@@ -1,25 +1,46 @@
 import random
 
-
 def generate_world_lore():
-    biomes = ["Sea of Rot", "Floating Sky-Islands", "Crimson Spirit-Wood", "Digital Data-Void", "Crystal Twilight Plains", "Submerged Neon City", "Obsidian Wastes", "Aurora Tundra"]
-    characters = ["The Medicine Seller", "Phosphophyllite", "Caiman", "Re-l Mayer", "Kino"]
-    power_scaling = ["Equivalent Exchange", "Binding Vows", "Nen-Aura", "Cursed Energy", "Spiral Power", "Quirks"]
-    abilities = ["Reality Glitch", "Soul Resonance", "Elemental Transmutation", "Domain Expansion", "Titan-Shifting", "Gravity Manipulation"]
+    # 1. Define the separate "Pools" of characters and archetypes
+    anime_pool = {
+        "characters": ["The Medicine Seller", "Re-l Mayer", "Kino", "Vash", "Maka"],
+        "powers": ["Equivalent Exchange", "Cursed Energy", "Spiral Power"],
+        "abilities": ["Domain Expansion", "Titan-Shifting", "Reality Glitch"]
+    }
+    
+    legend_pool = {
+        "characters": ["Yasuke", "Bruce Lee", "Nikola Tesla", "James Bond", "Malcolm X", "Tookie Williams"],
+        "powers": ["Strategic Genius", "Indomitable Will", "Kinetic Mastery", "The Scientific Method"],
+        "abilities": ["One-Inch Punch", "Electromagnetic Pulse", "Art of War", "Espionage"]
+    }
+    
+    biomes = ["Sea of Rot", "Floating Sky-Islands", "Submerged Neon City", "Clockwork Labyrinth"]
+    
+    # 2. Randomly decide if this generation is 'Anime' or 'Historical Legend'
+    style = random.choice(["Anime", "Legend"])
+    
+    if style == "Anime":
+        char = random.choice(anime_pool["characters"])
+        power = random.choice(anime_pool["powers"])
+        ability = random.choice(anime_pool["abilities"])
+        prefix = "🌀 [ANIME]"
+    else:
+        # Create a "Merge" of two real-life figures
+        char1, char2 = random.sample(legend_pool["characters"], 2)
+        char = f"{char1} x {char2}"
+        power = random.choice(legend_pool["powers"])
+        ability = random.choice(legend_pool["abilities"])
+        prefix = "📜 [LEGEND]"
 
-    lore_entries = []
-    for _ in range(3):
-        biome = random.choice(biomes)
-        character = random.choice(characters)
-        power = random.choice(power_scaling)
-        ability = random.choice(abilities)
-        entry = f"In the {biome}, a character named {character} manifests the {ability} through the power of {power}."
-        lore_entries.append(entry)
+    biome = random.choice(biomes)
+    return f"{prefix} In the {biome}, the fusion of {char} manifests {ability} through {power}."
 
-    return lore_entries
-
-# Main execution
 if __name__ == '__main__':
-    world_lore = generate_world_lore()
-    for entry in world_lore:
-        print(entry)
+    print("═" * 60)
+    print("  🌌 WORLD-CRAFT VISUALS: MULTIVERSE ENGINE V2.2 🌌  ")
+    print("═" * 60)
+    
+    for _ in range(5):
+        print(f" ► {generate_world_lore()}")
+        
+    print("═" * 60)
