@@ -14,5 +14,7 @@ WorldCraft-Visuals is a Python-based framework designed to automate the complex 
 ![VS Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
-## 🎓 Status: Learning
-I am currently a student preparing for my first semester in May 2026. This project serves as my primary research lab for Python and systems architecture.
+## 🚀 Project Phase: Alpha
+This engine is currently in active development. The primary focus is on refining the Python backend for fusion calculations and establishing the base biomes for environmental architecture.
+
+*Current Objective:* Mapping the interaction between Gravity constants and physical Power Scaling.
