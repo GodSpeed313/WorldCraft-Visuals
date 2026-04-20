@@ -1,46 +1,46 @@
 import random
 
 def generate_world_lore():
-    # 1. Define the separate "Pools" of characters and archetypes
+    # Character Data with Traits
+    legends = {
+        "Yasuke": {"trait": "Honorary Samurai", "element": "Steel"},
+        "Bruce Lee": {"trait": "Fluid Philosopher", "element": "Water"},
+        "Nikola Tesla": {"trait": "Mad Scientist", "element": "Lightning"},
+        "James Bond": {"trait": "Suave Operative", "element": "Shadow"},
+        "Malcolm X": {"trait": "Revolutionary Firebrand", "element": "Fire"},
+        "Tookie Williams": {"trait": "Redeemed Architect", "element": "Earth"}
+    }
+
     anime_pool = {
         "characters": ["The Medicine Seller", "Re-l Mayer", "Kino", "Vash", "Maka"],
         "powers": ["Equivalent Exchange", "Cursed Energy", "Spiral Power"],
         "abilities": ["Domain Expansion", "Titan-Shifting", "Reality Glitch"]
     }
-    
-    legend_pool = {
-        "characters": ["Yasuke", "Bruce Lee", "Nikola Tesla", "James Bond", "Malcolm X", "Tookie Williams"],
-        "powers": ["Strategic Genius", "Indomitable Will", "Kinetic Mastery", "The Scientific Method"],
-        "abilities": ["One-Inch Punch", "Electromagnetic Pulse", "Art of War", "Espionage"]
-    }
-    
+
     biomes = ["Sea of Rot", "Floating Sky-Islands", "Submerged Neon City", "Clockwork Labyrinth"]
-    
-    # 2. Randomly decide if this generation is 'Anime' or 'Historical Legend'
     style = random.choice(["Anime", "Legend"])
-    
+
     if style == "Anime":
         char = random.choice(anime_pool["characters"])
         power = random.choice(anime_pool["powers"])
         ability = random.choice(anime_pool["abilities"])
-        prefix = "🌀 [ANIME]"
+        lore = f"🌀 [ANIME] {char} uses {power} to trigger a {ability}."
     else:
-        # Create a "Merge" of two real-life figures
-        char1, char2 = random.sample(legend_pool["characters"], 2)
-        char = f"{char1} x {char2}"
-        power = random.choice(legend_pool["powers"])
-        ability = random.choice(legend_pool["abilities"])
-        prefix = "📜 [LEGEND]"
+        # Pick two legends and combine their traits
+        name1, name2 = random.sample(list(legends.keys()), 2)
+        t1, t2 = legends[name1]["trait"], legends[name2]["trait"]
+        e1, e2 = legends[name1]["element"], legends[name2]["element"]
+        
+        char = f"{name1} x {name2}"
+        lore = f"📜 [LEGEND] The fusion of {char} ({t1} & {t2}) commands the power of {e1}-{e2}."
 
     biome = random.choice(biomes)
-    return f"{prefix} In the {biome}, the fusion of {char} manifests {ability} through {power}."
+    return f"In the {biome}, {lore}"
 
 if __name__ == '__main__':
-    print("═" * 60)
-    print("  🌌 WORLD-CRAFT VISUALS: MULTIVERSE ENGINE V2.2 🌌  ")
-    print("═" * 60)
-    
+    print("═" * 65)
+    print("  🌌 WORLD-CRAFT VISUALS: TRAIT-SYNC ENGINE V2.3 🌌  ")
+    print("═" * 65)
     for _ in range(5):
         print(f" ► {generate_world_lore()}")
-        
-    print("═" * 60)
+    print("═" * 65)
