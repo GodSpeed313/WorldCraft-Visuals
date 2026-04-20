@@ -1,0 +1,313 @@
+[
+  {
+    "fusion_name": "Malcolm X x Vash",
+    "modality": "LEGACY",
+    "dominant": "Malcolm X (dominant)",
+    "tags": [
+      "strategy",
+      "rhetoric",
+      "angelic_power",
+      "legacy",
+      "gunslinger",
+      "pacifist"
+    ],
+    "biome": "Dust of Carthage",
+    "approved_powers": [
+      "Strategic Genius",
+      "Rhetoric & Legacy",
+      "Art of War"
+    ],
+    "signature_ability": "Strategic Genius",
+    "influence_pattern": "leaves no fingerprints but reshapes every outcome",
+    "rhetorical_style": "Legacy manifesto",
+    "lore_summary": "In Dust of Carthage, the fusion of Malcolm X x Vash channels Strategic Genius and leaves no fingerprints but reshapes every outcome. Their rhetorical mode: Legacy manifesto.",
+    "created_at": "2026-04-20 16:47:05",
+    "id": "MSF-001",
+    "engine_version": "v3.0"
+  },
+  {
+    "fusion_name": "Bruce Lee x Maka",
+    "modality": "HIGH_CONCEPT",
+    "dominant": "balanced blend",
+    "tags": [
+      "martial_arts",
+      "anti_demon",
+      "kinetic",
+      "meister",
+      "philosophy",
+      "soul_resonance"
+    ],
+    "biome": "Sea of Rot",
+    "approved_powers": [
+      "Indomitable Will",
+      "Spiral Power",
+      "Reality Glitch"
+    ],
+    "signature_ability": "Indomitable Will",
+    "influence_pattern": "strikes once \u2014 the shockwave lasts generations",
+    "rhetorical_style": "Soul-frequency broadcast",
+    "lore_summary": "In Sea of Rot, the fusion of Bruce Lee x Maka channels Indomitable Will and strikes once \u2014 the shockwave lasts generations. Their rhetorical mode: Soul-frequency broadcast.",
+    "created_at": "2026-04-20 16:47:05",
+    "id": "MSF-002",
+    "engine_version": "v3.0"
+  },
+  {
+    "fusion_name": "James Bond x Nikola Tesla",
+    "modality": "GROUNDED",
+    "dominant": "balanced blend",
+    "tags": [
+      "electromagnetic",
+      "tactical",
+      "visionary",
+      "inventor",
+      "espionage",
+      "resourceful"
+    ],
+    "biome": "Collapsed Industrial Zone",
+    "approved_powers": [
+      "Electromagnetic Pulse",
+      "Kinetic Mastery",
+      "Art of War"
+    ],
+    "signature_ability": "Electromagnetic Pulse",
+    "influence_pattern": "bends the will of generals through presence alone",
+    "rhetorical_style": "Kinetic storytelling",
+    "lore_summary": "In Collapsed Industrial Zone, the fusion of James Bond x Nikola Tesla channels Electromagnetic Pulse and bends the will of generals through presence alone. Their rhetorical mode: Kinetic storytelling.",
+    "created_at": "2026-04-20 16:47:05",
+    "id": "MSF-003",
+    "engine_version": "v3.0"
+  },
+  {
+    "fusion_name": "Malcolm X x Vash",
+    "modality": "LEGACY",
+    "dominant": "Malcolm X (dominant)",
+    "tags": [
+      "gunslinger",
+      "angelic_power",
+      "legacy",
+      "strategy",
+      "rhetoric",
+      "pacifist"
+    ],
+    "biome": "The Underground Railroad",
+    "approved_powers": [
+      "Art of War",
+      "Rhetoric & Legacy",
+      "Indomitable Will"
+    ],
+    "signature_ability": "Art of War",
+    "influence_pattern": "speaks in paradoxes that become prophecy",
+    "rhetorical_style": "Legacy manifesto",
+    "lore_summary": "In The Underground Railroad, the fusion of Malcolm X x Vash channels Art of War and speaks in paradoxes that become prophecy. Their rhetorical mode: Legacy manifesto.",
+    "created_at": "2026-04-20 16:47:21",
+    "id": "MSF-004",
+    "engine_version": "v3.0"
+  },
+  {
+    "fusion_name": "Bruce Lee x Maka",
+    "modality": "HIGH_CONCEPT",
+    "dominant": "balanced blend",
+    "tags": [
+      "anti_demon",
+      "soul_resonance",
+      "kinetic",
+      "martial_arts",
+      "meister",
+      "philosophy"
+    ],
+    "biome": "Floating Sky-Islands",
+    "approved_powers": [
+      "Domain Expansion",
+      "Soul Resonance",
+      "Rhetoric & Legacy"
+    ],
+    "signature_ability": "Domain Expansion",
+    "influence_pattern": "leaves no fingerprints but reshapes every outcome",
+    "rhetorical_style": "Dimensional proclamation",
+    "lore_summary": "In Floating Sky-Islands, the fusion of Bruce Lee x Maka channels Domain Expansion and leaves no fingerprints but reshapes every outcome. Their rhetorical mode: Dimensional proclamation.",
+    "created_at": "2026-04-20 16:47:21",
+    "id": "MSF-005",
+    "engine_version": "v3.0"
+  },
+  {
+    "fusion_name": "James Bond x Nikola Tesla",
+    "modality": "GROUNDED",
+    "dominant": "balanced blend",
+    "tags": [
+      "inventor",
+      "tactical",
+      "electromagnetic",
+      "espionage",
+      "visionary",
+      "resourceful"
+    ],
+    "biome": "Collapsed Industrial Zone",
+    "approved_powers": [
+      "Espionage",
+      "Kinetic Mastery",
+      "Indomitable Will"
+    ],
+    "signature_ability": "Espionage",
+    "influence_pattern": "rewrites the cultural memory of the realm",
+    "rhetorical_style": "Tactical misdirection",
+    "lore_summary": "In Collapsed Industrial Zone, the fusion of James Bond x Nikola Tesla channels Espionage and rewrites the cultural memory of the realm. Their rhetorical mode: Tactical misdirection.",
+    "created_at": "2026-04-20 16:47:21",
+    "id": "MSF-006",
+    "engine_version": "v3.0"
+  },
+  {
+    "fusion_name": "Malcolm X x Vash",
+    "modality": "LEGACY",
+    "dominant": "Malcolm X (dominant)",
+    "tags": [
+      "strategy",
+      "pacifist",
+      "legacy",
+      "gunslinger",
+      "angelic_power",
+      "rhetoric"
+    ],
+    "biome": "Dust of Carthage",
+    "approved_powers": [
+      "Art of War",
+      "Rhetoric & Legacy",
+      "Indomitable Will"
+    ],
+    "signature_ability": "Art of War",
+    "influence_pattern": "moves through systems like water through cracks",
+    "rhetorical_style": "Socratic dismantling",
+    "lore_summary": "In Dust of Carthage, the fusion of Malcolm X x Vash channels Art of War and moves through systems like water through cracks. Their rhetorical mode: Socratic dismantling.",
+    "created_at": "2026-04-20 17:03:20",
+    "id": "MSF-007",
+    "engine_version": "v3.0"
+  },
+  {
+    "fusion_name": "Bruce Lee x Maka",
+    "modality": "HIGH_CONCEPT",
+    "dominant": "balanced blend",
+    "tags": [
+      "philosophy",
+      "kinetic",
+      "martial_arts",
+      "anti_demon",
+      "soul_resonance",
+      "meister"
+    ],
+    "biome": "Sea of Rot",
+    "approved_powers": [
+      "Angelic Override",
+      "Domain Expansion",
+      "Rhetoric & Legacy"
+    ],
+    "signature_ability": "Angelic Override",
+    "influence_pattern": "strikes once \u2014 the shockwave lasts generations",
+    "rhetorical_style": "Cursed verse",
+    "lore_summary": "In Sea of Rot, the fusion of Bruce Lee x Maka channels Angelic Override and strikes once \u2014 the shockwave lasts generations. Their rhetorical mode: Cursed verse.",
+    "created_at": "2026-04-20 17:03:20",
+    "id": "MSF-008",
+    "engine_version": "v3.0"
+  },
+  {
+    "fusion_name": "James Bond x Nikola Tesla",
+    "modality": "GROUNDED",
+    "dominant": "balanced blend",
+    "tags": [
+      "resourceful",
+      "tactical",
+      "visionary",
+      "espionage",
+      "electromagnetic",
+      "inventor"
+    ],
+    "biome": "Cold War Safehouse",
+    "approved_powers": [
+      "Tactical Brilliance",
+      "Rhetoric & Legacy",
+      "One-Inch Punch"
+    ],
+    "signature_ability": "Tactical Brilliance",
+    "influence_pattern": "leaves no fingerprints but reshapes every outcome",
+    "rhetorical_style": "Cold precision",
+    "lore_summary": "In Cold War Safehouse, the fusion of James Bond x Nikola Tesla channels Tactical Brilliance and leaves no fingerprints but reshapes every outcome. Their rhetorical mode: Cold precision.",
+    "created_at": "2026-04-20 17:03:20",
+    "id": "MSF-009",
+    "engine_version": "v3.0"
+  },
+  {
+    "fusion_name": "Malcolm X x Vash",
+    "modality": "LEGACY",
+    "dominant": "Malcolm X (dominant)",
+    "tags": [
+      "legacy",
+      "pacifist",
+      "strategy",
+      "angelic_power",
+      "rhetoric",
+      "gunslinger"
+    ],
+    "biome": "Dust of Carthage",
+    "approved_powers": [
+      "The Scientific Method",
+      "Art of War"
+    ],
+    "signature_ability": "The Scientific Method",
+    "influence_pattern": "strikes once \u2014 the shockwave lasts generations",
+    "rhetorical_style": "Legacy manifesto",
+    "lore_summary": "In Dust of Carthage, the fusion of Malcolm X x Vash channels The Scientific Method and strikes once \u2014 the shockwave lasts generations. Their rhetorical mode: Legacy manifesto.",
+    "created_at": "2026-04-20 17:24:25",
+    "id": "MSF-010",
+    "engine_version": "v3.0"
+  },
+  {
+    "fusion_name": "Bruce Lee x Maka",
+    "modality": "HIGH_CONCEPT",
+    "dominant": "balanced blend",
+    "tags": [
+      "martial_arts",
+      "philosophy",
+      "soul_resonance",
+      "meister",
+      "anti_demon",
+      "kinetic"
+    ],
+    "biome": "Sea of Rot",
+    "approved_powers": [
+      "Reality Glitch",
+      "Indomitable Will",
+      "Angelic Override"
+    ],
+    "signature_ability": "Reality Glitch",
+    "influence_pattern": "moves through systems like water through cracks",
+    "rhetorical_style": "Cursed verse",
+    "lore_summary": "In Sea of Rot, the fusion of Bruce Lee x Maka channels Reality Glitch and moves through systems like water through cracks. Their rhetorical mode: Cursed verse.",
+    "created_at": "2026-04-20 17:24:25",
+    "id": "MSF-011",
+    "engine_version": "v3.0"
+  },
+  {
+    "fusion_name": "James Bond x Nikola Tesla",
+    "modality": "GROUNDED",
+    "dominant": "balanced blend",
+    "tags": [
+      "electromagnetic",
+      "resourceful",
+      "espionage",
+      "visionary",
+      "inventor",
+      "tactical"
+    ],
+    "biome": "Cold War Safehouse",
+    "approved_powers": [
+      "Espionage",
+      "The Scientific Method",
+      "Tactical Brilliance"
+    ],
+    "signature_ability": "Espionage",
+    "influence_pattern": "strikes once \u2014 the shockwave lasts generations",
+    "rhetorical_style": "Cold precision",
+    "lore_summary": "In Cold War Safehouse, the fusion of James Bond x Nikola Tesla channels Espionage and strikes once \u2014 the shockwave lasts generations. Their rhetorical mode: Cold precision.",
+    "created_at": "2026-04-20 17:24:25",
+    "id": "MSF-012",
+    "engine_version": "v3.0"
+  }
+]

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mythos-Sync — Containment Matrix</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0e0e10;
+    --surface:   #17171a;
+    --surface2:  #1f1f24;
+    --border:    rgba(255,255,255,0.08);
+    --border2:   rgba(255,255,255,0.14);
+    --text:      #f0eff4;
+    --muted:     #8a8a96;
+    --faint:     #4a4a55;
+    --legacy:    #1D9E75;
+    --legacy-bg: rgba(29,158,117,0.12);
+    --legacy-bd: rgba(29,158,117,0.35);
+    --ground:    #378ADD;
+    --ground-bg: rgba(55,138,221,0.12);
+    --ground-bd: rgba(55,138,221,0.35);
+    --high:      #7F77DD;
+    --high-bg:   rgba(127,119,221,0.12);
+    --high-bd:   rgba(127,119,221,0.35);
+    --mono:      'Space Mono', monospace;
+    --sans:      'Syne', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    border-bottom: 0.5px solid var(--border);
+    padding: 28px 40px 22px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .header-left { display: flex; flex-direction: column; gap: 5px; }
+  .header-wordmark { display: flex; align-items: center; gap: 12px; }
+  .header-title { font-size: 22px; font-weight: 800; letter-spacing: -0.8px; color: var(--text); }
+  .header-tag {
+    font-family: var(--mono); font-size: 10px;
+    background: var(--surface2); border: 0.5px solid var(--border2);
+    border-radius: 4px; padding: 3px 8px; color: var(--muted);
+  }
+  .header-sub { font-size: 13px; color: var(--muted); }
+  .header-right { display: flex; gap: 8px; align-items: center; }
+  .btn-clear {
+    font-family: var(--mono); font-size: 11px;
+    background: none; border: 0.5px solid var(--border2);
+    color: var(--muted); border-radius: 6px;
+    padding: 7px 14px; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-clear:hover { border-color: #E24B4A; color: #E24B4A; }
+  .btn-new {
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    background: var(--text); color: var(--bg);
+    border: none; border-radius: 6px;
+    padding: 8px 18px; cursor: pointer; transition: opacity 0.15s;
+  }
+  .btn-new:hover { opacity: 0.85; }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: flex; gap: 0;
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 40px;
+  }
+  .stat-cell {
+    padding: 16px 28px 16px 0;
+    margin-right: 28px;
+    border-right: 0.5px solid var(--border);
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .stat-cell:last-child { border-right: none; }
+  .stat-label { font-size: 10px; color: var(--faint); letter-spacing: 1px; text-transform: uppercase; font-family: var(--mono); }
+  .stat-val { font-size: 26px; font-weight: 800; color: var(--text); font-family: var(--mono); letter-spacing: -1px; }
+  .stat-val.legacy { color: var(--legacy); }
+  .stat-val.ground { color: var(--ground); }
+  .stat-val.high   { color: var(--high); }
+  .stat-val.warn   { color: #EF9F27; }
+
+  /* ── MAIN LAYOUT ── */
+  .main { padding: 28px 40px; }
+  .section-label {
+    font-size: 10px; font-family: var(--mono); letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--faint); margin-bottom: 16px;
+  }
+
+  /* ── GRID ── */
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .fusion-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, transform 0.12s;
+    position: relative;
+    overflow: hidden;
+  }
+  .fusion-card:hover { border-color: var(--border2); background: var(--surface2); transform: translateY(-2px); }
+  .fusion-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  }
+  .fusion-card.LEGACY::before  { background: var(--legacy); }
+  .fusion-card.GROUNDED::before { background: var(--ground); }
+  .fusion-card.HIGH_CONCEPT::before { background: var(--high); }
+
+  .card-badge {
+    display: inline-block; font-size: 9px; font-family: var(--mono);
+    font-weight: 700; letter-spacing: 0.5px;
+    padding: 3px 8px; border-radius: 4px; margin-bottom: 10px;
+  }
+  .card-badge.LEGACY      { background: var(--legacy-bg); color: var(--legacy); border: 0.5px solid var(--legacy-bd); }
+  .card-badge.GROUNDED    { background: var(--ground-bg); color: var(--ground); border: 0.5px solid var(--ground-bd); }
+  .card-badge.HIGH_CONCEPT { background: var(--high-bg);  color: var(--high);   border: 0.5px solid var(--high-bd); }
+
+  .card-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; line-height: 1.3; }
+  .card-sig  { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .card-biome { font-size: 11px; color: var(--faint); font-style: italic; }
+  .card-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 12px; padding-top: 10px;
+    border-top: 0.5px solid var(--border);
+  }
+  .card-id { font-family: var(--mono); font-size: 10px; color: var(--faint); }
+  .card-arrow { color: var(--faint); font-size: 14px; transition: color 0.15s; }
+  .fusion-card:hover .card-arrow { color: var(--text); }
+
+  .empty-state {
+    grid-column: 1/-1; text-align: center;
+    padding: 60px 20px; color: var(--faint); font-size: 14px; line-height: 2;
+  }
+  .empty-state code { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  /* ── MODAL OVERLAY ── */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 200; padding: 20px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: var(--surface);
+    border: 0.5px solid var(--border2);
+    border-radius: 16px;
+    width: 100%; max-width: 580px;
+    max-height: 88vh; overflow-y: auto;
+    transform: translateY(16px);
+    transition: transform 0.22s;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border2) transparent;
+  }
+  .overlay.open .modal { transform: translateY(0); }
+
+  .modal-header {
+    padding: 20px 22px 16px;
+    border-bottom: 0.5px solid var(--border);
+    position: sticky; top: 0;
+    background: var(--surface); z-index: 2;
+  }
+  .modal-header-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .modal-title { font-size: 18px; font-weight: 800; color: var(--text); line-height: 1.2; letter-spacing: -0.5px; }
+  .modal-close {
+    background: none; border: 0.5px solid var(--border2);
+    border-radius: 6px; width: 30px; height: 30px;
+    color: var(--muted); cursor: pointer; font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all 0.15s;
+  }
+  .modal-close:hover { border-color: var(--border2); color: var(--text); background: var(--surface2); }
+
+  .modal-body { padding: 20px 22px; display: flex; flex-direction: column; gap: 20px; }
+
+  /* ── MODAL SECTIONS ── */
+  .ms { background: var(--surface2); border-radius: 10px; padding: 16px; border: 0.5px solid var(--border); }
+  .ms-title {
+    font-size: 9px; font-family: var(--mono); letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--faint); margin-bottom: 14px;
+  }
+
+  /* source modalities */
+  .source-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .src-pill {
+    font-size: 10px; font-family: var(--mono); padding: 4px 10px;
+    border-radius: 20px; display: flex; align-items: center; gap: 5px;
+  }
+  .src-pill .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+  .src-plus { color: var(--faint); font-size: 12px; }
+
+  /* dominance bar */
+  .dom-section { margin-bottom: 0; }
+  .dom-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  .dom-track { height: 6px; border-radius: 3px; background: var(--border); overflow: hidden; }
+  .dom-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--legacy), var(--high)); transition: width 0.6s ease; }
+  .dom-pcts { display: flex; justify-content: space-between; font-size: 10px; color: var(--faint); margin-top: 5px; font-family: var(--mono); }
+
+  /* divider */
+  .divider { height: 0.5px; background: var(--border); margin: 14px 0; }
+
+  /* audit log */
+  .audit-list { display: flex; flex-direction: column; gap: 8px; }
+  .audit-row { display: flex; align-items: flex-start; gap: 10px; }
+  .audit-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .audit-dot.ok   { background: var(--legacy); }
+  .audit-dot.flag { background: #D85A30; }
+  .audit-info { flex: 1; }
+  .audit-power { font-size: 12px; color: var(--text); font-weight: 500; }
+  .audit-power.struck { text-decoration: line-through; color: var(--faint); font-weight: 400; }
+  .audit-trans { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .audit-trans span { color: var(--high); font-weight: 700; }
+  .audit-reason { font-size: 10px; color: var(--faint); margin-top: 2px; font-family: var(--mono); }
+  .audit-cost { font-family: var(--mono); font-size: 10px; color: var(--faint); margin-left: auto; padding-top: 2px; white-space: nowrap; }
+  .all-clear { font-size: 12px; color: var(--legacy); margin-top: 4px; }
+
+  /* lore */
+  .lore-text { font-size: 13px; color: var(--muted); line-height: 1.7; font-style: italic; }
+
+  /* powers */
+  .powers-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
+  .power-pill {
+    font-size: 11px; font-family: var(--mono);
+    padding: 4px 11px; border-radius: 20px;
+    background: transparent; border: 0.5px solid var(--border2);
+    color: var(--muted);
+  }
+  .power-pill.sig {
+    border-color: var(--text); color: var(--text); font-weight: 700;
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* influence */
+  .influence-text { font-size: 14px; color: var(--text); line-height: 1.6; }
+
+  /* meta grid */
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .meta-item { display: block; }
+  .meta-key { font-size: 9px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 1px; color: var(--faint); margin-bottom: 3px; }
+  .meta-val { font-size: 12px; font-family: var(--mono); color: var(--text); }
+
+  /* tags */
+  .tags-wrap { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+  .tag { font-size: 10px; font-family: var(--mono); padding: 2px 8px; border-radius: 4px; background: rgba(255,255,255,0.04); color: var(--faint); border: 0.5px solid var(--border); }
+
+  /* NEW FUSION FORM */
+  .form-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 300; padding: 20px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .form-overlay.open { opacity: 1; pointer-events: all; }
+  .form-modal {
+    background: var(--surface);
+    border: 0.5px solid var(--border2);
+    border-radius: 16px;
+    width: 100%; max-width: 440px;
+    padding: 24px;
+    transform: translateY(16px);
+    transition: transform 0.22s;
+  }
+  .form-overlay.open .form-modal { transform: translateY(0); }
+  .form-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 20px; letter-spacing: -0.4px; }
+  .form-field { margin-bottom: 14px; }
+  .form-label { font-size: 10px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 1px; color: var(--faint); margin-bottom: 6px; display: block; }
+  .form-input {
+    width: 100%; background: var(--surface2); border: 0.5px solid var(--border2);
+    border-radius: 8px; padding: 10px 14px; color: var(--text);
+    font-family: var(--sans); font-size: 14px; outline: none;
+    transition: border-color 0.15s;
+  }
+  .form-input:focus { border-color: var(--high); }
+  .form-input::placeholder { color: var(--faint); }
+  .slider-wrap { display: flex; align-items: center; gap: 12px; }
+  .form-slider { flex: 1; accent-color: var(--high); }
+  .slider-val { font-family: var(--mono); font-size: 13px; color: var(--text); min-width: 36px; text-align: right; }
+  .form-actions { display: flex; gap: 8px; margin-top: 20px; }
+  .btn-cancel {
+    flex: 1; background: none; border: 0.5px solid var(--border2);
+    color: var(--muted); font-family: var(--sans); font-size: 13px;
+    border-radius: 8px; padding: 10px; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-cancel:hover { color: var(--text); border-color: var(--text); }
+  .btn-generate {
+    flex: 2; background: var(--text); color: var(--bg);
+    border: none; font-family: var(--sans); font-size: 13px; font-weight: 700;
+    border-radius: 8px; padding: 10px; cursor: pointer; transition: opacity 0.15s;
+  }
+  .btn-generate:hover { opacity: 0.85; }
+  .form-note { font-size: 11px; color: var(--faint); margin-top: 10px; line-height: 1.5; font-family: var(--mono); }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <div class="header-wordmark">
+      <span class="header-title">Mythos-Sync</span>
+      <span class="header-tag">v3.0 · ENGINE ONLINE</span>
+    </div>
+    <p class="header-sub">Containment Matrix — click any card to open its case file</p>
+  </div>
+  <div class="header-right">
+    <button class="btn-clear" onclick="clearMatrix()">Clear Matrix</button>
+    <button class="btn-new" onclick="openForm()">+ New Fusion</button>
+  </div>
+</header>
+
+<div class="stats-bar">
+  <div class="stat-cell">
+    <span class="stat-label">Total Fusions</span>
+    <span class="stat-val" id="stat-total">—</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-label">Legacy</span>
+    <span class="stat-val legacy" id="stat-legacy">—</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-label">Grounded</span>
+    <span class="stat-val ground" id="stat-ground">—</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-label">High-Concept</span>
+    <span class="stat-val high" id="stat-high">—</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-label">Transpositions</span>
+    <span class="stat-val warn" id="stat-trans">—</span>
+  </div>
+</div>
+
+<main class="main">
+  <p class="section-label">Containment Matrix</p>
+  <div class="matrix-grid" id="matrix-grid">
+    <div class="empty-state">Loading matrix...</div>
+  </div>
+</main>
+
+<!-- CASE FILE MODAL -->
+<div class="overlay" id="case-overlay" onclick="overlayClick(event, 'case-overlay')">
+  <div class="modal" id="case-modal">
+    <div class="modal-header">
+      <div class="modal-header-top">
+        <p class="modal-title" id="modal-title">—</p>
+        <button class="modal-close" onclick="closeOverlay('case-overlay')">✕</button>
+      </div>
+      <span class="card-badge" id="modal-badge" style="margin-top:8px;display:inline-block;">—</span>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- NEW FUSION FORM -->
+<div class="form-overlay" id="form-overlay" onclick="overlayClick(event, 'form-overlay')">
+  <div class="form-modal">
+    <p class="form-title">Synthesize New Fusion</p>
+
+    <div class="form-field">
+      <label class="form-label" for="f-alpha">Alpha Subject</label>
+      <input class="form-input" id="f-alpha" placeholder="e.g. Malcolm X" />
+    </div>
+    <div class="form-field">
+      <label class="form-label" for="f-beta">Beta Subject</label>
+      <input class="form-input" id="f-beta" placeholder="e.g. Vash" />
+    </div>
+    <div class="form-field">
+      <label class="form-label">Alpha Dominance</label>
+      <div class="slider-wrap">
+        <input class="form-slider" type="range" min="0" max="100" value="50" id="f-dom"
+          oninput="document.getElementById('f-dom-val').textContent = this.value + '%'" />
+        <span class="slider-val" id="f-dom-val">50%</span>
+      </div>
+    </div>
+
+    <p class="form-note">
+      ⓘ After clicking Generate, run your Python engine in the terminal then refresh this page to see the new fusion appear in the matrix.
+    </p>
+
+    <div class="form-actions">
+      <button class="btn-cancel" onclick="closeOverlay('form-overlay')">Cancel</button>
+      <button class="btn-generate" onclick="generateFusion()">Generate Fusion →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let MATRIX = [];
+
+  // ── Load from containment_matrix.json ──
+  async function loadMatrix() {
+    try {
+      const res = await fetch('containment_matrix.json?t=' + Date.now());
+      if (!res.ok) throw new Error('not found');
+      MATRIX = await res.json();
+      // Patch missing fields
+      MATRIX.forEach((f, i) => {
+        if (!f.id) f.id = 'MSF-' + String(i+1).padStart(3,'0');
+        if (!f.engine_version) f.engine_version = 'v3.0';
+        if (!f.audit_log) f.audit_log = [];
+        if (!f.alpha) f.alpha = { name: f.fusion_name.split(' x ')[0], modality: f.modality };
+        if (!f.beta)  f.beta  = { name: f.fusion_name.split(' x ')[1] || '?', modality: f.modality };
+        if (!f.dominance) f.dominance = 50;
+      });
+      renderGrid();
+    } catch(e) {
+      document.getElementById('matrix-grid').innerHTML = `
+        <div class="empty-state">
+          No matrix file found.<br/>
+          Run <code>python mythos_sync.py</code> to generate fusions, then refresh.
+        </div>`;
+    }
+  }
+
+  // ── Render the card grid ──
+  function renderGrid() {
+    const grid = document.getElementById('matrix-grid');
+    const legacy = MATRIX.filter(f => f.modality === 'LEGACY').length;
+    const ground = MATRIX.filter(f => f.modality === 'GROUNDED').length;
+    const high   = MATRIX.filter(f => f.modality === 'HIGH_CONCEPT').length;
+    const trans  = MATRIX.reduce((a,f) => a + (f.audit_log||[]).filter(l => l.status === 'transposed').length, 0);
+
+    document.getElementById('stat-total').textContent  = MATRIX.length;
+    document.getElementById('stat-legacy').textContent = legacy;
+    document.getElementById('stat-ground').textContent = ground;
+    document.getElementById('stat-high').textContent   = high;
+    document.getElementById('stat-trans').textContent  = trans;
+
+    if (!MATRIX.length) {
+      grid.innerHTML = `<div class="empty-state">Matrix is empty.<br/>Run <code>python mythos_sync.py</code> and refresh.</div>`;
+      return;
+    }
+
+    grid.innerHTML = MATRIX.map((f, i) => `
+      <div class="fusion-card ${f.modality}" onclick="openCase(${i})">
+        <span class="card-badge ${f.modality}">${f.modality.replace('_',' ')}</span>
+        <p class="card-name">${f.fusion_name}</p>
+        <p class="card-sig">${f.signature_ability}</p>
+        <p class="card-biome">${f.biome}</p>
+        <div class="card-footer">
+          <span class="card-id">${f.id}</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ── Open Case File modal ──
+  function openCase(idx) {
+    const f = MATRIX[idx];
+    document.getElementById('modal-title').textContent = f.fusion_name;
+    const badge = document.getElementById('modal-badge');
+    badge.textContent = f.modality.replace('_',' ');
+    badge.className = `card-badge ${f.modality}`;
+
+    const transposed = (f.audit_log||[]).filter(l => l.status === 'transposed');
+    const alphaMod = f.alpha?.modality || f.modality;
+    const betaMod  = f.beta?.modality  || f.modality;
+    const dom = f.dominance ?? 50;
+
+    document.getElementById('modal-body').innerHTML = `
+
+      <!-- AUDIT TRAIL -->
+      <div class="ms">
+        <p class="ms-title">01 — Audit Trail</p>
+
+        <div class="source-row">
+          <span class="src-pill" style="background:${modalityBg(alphaMod)};color:${modalityColor(alphaMod)};border:0.5px solid ${modalityBd(alphaMod)};">
+            <span class="dot" style="background:${modalityColor(alphaMod)};"></span>
+            ${f.alpha?.name || '?'} · ${alphaMod}
+          </span>
+          <span class="src-plus">+</span>
+          <span class="src-pill" style="background:${modalityBg(betaMod)};color:${modalityColor(betaMod)};border:0.5px solid ${modalityBd(betaMod)};">
+            <span class="dot" style="background:${modalityColor(betaMod)};"></span>
+            ${f.beta?.name || '?'} · ${betaMod}
+          </span>
+        </div>
+
+        <p style="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:6px;letter-spacing:0.5px;">Dominance calibration</p>
+        <div class="dom-labels">
+          <span>${f.alpha?.name || 'Alpha'}</span>
+          <span>${f.beta?.name  || 'Beta'}</span>
+        </div>
+        <div class="dom-track"><div class="dom-fill" style="width:${dom}%"></div></div>
+        <div class="dom-pcts"><span>${dom}%</span><span>${100-dom}%</span></div>
+
+        <div class="divider"></div>
+        <p style="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:10px;letter-spacing:0.5px;">Grounding filter log</p>
+
+        ${(f.audit_log||[]).length === 0
+          ? `<p class="all-clear">No audit log recorded for this entry.</p>`
+          : `<div class="audit-list">
+              ${(f.audit_log||[]).map(l => l.status === 'transposed' ? `
+                <div class="audit-row">
+                  <div class="audit-dot flag"></div>
+                  <div class="audit-info">
+                    <p class="audit-power struck">${l.power}</p>
+                    <p class="audit-trans">→ transposed to <span>${l.transposed_to}</span></p>
+                    ${l.reason ? `<p class="audit-reason">${l.reason}</p>` : ''}
+                  </div>
+                  <span class="audit-cost">cost ${l.cost}</span>
+                </div>
+              ` : `
+                <div class="audit-row">
+                  <div class="audit-dot ok"></div>
+                  <div class="audit-info">
+                    <p class="audit-power">${l.power}</p>
+                  </div>
+                  <span class="audit-cost">cost ${l.cost}</span>
+                </div>
+              `).join('')}
+            </div>
+            ${transposed.length === 0 ? '<p class="all-clear" style="margin-top:10px;">All powers cleared — no transpositions needed.</p>' : ''}`
+        }
+      </div>
+
+      <!-- LEGACY PROFILE -->
+      <div class="ms">
+        <p class="ms-title">02 — Legacy Profile</p>
+        <p style="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:8px;">Lore summary</p>
+        <p class="lore-text">${f.lore_summary || '—'}</p>
+        <div class="divider"></div>
+        <p style="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:8px;">Approved powers</p>
+        <div class="powers-wrap">
+          ${(f.approved_powers||[]).map(p =>
+            `<span class="power-pill${p === f.signature_ability ? ' sig' : ''}">${p}${p === f.signature_ability ? ' ★' : ''}</span>`
+          ).join('')}
+        </div>
+        <div class="divider"></div>
+        <p style="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:6px;">Influence pattern</p>
+        <p class="influence-text">"${f.influence_pattern || '—'}"</p>
+        <div class="divider"></div>
+        <p style="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:6px;">Rhetorical style</p>
+        <p style="font-size:13px;color:var(--text);font-family:var(--mono);">${f.rhetorical_style || '—'}</p>
+        ${(f.tags||[]).length ? `
+          <div class="divider"></div>
+          <p style="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:6px;">Tags</p>
+          <div class="tags-wrap">${f.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        ` : ''}
+      </div>
+
+      <!-- SYNC STATUS -->
+      <div class="ms">
+        <p class="ms-title">03 — Sync Status</p>
+        <div class="meta-grid">
+          <div class="meta-item"><p class="meta-key">Fusion ID</p><p class="meta-val">${f.id}</p></div>
+          <div class="meta-item"><p class="meta-key">Engine</p><p class="meta-val">${f.engine_version}</p></div>
+          <div class="meta-item"><p class="meta-key">Created</p><p class="meta-val">${f.created_at}</p></div>
+          <div class="meta-item"><p class="meta-key">Biome</p><p class="meta-val">${f.biome}</p></div>
+          <div class="meta-item"><p class="meta-key">Dominant</p><p class="meta-val">${f.dominant}</p></div>
+          <div class="meta-item"><p class="meta-key">Transpositions</p><p class="meta-val">${transposed.length}</p></div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('case-overlay').classList.add('open');
+  }
+
+  // ── Helpers ──
+  function modalityColor(m) {
+    return m === 'LEGACY' ? 'var(--legacy)' : m === 'GROUNDED' ? 'var(--ground)' : 'var(--high)';
+  }
+  function modalityBg(m) {
+    return m === 'LEGACY' ? 'var(--legacy-bg)' : m === 'GROUNDED' ? 'var(--ground-bg)' : 'var(--high-bg)';
+  }
+  function modalityBd(m) {
+    return m === 'LEGACY' ? 'var(--legacy-bd)' : m === 'GROUNDED' ? 'var(--ground-bd)' : 'var(--high-bd)';
+  }
+
+  function overlayClick(e, id) {
+    if (e.target === document.getElementById(id)) closeOverlay(id);
+  }
+  function closeOverlay(id) {
+    document.getElementById(id).classList.remove('open');
+  }
+
+  function openForm() {
+    document.getElementById('form-overlay').classList.add('open');
+  }
+
+  function generateFusion() {
+    const alpha = document.getElementById('f-alpha').value.trim();
+    const beta  = document.getElementById('f-beta').value.trim();
+    const dom   = document.getElementById('f-dom').value;
+    if (!alpha || !beta) { alert('Enter both Alpha and Beta subjects.'); return; }
+    closeOverlay('form-overlay');
+    alert(`Ready to synthesize:\n\nAlpha: ${alpha}\nBeta: ${beta}\nDominance: ${dom}%\n\nNow run in your terminal:\npython mythos_sync.py\n\nThen refresh this page.`);
+  }
+
+  function clearMatrix() {
+    if (!confirm('Clear the entire Containment Matrix? This cannot be undone.')) return;
+    alert('To clear: delete containment_matrix.json from your folder, then refresh this page.');
+  }
+
+  loadMatrix();
+</script>
+</body>
+</html>
