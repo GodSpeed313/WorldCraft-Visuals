@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 \# 🗺️ WorldCraft-Visuals (V2)
 
 \*\*WorldCraft-Visuals\*\* is a Python-based procedural generator designed to create rich, anime-inspired fantasy kingdoms. 
@@ -23,7 +23,7 @@
 
 &#x20;  cd WorldCraft-Visuals
 
-=======
+
 # 👁️ WorldCraft-Visuals
 **The Multiverse Logic & Character Synthesis Engine.**
 
@@ -44,4 +44,4 @@ WorldCraft-Visuals is a Python-based framework designed to automate the complex 
 This engine is currently in active development. The primary focus is on refining the Python backend for fusion calculations and establishing the base biomes for environmental architecture.
 
 *Current Objective:* Mapping the interaction between Gravity constants and physical Power Scaling.
->>>>>>> 440c723fedbeb60afdaaff87c89e9fa1c3943c6d
+

@@ -18,13 +18,13 @@ class MythosHandler(SimpleHTTPRequestHandler):
         super().do_GET()
 
     def end_headers(self):
-        self.send_header('Content-Security-Policy',
-            "default-src 'self'; "
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com; "
-            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; "
-            "font-src https://fonts.googleapis.com https://fonts.gstatic.com; "
-            "connect-src 'self';"
-        )
+        self.send_header('Content-Security-Policy', 
+    "default-src 'self'; "
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval'; "
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+    "font-src https://fonts.gstatic.com; "
+    "connect-src 'self';")
+        
         self.send_header('Access-Control-Allow-Origin', '*')
         super().end_headers()
 

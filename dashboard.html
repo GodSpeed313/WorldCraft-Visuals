@@ -601,19 +601,36 @@
     document.getElementById('form-overlay').classList.add('open');
   }
 
-  function generateFusion() {
-    const alpha = document.getElementById('f-alpha').value.trim();
-    const beta  = document.getElementById('f-beta').value.trim();
-    const dom   = document.getElementById('f-dom').value;
-    if (!alpha || !beta) { alert('Enter both Alpha and Beta subjects.'); return; }
-    closeOverlay('form-overlay');
-    alert(`Ready to synthesize:\n\nAlpha: ${alpha}\nBeta: ${beta}\nDominance: ${dom}%\n\nNow run in your terminal:\npython mythos_sync.py\n\nThen refresh this page.`);
-  }
+  // --- REPLACE THESE FUNCTIONS AT THE BOTTOM OF DASHBOARD.HTML ---
 
-  function clearMatrix() {
-    if (!confirm('Clear the entire Containment Matrix? This cannot be undone.')) return;
-    alert('To clear: delete containment_matrix.json from your folder, then refresh this page.');
+async function generateFusion() {
+  const alpha = document.getElementById('f-alpha').value.trim();
+  const beta  = document.getElementById('f-beta').value.trim();
+  const dom   = document.getElementById('f-dom').value;
+  
+  if (!alpha || !beta) { alert('Enter both subjects.'); return; }
+
+  // This talks to your server.py /fuse endpoint
+  const res = await fetch('/fuse', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({alpha, beta, dominance: parseInt(dom)})
+  });
+
+  if (res.ok) {
+    closeOverlay('form-overlay');
+    await loadMatrix(); // Refreshes the grid automatically!
+  } else {
+    alert('Fusion failed. Check the server console.');
   }
+}
+
+async function clearMatrix() {
+  if (!confirm('Clear the entire matrix?')) return;
+  // This talks to your server.py /clear endpoint
+  await fetch('/clear', {method: 'POST'});
+  await loadMatrix(); // Refreshes the grid to show it's empty
+}
 
   loadMatrix();
 </script>

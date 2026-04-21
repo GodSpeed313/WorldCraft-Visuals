@@ -7,34 +7,37 @@
 # The Master Registry — defines every known character's modality
 CHARACTER_REGISTRY = {
     # --- LEGACY: Real historical/cultural figures (human limits only) ---
-    "Yasuke":          {"modality": "LEGACY",       "tags": ["warrior", "historical", "resilience"]},
-    "Bruce Lee":       {"modality": "LEGACY",       "tags": ["martial_arts", "philosophy", "kinetic"]},
-    "Nikola Tesla":    {"modality": "LEGACY",       "tags": ["inventor", "electromagnetic", "visionary"]},
-    "Malcolm X":       {"modality": "LEGACY",       "tags": ["rhetoric", "strategy", "legacy"]},
-    "Tookie Williams": {"modality": "LEGACY",       "tags": ["street_legend", "redemption", "influence"]},
+    "Yasuke":          {"modality": "LEGACY",       "tags": ["warrior", "historical", "resilience"], "trait": "Honorary Samurai", "element": "Steel"},
+    "Bruce Lee":       {"modality": "LEGACY",       "tags": ["martial_arts", "philosophy", "kinetic"], "trait": "Fluid Philosopher", "element": "Water"},
+    "Nikola Tesla":    {"modality": "LEGACY",       "tags": ["inventor", "electromagnetic", "visionary"], "trait": "Mad Scientist", "element": "Lightning"},
+    "Malcolm X":       {"modality": "LEGACY",       "tags": ["rhetoric", "strategy", "legacy"], "trait": "Revolutionary Firebrand", "element": "Fire"},
+    "Tookie Williams": {"modality": "LEGACY",       "tags": ["street_legend", "redemption", "influence"], "trait": "Redeemed Architect", "element": "Earth"},
+    "Bumpy Johnson":   {"modality": "LEGACY",       "tags": ["street_legend", "tactical", "underworld", "strategy"], "trait": "Harlem Underworld Strategist", "element": "Shadow"},
 
     # --- GROUNDED: Cinematic/fictional but physically realistic ---
-    "James Bond":      {"modality": "GROUNDED",     "tags": ["espionage", "tactical", "resourceful"]},
-    "Kino":            {"modality": "GROUNDED",     "tags": ["traveler", "observer", "survivalist"]},
+    "James Bond":      {"modality": "GROUNDED",     "tags": ["espionage", "tactical", "resourceful"], "trait": "Suave Operative", "element": "Shadow"},
+    "Kino":            {"modality": "GROUNDED",     "tags": ["traveler", "observer", "survivalist"], "trait": "Nomadic Witness", "element": "Wind"},
 
     # --- HIGH_CONCEPT: Physics-bending, supernatural powers ---
-    "The Medicine Seller": {"modality": "HIGH_CONCEPT", "tags": ["spiritual", "cursed", "ancient"]},
-    "Re-l Mayer":      {"modality": "HIGH_CONCEPT", "tags": ["cyberpunk", "investigator", "android_adjacent"]},
-    "Vash":            {"modality": "HIGH_CONCEPT", "tags": ["pacifist", "gunslinger", "angelic_power"]},
-    "Maka":            {"modality": "HIGH_CONCEPT", "tags": ["soul_resonance", "meister", "anti_demon"]},
+    "The Medicine Seller": {"modality": "HIGH_CONCEPT", "tags": ["spiritual", "cursed", "ancient"], "trait": "Exorcist Merchant", "element": "Void"},
+    "Re-l Mayer":      {"modality": "HIGH_CONCEPT", "tags": ["cyberpunk", "investigator", "android_adjacent"], "trait": "Synthetic Sleuth", "element": "Code"},
+    "Vash":            {"modality": "HIGH_CONCEPT", "tags": ["pacifist", "gunslinger", "angelic_power"], "trait": "Humanoid Typhoon", "element": "Light"},
+    "Maka":            {"modality": "HIGH_CONCEPT", "tags": ["soul_resonance", "meister", "anti_demon"], "trait": "Grigori Meister", "element": "Soul"},
 }
 
 def classify(character_name: str) -> dict:
-    """
-    Returns the modality profile for a character.
-    If unknown, defaults to GROUNDED so the Auditor stays conservative.
-    """
     profile = CHARACTER_REGISTRY.get(character_name)
     if profile:
         return {"name": character_name, **profile}
     else:
         print(f"  [CLASSIFIER] ⚠️  '{character_name}' not in registry. Defaulting to GROUNDED.")
-        return {"name": character_name, "modality": "GROUNDED", "tags": ["unknown"]}
+        return {
+            "name": character_name,
+            "modality": "GROUNDED",
+            "tags": ["unknown"],
+            "trait": "Unknown Entity",
+            "element": "Neutral"
+        }
 
 
 def classify_fusion(alpha_name: str, beta_name: str, dominance: int = 50) -> dict:

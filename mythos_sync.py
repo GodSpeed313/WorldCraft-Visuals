@@ -10,8 +10,8 @@ import os
 from datetime import datetime
 
 # Import our two modules
-from modality_classifier import classify_fusion
-from logic_auditor import audit_power, POWER_REGISTRY
+from modality_classifier import classify_fusion, classify
+from logic_auditor import audit_power, POWER_REGISTRY, MODALITY_RANK
 
 # ------------------------------------------------------------------
 # CONSTANTS
@@ -28,6 +28,43 @@ POWER_POOL = {
     "LEGACY":       ["Strategic Genius", "Indomitable Will", "Rhetoric & Legacy", "Art of War", "The Scientific Method"],
     "GROUNDED":     ["Espionage", "Tactical Brilliance", "Kinetic Mastery", "One-Inch Punch", "Electromagnetic Pulse"],
     "HIGH_CONCEPT": ["Domain Expansion", "Cursed Energy", "Soul Resonance", "Reality Glitch", "Spiral Power", "Angelic Override"],
+}
+
+TAG_POWER_MAP = {
+    "strategy":        ["Strategic Genius", "Art of War", "Tactical Brilliance"],
+    "rhetoric":        ["Rhetoric & Legacy", "Tactical Brilliance"],
+    "legacy":          ["Rhetoric & Legacy", "Indomitable Will"],
+    "tactical":        ["Tactical Brilliance", "Espionage", "Art of War", "Strategic Genius"],
+    "street_legend":   ["Indomitable Will", "Tactical Brilliance", "Espionage"],
+    "underworld":      ["Espionage", "Tactical Brilliance", "Indomitable Will"],
+    "martial_arts":    ["One-Inch Punch", "Kinetic Mastery"],
+    "philosophy":      ["The Scientific Method", "Strategic Genius"],
+    "kinetic":         ["Kinetic Mastery", "One-Inch Punch"],
+    "inventor":        ["The Scientific Method", "Electromagnetic Pulse"],
+    "electromagnetic": ["Electromagnetic Pulse"],
+    "visionary":       ["The Scientific Method", "Strategic Genius"],
+    "espionage":       ["Espionage", "Tactical Brilliance"],
+    "resourceful":     ["Tactical Brilliance", "Espionage"],
+    "warrior":         ["Indomitable Will", "Art of War", "Kinetic Mastery"],
+    "historical":      ["Strategic Genius", "Indomitable Will"],
+    "resilience":      ["Indomitable Will", "Strategic Genius"],
+    "redemption":      ["Rhetoric & Legacy", "Indomitable Will"],
+    "influence":       ["Rhetoric & Legacy", "Strategic Genius"],
+    "pacifist":        ["Indomitable Will", "Rhetoric & Legacy"],
+    "gunslinger":      ["Kinetic Mastery", "Tactical Brilliance"],
+    "angelic_power":   ["Soul Resonance", "Angelic Override"],
+    "soul_resonance":  ["Soul Resonance", "Spiral Power"],
+    "meister":         ["Soul Resonance", "Kinetic Mastery"],
+    "anti_demon":      ["Cursed Energy", "Soul Resonance"],
+    "spiritual":       ["Cursed Energy", "Soul Resonance"],
+    "cursed":          ["Cursed Energy", "Reality Glitch"],
+    "ancient":         ["Art of War", "Strategic Genius"],
+    "cyberpunk":       ["Reality Glitch", "Electromagnetic Pulse"],
+    "investigator":    ["Tactical Brilliance", "The Scientific Method"],
+    "android_adjacent":["Electromagnetic Pulse", "Reality Glitch"],
+    "traveler":        ["Indomitable Will", "Strategic Genius"],
+    "observer":        ["The Scientific Method", "Strategic Genius"],
+    "survivalist":     ["Indomitable Will", "Tactical Brilliance"],
 }
 
 INFLUENCE_PATTERNS = [
@@ -57,10 +94,21 @@ def load_matrix() -> list:
 
 def save_to_matrix(profile: dict):
     matrix = load_matrix()
-    matrix.append(profile)
-    with open(MATRIX_FILE, "w") as f:
-        json.dump(matrix, f, indent=2)
-    print(f"\n  💾 Saved to Containment Matrix → '{MATRIX_FILE}'")
+    
+    # Check if a duplicate already exists
+    is_duplicate = any(
+        m.get("fusion_name") == profile.get("fusion_name") and 
+        m.get("signature_ability") == profile.get("signature_ability") 
+        for m in matrix
+    )
+    
+    if not is_duplicate:
+        matrix.append(profile)
+        with open(MATRIX_FILE, 'w') as f:
+            json.dump(matrix, f, indent=2)
+        print(f" ✅ [SERVER] Saved new fusion: {profile['fusion_name']}")
+    else:
+        print(f" ⚠️ [SERVER] Duplicate fusion detected. Skipping save.")
 
 
 # ------------------------------------------------------------------
@@ -91,24 +139,65 @@ def build_legacy_profile(
     print(f"\n  [CLASSIFIER] Modality resolved → {modality}")
     print(f"  [CLASSIFIER] Dominant         → {fusion['dominant']}")
 
-    # --- STEP 2: Pick powers from modality pool ---
-    candidate_powers = random.sample(POWER_POOL[modality], min(2, len(POWER_POOL[modality])))
-    universal_power  = random.choice(POWER_POOL["LEGACY"])
-    all_candidates   = list(set(candidate_powers + [universal_power]))
-
-    # --- STEP 3: Audit every candidate power ---
-    print(f"\n  [AUDITOR] Running power checks...")
+    # --- STEP 2 & 3: Thematic power selection + audit ---
+    # Gather thematic powers from the fused tags first
+    thematic_pool = set()
+    for tag in fusion["tags"]:
+        for power in TAG_POWER_MAP.get(tag, []):
+            if power in POWER_REGISTRY:
+                required_rank = MODALITY_RANK[POWER_REGISTRY[power]["min_modality"]]
+                if MODALITY_RANK[modality] >= required_rank:
+                    thematic_pool.add(power)
+    
+    thematic_pool = list(thematic_pool)
+    random.shuffle(thematic_pool)
+    
     approved_powers = []
-    for power in all_candidates:
+    audit_log = []
+    
+    # Pull up to 2 thematic powers
+    for power in thematic_pool[:2]:
         result = audit_power(power, fusion)
-        if result["transposed_to"]:
-            approved_powers.append(result["transposed_to"])
-            print(f"    ⚡ {power} → transposed to → {result['transposed_to']}")
-        else:
-            approved_powers.append(power)
-            print(f"    ✅ {power} approved  (cost: {result['cost_factor']})")
-
-    approved_powers = list(set(approved_powers))
+        audit_log.append({
+            "power": result["power"],
+            "status": "transposed" if result["transposed_to"] else "approved",
+            "transposed_to": result["transposed_to"],
+            "cost": result["cost_factor"],
+            "reason": result["message"] if result["transposed_to"] else None
+        })
+        approved_powers.append(result["transposed_to"] or result["power"])
+    
+    # Fill remaining slots from generic pool if needed
+    if len(approved_powers) < 2:
+        generic_pool = [p for p in POWER_POOL[modality] if p not in approved_powers]
+        needed = 2 - len(approved_powers)
+        extras = random.sample(generic_pool, min(needed, len(generic_pool)))
+        for power in extras:
+            result = audit_power(power, fusion)
+            audit_log.append({
+                "power": result["power"],
+                "status": "transposed" if result["transposed_to"] else "approved",
+                "transposed_to": result["transposed_to"],
+                "cost": result["cost_factor"],
+                "reason": result["message"] if result["transposed_to"] else None
+            })
+            approved_powers.append(result["transposed_to"] or result["power"])
+    
+    # Always try to add one universal LEGACY power
+    universal_candidates = [p for p in POWER_POOL["LEGACY"] if p not in approved_powers]
+    if universal_candidates:
+        power = random.choice(universal_candidates)
+        result = audit_power(power, fusion)
+        audit_log.append({
+            "power": result["power"],
+            "status": "transposed" if result["transposed_to"] else "approved",
+            "transposed_to": result["transposed_to"],
+            "cost": result["cost_factor"],
+            "reason": result["message"] if result["transposed_to"] else None
+        })
+        approved_powers.append(result["transposed_to"] or result["power"])
+    
+    approved_powers = list(dict.fromkeys(approved_powers))
 
     # --- STEP 4: Generate lore components ---
     biome             = random.choice(BIOMES[modality])
@@ -116,23 +205,37 @@ def build_legacy_profile(
     influence         = random.choice(INFLUENCE_PATTERNS)
     rhetoric          = random.choice(RHETORICAL_STYLES[modality])
 
+    # Character-aware lore (uses traits/elements from registry)
+    alpha_data = classify(alpha)
+    beta_data  = classify(beta)
+    a_trait = alpha_data.get("trait", alpha)
+    b_trait = beta_data.get("trait", beta)
+    a_elem  = alpha_data.get("element", "Neutral")
+    b_elem  = beta_data.get("element", "Neutral")
+    
+    lore_templates = [
+        f"Where {alpha}, the {a_trait} ({a_elem}), collides with {beta}, the {b_trait} ({b_elem}), a new force crystallizes. In {biome}, this fusion wields {signature_ability} to {influence}. Their doctrine: {rhetoric}.",
+        f"Born from the tension between the {a_trait} ({a_elem}) and the {b_trait} ({b_elem}), this fusion haunts {biome} with singular intent. They channel {signature_ability} to {influence}, their voice carrying only {rhetoric}.",
+    ]
+    lore_summary = random.choice(lore_templates)
+
     # --- STEP 5: Build the full Legacy Profile ---
     profile = {
         "fusion_name":       fusion["fusion_name"],
         "modality":          modality,
         "dominant":          fusion["dominant"],
+        "alpha":             {"name": alpha, "modality": classify(alpha)["modality"]},
+        "beta":              {"name": beta, "modality": classify(beta)["modality"]},
+        "dominance":         dominance,
         "tags":              fusion["tags"],
         "biome":             biome,
         "approved_powers":   approved_powers,
         "signature_ability": signature_ability,
         "influence_pattern": influence,
         "rhetorical_style":  rhetoric,
-        "lore_summary": (
-            f"In {biome}, the fusion of {fusion['fusion_name']} "
-            f"channels {signature_ability} and {influence}. "
-            f"Their rhetorical mode: {rhetoric}."
-        ),
-        "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        "lore_summary":      lore_summary,
+        "audit_log":         audit_log,
+        "created_at":        datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     }
 
     return profile
