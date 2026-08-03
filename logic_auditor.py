@@ -94,6 +94,13 @@ def audit_power(power_name: str, fusion_profile: dict) -> dict:
     # ❌ ILLEGAL — power exceeds fusion's modality ceiling
     else:
         transposed = TRANSPOSITION_MAP.get(power_name, "Indomitable Will")
+
+        # The transposition target must itself be legal for this fusion. Some
+        # entries only ground a power partway — Soul Resonance → Kinetic Mastery
+        # is GROUNDED, still illegal for a LEGACY fusion — so drop to a
+        # universal LEGACY power rather than leak an illegal one through.
+        if MODALITY_RANK[POWER_REGISTRY[transposed]["min_modality"]] > fusion_rank:
+            transposed = "Indomitable Will"
         return {
             "fusion":        fusion_name,
             "power":         power_name,

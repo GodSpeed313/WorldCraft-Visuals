@@ -1,47 +1,50 @@
+# 🌌 WorldCraft-Visuals
 
-\# 🗺️ WorldCraft-Visuals (V2)
-
-\*\*WorldCraft-Visuals\*\* is a Python-based procedural generator designed to create rich, anime-inspired fantasy kingdoms. 
-
-
-
-\### ✨ Key Features
-
-\* \*\*Anime-Centric Logic:\*\* Inspired by classic fantasy tropes (Isekai, Shonen, and Seinen styles).
-
-\* \*\*Procedural Kingdom Building:\*\* Creates unique names, government types, and power systems.
-
-\* \*\*V2 Upgrades:\*\* Enhanced biome diversity and more complex architectural descriptions.
-
-
-
-\### 🚀 Getting Started
-
-1\. \*\*Navigate to the folder:\*\*
-
-&#x20;  ```bash
-
-&#x20;  cd WorldCraft-Visuals
-
-
-# 👁️ WorldCraft-Visuals
 **The Multiverse Logic & Character Synthesis Engine.**
 
-WorldCraft-Visuals is a Python-based framework designed to automate the complex math behind character fusions, power-scaling, and universal laws. It removes the "guesswork" from world-building by using structured logic to determine how different traits, powers, and environments interact.
+WorldCraft-Visuals is a Python framework for fusing characters — historical figures, cinematic icons, anime leads — into a single "Legacy Profile," complete with powers, lore, and a home biome. Instead of picking outcomes at random, it runs every fusion through a modality system so the results stay internally consistent: a fusion of two grounded, real-world figures shouldn't casually wield reality-bending anime powers, and the engine enforces that.
 
 ### 🧬 Core Systems
-* **Fusion Logic:** A mathematical approach to combining two distinct character archetypes into a stable, logical "Third Being."
-* **Power Scaling:** A standardized system for measuring and comparing energy output and physical capabilities across different multiverses.
-* **Environmental Architecture:** A generator for procedural **Biomes and Landscapes**, ensuring that world settings (atmosphere, gravity, and terrain) align with the local universal laws.
-* **Trait Inheritance:** A system that determines which "Biological" or "Mystical" traits are dominant during a synthesis event.
+
+- **Modality Classifier** (`modality_classifier.py`) — tags every character as `LEGACY` (real historical/cultural figures), `GROUNDED` (cinematic but physically realistic), or `HIGH_CONCEPT` (physics-bending, supernatural), and blends two characters' modalities into a single fusion profile.
+- **Logic Auditor** (`logic_auditor.py`) — the enforcer. Checks every power against the fusion's modality ceiling and auto-transposes anything illegal down to a legal equivalent (e.g. `Domain Expansion` → `Strategic Genius` for a `LEGACY` fusion), so nothing breaks its own power-scaling rules.
+- **Mythos-Sync Engine** (`mythos_sync.py`) — the full pipeline: classify → select thematic powers by tag → audit → generate lore, biome, rhetorical style, and influence pattern → persist to `containment_matrix.json`.
+- **Fantasy Kingdom Generator** (`fantasy_kingdom_generator.py`) — the original, standalone lore generator. Lighter weight than Mythos-Sync; good for a quick taste of the anime/legend flavor text without the full fusion pipeline.
+- **Live Dashboard** (`dashboard.html` + `server.py`) — a local web UI. Run `server.py` and it serves `dashboard.html`, which posts fusion requests to `/fuse` and renders the resulting Legacy Profile.
+
+### 🚀 Getting Started
+
+No third-party dependencies — everything runs on the Python standard library (3.10+).
+
+**Quick lore sample:**
+```bash
+python fantasy_kingdom_generator.py
+```
+
+**Full fusion engine (command line):**
+```bash
+python mythos_sync.py
+```
+
+**Web dashboard:**
+```bash
+python server.py
+# then open http://localhost:8000/dashboard.html
+```
 
 ## 🛠️ Tech Stack
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![VS Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
-## 🚀 Project Phase: Alpha
-This engine is currently in active development. The primary focus is on refining the Python backend for fusion calculations and establishing the base biomes for environmental architecture.
+## 🚀 Project Status
 
-*Current Objective:* Mapping the interaction between Gravity constants and physical Power Scaling.
+The Mythos-Sync engine (classifier, auditor, tag-driven power selection, live dashboard) is functional end to end. Ongoing areas of interest: expanding the character registry (see the open "Legend Pool" issue for community suggestions) and further balancing the power-scaling rules between modalities.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## About
+
+Repository for [replit.com/@lamontb778/WorldCraft-Visuals](https://replit.com/@lamontb778/WorldCraft-Visuals)

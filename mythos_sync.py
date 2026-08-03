@@ -11,7 +11,7 @@ from datetime import datetime
 
 # Import our two modules
 from modality_classifier import classify_fusion, classify
-from logic_auditor import audit_power, POWER_REGISTRY, MODALITY_RANK
+from logic_auditor import audit_power, POWER_REGISTRY
 
 # ------------------------------------------------------------------
 # CONSTANTS
@@ -140,23 +140,28 @@ def build_legacy_profile(
     print(f"  [CLASSIFIER] Dominant         → {fusion['dominant']}")
 
     # --- STEP 2 & 3: Thematic power selection + audit ---
-    # Gather thematic powers from the fused tags first
+    # Gather thematic powers from the fused tags. Powers that exceed this
+    # fusion's modality ceiling are deliberately NOT filtered out here — they
+    # go to the auditor, which grounds them into legal equivalents. Filtering
+    # would silently discard a character's theme; transposing translates it.
     thematic_pool = set()
     for tag in fusion["tags"]:
         for power in TAG_POWER_MAP.get(tag, []):
             if power in POWER_REGISTRY:
-                required_rank = MODALITY_RANK[POWER_REGISTRY[power]["min_modality"]]
-                if MODALITY_RANK[modality] >= required_rank:
-                    thematic_pool.add(power)
-    
+                thematic_pool.add(power)
+
     thematic_pool = list(thematic_pool)
     random.shuffle(thematic_pool)
-    
+
     approved_powers = []
     audit_log = []
-    
-    # Pull up to 2 thematic powers
-    for power in thematic_pool[:2]:
+
+    def audit_and_take(power: str):
+        """Audit one power, log the verdict, and hold the result if it's new.
+
+        Transposition can map several illegal powers onto the same legal one,
+        so a power that gets audited is not necessarily a power that is gained.
+        """
         result = audit_power(power, fusion)
         audit_log.append({
             "power": result["power"],
@@ -165,39 +170,29 @@ def build_legacy_profile(
             "cost": result["cost_factor"],
             "reason": result["message"] if result["transposed_to"] else None
         })
-        approved_powers.append(result["transposed_to"] or result["power"])
-    
-    # Fill remaining slots from generic pool if needed
+        final = result["transposed_to"] or result["power"]
+        if final not in approved_powers:
+            approved_powers.append(final)
+
+    # Pull thematic powers until we hold 2 distinct ones
+    for power in thematic_pool:
+        if len(approved_powers) >= 2:
+            break
+        audit_and_take(power)
+
+    # Fill remaining slots from generic pool if the tags came up short
     if len(approved_powers) < 2:
         generic_pool = [p for p in POWER_POOL[modality] if p not in approved_powers]
-        needed = 2 - len(approved_powers)
-        extras = random.sample(generic_pool, min(needed, len(generic_pool)))
-        for power in extras:
-            result = audit_power(power, fusion)
-            audit_log.append({
-                "power": result["power"],
-                "status": "transposed" if result["transposed_to"] else "approved",
-                "transposed_to": result["transposed_to"],
-                "cost": result["cost_factor"],
-                "reason": result["message"] if result["transposed_to"] else None
-            })
-            approved_powers.append(result["transposed_to"] or result["power"])
-    
+        random.shuffle(generic_pool)
+        for power in generic_pool:
+            if len(approved_powers) >= 2:
+                break
+            audit_and_take(power)
+
     # Always try to add one universal LEGACY power
     universal_candidates = [p for p in POWER_POOL["LEGACY"] if p not in approved_powers]
     if universal_candidates:
-        power = random.choice(universal_candidates)
-        result = audit_power(power, fusion)
-        audit_log.append({
-            "power": result["power"],
-            "status": "transposed" if result["transposed_to"] else "approved",
-            "transposed_to": result["transposed_to"],
-            "cost": result["cost_factor"],
-            "reason": result["message"] if result["transposed_to"] else None
-        })
-        approved_powers.append(result["transposed_to"] or result["power"])
-    
-    approved_powers = list(dict.fromkeys(approved_powers))
+        audit_and_take(random.choice(universal_candidates))
 
     # --- STEP 4: Generate lore components ---
     biome             = random.choice(BIOMES[modality])
