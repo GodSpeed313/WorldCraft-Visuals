@@ -1,5 +1,7 @@
 import random
 
+from console import use_utf8_output
+
 def generate_world_lore():
     # Character Data with Traits
     legends = {
@@ -38,6 +40,7 @@ def generate_world_lore():
     return f"In the {biome}, {lore}"
 
 if __name__ == '__main__':
+    use_utf8_output()
     print("═" * 65)
     print("  🌌 WORLD-CRAFT VISUALS: TRAIT-SYNC ENGINE V2.3 🌌  ")
     print("═" * 65)

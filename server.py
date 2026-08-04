@@ -7,6 +7,7 @@ import json
 import os
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
+from console import use_utf8_output
 from mythos_sync import build_legacy_profile, save_to_matrix, load_matrix, export_for_web
 
 class MythosHandler(SimpleHTTPRequestHandler):
@@ -70,6 +71,7 @@ class MythosHandler(SimpleHTTPRequestHandler):
 
 
 if __name__ == '__main__':
+    use_utf8_output()
     port = 8000
     print(f"\n{'═'*50}")
     print(f"  🌌 MYTHOS-SYNC SERVER — LIVE ON PORT {port}")

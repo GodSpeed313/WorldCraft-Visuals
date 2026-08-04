@@ -6,6 +6,8 @@
 
 import random
 
+from console import use_utf8_output
+
 # Modality rank for comparison — how far a power can bend the world.
 MODALITY_RANK = {"LEGACY": 1, "GROUNDED": 2, "HIGH_CONCEPT": 3}
 
@@ -272,6 +274,7 @@ def audit_profile(fusion_profile: dict, powers_to_test: list) -> list:
 # QUICK TEST
 # ------------------------------------------------------------------
 if __name__ == "__main__":
+    use_utf8_output()
     # Simulate fusion profiles (normally these come from classifier)
     legacy_fusion = {
         "fusion_name": "Malcolm X x Bruce Lee",

@@ -9,10 +9,12 @@ import io
 import itertools
 import os
 import random
+import sys
 import tempfile
 import unittest
 
 import mythos_sync
+from console import use_utf8_output
 from logic_auditor import (
     MODALITY_RANK,
     POWER_FAMILIES,
@@ -396,6 +398,29 @@ class TestPowerSelection(unittest.TestCase):
         self.assertGreaterEqual(len(profile["approved_powers"]), 2)
         for power in profile["approved_powers"]:
             self.assertTrue(is_legal(power, profile["modality"]))
+
+
+# ------------------------------------------------------------------
+class TestConsoleSetup(unittest.TestCase):
+
+    def test_utf8_output_survives_a_non_stream_stdout(self):
+        """StringIO has no reconfigure(); the helper must not raise. This is
+        the exact shape of every test in this file, which runs under
+        redirect_stdout."""
+        with contextlib.redirect_stdout(io.StringIO()):
+            use_utf8_output()
+
+    def test_utf8_output_is_idempotent(self):
+        use_utf8_output()
+        use_utf8_output()
+        self.assertEqual(sys.stdout.encoding.lower().replace("-", ""), "utf8")
+
+    def test_engine_glyphs_encode_after_setup(self):
+        """The characters that used to crash on cp1252."""
+        use_utf8_output()
+        for glyph in ("═", "🌌", "⚡", "❌", "✅", "→"):
+            with self.subTest(glyph=glyph):
+                glyph.encode(sys.stdout.encoding)
 
 
 # ------------------------------------------------------------------

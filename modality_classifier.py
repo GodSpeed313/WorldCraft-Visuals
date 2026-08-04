@@ -4,6 +4,8 @@
 #  engine knows what rules apply to them.
 # =============================================================
 
+from console import use_utf8_output
+
 # The Master Registry — defines every known character's modality
 CHARACTER_REGISTRY = {
     # --- LEGACY: Real historical/cultural figures (human limits only) ---
@@ -82,6 +84,7 @@ def classify_fusion(alpha_name: str, beta_name: str, dominance: int = 50) -> dic
 
 # --- Quick test when run directly ---
 if __name__ == "__main__":
+    use_utf8_output()
     print("\n🔬 CLASSIFIER TEST\n" + "─" * 40)
     print(classify("Bruce Lee"))
     print(classify("Vash"))

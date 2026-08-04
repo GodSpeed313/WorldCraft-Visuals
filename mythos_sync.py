@@ -10,6 +10,7 @@ import os
 from datetime import datetime
 
 # Import our two modules
+from console import use_utf8_output
 from modality_classifier import classify_fusion, classify
 from logic_auditor import audit_power, family_of, POWER_REGISTRY
 
@@ -322,6 +323,7 @@ def export_for_web():
 # MAIN
 # ------------------------------------------------------------------
 if __name__ == "__main__":
+    use_utf8_output()
     print("\n" + "═"*60)
     print("   🌌 MYTHOS-SYNC FRAMEWORK — MULTIVERSE ENGINE V3.0 🌌")
     print("═"*60)
