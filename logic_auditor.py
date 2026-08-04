@@ -4,6 +4,8 @@
 #  rules and transposes illegal combos to legal equivalents.
 # =============================================================
 
+import random
+
 # ------------------------------------------------------------------
 # POWER REGISTRY — Every power tagged with its minimum modality
 # ------------------------------------------------------------------
@@ -34,21 +36,64 @@ POWER_REGISTRY = {
 }
 
 # ------------------------------------------------------------------
-# TRANSPOSITION TABLE — illegal power → legal human-scale equivalent
+# TRANSPOSITION TABLE — illegal power → legal equivalents
+#
+# Each power lists several thematic descendants rather than a single fixed
+# one, because a single target made every grounded fusion converge on the
+# same handful of powers. Entries are ordered richest-first; the grounding
+# rule below keeps the highest tier that is legal for the fusion, so a power
+# is lowered only as far as it has to be.
+#
+# GROUNDED powers need entries too: they are illegal for a LEGACY fusion,
+# and without a mapping they all fell through to the default.
 # ------------------------------------------------------------------
 TRANSPOSITION_MAP = {
-    "Domain Expansion":    "Strategic Genius",
-    "Titan-Shifting":      "Indomitable Will",
-    "Reality Glitch":      "The Scientific Method",
-    "Equivalent Exchange": "Art of War",
-    "Cursed Energy":       "Rhetoric & Legacy",
-    "Spiral Power":        "Indomitable Will",
-    "Soul Resonance":      "Kinetic Mastery",
-    "Angelic Override":    "Indomitable Will",
+    # HIGH_CONCEPT — battlefield control, transformation, rule-breaking
+    "Domain Expansion":    ["Tactical Brilliance", "Strategic Genius", "Art of War"],
+    "Titan-Shifting":      ["Kinetic Mastery", "One-Inch Punch", "Indomitable Will"],
+    "Reality Glitch":      ["Electromagnetic Pulse", "Espionage", "The Scientific Method"],
+    "Equivalent Exchange": ["Tactical Brilliance", "Art of War", "The Scientific Method"],
+    "Cursed Energy":       ["Espionage", "Rhetoric & Legacy", "Indomitable Will"],
+    "Spiral Power":        ["Kinetic Mastery", "One-Inch Punch", "Indomitable Will"],
+    "Soul Resonance":      ["Kinetic Mastery", "Art of War", "Rhetoric & Legacy"],
+    "Angelic Override":    ["Rhetoric & Legacy", "Indomitable Will", "Strategic Genius"],
+
+    # GROUNDED — only illegal when the fusion is LEGACY
+    "Espionage":             ["Strategic Genius", "Art of War"],
+    "Tactical Brilliance":   ["Strategic Genius", "Art of War"],
+    "Kinetic Mastery":       ["Indomitable Will", "Art of War"],
+    "Electromagnetic Pulse": ["The Scientific Method", "Strategic Genius"],
+    "One-Inch Punch":        ["Indomitable Will", "Art of War"],
 }
+
+# Used when a power has no entry above — universal, so always legal.
+DEFAULT_TRANSPOSITIONS = ["Indomitable Will", "Strategic Genius", "Art of War"]
 
 # Modality rank for comparison
 MODALITY_RANK = {"LEGACY": 1, "GROUNDED": 2, "HIGH_CONCEPT": 3}
+
+
+def ground_power(power_name: str, fusion_rank: int) -> str:
+    """Pick a legal stand-in for a power that exceeds the fusion's ceiling.
+
+    Keeps the richest tier still legal for the fusion — Soul Resonance
+    becomes Kinetic Mastery for a GROUNDED fusion but has to fall further,
+    to Art of War or Rhetoric & Legacy, for a LEGACY one — then chooses at
+    random within that tier so grounded fusions don't all look alike.
+    """
+    candidates = [
+        p for p in TRANSPOSITION_MAP.get(power_name, DEFAULT_TRANSPOSITIONS)
+        if p in POWER_REGISTRY
+        and MODALITY_RANK[POWER_REGISTRY[p]["min_modality"]] <= fusion_rank
+    ]
+    if not candidates:
+        return "Indomitable Will"  # universal — legal at every modality
+
+    best = max(MODALITY_RANK[POWER_REGISTRY[p]["min_modality"]] for p in candidates)
+    return random.choice(
+        [p for p in candidates
+         if MODALITY_RANK[POWER_REGISTRY[p]["min_modality"]] == best]
+    )
 
 
 # ------------------------------------------------------------------
@@ -93,14 +138,7 @@ def audit_power(power_name: str, fusion_profile: dict) -> dict:
 
     # ❌ ILLEGAL — power exceeds fusion's modality ceiling
     else:
-        transposed = TRANSPOSITION_MAP.get(power_name, "Indomitable Will")
-
-        # The transposition target must itself be legal for this fusion. Some
-        # entries only ground a power partway — Soul Resonance → Kinetic Mastery
-        # is GROUNDED, still illegal for a LEGACY fusion — so drop to a
-        # universal LEGACY power rather than leak an illegal one through.
-        if MODALITY_RANK[POWER_REGISTRY[transposed]["min_modality"]] > fusion_rank:
-            transposed = "Indomitable Will"
+        transposed = ground_power(power_name, fusion_rank)
         return {
             "fusion":        fusion_name,
             "power":         power_name,

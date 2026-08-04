@@ -88,8 +88,9 @@ class TestLogicAuditor(unittest.TestCase):
 
     def test_illegal_power_is_transposed(self):
         result = audit_power("Domain Expansion", self.LEGACY_FUSION)
-        self.assertEqual(result["transposed_to"], "Strategic Genius")
         self.assertIn("TRANSPOSED", result["status"])
+        self.assertIn(result["transposed_to"], TRANSPOSITION_MAP["Domain Expansion"])
+        self.assertTrue(is_legal(result["transposed_to"], "LEGACY"))
 
     def test_unregistered_power_is_flagged_unverified(self):
         result = audit_power("Hypernova Fist", self.LEGACY_FUSION)
@@ -97,24 +98,64 @@ class TestLogicAuditor(unittest.TestCase):
         self.assertIsNone(result["transposed_to"])
 
     def test_every_transposition_target_is_a_registered_power(self):
-        for source, target in TRANSPOSITION_MAP.items():
+        for source, targets in TRANSPOSITION_MAP.items():
+            for target in targets:
+                with self.subTest(source=source, target=target):
+                    self.assertIn(target, POWER_REGISTRY)
+
+    def test_every_power_has_at_least_one_universal_fallback(self):
+        """Every entry must contain a LEGACY-tier power, otherwise a LEGACY
+        fusion has nothing legal to ground to and hits the blanket default."""
+        for source, targets in TRANSPOSITION_MAP.items():
             with self.subTest(source=source):
-                self.assertIn(target, POWER_REGISTRY)
+                self.assertTrue(
+                    any(is_legal(t, "LEGACY") for t in targets),
+                    f"{source} cannot be grounded for a LEGACY fusion",
+                )
 
     def test_transposition_never_yields_an_illegal_power(self):
         """Regression guard: Soul Resonance -> Kinetic Mastery grounded a
         HIGH_CONCEPT power only as far as GROUNDED, which still leaked an
-        illegal power into LEGACY profiles."""
+        illegal power into LEGACY profiles. Repeated because grounding now
+        picks at random among equally-ranked candidates."""
+        random.seed(21)
         for modality in ALL_MODALITIES:
             fusion = dict(self.LEGACY_FUSION, modality=modality)
             for power in POWER_REGISTRY:
                 with self.subTest(modality=modality, power=power):
-                    result = audit_power(power, fusion)
-                    final = result["transposed_to"] or result["power"]
-                    self.assertTrue(
-                        is_legal(final, modality),
-                        f"{power} -> {final} is illegal for {modality}",
-                    )
+                    for _ in range(20):
+                        result = audit_power(power, fusion)
+                        final = result["transposed_to"] or result["power"]
+                        self.assertTrue(
+                            is_legal(final, modality),
+                            f"{power} -> {final} is illegal for {modality}",
+                        )
+
+    def test_grounding_keeps_the_richest_legal_tier(self):
+        """A power should fall only as far as it must: Soul Resonance stays
+        GROUNDED for a GROUNDED fusion, but drops to LEGACY for a LEGACY one."""
+        grounded = dict(self.LEGACY_FUSION, modality="GROUNDED")
+        self.assertEqual(
+            audit_power("Soul Resonance", grounded)["transposed_to"],
+            "Kinetic Mastery",
+        )
+        legacy_target = audit_power("Soul Resonance", self.LEGACY_FUSION)["transposed_to"]
+        self.assertIn(legacy_target, ("Art of War", "Rhetoric & Legacy"))
+
+    def test_grounding_is_not_always_the_same_power(self):
+        """The whole point of the widened map: a LEGACY fusion should not
+        funnel every illegal power into one stand-in."""
+        random.seed(22)
+        targets = set()
+        for power in POWER_REGISTRY:
+            for _ in range(30):
+                result = audit_power(power, self.LEGACY_FUSION)
+                if result["transposed_to"]:
+                    targets.add(result["transposed_to"])
+        self.assertGreaterEqual(
+            len(targets), 4,
+            f"grounding collapsed onto too few powers: {sorted(targets)}",
+        )
 
     def test_legacy_powers_are_legal_at_every_modality(self):
         for power in POWER_POOL["LEGACY"]:
