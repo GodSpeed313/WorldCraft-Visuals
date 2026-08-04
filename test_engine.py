@@ -142,8 +142,11 @@ class TestLogicAuditor(unittest.TestCase):
             audit_power("Soul Resonance", grounded)["transposed_to"],
             "Kinetic Mastery",
         )
+        # At LEGACY it has to fall further, but stays in DISCIPLINE — before
+        # the rebalance it landed on Art of War, i.e. became a strategist.
         legacy_target = audit_power("Soul Resonance", self.LEGACY_FUSION)["transposed_to"]
-        self.assertIn(legacy_target, ("Art of War", "Rhetoric & Legacy"))
+        self.assertIn(legacy_target, ("Adaptive Combat", "Martial Perfection"))
+        self.assertEqual(family_of(legacy_target), family_of("Soul Resonance"))
 
     def test_grounding_is_not_always_the_same_power(self):
         """The whole point of the widened map: a LEGACY fusion should not
@@ -193,20 +196,10 @@ class TestPowerFamilies(unittest.TestCase):
         counted = sum(len(family_members(f)) for f in POWER_FAMILIES)
         self.assertEqual(counted, len(POWER_REGISTRY))
 
-    @unittest.expectedFailure
     def test_every_family_can_ground_to_itself_at_legacy(self):
-        """KNOWN GAP — PERCEPTION has no LEGACY-tier power.
-
-        A family with no LEGACY-tier member cannot keep a grounded power in
-        the family, so Espionage has to leave PERCEPTION entirely when a
-        LEGACY fusion grounds it. The registry is lopsided: COGNITION has 8
-        powers, PERCEPTION has 1 and none at LEGACY.
-
-        This is an ontology gap for the registry expansion to close, not a
-        code defect. Marked expectedFailure so it stays visible without
-        breaking CI; adding a LEGACY-tier PERCEPTION power will flip this to
-        an unexpected success, which is the signal to delete this decorator.
-        """
+        """Was an expectedFailure: PERCEPTION had no LEGACY-tier power, so
+        Espionage had to leave its family entirely when grounded. Closed by
+        the registry rebalance."""
         for family in POWER_FAMILIES:
             with self.subTest(family=family):
                 self.assertTrue(
@@ -242,6 +235,35 @@ class TestPowerFamilies(unittest.TestCase):
 
 # ------------------------------------------------------------------
 class TestRegistryIntegrity(unittest.TestCase):
+
+    def test_transposition_preserves_family(self):
+        """Grounding changes a power's EXPRESSION, not its essence. Espionage
+        becoming Strategic Genius turned a perceptive person into a strategist;
+        it should become Situational Awareness instead."""
+        for source, targets in TRANSPOSITION_MAP.items():
+            for target in targets:
+                with self.subTest(source=source, target=target):
+                    self.assertEqual(
+                        family_of(target), family_of(source),
+                        f"{source} ({family_of(source)}) grounds to "
+                        f"{target} ({family_of(target)})",
+                    )
+
+    def test_every_power_is_reachable_from_some_tag(self):
+        """A power no tag routes to can only arrive via the single random
+        universal slot — more combinations carrying less meaning."""
+        routed = {p for powers in TAG_POWER_MAP.values() for p in powers}
+        for power in POWER_REGISTRY:
+            with self.subTest(power=power):
+                self.assertIn(power, routed)
+
+    def test_no_family_dominates_the_legacy_tier(self):
+        """The skew that made 91% of LEGACY fusions read as strategists."""
+        legacy = [p for p in POWER_REGISTRY if is_legal(p, "LEGACY")]
+        for family in POWER_FAMILIES:
+            share = len([p for p in legacy if family_of(p) == family]) / len(legacy)
+            with self.subTest(family=family):
+                self.assertLessEqual(share, 0.40, f"{family} is {share:.0%} of LEGACY")
 
     def test_tag_power_map_only_references_registered_powers(self):
         """Unregistered powers are silently dropped during selection, so a

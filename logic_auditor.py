@@ -42,19 +42,44 @@ POWER_REGISTRY = {
     "Soul Resonance":         {"min_modality": "HIGH_CONCEPT", "cost_factor": 5,  "family": DISCIPLINE},
     "Angelic Override":       {"min_modality": "HIGH_CONCEPT", "cost_factor": 9,  "family": INFLUENCE},
 
-    # GROUNDED or higher
+    # GROUNDED or higher — the body exceeds ordinary human limits
     "Espionage":              {"min_modality": "GROUNDED",     "cost_factor": 3,  "family": PERCEPTION},
-    "Tactical Brilliance":    {"min_modality": "GROUNDED",     "cost_factor": 3,  "family": COGNITION},
     "Kinetic Mastery":        {"min_modality": "GROUNDED",     "cost_factor": 4,  "family": DISCIPLINE},
     "Electromagnetic Pulse":  {"min_modality": "GROUNDED",     "cost_factor": 4,  "family": COGNITION},
     "One-Inch Punch":         {"min_modality": "GROUNDED",     "cost_factor": 2,  "family": DISCIPLINE},
 
-    # LEGACY or higher (universal — anyone can have these)
+    # LEGACY or higher — human excellence, no rules bent. Anyone can have these.
+    # Grouped by family: the tier was 3/5 COGNITION, which made 91% of LEGACY
+    # fusions read as strategists regardless of who they were built from.
+
+    # -- COGNITION: understanding the system
     "Strategic Genius":       {"min_modality": "LEGACY",       "cost_factor": 1,  "family": COGNITION},
-    "Indomitable Will":       {"min_modality": "LEGACY",       "cost_factor": 1,  "family": DISCIPLINE},
     "The Scientific Method":  {"min_modality": "LEGACY",       "cost_factor": 1,  "family": COGNITION},
-    "Rhetoric & Legacy":      {"min_modality": "LEGACY",       "cost_factor": 1,  "family": INFLUENCE},
     "Art of War":             {"min_modality": "LEGACY",       "cost_factor": 2,  "family": COGNITION},
+    "Pattern Recognition":    {"min_modality": "LEGACY",       "cost_factor": 1,  "family": COGNITION},
+    "Mastermind Architecture": {"min_modality": "LEGACY",      "cost_factor": 2,  "family": COGNITION},
+    # Understanding conflict better than anyone is human excellence; moving
+    # faster than a human can is not. The name was ambiguous, the concept is
+    # LEGACY. Reacting past human limits stays GROUNDED as Kinetic Mastery.
+    "Tactical Brilliance":    {"min_modality": "LEGACY",       "cost_factor": 3,  "family": COGNITION},
+
+    # -- INFLUENCE: moving people, and moving generations
+    "Rhetoric & Legacy":      {"min_modality": "LEGACY",       "cost_factor": 1,  "family": INFLUENCE},
+    "Cultural Resonance":     {"min_modality": "LEGACY",       "cost_factor": 2,  "family": INFLUENCE},
+    "Diplomatic Mastery":     {"min_modality": "LEGACY",       "cost_factor": 1,  "family": INFLUENCE},
+    "Symbolic Authority":     {"min_modality": "LEGACY",       "cost_factor": 2,  "family": INFLUENCE},
+
+    # -- DISCIPLINE: the mind commands the body
+    "Indomitable Will":       {"min_modality": "LEGACY",       "cost_factor": 1,  "family": DISCIPLINE},
+    "Martial Perfection":     {"min_modality": "LEGACY",       "cost_factor": 2,  "family": DISCIPLINE},
+    "Adaptive Combat":        {"min_modality": "LEGACY",       "cost_factor": 2,  "family": DISCIPLINE},
+    "Iron Discipline":        {"min_modality": "LEGACY",       "cost_factor": 1,  "family": DISCIPLINE},
+
+    # -- PERCEPTION: reading rooms, people, situations
+    "Intuitive Insight":      {"min_modality": "LEGACY",       "cost_factor": 1,  "family": PERCEPTION},
+    "Situational Awareness":  {"min_modality": "LEGACY",       "cost_factor": 1,  "family": PERCEPTION},
+    "Psychological Mastery":  {"min_modality": "LEGACY",       "cost_factor": 2,  "family": PERCEPTION},
+    "Memory Palace":          {"min_modality": "LEGACY",       "cost_factor": 1,  "family": PERCEPTION},
 }
 
 
@@ -87,21 +112,22 @@ def family_members(family: str, max_modality: str = "HIGH_CONCEPT") -> list:
 # ------------------------------------------------------------------
 TRANSPOSITION_MAP = {
     # HIGH_CONCEPT — battlefield control, transformation, rule-breaking
-    "Domain Expansion":    ["Tactical Brilliance", "Strategic Genius", "Art of War"],
-    "Titan-Shifting":      ["Kinetic Mastery", "One-Inch Punch", "Indomitable Will"],
-    "Reality Glitch":      ["Electromagnetic Pulse", "Espionage", "The Scientific Method"],
+    "Domain Expansion":    ["Tactical Brilliance", "Mastermind Architecture", "Strategic Genius", "Art of War"],
+    "Titan-Shifting":      ["Kinetic Mastery", "One-Inch Punch", "Martial Perfection", "Indomitable Will"],
+    "Reality Glitch":      ["Electromagnetic Pulse", "Pattern Recognition", "The Scientific Method"],
     "Equivalent Exchange": ["Tactical Brilliance", "Art of War", "The Scientific Method"],
-    "Cursed Energy":       ["Espionage", "Rhetoric & Legacy", "Indomitable Will"],
-    "Spiral Power":        ["Kinetic Mastery", "One-Inch Punch", "Indomitable Will"],
-    "Soul Resonance":      ["Kinetic Mastery", "Art of War", "Rhetoric & Legacy"],
-    "Angelic Override":    ["Rhetoric & Legacy", "Indomitable Will", "Strategic Genius"],
+    "Cursed Energy":       ["Rhetoric & Legacy", "Symbolic Authority", "Cultural Resonance"],
+    "Spiral Power":        ["Kinetic Mastery", "One-Inch Punch", "Iron Discipline", "Indomitable Will"],
+    "Soul Resonance":      ["Kinetic Mastery", "Adaptive Combat", "Martial Perfection"],
+    "Angelic Override":    ["Symbolic Authority", "Rhetoric & Legacy", "Diplomatic Mastery"],
 
-    # GROUNDED — only illegal when the fusion is LEGACY
-    "Espionage":             ["Strategic Genius", "Art of War"],
-    "Tactical Brilliance":   ["Strategic Genius", "Art of War"],
-    "Kinetic Mastery":       ["Indomitable Will", "Art of War"],
-    "Electromagnetic Pulse": ["The Scientific Method", "Strategic Genius"],
-    "One-Inch Punch":        ["Indomitable Will", "Art of War"],
+    # GROUNDED — only illegal when the fusion is LEGACY. Every entry now stays
+    # inside the source power's family: a perception-driven person grounds into
+    # a different EXPRESSION of perception, not into somebody else's essence.
+    "Espionage":             ["Situational Awareness", "Psychological Mastery"],
+    "Kinetic Mastery":       ["Martial Perfection", "Iron Discipline", "Indomitable Will"],
+    "Electromagnetic Pulse": ["The Scientific Method", "Pattern Recognition"],
+    "One-Inch Punch":        ["Martial Perfection", "Iron Discipline", "Indomitable Will"],
 }
 
 # Last-resort fallback — universal, so legal at every modality.
