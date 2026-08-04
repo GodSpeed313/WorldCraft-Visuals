@@ -6,34 +6,72 @@
 
 import random
 
+# Modality rank for comparison — how far a power can bend the world.
+MODALITY_RANK = {"LEGACY": 1, "GROUNDED": 2, "HIGH_CONCEPT": 3}
+
 # ------------------------------------------------------------------
-# POWER REGISTRY — Every power tagged with its minimum modality
+# POWER FAMILIES — the semantic layer beneath modality
+#
+# Modality answers "how much can this person bend the world?". Family answers
+# "what kind of excellence is this?". They are independent axes: Domain
+# Expansion and Strategic Genius are the same KIND of power (imposing order on
+# a battlefield) at wildly different scales, which is exactly why one grounds
+# into the other.
+#
+# Family is what makes a power's neighbours computable instead of hand-listed.
+# ------------------------------------------------------------------
+COGNITION  = "COGNITION"    # strategy, invention, seeing the system
+INFLUENCE  = "INFLUENCE"    # rhetoric, authority, moving people
+DISCIPLINE = "DISCIPLINE"   # body, will, endurance, mastery of self
+PERCEPTION = "PERCEPTION"   # reading rooms, people, situations
+
+POWER_FAMILIES = (COGNITION, INFLUENCE, DISCIPLINE, PERCEPTION)
+
+
+# ------------------------------------------------------------------
+# POWER REGISTRY — every power tagged with its minimum modality and family
 # ------------------------------------------------------------------
 POWER_REGISTRY = {
     # HIGH_CONCEPT only
-    "Domain Expansion":      {"min_modality": "HIGH_CONCEPT", "cost_factor": 9},
-    "Titan-Shifting":         {"min_modality": "HIGH_CONCEPT", "cost_factor": 8},
-    "Reality Glitch":         {"min_modality": "HIGH_CONCEPT", "cost_factor": 10},
-    "Equivalent Exchange":    {"min_modality": "HIGH_CONCEPT", "cost_factor": 7},
-    "Cursed Energy":          {"min_modality": "HIGH_CONCEPT", "cost_factor": 6},
-    "Spiral Power":           {"min_modality": "HIGH_CONCEPT", "cost_factor": 8},
-    "Soul Resonance":         {"min_modality": "HIGH_CONCEPT", "cost_factor": 5},
-    "Angelic Override":       {"min_modality": "HIGH_CONCEPT", "cost_factor": 9},
+    "Domain Expansion":       {"min_modality": "HIGH_CONCEPT", "cost_factor": 9,  "family": COGNITION},
+    "Titan-Shifting":         {"min_modality": "HIGH_CONCEPT", "cost_factor": 8,  "family": DISCIPLINE},
+    "Reality Glitch":         {"min_modality": "HIGH_CONCEPT", "cost_factor": 10, "family": COGNITION},
+    "Equivalent Exchange":    {"min_modality": "HIGH_CONCEPT", "cost_factor": 7,  "family": COGNITION},
+    "Cursed Energy":          {"min_modality": "HIGH_CONCEPT", "cost_factor": 6,  "family": INFLUENCE},
+    "Spiral Power":           {"min_modality": "HIGH_CONCEPT", "cost_factor": 8,  "family": DISCIPLINE},
+    "Soul Resonance":         {"min_modality": "HIGH_CONCEPT", "cost_factor": 5,  "family": DISCIPLINE},
+    "Angelic Override":       {"min_modality": "HIGH_CONCEPT", "cost_factor": 9,  "family": INFLUENCE},
 
     # GROUNDED or higher
-    "Espionage":              {"min_modality": "GROUNDED",     "cost_factor": 3},
-    "Tactical Brilliance":    {"min_modality": "GROUNDED",     "cost_factor": 3},
-    "Kinetic Mastery":        {"min_modality": "GROUNDED",     "cost_factor": 4},
-    "Electromagnetic Pulse":  {"min_modality": "GROUNDED",     "cost_factor": 4},
-    "One-Inch Punch":         {"min_modality": "GROUNDED",     "cost_factor": 2},
+    "Espionage":              {"min_modality": "GROUNDED",     "cost_factor": 3,  "family": PERCEPTION},
+    "Tactical Brilliance":    {"min_modality": "GROUNDED",     "cost_factor": 3,  "family": COGNITION},
+    "Kinetic Mastery":        {"min_modality": "GROUNDED",     "cost_factor": 4,  "family": DISCIPLINE},
+    "Electromagnetic Pulse":  {"min_modality": "GROUNDED",     "cost_factor": 4,  "family": COGNITION},
+    "One-Inch Punch":         {"min_modality": "GROUNDED",     "cost_factor": 2,  "family": DISCIPLINE},
 
     # LEGACY or higher (universal — anyone can have these)
-    "Strategic Genius":       {"min_modality": "LEGACY",      "cost_factor": 1},
-    "Indomitable Will":       {"min_modality": "LEGACY",      "cost_factor": 1},
-    "The Scientific Method":  {"min_modality": "LEGACY",      "cost_factor": 1},
-    "Rhetoric & Legacy":      {"min_modality": "LEGACY",      "cost_factor": 1},
-    "Art of War":             {"min_modality": "LEGACY",      "cost_factor": 2},
+    "Strategic Genius":       {"min_modality": "LEGACY",       "cost_factor": 1,  "family": COGNITION},
+    "Indomitable Will":       {"min_modality": "LEGACY",       "cost_factor": 1,  "family": DISCIPLINE},
+    "The Scientific Method":  {"min_modality": "LEGACY",       "cost_factor": 1,  "family": COGNITION},
+    "Rhetoric & Legacy":      {"min_modality": "LEGACY",       "cost_factor": 1,  "family": INFLUENCE},
+    "Art of War":             {"min_modality": "LEGACY",       "cost_factor": 2,  "family": COGNITION},
 }
+
+
+def family_of(power_name: str) -> str:
+    """The family a power belongs to, or None if it isn't registered."""
+    entry = POWER_REGISTRY.get(power_name)
+    return entry["family"] if entry else None
+
+
+def family_members(family: str, max_modality: str = "HIGH_CONCEPT") -> list:
+    """Every registered power in `family` that is legal at `max_modality`."""
+    ceiling = MODALITY_RANK[max_modality]
+    return [
+        name for name, entry in POWER_REGISTRY.items()
+        if entry["family"] == family
+        and MODALITY_RANK[entry["min_modality"]] <= ceiling
+    ]
 
 # ------------------------------------------------------------------
 # TRANSPOSITION TABLE — illegal power → legal equivalents
@@ -66,11 +104,28 @@ TRANSPOSITION_MAP = {
     "One-Inch Punch":        ["Indomitable Will", "Art of War"],
 }
 
-# Used when a power has no entry above — universal, so always legal.
+# Last-resort fallback — universal, so legal at every modality.
 DEFAULT_TRANSPOSITIONS = ["Indomitable Will", "Strategic Genius", "Art of War"]
 
-# Modality rank for comparison
-MODALITY_RANK = {"LEGACY": 1, "GROUNDED": 2, "HIGH_CONCEPT": 3}
+
+def _grounding_candidates(power_name: str) -> list:
+    """Where a power may ground to, curated entry first, family second.
+
+    An explicit TRANSPOSITION_MAP entry is a deliberate authorial choice and
+    wins. Without one, the power's own family supplies the neighbours — which
+    is the point of families: a power no longer needs a hand-written mapping
+    to ground somewhere thematically adjacent.
+    """
+    if power_name in TRANSPOSITION_MAP:
+        return TRANSPOSITION_MAP[power_name]
+
+    family = family_of(power_name)
+    if family:
+        kin = [p for p in family_members(family) if p != power_name]
+        if kin:
+            return kin
+
+    return DEFAULT_TRANSPOSITIONS
 
 
 def ground_power(power_name: str, fusion_rank: int) -> str:
@@ -78,22 +133,28 @@ def ground_power(power_name: str, fusion_rank: int) -> str:
 
     Keeps the richest tier still legal for the fusion — Soul Resonance
     becomes Kinetic Mastery for a GROUNDED fusion but has to fall further,
-    to Art of War or Rhetoric & Legacy, for a LEGACY one — then chooses at
-    random within that tier so grounded fusions don't all look alike.
+    to Art of War or Rhetoric & Legacy, for a LEGACY one — then prefers a
+    stand-in from the power's own family, and chooses at random among what
+    remains so grounded fusions don't all look alike.
     """
     candidates = [
-        p for p in TRANSPOSITION_MAP.get(power_name, DEFAULT_TRANSPOSITIONS)
+        p for p in _grounding_candidates(power_name)
         if p in POWER_REGISTRY
         and MODALITY_RANK[POWER_REGISTRY[p]["min_modality"]] <= fusion_rank
     ]
     if not candidates:
         return "Indomitable Will"  # universal — legal at every modality
 
+    # Fall as little as possible: keep the richest legal tier.
     best = max(MODALITY_RANK[POWER_REGISTRY[p]["min_modality"]] for p in candidates)
-    return random.choice(
-        [p for p in candidates
-         if MODALITY_RANK[POWER_REGISTRY[p]["min_modality"]] == best]
-    )
+    candidates = [
+        p for p in candidates
+        if MODALITY_RANK[POWER_REGISTRY[p]["min_modality"]] == best
+    ]
+
+    # Then stay in the family if this tier offers a relative.
+    kin = [p for p in candidates if family_of(p) == family_of(power_name)]
+    return random.choice(kin or candidates)
 
 
 # ------------------------------------------------------------------

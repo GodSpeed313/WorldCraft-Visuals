@@ -11,7 +11,7 @@ from datetime import datetime
 
 # Import our two modules
 from modality_classifier import classify_fusion, classify
-from logic_auditor import audit_power, POWER_REGISTRY
+from logic_auditor import audit_power, family_of, POWER_REGISTRY
 
 # ------------------------------------------------------------------
 # CONSTANTS
@@ -215,6 +215,12 @@ def build_legacy_profile(
     lore_summary = random.choice(lore_templates)
 
     # --- STEP 5: Build the full Legacy Profile ---
+    # Which kinds of excellence this fusion actually embodies. The dominant
+    # family is the closest thing the engine currently has to a disposition,
+    # and is what a philosophy/tension layer would read from.
+    families = [family_of(p) for p in approved_powers]
+    dominant_family = max(set(families), key=families.count)
+
     profile = {
         "fusion_name":       fusion["fusion_name"],
         "modality":          modality,
@@ -225,6 +231,8 @@ def build_legacy_profile(
         "tags":              fusion["tags"],
         "biome":             biome,
         "approved_powers":   approved_powers,
+        "power_families":    {p: family_of(p) for p in approved_powers},
+        "dominant_family":   dominant_family,
         "signature_ability": signature_ability,
         "influence_pattern": influence,
         "rhetorical_style":  rhetoric,
@@ -247,6 +255,7 @@ def display_profile(profile: dict):
     print(f"  Dominant         : {profile['dominant']}")
     print(f"  Biome            : {profile['biome']}")
     print(f"  Approved Powers  : {', '.join(profile['approved_powers'])}")
+    print(f"  Dominant Family  : {profile['dominant_family']}")
     print(f"  Signature Ability: {profile['signature_ability']}")
     print(f"  Influence Pattern: {profile['influence_pattern']}")
     print(f"  Rhetorical Style : {profile['rhetorical_style']}")

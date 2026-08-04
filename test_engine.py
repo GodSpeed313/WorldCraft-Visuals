@@ -15,9 +15,12 @@ import unittest
 import mythos_sync
 from logic_auditor import (
     MODALITY_RANK,
+    POWER_FAMILIES,
     POWER_REGISTRY,
     TRANSPOSITION_MAP,
     audit_power,
+    family_members,
+    family_of,
 )
 from modality_classifier import CHARACTER_REGISTRY, classify, classify_fusion
 from mythos_sync import POWER_POOL, TAG_POWER_MAP, build_legacy_profile
@@ -165,6 +168,79 @@ class TestLogicAuditor(unittest.TestCase):
 
 
 # ------------------------------------------------------------------
+class TestPowerFamilies(unittest.TestCase):
+    """Families are the semantic layer that tension and philosophy will read."""
+
+    def test_every_power_declares_a_known_family(self):
+        for power, entry in POWER_REGISTRY.items():
+            with self.subTest(power=power):
+                self.assertIn("family", entry)
+                self.assertIn(entry["family"], POWER_FAMILIES)
+
+    def test_family_of_returns_none_for_unregistered_power(self):
+        self.assertIsNone(family_of("Hypernova Fist"))
+
+    def test_family_members_respects_the_modality_ceiling(self):
+        for family in POWER_FAMILIES:
+            legacy_only = family_members(family, "LEGACY")
+            everything = family_members(family)
+            with self.subTest(family=family):
+                self.assertTrue(set(legacy_only).issubset(everything))
+                for power in legacy_only:
+                    self.assertTrue(is_legal(power, "LEGACY"))
+
+    def test_families_partition_the_registry(self):
+        counted = sum(len(family_members(f)) for f in POWER_FAMILIES)
+        self.assertEqual(counted, len(POWER_REGISTRY))
+
+    @unittest.expectedFailure
+    def test_every_family_can_ground_to_itself_at_legacy(self):
+        """KNOWN GAP — PERCEPTION has no LEGACY-tier power.
+
+        A family with no LEGACY-tier member cannot keep a grounded power in
+        the family, so Espionage has to leave PERCEPTION entirely when a
+        LEGACY fusion grounds it. The registry is lopsided: COGNITION has 8
+        powers, PERCEPTION has 1 and none at LEGACY.
+
+        This is an ontology gap for the registry expansion to close, not a
+        code defect. Marked expectedFailure so it stays visible without
+        breaking CI; adding a LEGACY-tier PERCEPTION power will flip this to
+        an unexpected success, which is the signal to delete this decorator.
+        """
+        for family in POWER_FAMILIES:
+            with self.subTest(family=family):
+                self.assertTrue(
+                    family_members(family, "LEGACY"),
+                    f"{family} has no LEGACY-tier power to ground into",
+                )
+
+    def test_grounding_prefers_a_relative_when_one_is_legal(self):
+        """Titan-Shifting is DISCIPLINE; grounded at LEGACY it should land on
+        a DISCIPLINE power rather than drifting to another family."""
+        random.seed(31)
+        fusion = {"fusion_name": "t", "modality": "LEGACY", "dominant": "", "tags": []}
+        for _ in range(20):
+            target = audit_power("Titan-Shifting", fusion)["transposed_to"]
+            self.assertEqual(family_of(target), family_of("Titan-Shifting"))
+
+    def test_unmapped_power_grounds_through_its_family(self):
+        """Powers with no TRANSPOSITION_MAP entry fall back to family rather
+        than the blanket default list."""
+        random.seed(32)
+        fusion = {"fusion_name": "t", "modality": "LEGACY", "dominant": "", "tags": []}
+        # Angelic Override is INFLUENCE and mapped; strip the entry to prove
+        # the family path alone produces a same-family, legal result.
+        original = TRANSPOSITION_MAP.pop("Angelic Override")
+        try:
+            for _ in range(10):
+                target = audit_power("Angelic Override", fusion)["transposed_to"]
+                self.assertTrue(is_legal(target, "LEGACY"))
+                self.assertEqual(family_of(target), "INFLUENCE")
+        finally:
+            TRANSPOSITION_MAP["Angelic Override"] = original
+
+
+# ------------------------------------------------------------------
 class TestRegistryIntegrity(unittest.TestCase):
 
     def test_tag_power_map_only_references_registered_powers(self):
@@ -264,12 +340,26 @@ class TestPowerSelection(unittest.TestCase):
         profile = quiet(build_legacy_profile, "Bruce Lee", "Maka", 50)
         for key in (
             "fusion_name", "modality", "dominant", "alpha", "beta", "dominance",
-            "tags", "biome", "approved_powers", "signature_ability",
+            "tags", "biome", "approved_powers", "power_families",
+            "dominant_family", "signature_ability",
             "influence_pattern", "rhetorical_style", "lore_summary",
             "audit_log", "created_at",
         ):
             with self.subTest(key=key):
                 self.assertIn(key, profile)
+
+    def test_power_families_field_matches_the_held_powers(self):
+        random.seed(8)
+        for alpha, beta in itertools.permutations(CHARACTER_REGISTRY, 2):
+            profile = quiet(build_legacy_profile, alpha, beta, 50)
+            with self.subTest(fusion=profile["fusion_name"]):
+                self.assertEqual(
+                    set(profile["power_families"]), set(profile["approved_powers"])
+                )
+                self.assertIn(profile["dominant_family"], POWER_FAMILIES)
+                self.assertIn(
+                    profile["dominant_family"], profile["power_families"].values()
+                )
 
     def test_biome_matches_the_fusion_modality(self):
         random.seed(6)
