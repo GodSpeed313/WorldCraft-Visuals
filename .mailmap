@@ -1,0 +1,13 @@
+# Canonical author identity.
+#
+# Early commits were made under a placeholder git identity and an unedited
+# template email, neither of which routes to a real account. History is
+# deliberately not rewritten — the commit messages are this project's design
+# record and their hashes are cited elsewhere. This file maps the old
+# identities onto the canonical one so git log, git shortlog and blame report
+# a single author.
+#
+# Format: Canonical Name <canonical@email>  Old Name <old@email>
+
+GodSpeed313 <lamontb778@gmail.com>  Continuum Core <continuum-core@hessian.local>
+GodSpeed313 <lamontb778@gmail.com>  Kevin Brown <your-github-email@example.com>
