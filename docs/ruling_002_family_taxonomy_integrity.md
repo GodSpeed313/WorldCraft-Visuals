@@ -307,14 +307,14 @@ decision, not an engineering one.
 ### 8.1 Mapping to Ruling 001 §4 result states
 
 Three vocabularies now exist and must not be confused. `UNRESOLVED_FAMILY` is a **proposal** outcome;
-`GROUNDING_UNAVAILABLE` is a **grounding** outcome; `ADMITTED` / `CAUTIONARY` / `BLOCKED` are **fusion
-result** states.
+`GROUNDING_UNAVAILABLE` is a **grounding** outcome; `ADMITTED` / `SURFACED` / `CAUTIONARY` /
+`BLOCKED` are **fusion result** states.
 
 | Situation | Proposal | Grounding | Fusion result |
 |---|---|---|---|
 | Recognized or resolved, all three fields valid, grounding legal or unnecessary | accepted | n/a or resolved | **ADMITTED** |
 | Resolved, but no existing family contains it | `UNRESOLVED_FAMILY` | — | **CAUTIONARY** |
-| Resolved and classified, but no in-domain grounding candidate exists | accepted | `GROUNDING_UNAVAILABLE` | **surfaced — accepted and rejected components both reported, with reason (§5.3)** |
+| Resolved and classified, but no in-domain grounding candidate exists | accepted | `GROUNDING_UNAVAILABLE` | **`SURFACED`** — accepted and rejected components both reported, with reason (§5.3); terminal, not a degraded `ADMITTED` |
 | Could not be resolved at all | unresolved | — | **BLOCKED** |
 
 The second row is the one that matters most: the concept is *understood* but *uncategorizable*. That

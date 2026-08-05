@@ -179,7 +179,7 @@ The stages below are already ruled; they are collected here so the full pipeline
 | Domain resolution | `UNRESOLVED_DOMAIN` · `AMBIGUOUS_DOMAIN` · `RESOLVED_DOMAIN` | this contract §3 |
 | Family resolution | `UNRESOLVED_FAMILY` · resolved | Ruling 002 §2, §8 |
 | Grounding resolution | grounded candidate · `GROUNDING_UNAVAILABLE` · grounding not required | Ruling 002 §5.2, §5.3 |
-| Fusion result | `ADMITTED` · `CAUTIONARY` · `BLOCKED` | Ruling 001 §4 |
+| Fusion result | `ADMITTED` · `SURFACED` · `CAUTIONARY` · `BLOCKED` | Ruling 001 §4 |
 
 ### 5.1 Terminal mapping
 
@@ -189,10 +189,10 @@ The stages below are already ruled; they are collected here so the full pipeline
 | `UNRESOLVED_DOMAIN` | `CAUTIONARY` | gather evidence / enrich vocabulary |
 | `AMBIGUOUS_DOMAIN` | `CAUTIONARY` | preserve alternatives, await criteria |
 | `UNRESOLVED_FAMILY` | `CAUTIONARY` | extend the taxonomy |
-| `GROUNDING_UNAVAILABLE` | surfaced — accepted and rejected components both reported, with reason | none required; a valid ontology state |
+| `GROUNDING_UNAVAILABLE` | `SURFACED` — accepted and rejected components both reported, with reason | none required; a valid ontology state, terminal |
 | All stages resolved | `ADMITTED` | none |
 
-**Critical property: the fusion result states are lossy.** Four distinct terminal conditions map onto
+**Critical property: the fusion result states are lossy.** Three distinct terminal conditions map onto
 `CAUTIONARY`, and each calls for a *different* operator action. **The reason must therefore travel
 with the result and may never be discarded on the way out** — this is Ruling 002 §5.3 applied to the
 whole pipeline rather than to grounding alone. A `CAUTIONARY` without its reason is indistinguishable
@@ -216,6 +216,9 @@ Invariant 1, Ruling 002 §5.3.
 **I6 — Unknown is not false. Uncertain is not resolved.** The two principles that have emerged across
 001, 002 and this contract, stated as one invariant because they fail together: both are violated by
 the same move — treating an absence of evidence as a determination.
+
+**I7 — `SURFACED` is terminal.** A `SURFACED` result is not a degraded `ADMITTED` result and may not
+be auto-resolved through taxonomy expansion. Ruling 001 §4, Ruling 002 §5.2, §5.4.
 
 ## 7. The conservative principle at three levels
 
@@ -250,8 +253,8 @@ Ruling 002 §1.1 identifies as the thing WorldCraft is leaving behind.
 - [ ] §2 V2 epistemic distinction preservation
 - [ ] §3 Three domain states, with operator implications
 - [ ] §4 Transition graph — two terminal branches, one continuing
-- [ ] §5 Consolidated pipeline + terminal mapping; reasons are lossless
-- [ ] §6 Invariants I1–I6
+- [ ] §5 Consolidated pipeline + four-state fusion result + terminal mapping; reasons are lossless
+- [ ] §6 Invariants I1–I7
 - [ ] §7 The conservative principle at three levels
 - [ ] §8 Future extensibility clause
 

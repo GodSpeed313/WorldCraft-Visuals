@@ -54,8 +54,13 @@ Mokuton                          <- canonical identity
 │   ├── Wood Release
 │   ├── Wood Style
 │   └── Wood Element
-└── family: Nature Transformation
+└── grounding candidate:
+    └── requires taxonomy validation
 ```
+
+The example demonstrates canonical identity and alias handling only. **The family assignment is
+intentionally omitted**, because family membership is governed by Ruling 002 and must not be
+inferred from descriptive similarity.
 
 **`Divine Tree Manipulation` does NOT automatically merge into Mokuton.** It may be a technique
 derived from Mokuton, a related but separate ability, a higher-order transformation, or an ability
@@ -138,17 +143,40 @@ Recognized?
 ```
 
 **The application does not hard-fail.** WorldCraft is a creative engine and exploration matters.
-Results therefore carry one of three states:
+Results therefore carry one of four states:
 
-| State | Meaning |
-|---|---|
-| **ADMITTED** | Concept recognized or resolved and validated. Fusion proceeds normally. |
-| **CAUTIONARY** | Concept requires normalization. The idea may be inspected, but **no fusion output is generated until validation.** The engine never pretends the concept is grounded. |
-| **BLOCKED** | Resolution failed or validation rejected the proposal. No output. |
+| State | Output | Meaning |
+|---|---|---|
+| **ADMITTED** | emitted — complete | Concept recognized or resolved and validated, and every component grounded. Fusion proceeds normally. |
+| **SURFACED** | emitted — deliberately incomplete | Some components are grounded; others are rejected because no in-domain grounding candidate exists. Accepted and rejected components are both reported, each rejection carrying its reason. Terminal. Ruling 002 §5.3. |
+| **CAUTIONARY** | none — pending | Concept requires normalization. The idea may be inspected, but **no fusion output is generated until validation.** The engine never pretends the concept is grounded. |
+| **BLOCKED** | none — refused | Resolution failed or validation rejected the proposal. No output. |
+
+**`SURFACED` is not a degraded `ADMITTED` state.** It does not describe a fusion that almost
+succeeded, and it is not awaiting anything. It represents a **compatibility boundary, not incomplete
+validation**, and it cannot be resolved by expanding the taxonomy — doing so would require inventing
+precisely the *artificial bridge concepts whose only purpose is being a fallback* that Ruling 002
+§5.4 rejects.
+
+The contrast with `UNRESOLVED_FAMILY` — a vocabulary gap, where extending the taxonomy *is* the
+correct operator action — is governed by Ruling 002 §2 and §8.
 
 Worked examples:
 
-- `Hashirama Senju` → known: Wood Release, HIGH_CONCEPT, Nature family → **ADMITTED**.
+**`Hashirama Senju` → `Wood Release`.** The state depends on the fusion context, and this example is
+written to expose that variable rather than hide it.
+
+| Stage | Result |
+|---|---|
+| Standalone resolution | Known power → `Wood Release`. No unsupported substitution occurs. |
+| Fusion A — against a compatible HIGH_CONCEPT domain | grounding legal or unnecessary → **ADMITTED** |
+| Fusion B — against a domain where grounding would require a bridge that does not exist | `GROUNDING_UNAVAILABLE` → **SURFACED** |
+
+**Resolution alone does not determine the state.** Under the pre-domain model this example read
+*known power → family assignment → fusion accepted*, treating the family label as sufficient. It is
+not. Per Ruling 002 Addendum A the order is domain → family → grounding, and the fusion's own
+compatibility decides the terminal state. Fusion B is Regression Case 001's corrected path (§6).
+
 - `Shadow Dragon Reality Collapse` (original character) → unknown → **CAUTIONARY**: *"Power concept
   requires normalization."* Inspectable; no fusion output.
 
@@ -160,10 +188,20 @@ Worked examples:
 LLM ──► Proposal ──► WorldCraft validator ──► Registry
 ```
 
-The model proposes a classification — `name: Wood Release`, `family: Nature`,
-`modality: HIGH_CONCEPT`, `cost: 8`. **The engine decides whether that enters reality.** This is the
-Continuum separation restated: what generates is never what validates. The LLM is the historian;
-WorldCraft is the scientist.
+The model proposes a classification:
+
+```
+name:      Wood Release
+family:    <proposed — validated against Ruling 002 §8>
+modality:  HIGH_CONCEPT
+cost:      8
+```
+
+**The engine decides whether that enters reality.** The validator determines whether the proposed
+family exists and whether the classification is admissible under the current taxonomy; a family that
+does not exist is rejected as `UNRESOLVED_FAMILY`, never coerced. This is the Continuum separation
+restated: what generates is never what validates. The LLM is the historian; WorldCraft is the
+scientist.
 
 **Cost.** Acceptable. The model is classifying unknown concepts, not generating worlds — a narrow
 enough task that 2–3 calls per novel concept is reasonable, and the result is cached permanently.
@@ -214,13 +252,16 @@ action each calls for is completely different.
 
 ## 7. Open questions carried forward — NOT resolved by this ruling
 
-**7.1 — SUPERSEDED BY RULING 002.** This ruling's own example refers to a `Nature` /
-`Nature Transformation` family that does not exist; `POWER_FAMILIES` is exactly `COGNITION`,
-`INFLUENCE`, `DISCIPLINE`, `PERCEPTION`. That gap turned out to be an ontology boundary rather than
-a missing label, and is governed by `docs/ruling_002_family_taxonomy_integrity.md`. The operative
-consequence for *this* ruling: **§5's example proposal (`family: Nature`) is illustrative of the
-proposal shape only — it is not a valid classification under the current taxonomy**, and would be
-rejected as `UNRESOLVED_FAMILY` per Ruling 002 §8.
+**7.1 — FAMILY CLASSIFICATION EXAMPLES. SUPERSEDED BY RULING 002.**
+
+This ruling originally used descriptive families as examples — a `Nature` / `Nature Transformation`
+family that does not exist, where `POWER_FAMILIES` is exactly `COGNITION`, `INFLUENCE`, `DISCIPLINE`,
+`PERCEPTION`. Those examples were not taxonomy assignments and have been removed from §3.1 and §5.
+
+**Family membership, grounding behavior, and unresolved-family handling are governed exclusively by
+`docs/ruling_002_family_taxonomy_integrity.md`.** This ruling owns concept identity, aliasing and
+merges, the provider boundary, normalization, and the resolution states. It does not own family
+decisions, and nothing in it may be read as making one.
 
 **7.2 — `cost_factor` exact-match as a merge criterion.** §3.2(c) requires `cost_factor` to match
 for a merge. As an integer, this makes an otherwise-identical pair with costs 8 and 9 permanently
@@ -233,6 +274,14 @@ consensus reality must bend*, but plays three different logical roles: **ceiling
 ability (what world it needs). The existing grounding filter already implements the ability-inside-a
 -place case. Formalizing this belongs in Ruling 002.
 
+**7.4 — Component eligibility semantics.** §4's `SURFACED` definition is deliberately
+component-neutral: *some components are grounded; others are rejected.* It does not distinguish
+components that participate in grounding eligibility from those that do not, because no such
+component ontology exists yet. Once it does, it must define whether a rejected non-participating
+component (metadata, flavor, a non-essential modifier) can move a fusion out of `ADMITTED` — it
+should not. Deferred deliberately: gating a state on a `required` predicate today would make the
+state machine depend on an undefined component model.
+
 ---
 
 ## Sign-off checklist
@@ -240,9 +289,9 @@ ability (what world it needs). The existing grounding filter already implements 
 - [ ] §1 Core principle — minting cheap, merging expensive
 - [ ] §2 The three invariants
 - [ ] §3 Canonicalization policy — conservative default, three merge requirements, alias≠merge, reversibility
-- [ ] §4 Resolution states — ADMITTED / CAUTIONARY / BLOCKED, no hard-fail
+- [ ] §4 Resolution states — ADMITTED / SURFACED / CAUTIONARY / BLOCKED, no hard-fail; SURFACED is terminal and is not a degraded ADMITTED
 - [ ] §5 Provider boundary — model proposes, engine decides; stdlib; core knows nothing about Anthropic
 - [ ] §6 Regression Case 001 preserved permanently
-- [ ] §7 Open questions carried, 7.1 flagged blocking
+- [ ] §7 Open questions carried; 7.1 discharged to Ruling 002; 7.2 and 7.3 remain explicitly open
 
 Drafted 2026-08-04. Not binding until signed off and marked LOCKED.
