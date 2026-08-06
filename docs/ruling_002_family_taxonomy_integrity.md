@@ -98,6 +98,15 @@ family = ecosystem change.** The admission threshold for a family is therefore *
 power — the opposite of the usual instinct, which treats broader categories as safer because they are
 vaguer.
 
+**Mechanism — operator ruling, 2026-08-06.** Inheritance currently flows through **profile
+classification**, not grounding. `family_of` feeds `power_families` and `dominant_family` into every
+emitted profile (`mythos_sync.py:238–252`), and a single family reassignment changes the emitted
+`dominant_family` in a mean of 7.2% of sampled fusions. **The grounding channel this section names
+is not yet live**: the family fallback is Audit 001 (M1)'s dead branch, firing 0 of 12. The higher
+threshold is therefore justified today by classification inheritance and prospectively by grounding
+inheritance, and both are reasons for the same rule. A future reader must not take the grounding
+sentence as a description of current behavior.
+
 This inverts the Ruling 001 §1 economics one level up and for a different reason: there, minting is
 cheap because a redundant power is recoverable. Here, minting is expensive because a family is
 inherited.
@@ -421,7 +430,7 @@ A modality question, not a family one; logged so it is not lost.
 
 - [x] §1 Family is a grounding behavior class, not an ontology; closed-world → open-world transition — signed with the 2026-08-06 scope amendment (non-engine uses outside scope; Audit 002 C3 named and excluded from this section's governance)
 - [x] §2 No catch-all assignment — `UNRESOLVED_FAMILY`, never best-guess — signed 2026-08-06 **narrow**: governs family assignment only; grounding-target fallback (`DEFAULT_TRANSPOSITIONS`) is a separate layer under Addendum A sequencing and is carried as GAP-4, not ruled here
-- [ ] §3 Family threshold is higher than power threshold — ecosystem vs local
+- [x] §3 Family threshold is higher than power threshold — ecosystem vs local — signed 2026-08-06 with the mechanism amendment: inheritance flows today through profile classification (`dominant_family`, measured 7.2% mean blast radius), not through grounding, whose family fallback is Audit 001 (M1)'s dead branch; the grounding sentence is prospective, not a description of current behavior
 - [ ] §4 The four families are complete for the LEGACY domain only (measured)
 - [ ] §5 Domain layer recorded as direction, not adopted
 - [ ] §5.1 Domain isolation is a precondition for learned grounding (measured, not alarm)
