@@ -33,6 +33,10 @@ The second use is an accident of history, and the code says so: *"family is the 
 engine currently has to a disposition."* Family was pressed into service as a disposition proxy
 because nothing better existed. See §7.
 
+**Scope amendment — operator ruling, 2026-08-06.** Additional non-engine uses may exist outside this
+scope. Audit 002 (C3) records one such unresolved use: family represented as an accumulating
+resource quantity in card output. Such representations are not governed by this section.
+
 ### 1.1 The transition this ruling actually governs
 
 **The original LEGACY design was not wrong. It was a closed-world model.** Every concept was
@@ -68,6 +72,19 @@ exactly the rule the normalization layer exists to eliminate:
 That is the same defect as Ruling 001 §6's silent GROUNDED default, relocated one layer up. A coerced
 family is not a small inaccuracy — it is a false statement about what kind of thing the concept is,
 inherited by everything that grounds through it.
+
+**Scope — operator ruling, 2026-08-06. This section governs family assignment only.** It rules what
+may be written into a concept's `family` field and nothing else. It does **not** govern what the
+grounding layer does with a concept whose family could not be resolved: under Addendum A's fixed
+`domain → family → grounding` sequencing, that is a separate layer, and expanding this ruling to
+reach it would put taxonomy authority over a stage it does not own.
+
+The implementation's grounding-target fallback — `DEFAULT_TRANSPOSITIONS` — is therefore **not
+ruled on here**, and no reader may take §2 as having authorized, forbidden, or bounded it. It is
+carried as **GAP-4** in `docs/open_contract_gaps.md`, which records the verification finding that
+the halt preventing an unplaceable concept from reaching grounding is stated in §8 and §8.1 but is
+enforced by no invariant and no code. **Signing §2 does not close that gap and must not be read as
+having closed it.**
 
 ## 3. Expansion rates — why families need a higher threshold than powers
 
@@ -402,8 +419,8 @@ A modality question, not a family one; logged so it is not lost.
 
 ## Sign-off checklist
 
-- [ ] §1 Family is a grounding behavior class, not an ontology; closed-world → open-world transition
-- [ ] §2 No catch-all assignment — `UNRESOLVED_FAMILY`, never best-guess
+- [x] §1 Family is a grounding behavior class, not an ontology; closed-world → open-world transition — signed with the 2026-08-06 scope amendment (non-engine uses outside scope; Audit 002 C3 named and excluded from this section's governance)
+- [x] §2 No catch-all assignment — `UNRESOLVED_FAMILY`, never best-guess — signed 2026-08-06 **narrow**: governs family assignment only; grounding-target fallback (`DEFAULT_TRANSPOSITIONS`) is a separate layer under Addendum A sequencing and is carried as GAP-4, not ruled here
 - [ ] §3 Family threshold is higher than power threshold — ecosystem vs local
 - [ ] §4 The four families are complete for the LEGACY domain only (measured)
 - [ ] §5 Domain layer recorded as direction, not adopted

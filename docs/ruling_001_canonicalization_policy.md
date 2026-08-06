@@ -1,6 +1,10 @@
 # WorldCraft Ruling 001 — Concept Canonicalization Policy
 
-**Status:** DRAFT — pending operator review and sign-off.
+**Status:** **LOCKED** — all sections signed off by the operator, 2026-08-06. Binding.
+
+Amendments recorded inline are part of what was signed and carry the same authority as the original
+text. Changing a signed section requires a new operator ruling, recorded in that section the way the
+2026-08-06 amendments are.
 
 **Authority:** This is the first WorldCraft ruling. It governs how unknown concepts enter the
 system, when two concepts may be treated as one, and what the resolver is permitted to decide.
@@ -40,7 +44,15 @@ GROUNDED is not a harmless fallback; it manufactures false certainty.
 A duplicate is recoverable. A false identity is structural corruption.
 
 **Invariant 3 — Learned vocabulary is constrained vocabulary.**
-The model may propose `name`, `family`, `modality`, `cost`. **It may not invent mechanics.**
+The model may propose `name`, `family`, `modality`, `cost_factor`. **It may not invent mechanics.**
+
+**Amendment — operator ruling, 2026-08-06.** "Mechanics," for the purposes of this invariant, means
+any behavior, rule, or effect that is not derivable from the four permitted fields (name, family,
+modality, cost_factor) by lookup against the existing engine logic. A proposal violates this
+invariant if content within an allowed field requires interpretation by the validator rather than
+resolution by lookup — e.g. a name that encodes a mechanical effect, or a family value that
+functions as an ad hoc rule rather than a reference to an existing or properly-proposed taxonomic
+category.
 
 ## 3. Canonicalization policy
 
@@ -86,6 +98,23 @@ a merge on its own.
 and `cost_factor`. **If the classification differs, the concepts stay separate until the
 discrepancy is itself resolved.** A classification disagreement is evidence that the two concepts
 are not the same phenomenon, and it is treated as such rather than averaged away.
+
+**Amendment — operator ruling, 2026-08-06.** For **operator-authored concepts**, operator
+declaration satisfies (b). A concept is operator-authored when its canonical identity, and the lore
+establishing it, originate with the operator rather than with a model proposal or an external
+source. Requirements **(a) semantic identity and (c) mechanical equivalence are unchanged** and
+remain binding on operator-authored and learned concepts alike. Source consensus continues to apply
+in full to learned concepts, for which the operator is not a source.
+
+**The operator is providing authoritative source consensus, not a merge override.** The exemption
+supplies what (b) asks for; it does not excuse a merge from (a) or (c). A merge that fails semantic
+identity or mechanical equivalence remains rejected regardless of who declares it.
+
+**Why the amendment exists.** As originally drafted, (b) was unsatisfiable for anything the operator
+authors: original lore has exactly one source. Because all three requirements are required, the
+merge path was structurally unreachable for the operator's own corpus — a branch that could never
+fire, the same finding shape as Audit 001 (M1). The amendment opens that path without weakening the
+test for learned vocabulary, where the risk (b) guards against actually lives.
 
 ### 3.3 Alias is not merge — the load-bearing architectural separation
 
@@ -180,6 +209,14 @@ compatibility decides the terminal state. Fusion B is Regression Case 001's corr
 - `Shadow Dragon Reality Collapse` (original character) → unknown → **CAUTIONARY**: *"Power concept
   requires normalization."* Inspectable; no fusion output.
 
+**Operator acceptance recorded 2026-08-06 — a record of what was accepted, not an amendment to this
+section.** Signing §4 accepts a known cost explicitly. `CAUTIONARY` and `BLOCKED` both emit nothing,
+and combined with Invariant 1's prohibition on silent grounding, the engine will frequently return a
+reason where it previously returned a guess. **That tradeoff is intentional and is preferred over
+false certainty**, and it is expected to read as a regression in the dashboard until the resolver
+exists. A future reader encountering empty results should treat them as the ruling working, not
+failing.
+
 ## 5. The provider boundary
 
 **Model calls are acceptable. The model is not the authority.**
@@ -193,8 +230,8 @@ The model proposes a classification:
 ```
 name:      Wood Release
 family:    <proposed — validated against Ruling 002 §8>
-modality:  HIGH_CONCEPT
-cost:      8
+modality:     HIGH_CONCEPT
+cost_factor:  8
 ```
 
 **The engine decides whether that enters reality.** The validator determines whether the proposed
@@ -203,12 +240,23 @@ does not exist is rejected as `UNRESOLVED_FAMILY`, never coerced. This is the Co
 restated: what generates is never what validates. The LLM is the historian; WorldCraft is the
 scientist.
 
+**Scope of this section — operator ruling, 2026-08-06.** §5 owns the **provider authority boundary**
+and **taxonomy existence validation** only. The content-interpretation validation required by
+Invariant 3 as amended — determining whether content within an allowed field requires interpretation
+rather than resolution by lookup — is **not** governed here. It is owned by Contract 001 as a
+separate invariant alongside I7, and is tracked as GAP-1 in `docs/open_contract_gaps.md` until that
+invariant exists. The validator described in this section is therefore **not the whole validator**,
+and no reader may treat §5 as an exhaustive account of what validation performs.
+
 **Cost.** Acceptable. The model is classifying unknown concepts, not generating worlds — a narrow
 enough task that 2–3 calls per novel concept is reasonable, and the result is cached permanently.
 
-**Dependencies: stdlib only, initially.** The moment WorldCraft acquires a dependency stack it loses
-one of its strongest properties — *anyone can run the engine anywhere*. A thin transport layer is
-sufficient:
+**Dependencies.** Initial implementation remains stdlib-only. Future external dependencies require
+documented justification, explicit scope, and review before adoption — triggered when a resolver
+capability cannot be implemented without one.
+
+The moment WorldCraft acquires a dependency stack it loses one of its strongest properties — *anyone
+can run the engine anywhere*. A thin transport layer is sufficient:
 
 ```
 worldcraft/
@@ -218,6 +266,10 @@ worldcraft/
     └── cache.py        — resolved-concept memory
 ```
 
+The repository is currently flat. Adopting this layout is an **implementation follow-up, not a
+ruling blocker** (operator ruling, 2026-08-06): it requires becoming a package and touches imports,
+CI, and the test module, none of which affects whether this section is true.
+
 **The core engine must know nothing about Anthropic.** The provider is swappable and the engine's
 correctness must not depend on which one is installed, or on one being installed at all.
 
@@ -226,6 +278,29 @@ correctness must not depend on which one is installed, or on one being installed
 `containment_matrix.json` currently holds exactly one fusion: **Hashirama Senju × William
 Vangeance**, both silently defaulted to GROUNDED with `tags: ["unknown"]`, producing
 `Espionage / One-Inch Punch / Psychological Mastery` — two nature-magic leaders rendered as spies.
+
+**The primary exhibit is the artifact's own lore text.** The engine recorded that it did not know
+what either input was, and generated a complete profile anyway:
+
+```
+"lore_summary": "Born from the tension between the Unknown Entity (Neutral)
+                 and the Unknown Entity (Neutral), this fusion haunts
+                 Cold War Safehouse with singular intent"
+```
+
+Both inputs are named `Unknown Entity (Neutral)` — the same placeholder, twice. **This is not a
+system that failed to notice its own ignorance. It wrote the ignorance down and proceeded**, emitting
+a signature ability, a dominant family, and a biome on that basis. That is Invariant 1's violation
+stated in the engine's own words, and it forecloses any reading in which the engine merely guessed
+badly.
+
+**The false certainty propagated into downstream fields.** `biome: "Cold War Safehouse"` is where the
+espionage framing entered: the spy reading is not a consequence of power selection alone but of a
+setting derived from inputs the engine had already recorded as unknown. **A defaulted classification
+does not stay where it was defaulted.**
+
+Secondary observation, recorded as fact and not analysed here: the artifact also carries
+`dominant_family: "PERCEPTION"`, the field governed by Ruling 002 §7.
 
 **This artifact is retained permanently as the first Normalization Regression Case**, not as a bug
 record but as the demonstration of why the layer exists:
@@ -272,7 +347,13 @@ a deliberate choice rather than an artifact of the field's type.
 consensus reality must bend*, but plays three different logical roles: **ceiling** for a character
 (what it may hold), **ambient law** for a place (what may happen there), **requirement** for an
 ability (what world it needs). The existing grounding filter already implements the ability-inside-a
--place case. Formalizing this belongs in Ruling 002.
+-place case.
+
+**Ownership — operator ruling, 2026-08-06: this question is owned by Ruling 001.** An earlier draft
+of this entry assigned formalization to Ruling 002. Ruling 002 neither formalizes modality's role
+polymorphism nor carries it as an open question, so the handoff was never received. Assigning
+content to that document while its own review is incomplete would mean deciding its contents from
+outside it. The question remains open and stays here.
 
 **7.4 — Component eligibility semantics.** §4's `SURFACED` definition is deliberately
 component-neutral: *some components are grounded; others are rejected.* It does not distinguish
@@ -282,16 +363,44 @@ component (metadata, flavor, a non-essential modifier) can move a fusion out of 
 should not. Deferred deliberately: gating a state on a `required` predicate today would make the
 state machine depend on an undefined component model.
 
+**7.5 — Merge-review counterweight.** §1's conservatism has no alarm attached to it. A merge that
+should have happened and did not produces no event, no warning, and no artifact; the symptom is
+absence, and a graph can fragment slowly without anything marking the moment it began. §3.4's
+reversibility makes a periodic review pass over near-miss merge candidates safe to run, but nothing
+in this ruling requires one and no criteria exist for what qualifies as a near-miss. Scoped as open
+by operator ruling on 2026-08-06, taken at the same time §1 was signed off: the counterweight is a
+separate future decision and **does not gate §1**.
+
+**7.6 — Mechanic authorship.** Open question regarding whether mechanics are operator-authored
+canon, generated proposals requiring validation, or another category. Invariant 3 as amended
+establishes that the model may not author them; it does not establish who may. Evidence: the
+operator-authored character corpus contains mechanics with no equivalent anywhere in the engine —
+`Audit 002 (C2)` records three structurally distinct resource mechanics across three cards.
+
+**7.7 — Entity relationships.** Open question regarding representation of relationships between
+entities (for example, sibling relationships) distinct from concept identity relationships. §3.3
+defines a relationship graph for **concepts** — canonical, aliases, derivatives, related. No
+equivalent exists for **entities**. Evidence: `Audit 002 (C4)` records an ability whose effect is
+defined relative to another named entity, where the relationship is derivable from neither
+identifier and exists only as an explicit fact.
+
 ---
 
 ## Sign-off checklist
 
-- [ ] §1 Core principle — minting cheap, merging expensive
-- [ ] §2 The three invariants
-- [ ] §3 Canonicalization policy — conservative default, three merge requirements, alias≠merge, reversibility
-- [ ] §4 Resolution states — ADMITTED / SURFACED / CAUTIONARY / BLOCKED, no hard-fail; SURFACED is terminal and is not a degraded ADMITTED
-- [ ] §5 Provider boundary — model proposes, engine decides; stdlib; core knows nothing about Anthropic
-- [ ] §6 Regression Case 001 preserved permanently
-- [ ] §7 Open questions carried; 7.1 discharged to Ruling 002; 7.2 and 7.3 remain explicitly open
+- [x] §1 Core principle — minting cheap, merging expensive
+- [x] §2 The three invariants — 1 and 2 as written; 3 signed with the 2026-08-06 amendment defining "mechanics" as lookup-derivable, not validator-interpreted
+- [x] §3 Canonicalization policy — 3.1 and 3.3 as written; 3.2 signed with the 2026-08-06 amendment (operator declaration satisfies (b) for operator-authored concepts only; (a) and (c) unchanged); 3.4 accepted as written with enforcement deferred to Contract 001
+- [x] §4 Resolution states — ADMITTED / SURFACED / CAUTIONARY / BLOCKED, no hard-fail; SURFACED is terminal and is not a degraded ADMITTED — signed as written; no-output tradeoff accepted explicitly; §7.4 component neutrality affirmed as a deferred gap, not to be resolved by inventing a component model
+- [x] §5 Provider boundary — model proposes, engine decides; core knows nothing about Anthropic — signed 2026-08-06 with: scope limited to provider authority + taxonomy existence validation (content-interpretation owned by Contract 001, GAP-1 Option 2); dependency-governance condition replacing "stdlib only, initially"; `cost` → `cost_factor`; package layout recorded as implementation follow-up
+- [x] §6 Regression Case 001 preserved permanently — signed 2026-08-06 with the amendment promoting the artifact's own `lore_summary` to primary exhibit, recording `biome` as propagation evidence, and noting `dominant_family` as a one-sentence pointer to Ruling 002 §7
+- [x] §7 Open questions carried — signed 2026-08-06 as a complete inventory of known unresolved areas: 7.1 discharged to Ruling 002 with jurisdiction stated; **7.2 through 7.7 open and owned by Ruling 001**, including 7.3 retained here rather than handed onward, and 7.6 / 7.7 added from the 2026-08-06 corpus audit
 
-Drafted 2026-08-04. Not binding until signed off and marked LOCKED.
+Drafted 2026-08-04. **All seven sections signed off by the operator 2026-08-06; marked LOCKED and
+binding as of that date.**
+
+**Open questions carried under §7 are not closed by this lock.** §7 was signed as a complete
+inventory of what remains unresolved, not as a resolution of it — 7.2 through 7.7 stay open and
+owned by this ruling. Requirements ruled here but not yet enforceable are tracked in
+`docs/open_contract_gaps.md` (GAP-1 from §2 Invariant 3, GAP-2 and GAP-3 from §3.4). A locked ruling
+states what is true; it does not assert that implementations already obey it.
