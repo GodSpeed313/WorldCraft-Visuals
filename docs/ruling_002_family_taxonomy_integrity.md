@@ -142,18 +142,30 @@ the split is 20/10 with no overlap. The original taxonomy is not defective. It i
 
 ## 5. The domain layer
 
-**Not adopted by this ruling. Recorded as the agreed direction, to be decided deliberately.**
+**The domain taxonomy is not adopted by this ruling** — no domain is named, no membership is
+assigned, and the domain set is not fixed. Those decisions are recorded here as the agreed
+direction, to be made deliberately.
+
+**The domain concept is not deferred, and this ruling does not pretend otherwise.** It is already
+load-bearing in signed material: Ruling 001 §4 — locked — defines `SURFACED` as the state reached
+when *"no in-domain grounding candidate exists"*, citing §5.3 as its source, and maps
+`GROUNDING_UNAVAILABLE` → `SURFACED` for a fusion resolved *"against a domain where grounding would
+require a bridge that does not exist"*. That state is unstatable without the concept. What remains
+open is the taxonomy, not the idea.
+
+Adoption of the machine-enforceable form is Contract 001's to make — it defines the three domain
+resolution states and invariant I7, and this ruling does not adopt them on its behalf.
 
 The four families are **not** to be replaced. The safer evolution nests them:
 
 ```
 domain
-├── human excellence
+├── ‹"human excellence"› — descriptive placeholder, not an adopted domain name
 │   ├── COGNITION
 │   ├── INFLUENCE
 │   ├── DISCIPLINE
 │   └── PERCEPTION
-├── (further domains — see audit Q4)
+├── (further domains — see audit Part 3, Q4)
 ```
 
 **This is a taxonomy decision, not a patch.** Domain names are lore and belong to the operator.
@@ -448,7 +460,7 @@ A modality question, not a family one; logged so it is not lost.
 - [x] §2 No catch-all assignment — `UNRESOLVED_FAMILY`, never best-guess — signed 2026-08-06 **narrow**: governs family assignment only; grounding-target fallback (`DEFAULT_TRANSPOSITIONS`) is a separate layer under Addendum A sequencing and is carried as GAP-4, not ruled here
 - [x] §3 Family threshold is higher than power threshold — ecosystem vs local — signed 2026-08-06 with the mechanism amendment: inheritance flows today through profile classification (`dominant_family`, measured 7.2% mean blast radius), not through grounding, whose family fallback is Audit 001 (M1)'s dead branch; the grounding sentence is prospective, not a description of current behavior
 - [x] §4 The four families are complete for one observed capability cluster only (measured) — signed 2026-08-08 with the wording correction: "LEGACY domain" replaced with "observed capability cluster" (cluster records observation, domain asserts architecture); no domain named, naming stays with §10; `One-Inch Punch` → `DISCIPLINE` and `Espionage` → `PERCEPTION` accounted for explicitly; 6/4/4/4 scoped to the 18-entry `LEGACY` subset, cluster-wide partition stated as 6/4/5/5
-- [ ] §5 Domain layer recorded as direction, not adopted
+- [x] §5 Domain taxonomy recorded as direction, not adopted — signed 2026-08-08 with the scope amendment: "not adopted" scoped to taxonomy/naming/membership only; the domain *concept* recorded as already load-bearing in locked Ruling 001 §4 (`SURFACED`); diagram nesting retained with the "human excellence" node marked a descriptive placeholder, not an adopted domain name; audit cross-ref corrected to Part 3, Q4
 - [ ] §5.1 Domain isolation is a precondition for learned grounding (measured, not alarm)
 - [ ] §5.2 **No Cross-Domain Terminal Substitution** — `GROUNDING_UNAVAILABLE` is a valid terminal state
 - [ ] §5.3 **Unresolvable Grounding Must Surface** — accepted + unresolved + reason, never silent
