@@ -217,18 +217,38 @@ GROUNDING_UNAVAILABLE
 **The engine must not manufacture a bridge between incompatible realities.**
 
 **The decisive evidence (audit M3).** A learned `Wood Release` (HIGH_CONCEPT) entering a LEGACY
-fusion, simulated under every possible family assignment:
+fusion, simulated under every possible family assignment. The grounding target is **not** a single
+value: `ground_power` ends in `random.choice`, so each assignment yields a *set* of legal candidates
+and one is drawn per run.
 
-| assigned family | grounds to |
-|---|---|
-| DISCIPLINE | Adaptive Combat |
-| COGNITION | The Scientific Method |
-| INFLUENCE | Symbolic Authority |
-| PERCEPTION | Intuitive Insight |
+| assigned family | grounds to — full candidate set | n |
+|---|---|---|
+| DISCIPLINE | Adaptive Combat · Iron Discipline · Martial Perfection · Indomitable Will | 4 |
+| COGNITION | The Scientific Method · Pattern Recognition · Strategic Genius · Mastermind Architecture · Art of War · Tactical Brilliance | 6 |
+| INFLUENCE | Symbolic Authority · Cultural Resonance · Rhetoric & Legacy · Diplomatic Mastery | 4 |
+| PERCEPTION | Intuitive Insight · Memory Palace · Situational Awareness · Psychological Mastery | 4 |
+
+Measured at `7c423a9`. The four sets total **18** — the entire LEGACY tier — and partition
+**6/4/4/4**, the same partition recorded in §4.
 
 **The failure is not classification. The failure is that every available destination belongs to the
 wrong ontology.** The entire LEGACY destination space is human excellence, so no family assignment
 can produce a correct landing.
+
+**The wrong landing is not even stable.** Because selection is random within the set, the same
+learned `Wood Release` grounds to a different human capability on each run. The concept does not
+merely land wrongly — it has no fixed meaning in the output at all.
+
+**Relation to Regression Case 001 — a shared defect class, not a shared code path.** That
+instability is the same *class* of failure as the artifact recorded in §9: a random selection over a
+candidate set the taxonomy cannot narrow. It is **not** the same mechanism, and the two must not be
+merged in the record. Regression Case 001's variance enters at character resolution — unknown inputs
+tagged `unknown`, powers drawn at random during fusion assembly, measured at **90 distinct
+approved-power sets over 200 runs** (seeds 0–199, at `7c423a9`) — and its grounding path never
+fires, because the powers drawn are already legal for that fusion. The instability described here
+enters one layer later, at grounding-target selection. Two entry points, one shape: **where the
+taxonomy cannot decide, the engine picks.** This is the runtime form of §9's failure 2, not a third
+defect.
 
 The required result:
 
@@ -475,7 +495,7 @@ A modality question, not a family one; logged so it is not lost.
 - [x] §4 The four families are complete for one observed capability cluster only (measured) — signed 2026-08-08 with the wording correction: "LEGACY domain" replaced with "observed capability cluster" (cluster records observation, domain asserts architecture); no domain named, naming stays with §10; `One-Inch Punch` → `DISCIPLINE` and `Espionage` → `PERCEPTION` accounted for explicitly; 6/4/4/4 scoped to the 18-entry `LEGACY` subset, cluster-wide partition stated as 6/4/5/5
 - [x] §5 Domain taxonomy recorded as direction, not adopted — signed 2026-08-08 with the scope amendment: "not adopted" scoped to taxonomy/naming/membership only; the domain *concept* recorded as already load-bearing in locked Ruling 001 §4 (`SURFACED`); diagram nesting retained with the "human excellence" node marked a descriptive placeholder, not an adopted domain name; audit cross-ref corrected to Part 3, Q4
 - [x] §5.1 Domain isolation is a precondition for learned grounding (measured, not alarm) — signed 2026-08-08 with the caveat accepted: M2 re-cited to the 12/12 measurement across all entries rather than to the `TRANSPOSITION_MAP` comment, which is demoted to authorial-intent evidence for the `GROUNDED` block only (`logic_auditor.py:126-128`); added the finding that the locality check is evaluated against family assignments 10/30 of which are wrong, with `Reality Glitch` → `Electromagnetic Pulse` as the live example; thesis unchanged
-- [ ] §5.2 **No Cross-Domain Terminal Substitution** — `GROUNDING_UNAVAILABLE` is a valid terminal state
+- [x] §5.2 **No Cross-Domain Terminal Substitution** — `GROUNDING_UNAVAILABLE` is a valid terminal state — signed 2026-08-08, substance unchanged, with the M3 evidence amended: full candidate sets shown per family (18 total, 6/4/4/4) instead of one sample each; grounding-target selection stated as non-deterministic (`random.choice`); related to Regression Case 001 as a shared defect *class* only, with its 90-sets-over-200-runs variance measured and its distinct mechanism preserved. `GROUNDING_UNAVAILABLE` cross-refs verified consistent across Ruling 001 §4, §8.1 and Contract 001; GAP-4 widened to both fallback sites
 - [ ] §5.3 **Unresolvable Grounding Must Surface** — accepted + unresolved + reason, never silent
 - [ ] §5.4 **Terminal Resolution Policy, not fallback** — Option B; domain = compatibility boundary
 - [ ] §6 **Provenance Does Not Determine Classification**

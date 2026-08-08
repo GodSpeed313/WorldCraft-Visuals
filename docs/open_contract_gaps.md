@@ -77,12 +77,17 @@ Ruling 001 Invariant 1 exists to forbid.
 **Ruled in:** nothing rules it. Opened alongside the signing of Ruling 002 §2, 2026-08-06.
 **Contract invariant required:** none exists.
 
-`logic_auditor.py:136` defines `DEFAULT_TRANSPOSITIONS` — a universal fallback target set
-(`Indomitable Will` / `Strategic Genius` / `Art of War`) returned by `_grounding_candidates` when a
-power has neither a curated `TRANSPOSITION_MAP` entry nor usable family kin. **No ruling authorizes
-it, bounds it, or names it.** It is the one place in the implementation where a concept the taxonomy
-cannot place is bent into an arbitrary target rather than stopping — the shape Ruling 002 §2 forbids
-at the family layer, sitting one layer down at the grounding layer.
+**This entry covers two distinct fallback sites with distinct triggers.** Both return an arbitrary
+grounding target rather than stopping; neither is authorized, bounded, or named by any ruling.
+
+| # | Site | Fires when |
+|---|---|---|
+| 1 | `logic_auditor.py:136` — `DEFAULT_TRANSPOSITIONS` (`Indomitable Will` / `Strategic Genius` / `Art of War`), returned by `_grounding_candidates` | a power has **neither** a curated `TRANSPOSITION_MAP` entry **nor** usable family kin |
+| 2 | `logic_auditor.py:173-174` — the hardcoded `return "Indomitable Will"` in `ground_power` | the candidate list survives `_grounding_candidates` but is **emptied by the legality filter** (registry membership + `min_modality` ≤ fusion rank). This can catch a power that *does* carry a curated entry, if none of its destinations is legal for the fusion. |
+
+**The triggers are not interchangeable and the sites are not redundant.** Site 1 is reached before
+legality is considered; site 2 only after. A fix that bounds one leaves the other standing. Both are
+the shape Ruling 002 §2 forbids at the family layer, sitting one layer down at the grounding layer.
 
 **Scope, per operator ruling 2026-08-06.** Ruling 002 §2 was signed **narrow** — family assignment
 only. Grounding-target fallback is a separate layer under Addendum A's fixed `domain → family →
@@ -128,6 +133,8 @@ powers that can ever require grounding           : 12
    of those, without a curated entry             : 0    → family fallback dead (Audit 001 M1)
 registry powers reaching DEFAULT_TRANSPOSITIONS  : 0
 smallest family (PERCEPTION)                     : 5 members → kin is never empty
+curated lists emptied by the legality filter     : 0 at fusion ranks 1, 2 and 3
+   → site 2's hardcoded return is unreachable today
 ```
 
 ### Classification — live risk on implementation, not dormant-but-safe
@@ -146,10 +153,13 @@ Each guard fails to a different learned-vocabulary case:
 - a learned power with an **`UNRESOLVED_FAMILY`** result → reaches `DEFAULT_TRANSPOSITIONS`, *iff*
   anything calls grounding without first checking the family terminal — **which nothing currently
   prevents by construction**
+- a learned power whose curated destinations are **all illegal for the fusion's modality** → empties
+  the candidate list after filtering and reaches site 2's hardcoded `Indomitable Will`
 
 **This entry closes when Contract 001 carries an invariant that (a) makes terminal conditions halting
-rather than advisory, and (b) either authorizes `DEFAULT_TRANSPOSITIONS` with an explicit bound or
-removes it.** Not before, and not by the registry continuing to be authored in a way that hides it.
+rather than advisory, and (b) for **each** of the two sites above, either authorizes the fallback with
+an explicit bound or removes it.** Not before, and not by the registry continuing to be authored in a
+way that hides them.
 
 ---
 
