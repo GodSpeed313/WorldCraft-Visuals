@@ -1,0 +1,61 @@
+[
+  {
+    "fusion_name": "Hashirama Senju x William Vangeance",
+    "modality": "GROUNDED",
+    "dominant": "balanced blend",
+    "alpha": {
+      "name": "Hashirama Senju",
+      "modality": "GROUNDED"
+    },
+    "beta": {
+      "name": "William Vangeance",
+      "modality": "GROUNDED"
+    },
+    "dominance": 50,
+    "tags": [
+      "unknown"
+    ],
+    "biome": "Cold War Safehouse",
+    "approved_powers": [
+      "Espionage",
+      "One-Inch Punch",
+      "Psychological Mastery"
+    ],
+    "power_families": {
+      "Espionage": "PERCEPTION",
+      "One-Inch Punch": "DISCIPLINE",
+      "Psychological Mastery": "PERCEPTION"
+    },
+    "dominant_family": "PERCEPTION",
+    "signature_ability": "Espionage",
+    "influence_pattern": "strikes once \u2014 the shockwave lasts generations",
+    "rhetorical_style": "Cold precision",
+    "lore_summary": "Born from the tension between the Unknown Entity (Neutral) and the Unknown Entity (Neutral), this fusion haunts Cold War Safehouse with singular intent. They channel Espionage to strikes once \u2014 the shockwave lasts generations, their voice carrying only Cold precision.",
+    "audit_log": [
+      {
+        "power": "Espionage",
+        "status": "approved",
+        "transposed_to": null,
+        "cost": 3,
+        "reason": null
+      },
+      {
+        "power": "One-Inch Punch",
+        "status": "approved",
+        "transposed_to": null,
+        "cost": 2,
+        "reason": null
+      },
+      {
+        "power": "Psychological Mastery",
+        "status": "approved",
+        "transposed_to": null,
+        "cost": 2,
+        "reason": null
+      }
+    ],
+    "created_at": "2026-08-03 21:15:01",
+    "id": "MSF-001",
+    "engine_version": "v3.0"
+  }
+]
