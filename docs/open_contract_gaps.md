@@ -78,7 +78,25 @@ Ruling 001 Invariant 1 exists to forbid.
 **Contract invariant required:** none exists.
 
 **This entry covers two distinct fallback sites with distinct triggers.** Both return an arbitrary
-grounding target rather than stopping; neither is authorized, bounded, or named by any ruling.
+grounding target rather than stopping.
+
+**Naming status, updated 2026-08-08 on the signing of Ruling 002 §5.4.** `Indomitable Will` is now
+**explicitly named by a ruling**: §5.4 records it as the terminal resolution policy for the
+human-excellence domain. **That authorization is domain-scoped** — the same table rules that a
+supernatural concept has no fallback and resolves to `GROUNDING_UNAVAILABLE`. **Neither implementation
+site is domain-scoped.** Neither consults anything domain-shaped, because no domain layer exists, so
+neither can distinguish the case §5.4's policy turns on. The sites are therefore **not authorized by
+§5.4, cannot guarantee conformance to it, and remain debt-bearing.**
+
+**Measured, not alarm — the debt is latent, not active.** `ground_power` has exactly one caller,
+`audit_power`, which short-circuits to `⚠️ UNVERIFIED` for any power absent from `POWER_REGISTRY`
+(`logic_auditor.py:203-204`, covered by `test_engine.py:100-102`), and every registered power carries
+a family. **Both sites are unreachable by any existing call path with existing data.** What is
+recorded here is what happens when either premise stops holding, not what the engine does today.
+
+**The bound must govern the whole mechanism.** `DEFAULT_TRANSPOSITIONS` also contains
+`Strategic Genius` and `Art of War`, neither named by any ruling. An authorization covering only
+`Indomitable Will` would leave the mechanism unbounded.
 
 | # | Site | Fires when |
 |---|---|---|
