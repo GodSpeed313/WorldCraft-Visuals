@@ -182,12 +182,25 @@ The supporting measurements:
 - **The family-fallback branch is currently dead code.** All 12 powers that can ever require
   grounding carry hand-written `TRANSPOSITION_MAP` entries; the 18 LEGACY powers never ground. The
   fallback fires for 0 of 12 (audit M1).
-- **There are zero cross-family grounding edges in the registry** (audit M2). The system is not
-  currently contaminated.
-- **That locality is authorship, not architecture.** The `TRANSPOSITION_MAP` comment records the rule
-  being applied by hand: *"Every entry now stays inside the source power's family."* **The invariant
-  this ruling proposes is already being enforced manually, one layer down.** The domain layer
-  generalizes an existing rule rather than imposing a new one.
+- **There are zero cross-family grounding edges in the registry** (audit M2). Measured across all
+  12 entries — every destination in every source's candidate list shares that source's family, in
+  the 8 `HIGH_CONCEPT` entries as well as the 4 `GROUNDED` ones. The system is not currently
+  contaminated.
+- **That locality is authorship, not architecture.** The 12/12 measurement above is the evidence;
+  the `TRANSPOSITION_MAP` comment at `logic_auditor.py:126-128` records the intent, for the
+  `GROUNDED` block it sits under: *"Every entry now stays inside the source power's family."* That
+  comment does not speak for the 8 `HIGH_CONCEPT` entries above it, which carry no such note — their
+  locality is equally real and equally hand-made, just undocumented. **The invariant this ruling
+  proposes is already being enforced manually, one layer down.** The domain layer generalizes an
+  existing rule rather than imposing a new one.
+- **The locality check is evaluated against the family assignments themselves, and 10 of 30 of those
+  are wrong** (audit Part 3, Q1). A passing locality check is therefore not evidence of a correct
+  grounding. Live example: `Reality Glitch` → `Electromagnetic Pulse` passes, both being `COGNITION`
+  — and **both are type-3 wrong-domain failures**, `Electromagnetic Pulse` sitting in `COGNITION`
+  only because it inherited the family of Tesla, its originating character. Two entries in the same
+  wrong family satisfy an invariant that only compares them to each other. This does not weaken the
+  finding; it sharpens it — hand-enforcement preserved family-adjacency but could not preserve
+  domain-adjacency, because no domain exists yet to preserve.
 - **Learning removes the guarantee.** The first uncurated power activates a branch that has never
   run.
 
@@ -461,7 +474,7 @@ A modality question, not a family one; logged so it is not lost.
 - [x] §3 Family threshold is higher than power threshold — ecosystem vs local — signed 2026-08-06 with the mechanism amendment: inheritance flows today through profile classification (`dominant_family`, measured 7.2% mean blast radius), not through grounding, whose family fallback is Audit 001 (M1)'s dead branch; the grounding sentence is prospective, not a description of current behavior
 - [x] §4 The four families are complete for one observed capability cluster only (measured) — signed 2026-08-08 with the wording correction: "LEGACY domain" replaced with "observed capability cluster" (cluster records observation, domain asserts architecture); no domain named, naming stays with §10; `One-Inch Punch` → `DISCIPLINE` and `Espionage` → `PERCEPTION` accounted for explicitly; 6/4/4/4 scoped to the 18-entry `LEGACY` subset, cluster-wide partition stated as 6/4/5/5
 - [x] §5 Domain taxonomy recorded as direction, not adopted — signed 2026-08-08 with the scope amendment: "not adopted" scoped to taxonomy/naming/membership only; the domain *concept* recorded as already load-bearing in locked Ruling 001 §4 (`SURFACED`); diagram nesting retained with the "human excellence" node marked a descriptive placeholder, not an adopted domain name; audit cross-ref corrected to Part 3, Q4
-- [ ] §5.1 Domain isolation is a precondition for learned grounding (measured, not alarm)
+- [x] §5.1 Domain isolation is a precondition for learned grounding (measured, not alarm) — signed 2026-08-08 with the caveat accepted: M2 re-cited to the 12/12 measurement across all entries rather than to the `TRANSPOSITION_MAP` comment, which is demoted to authorial-intent evidence for the `GROUNDED` block only (`logic_auditor.py:126-128`); added the finding that the locality check is evaluated against family assignments 10/30 of which are wrong, with `Reality Glitch` → `Electromagnetic Pulse` as the live example; thesis unchanged
 - [ ] §5.2 **No Cross-Domain Terminal Substitution** — `GROUNDING_UNAVAILABLE` is a valid terminal state
 - [ ] §5.3 **Unresolvable Grounding Must Surface** — accepted + unresolved + reason, never silent
 - [ ] §5.4 **Terminal Resolution Policy, not fallback** — Option B; domain = compatibility boundary
