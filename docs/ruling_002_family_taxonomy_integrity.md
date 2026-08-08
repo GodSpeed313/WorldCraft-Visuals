@@ -111,7 +111,7 @@ This inverts the Ruling 001 §1 economics one level up and for a different reaso
 cheap because a redundant power is recoverable. Here, minting is expensive because a family is
 inherited.
 
-## 4. Finding — the four families are complete for the LEGACY domain only
+## 4. Finding — the four families are complete for one observed capability cluster only
 
 `COGNITION` / `INFLUENCE` / `DISCIPLINE` / `PERCEPTION` were authored for the LEGACY tier rebalance.
 They are **human capability families**: thinking, affecting, training/mastery, sensing.
@@ -119,10 +119,26 @@ They are **human capability families**: thinking, affecting, training/mastery, s
 They do not describe elemental transformation, reality alteration, supernatural manifestation, energy
 systems, or biological mutation.
 
-**Measured (audit Part 2, Q5):** all 18 LEGACY entries are honest fits, partitioning 6/4/4/4 with no
-coercions and no boundary cases. **10 of 30 entries do not sit honestly in their assigned family** —
-seven wrong-domain, three boundary cases. The original taxonomy is not defective; it is correct and
-complete for its domain, and the failures are concentrated entirely outside it.
+**Measured (audit Part 2, per-entry audit; restated at Part 3 Q5):** all 18 `LEGACY` entries are
+honest fits, partitioning **6/4/4/4** — COGNITION 6, INFLUENCE 4, DISCIPLINE 4, PERCEPTION 4 — with
+no coercions and no boundary cases.
+
+**The set these families serve is wider than the `LEGACY` modality tier.** Audit Part 3 Q4 records a
+confirmed cluster of **20 entries**: the 18 `LEGACY` entries plus `One-Inch Punch` and `Espionage`,
+both `GROUNDED`. Both resolve cleanly to an existing family — `One-Inch Punch` → `DISCIPLINE`,
+`Espionage` → `PERCEPTION` — so neither is a family failure. (`Espionage` is flagged at Part 3 Q1 on
+**modality** grounds only; that is a question for its modality, not for its family.) Across all 20 the
+partition is **6/4/5/5**. The 6/4/4/4 figure above is scoped to the 18-entry `LEGACY` subset.
+
+**This section records an observed capability cluster, not a domain.** A cluster records an
+observation; a domain asserts architecture. No domain is named or established here — the audit's
+"human excellence" label is a descriptive placeholder (audit Part 2 preamble), and domain naming
+remains open under §10.
+
+**10 of 30 entries do not sit honestly in their assigned family** — seven of audit failure-type 3
+(wrong domain), three of type 4 (ambiguous boundary). **All ten fall outside the 20-entry cluster**:
+the split is 20/10 with no overlap. The original taxonomy is not defective. It is correct and complete
+*for the cluster it was authored against*, and the failures are concentrated entirely outside it.
 
 ## 5. The domain layer
 
@@ -431,7 +447,7 @@ A modality question, not a family one; logged so it is not lost.
 - [x] §1 Family is a grounding behavior class, not an ontology; closed-world → open-world transition — signed with the 2026-08-06 scope amendment (non-engine uses outside scope; Audit 002 C3 named and excluded from this section's governance)
 - [x] §2 No catch-all assignment — `UNRESOLVED_FAMILY`, never best-guess — signed 2026-08-06 **narrow**: governs family assignment only; grounding-target fallback (`DEFAULT_TRANSPOSITIONS`) is a separate layer under Addendum A sequencing and is carried as GAP-4, not ruled here
 - [x] §3 Family threshold is higher than power threshold — ecosystem vs local — signed 2026-08-06 with the mechanism amendment: inheritance flows today through profile classification (`dominant_family`, measured 7.2% mean blast radius), not through grounding, whose family fallback is Audit 001 (M1)'s dead branch; the grounding sentence is prospective, not a description of current behavior
-- [ ] §4 The four families are complete for the LEGACY domain only (measured)
+- [x] §4 The four families are complete for one observed capability cluster only (measured) — signed 2026-08-08 with the wording correction: "LEGACY domain" replaced with "observed capability cluster" (cluster records observation, domain asserts architecture); no domain named, naming stays with §10; `One-Inch Punch` → `DISCIPLINE` and `Espionage` → `PERCEPTION` accounted for explicitly; 6/4/4/4 scoped to the 18-entry `LEGACY` subset, cluster-wide partition stated as 6/4/5/5
 - [ ] §5 Domain layer recorded as direction, not adopted
 - [ ] §5.1 Domain isolation is a precondition for learned grounding (measured, not alarm)
 - [ ] §5.2 **No Cross-Domain Terminal Substitution** — `GROUNDING_UNAVAILABLE` is a valid terminal state
