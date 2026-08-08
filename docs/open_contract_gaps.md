@@ -163,6 +163,45 @@ way that hides them.
 
 ---
 
+## GAP-5 — `SURFACED` payload completeness
+
+**Ruled in:** Ruling 002 §5.3, signed 2026-08-08. Contract 001 §5.1 states the requirement in its
+terminal-mapping cell.
+**Contract invariant required:** none exists.
+
+§5.3 requires a surfaced fusion to preserve three things: the accepted components, the unresolved
+components, and the reason for exclusion. **Contract 001 §6 carries two of the three.**
+
+| §5.3 requirement | Invariant | Status |
+|---|---|---|
+| the reason travels to the output | **I5** — no silent terminal | carried |
+| `SURFACED` is terminal, not a degraded `ADMITTED` | **I7** | carried |
+| accepted components reported alongside rejected ones | — | **not carried** |
+
+**Why the third is not covered by the first two.** I5 governs the reason, not the payload; I7 governs
+the result's standing, not its contents. Neither states that a `SURFACED` output must still contain
+what resolved. An implementation may therefore emit `SURFACED` carrying only the rejected component
+and its reason, discard the accepted components, and violate no invariant — **which is the hard
+fusion failure §5.3 explicitly rejects**, on the ground that it *"discards the work that did
+resolve."*
+
+**The requirement is stated, but not where enforcement lives.** It appears in §5.3's prose and in
+Contract 001 §5.1's terminal-mapping cell (*"accepted and rejected components both reported, with
+reason"*). Contract 001 §5 opens by describing itself as a consolidation of already-ruled material —
+**§6 is the enforcement layer, and §6 is silent.** This is the seam shape recorded on 2026-08-05: a
+ruling brings a behavior into existence and nothing states which document must carry it into
+machine-enforceable form.
+
+**Not yet load-bearing:** Contract 001 is unsigned in full, so no implementation has been authorized
+against the incomplete set.
+
+**This entry closes when Contract 001 carries an invariant requiring a `SURFACED` result to preserve
+the accepted components, the rejected components, and the reason for rejection.** Not before.
+
+Opened 2026-08-08.
+
+---
+
 ## Closed
 
 *(none yet)*

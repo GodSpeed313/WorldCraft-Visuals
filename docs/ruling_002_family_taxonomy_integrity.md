@@ -284,8 +284,7 @@ requested power                  requested power
       ↓                                ↓
 grounding candidate              grounding resolution
       ↓                                ├── grounded candidate
-fusion continues                       ├── cautionary unresolved
-                                       └── GROUNDING_UNAVAILABLE
+fusion continues                       └── GROUNDING_UNAVAILABLE
 ```
 
 **Ruling: a fusion surfaces the incompatibility.** Not a hard failure, and not a silent partial
@@ -300,6 +299,11 @@ Fusion generated:
     accepted components : X
     rejected components : Y — no valid grounding domain
 ```
+
+**Enforcement is currently partial.** Contract 001 **I5** requires the reason to travel to the output
+and **I7** fixes `SURFACED` as terminal; **no invariant requires a `SURFACED` result to report the
+accepted components alongside the rejected ones.** Without one, an implementation may discard what
+resolved and still conform — the hard-failure alternative this section rejects. Tracked as **GAP-5**.
 
 **`GROUNDING_UNAVAILABLE` is not an error condition. It is a valid ontology state.**
 
@@ -496,7 +500,7 @@ A modality question, not a family one; logged so it is not lost.
 - [x] §5 Domain taxonomy recorded as direction, not adopted — signed 2026-08-08 with the scope amendment: "not adopted" scoped to taxonomy/naming/membership only; the domain *concept* recorded as already load-bearing in locked Ruling 001 §4 (`SURFACED`); diagram nesting retained with the "human excellence" node marked a descriptive placeholder, not an adopted domain name; audit cross-ref corrected to Part 3, Q4
 - [x] §5.1 Domain isolation is a precondition for learned grounding (measured, not alarm) — signed 2026-08-08 with the caveat accepted: M2 re-cited to the 12/12 measurement across all entries rather than to the `TRANSPOSITION_MAP` comment, which is demoted to authorial-intent evidence for the `GROUNDED` block only (`logic_auditor.py:126-128`); added the finding that the locality check is evaluated against family assignments 10/30 of which are wrong, with `Reality Glitch` → `Electromagnetic Pulse` as the live example; thesis unchanged
 - [x] §5.2 **No Cross-Domain Terminal Substitution** — `GROUNDING_UNAVAILABLE` is a valid terminal state — signed 2026-08-08, substance unchanged, with the M3 evidence amended: full candidate sets shown per family (18 total, 6/4/4/4) instead of one sample each; grounding-target selection stated as non-deterministic (`random.choice`); related to Regression Case 001 as a shared defect *class* only, with its 90-sets-over-200-runs variance measured and its distinct mechanism preserved. `GROUNDING_UNAVAILABLE` cross-refs verified consistent across Ruling 001 §4, §8.1 and Contract 001; GAP-4 widened to both fallback sites
-- [ ] §5.3 **Unresolvable Grounding Must Surface** — accepted + unresolved + reason, never silent
+- [x] §5.3 **Unresolvable Grounding Must Surface** — accepted + unresolved + reason, never silent — signed 2026-08-08, substance unchanged, with two corrections: the output-space diagram loses its `cautionary unresolved` branch (it named no state anywhere in the corpus and disagreed with Contract 001 §5's enumeration of the same stage), and enforcement is recorded as partial — I5 carries the reason, I7 carries terminality, no invariant requires the accepted set to be reported alongside the rejected set, opened as GAP-5
 - [ ] §5.4 **Terminal Resolution Policy, not fallback** — Option B; domain = compatibility boundary
 - [ ] §6 **Provenance Does Not Determine Classification**
 - [ ] §7 `dominant_family` breaks under domains
