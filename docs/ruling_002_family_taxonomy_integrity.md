@@ -343,18 +343,23 @@ A domain is not a folder. Refusal is a legitimate terminal state for a wall.
 **A power's originator does not define the power's family. Classification belongs to the capability
 itself.**
 
-**The evidence (audit Part 2, GROUNDED tier).** `Electromagnetic Pulse` is classified `COGNITION`.
-An EMP is an energy effect, not an act of thinking. The assignment is almost certainly inherited from
-Tesla, whose *character* is cognitive:
+**Who this rule addresses.** This is a rule about **classification authority**: it binds whoever
+assigns a family to an entry. It is not a runtime invariant. No code path carries a family from a
+character to a power — characters hold no `family` field at all (`modality_classifier.py`), and the
+character→power link that does exist is tag-based (`TAG_POWER_MAP`, `mythos_sync.py:50`), which
+carries no family information. No code path in the character-to-power pipeline could therefore violate
+this rule. How it should be enforced once family assignment is no longer hand-authored is not ruled
+here.
 
-```
-Tesla → COGNITION
-   ↓
-EMP → COGNITION
-```
+**The evidence (audit Part 2, GROUNDED tier).** `Electromagnetic Pulse` is classified `COGNITION`
+(`logic_auditor.py:50`). An EMP is an energy effect, not an act of thinking. The misclassification is
+the finding, and it stands on the entry alone.
 
-This is semantic leakage of exactly the kind the registry exists to prevent — *scientist creates
-technology, technology inherits the scientist's cognitive family.*
+**On origin — an inference, not a finding.** Tesla's *character* is cognitive, and the assignment may
+have been reasoned from him. This is not established: no mechanism exists that could have propagated a
+family from character to power, so the resemblance is the only evidence for it and it is not
+sufficient. The failure mode named here — *a technology inheriting its inventor's family* — is what
+this section forbids going forward; it is not a diagnosis of how this entry came to be wrong.
 
 **Why this finding is disproportionately important:** it proves the domain problem is **not** confined
 to HIGH_CONCEPT. The boundary was already crossed in the GROUNDED tier, in an entry nobody had flagged
@@ -502,7 +507,7 @@ A modality question, not a family one; logged so it is not lost.
 - [x] §5.2 **No Cross-Domain Terminal Substitution** — `GROUNDING_UNAVAILABLE` is a valid terminal state — signed 2026-08-08, substance unchanged, with the M3 evidence amended: full candidate sets shown per family (18 total, 6/4/4/4) instead of one sample each; grounding-target selection stated as non-deterministic (`random.choice`); related to Regression Case 001 as a shared defect *class* only, with its 90-sets-over-200-runs variance measured and its distinct mechanism preserved. `GROUNDING_UNAVAILABLE` cross-refs verified consistent across Ruling 001 §4, §8.1 and Contract 001; GAP-4 widened to both fallback sites
 - [x] §5.3 **Unresolvable Grounding Must Surface** — accepted + unresolved + reason, never silent — signed 2026-08-08, substance unchanged, with two corrections: the output-space diagram loses its `cautionary unresolved` branch (it named no state anywhere in the corpus and disagreed with Contract 001 §5's enumeration of the same stage), and enforcement is recorded as partial — I5 carries the reason, I7 carries terminality, no invariant requires the accepted set to be reported alongside the rejected set, opened as GAP-5
 - [x] §5.4 **Terminal Resolution Policy, not fallback** — Option B; domain = compatibility boundary — signed 2026-08-08 as written. Consequence recorded in GAP-4 rather than here: §5.4 is the first ruling to name `Indomitable Will`, its authorization is domain-scoped, and neither fallback implementation site is domain-scoped — so neither is authorized by §5.4 and both remain debt-bearing, latent rather than active (both unreachable by any existing call path with existing data)
-- [ ] §6 **Provenance Does Not Determine Classification**
+- [x] §6 **Provenance Does Not Determine Classification** — signed 2026-08-09, ruling unchanged, with two amendments that fix evidentiary status and scope of authority: the `Tesla → COGNITION / EMP → COGNITION` diagram is deleted with no prose substitute (it rendered an inference in the same notation as a registry value — characters carry no `family` field at all, so the top edge asserted data that does not exist), and the "semantic leakage of exactly the kind the registry exists to prevent" sentence is replaced, because it dropped the preceding sentence's hedge and restated the same unsupported inheritance claim as fact. Origin is now labelled an inference with its verified negative attached: no mechanism could have propagated a family from character to power. Added an explicit addressee — §6 is a **classification-authority** rule binding whoever assigns a family, not a runtime invariant; no code path in the character-to-power pipeline could violate it (`modality_classifier.py` holds no `family`; `TAG_POWER_MAP`, `mythos_sync.py:50`, carries none). Enforcement under non-hand-authored assignment is explicitly not ruled. No gap opened and Contract 001 not amended, per operator ruling. The section's argument is untouched and fully verified: `Electromagnetic Pulse` → `COGNITION` (`logic_auditor.py:50`) in the *non-priority* GROUNDED tier (audit 001 Part 2, `:122`, finding at `:135`), surfaced only by auditing all 30 entries rather than the eight HIGH_CONCEPT priority cases (`:92`)
 - [ ] §7 `dominant_family` breaks under domains
 - [ ] §8 Normalization contract + three-vocabulary state mapping
 - [ ] §9 Regression Case 001 demonstrates two independent failures
