@@ -12,6 +12,25 @@ WorldCraft-Visuals is a Python framework for fusing characters — historical fi
 - **Fantasy Kingdom Generator** (`fantasy_kingdom_generator.py`) — the original, standalone lore generator. Lighter weight than Mythos-Sync; good for a quick taste of the anime/legend flavor text without the full fusion pipeline.
 - **Live Dashboard** (`dashboard.html` + `server.py`) — a local web UI. Run `server.py` and it serves `dashboard.html`, which posts fusion requests to `/fuse` and renders the resulting Legacy Profile.
 
+### ⚖️ Governance (`docs/`)
+
+The engine's behavior is governed by written rulings, not only by code. These are binding documents,
+and they are the place to look before changing how concepts are named, classified, or grounded.
+
+- **`ruling_001_canonicalization_policy.md`** — concept identity: when two names are the same concept,
+  when they may be merged, and what a learned vocabulary is permitted to propose. **LOCKED.**
+- **`ruling_002_family_taxonomy_integrity.md`** — what `family` is (a grounding behavior class, not an
+  ontology), the domain layer, and what happens when a concept cannot be placed.
+- **`contract_001_domain_resolution.md`** — the machine-enforceable form: domain resolution states,
+  transitions, and invariants.
+- **`audit_001_…` / `audit_002_…`** — measured evidence the rulings are argued from.
+- **`open_contract_gaps.md`** — known gaps between what is ruled and what is enforced.
+- **`evidence/`** — preserved exhibits, including Regression Case 001.
+
+Each document carries its own sign-off checklist, which is the authority on what has been signed.
+A ruling states what is true; it does **not** assert that the current implementation obeys it — the
+gaps register is where those differences are tracked.
+
 ### 🚀 Getting Started
 
 No third-party dependencies — everything runs on the Python standard library (3.10+).
@@ -39,7 +58,11 @@ python server.py
 
 ## 🚀 Project Status
 
-The Mythos-Sync engine (classifier, auditor, tag-driven power selection, live dashboard) is functional end to end. Ongoing areas of interest: expanding the character registry (see the open "Legend Pool" issue for community suggestions) and further balancing the power-scaling rules between modalities.
+The Mythos-Sync engine (classifier, auditor, tag-driven power selection, live dashboard) is functional end to end.
+
+Current work is architectural rather than feature work: the engine is being taken from a closed-world model — a hand-authored registry that is correct for the vocabulary it contains — toward one that can accept concepts it was never authored with. That transition is being specified in `docs/` before it is implemented, which is why the recent history is rulings rather than code.
+
+Earlier plans listed here (growing the character registry, rebalancing power-scaling between modalities) are superseded by that work rather than abandoned.
 
 ## Contributing
 
