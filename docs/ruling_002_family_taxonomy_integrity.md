@@ -367,10 +367,37 @@ as suspicious. Auditing all 30 entries rather than the eight obvious ones is wha
 
 ## 7. Consequence — `dominant_family` breaks under a domain layer
 
-`dominant_family` is computed as `max(set(families), key=families.count)` over the approved powers.
-Once powers span domains, that expression takes a plurality vote across **incommensurable
-categories** — a set like `[COGNITION, NATURE_TRANSFORMATION, PERCEPTION]` yields an arbitrary winner
-that characterizes nothing.
+`dominant_family` is computed as `max(set(families), key=families.count)` over the approved powers
+(`mythos_sync.py:238-239`). Once powers span domains, that expression takes a plurality vote across
+**incommensurable categories** — a set like `[COGNITION, NATURE_TRANSFORMATION, PERCEPTION]` yields an
+arbitrary winner that characterizes nothing. `NATURE_TRANSFORMATION` is a **descriptive placeholder**
+used to illustrate a cross-domain set; it is not a registry family, and this section mints no family
+name.
+
+**The expression is already failing, before any domain layer exists.** The domain consequence above is
+this section's subject and is unchanged. What follows is a present-tense finding: the current registry
+alone is sufficient to produce the failure.
+
+- **Ties are structurally possible under the current registry.** A profile carries three approved
+  powers drawn over four families, so no plurality is guaranteed and a tie requires no cross-domain
+  vocabulary to arise.
+- **Ties occur in actual emitted profiles.** This is observed behavior, not a hypothetical property of
+  the expression.
+- **The tie winner is process-dependent.** `set()` over family strings iterates in string-hash order,
+  and string hashing is randomized per process. Demonstrated on fixed input, with no engine and no
+  seeded randomness involved: `["COGNITION", "PERCEPTION", "INFLUENCE"]` resolves to `PERCEPTION`
+  under `PYTHONHASHSEED=0`, to `COGNITION` under `PYTHONHASHSEED=1`, and varies between runs when the
+  seed is unset.
+- **That value reaches persisted output.** `dominant_family` is written into every emitted profile
+  (`mythos_sync.py:252`) and exported to `containment_matrix.json` (`export_for_web`), which the
+  dashboard reads. The nondeterminism is consequential, not internal.
+- **The existing tests do not detect this axis.** They assert that `dominant_family` is a member of
+  `POWER_FAMILIES` and appears among the profile's own families (`test_engine.py:383-385`). Both hold
+  whichever tied family wins, so the suite is satisfied under every permutation.
+
+The section's mechanism is therefore right and its timing is not: the break does not wait for domains.
+A domain layer widens an expression that is already returning an unreproducible answer. This section
+records the defect; it does not rule a remedy.
 
 The disposition question is real and worth keeping; `family` was only ever a stand-in for it. Whether
 disposition becomes its own field, is computed per-domain, or is derived from the philosophy axes
@@ -508,7 +535,7 @@ A modality question, not a family one; logged so it is not lost.
 - [x] §5.3 **Unresolvable Grounding Must Surface** — accepted + unresolved + reason, never silent — signed 2026-08-08, substance unchanged, with two corrections: the output-space diagram loses its `cautionary unresolved` branch (it named no state anywhere in the corpus and disagreed with Contract 001 §5's enumeration of the same stage), and enforcement is recorded as partial — I5 carries the reason, I7 carries terminality, no invariant requires the accepted set to be reported alongside the rejected set, opened as GAP-5
 - [x] §5.4 **Terminal Resolution Policy, not fallback** — Option B; domain = compatibility boundary — signed 2026-08-08 as written. Consequence recorded in GAP-4 rather than here: §5.4 is the first ruling to name `Indomitable Will`, its authorization is domain-scoped, and neither fallback implementation site is domain-scoped — so neither is authorized by §5.4 and both remain debt-bearing, latent rather than active (both unreachable by any existing call path with existing data)
 - [x] §6 **Provenance Does Not Determine Classification** — signed 2026-08-09, ruling unchanged, with two amendments that fix evidentiary status and scope of authority: the `Tesla → COGNITION / EMP → COGNITION` diagram is deleted with no prose substitute (it rendered an inference in the same notation as a registry value — characters carry no `family` field at all, so the top edge asserted data that does not exist), and the "semantic leakage of exactly the kind the registry exists to prevent" sentence is replaced, because it dropped the preceding sentence's hedge and restated the same unsupported inheritance claim as fact. Origin is now labelled an inference with its verified negative attached: no mechanism could have propagated a family from character to power. Added an explicit addressee — §6 is a **classification-authority** rule binding whoever assigns a family, not a runtime invariant; no code path in the character-to-power pipeline could violate it (`modality_classifier.py` holds no `family`; `TAG_POWER_MAP`, `mythos_sync.py:50`, carries none). Enforcement under non-hand-authored assignment is explicitly not ruled. No gap opened and Contract 001 not amended, per operator ruling. The section's argument is untouched and fully verified: `Electromagnetic Pulse` → `COGNITION` (`logic_auditor.py:50`) in the *non-priority* GROUNDED tier (audit 001 Part 2, `:122`, finding at `:135`), surfaced only by auditing all 30 entries rather than the eight HIGH_CONCEPT priority cases (`:92`)
-- [ ] §7 `dominant_family` breaks under domains
+- [x] §7 `dominant_family` breaks under domains — signed 2026-08-09, domain consequence unchanged, with a present-tense finding added: the expression is **already** failing pre-domains, so §7's mechanism is right and its timing understated. Recorded as a hierarchy, deliberately without any percentage — ties are structurally possible under the current registry (3 approved powers over 4 families), they occur in actual emitted profiles, the tie winner is **process-dependent** (`set()` iterates in string-hash order, randomized per process; demonstrated on fixed input with no engine and no seeded randomness — `PYTHONHASHSEED=0` → `PERCEPTION`, `PYTHONHASHSEED=1` → `COGNITION`), that value reaches persisted output (`mythos_sync.py:252` → `containment_matrix.json` → dashboard), and the suite cannot detect this axis because its assertions (`test_engine.py:383-385`) hold whichever tied family wins. Operator ruling: **no sampling methodology enters the locked text**, so no tie-rate figure is recorded here. `NATURE_TRANSFORMATION` marked a descriptive placeholder with an explicit statement that §7 mints no family name. Boundary held per operator instruction — §7 amendment only: the section records the defect and does **not** rule a remedy; no gap opened, no Contract 001 jurisdiction decision, nothing decided about `mythos_sync.py:185`
 - [ ] §8 Normalization contract + three-vocabulary state mapping
 - [ ] §9 Regression Case 001 demonstrates two independent failures
 - [ ] Addendum A — Domain Before Family
