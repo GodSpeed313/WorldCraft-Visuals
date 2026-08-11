@@ -433,6 +433,11 @@ Three vocabularies now exist and must not be confused. `UNRESOLVED_FAMILY` is a 
 `GROUNDING_UNAVAILABLE` is a **grounding** outcome; `ADMITTED` / `SURFACED` / `CAUTIONARY` /
 `BLOCKED` are **fusion result** states.
 
+**Scope of "proposal" in this section.** Throughout §8, *proposal* means a family-classification
+proposal — the three-field submission this section governs. The term is this section's own and
+carries no authority outside it. The fusion-result vocabulary belongs to Ruling 001 §4; §8 maps onto
+it and does not characterize the scope of any of its states.
+
 | Situation | Proposal | Grounding | Fusion result |
 |---|---|---|---|
 | Recognized or resolved, all three fields valid, grounding legal or unnecessary | accepted | n/a or resolved | **ADMITTED** |
@@ -521,6 +526,18 @@ ontology state rather than an error.
 "the body exceeds ordinary human limits," yet real spies exist and the one-inch punch is documented.
 A modality question, not a family one; logged so it is not lost.
 
+**10.8 — The word "proposal" appears in two vocabularies, one of them locked.** Ruling 001 §4's
+`BLOCKED` row reads *"Resolution failed or validation rejected the proposal. No output."* §8 uses
+*proposal* for a family-classification submission, whose rejection maps to **CAUTIONARY** (§8.1,
+row 2), not `BLOCKED`. The two documents assign different referents to the same word.
+
+No state assignment is currently in dispute: §8.1 row 4 assigns `BLOCKED` to concepts that *could not
+be resolved at all*, and Ruling 001 §4 (lines 190–191) defers the `UNRESOLVED_FAMILY` case to
+Ruling 002 §2 and §8. The collision is lexical — observed here, not resolved here.
+
+Whether Ruling 002 may characterize the scope of a locked Ruling 001 row is a jurisdiction question
+this section does not decide.
+
 ---
 
 ## Sign-off checklist
@@ -536,7 +553,7 @@ A modality question, not a family one; logged so it is not lost.
 - [x] §5.4 **Terminal Resolution Policy, not fallback** — Option B; domain = compatibility boundary — signed 2026-08-08 as written. Consequence recorded in GAP-4 rather than here: §5.4 is the first ruling to name `Indomitable Will`, its authorization is domain-scoped, and neither fallback implementation site is domain-scoped — so neither is authorized by §5.4 and both remain debt-bearing, latent rather than active (both unreachable by any existing call path with existing data)
 - [x] §6 **Provenance Does Not Determine Classification** — signed 2026-08-09, ruling unchanged, with two amendments that fix evidentiary status and scope of authority: the `Tesla → COGNITION / EMP → COGNITION` diagram is deleted with no prose substitute (it rendered an inference in the same notation as a registry value — characters carry no `family` field at all, so the top edge asserted data that does not exist), and the "semantic leakage of exactly the kind the registry exists to prevent" sentence is replaced, because it dropped the preceding sentence's hedge and restated the same unsupported inheritance claim as fact. Origin is now labelled an inference with its verified negative attached: no mechanism could have propagated a family from character to power. Added an explicit addressee — §6 is a **classification-authority** rule binding whoever assigns a family, not a runtime invariant; no code path in the character-to-power pipeline could violate it (`modality_classifier.py` holds no `family`; `TAG_POWER_MAP`, `mythos_sync.py:50`, carries none). Enforcement under non-hand-authored assignment is explicitly not ruled. No gap opened and Contract 001 not amended, per operator ruling. The section's argument is untouched and fully verified: `Electromagnetic Pulse` → `COGNITION` (`logic_auditor.py:50`) in the *non-priority* GROUNDED tier (audit 001 Part 2, `:122`, finding at `:135`), surfaced only by auditing all 30 entries rather than the eight HIGH_CONCEPT priority cases (`:92`)
 - [x] §7 `dominant_family` breaks under domains — signed 2026-08-09, domain consequence unchanged, with a present-tense finding added: the expression is **already** failing pre-domains, so §7's mechanism is right and its timing understated. Recorded as a hierarchy, deliberately without any percentage — ties are structurally possible under the current registry (3 approved powers over 4 families), they occur in actual emitted profiles, the tie winner is **process-dependent** (`set()` iterates in string-hash order, randomized per process; demonstrated on fixed input with no engine and no seeded randomness — `PYTHONHASHSEED=0` → `PERCEPTION`, `PYTHONHASHSEED=1` → `COGNITION`), that value reaches persisted output (`mythos_sync.py:252` → `containment_matrix.json` → dashboard), and the suite cannot detect this axis because its assertions (`test_engine.py:383-385`) hold whichever tied family wins. Operator ruling: **no sampling methodology enters the locked text**, so no tie-rate figure is recorded here. `NATURE_TRANSFORMATION` marked a descriptive placeholder with an explicit statement that §7 mints no family name. Boundary held per operator instruction — §7 amendment only: the section records the defect and does **not** rule a remedy; no gap opened, no Contract 001 jurisdiction decision, nothing decided about `mythos_sync.py:185`
-- [ ] §8 Normalization contract + three-vocabulary state mapping
+- [x] §8 Normalization contract + three-vocabulary state mapping — signed 2026-08-11; §8's substance unamended, with one scope addition to §8.1: "proposal" is declared this section's own term (a family-classification submission) carrying no authority outside it, and §8 is stated to map onto Ruling 001 §4's fusion-result vocabulary without characterizing the scope of any of its states. The collision between §8's "proposal" and locked Ruling 001 §4's `BLOCKED` row ("validation rejected the proposal") is recorded as **§10.8** — observed, not resolved — rather than folded into §8's prose as a settled reading; jurisdiction over characterizing a locked Ruling 001 row is expressly left undecided. Not filed against the gap register, whose entries close on a Contract 001 invariant — a shape this collision does not have — so no gap number is opened.
 - [ ] §9 Regression Case 001 demonstrates two independent failures
 - [ ] Addendum A — Domain Before Family
 - [ ] §10 Open questions
