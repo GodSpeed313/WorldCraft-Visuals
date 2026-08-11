@@ -449,19 +449,23 @@ The second row is the one that matters most: the concept is *understood* but *un
 must never present as the same condition as "unknown," because the operator action it calls for is
 completely different — extend the taxonomy, not resolve the name.
 
-## 9. Regression Case 001 exposes two independent failures
+## 9. Regression Case 001 — receipt of failure 2
 
-Hashirama Senju × William Vangeance (Ruling 001 §6) is retained permanently, and demonstrates **two
-distinct defects that must stay separate in the record**:
+The two independent failures exposed by Hashirama Senju × William Vangeance are recorded in
+**Ruling 001 §6**, which is locked, together with the artifact itself and the requirement that they
+stay separate. That table is the record. This section does not restate it, and no restatement of it
+belongs here.
 
-| # | Failure | Class | Fixed by |
-|---|---|---|---|
-| 1 | Unknown character/power silently became GROUNDED | **normalization bug** | Ruling 001 — Invariant 1, resolve-then-proceed |
-| 2 | The registry has no honest place for non-human-excellence abilities | **ontology boundary** | Ruling 002 — taxonomy extension, unresolved |
+Ruling 001 §6 assigns the second failure — *"the registry has no honest place for
+non-human-excellence abilities"* — to Ruling 002, under the column heading **Governed by**. **This
+section is the acknowledgement of that assignment.** The failure is Ruling 002's to govern, and it is
+**not resolved by this ruling**; the taxonomy extension it calls for is carried as §10.1, which is
+open. Acknowledging an assignment records ownership, not closure.
 
-**Fixing the first does not fix the second.** With normalization alone, Hashirama resolves correctly
-to Wood Release — and then, per §5.2, correctly returns `GROUNDING_UNAVAILABLE` rather than becoming
-a spy. The artifact proves both layers are necessary.
+Its relationship to the grounding instability measured in this document is already stated at **§5.2**
+— ***a shared defect class, not a shared code path*** — including the measurement that Regression
+Case 001's own grounding path never fires. That statement is §5.2's; this section adds nothing to it
+and does not re-derive it.
 
 ---
 
@@ -554,7 +558,7 @@ this section does not decide.
 - [x] §6 **Provenance Does Not Determine Classification** — signed 2026-08-09, ruling unchanged, with two amendments that fix evidentiary status and scope of authority: the `Tesla → COGNITION / EMP → COGNITION` diagram is deleted with no prose substitute (it rendered an inference in the same notation as a registry value — characters carry no `family` field at all, so the top edge asserted data that does not exist), and the "semantic leakage of exactly the kind the registry exists to prevent" sentence is replaced, because it dropped the preceding sentence's hedge and restated the same unsupported inheritance claim as fact. Origin is now labelled an inference with its verified negative attached: no mechanism could have propagated a family from character to power. Added an explicit addressee — §6 is a **classification-authority** rule binding whoever assigns a family, not a runtime invariant; no code path in the character-to-power pipeline could violate it (`modality_classifier.py` holds no `family`; `TAG_POWER_MAP`, `mythos_sync.py:50`, carries none). Enforcement under non-hand-authored assignment is explicitly not ruled. No gap opened and Contract 001 not amended, per operator ruling. The section's argument is untouched and fully verified: `Electromagnetic Pulse` → `COGNITION` (`logic_auditor.py:50`) in the *non-priority* GROUNDED tier (audit 001 Part 2, `:122`, finding at `:135`), surfaced only by auditing all 30 entries rather than the eight HIGH_CONCEPT priority cases (`:92`)
 - [x] §7 `dominant_family` breaks under domains — signed 2026-08-09, domain consequence unchanged, with a present-tense finding added: the expression is **already** failing pre-domains, so §7's mechanism is right and its timing understated. Recorded as a hierarchy, deliberately without any percentage — ties are structurally possible under the current registry (3 approved powers over 4 families), they occur in actual emitted profiles, the tie winner is **process-dependent** (`set()` iterates in string-hash order, randomized per process; demonstrated on fixed input with no engine and no seeded randomness — `PYTHONHASHSEED=0` → `PERCEPTION`, `PYTHONHASHSEED=1` → `COGNITION`), that value reaches persisted output (`mythos_sync.py:252` → `containment_matrix.json` → dashboard), and the suite cannot detect this axis because its assertions (`test_engine.py:383-385`) hold whichever tied family wins. Operator ruling: **no sampling methodology enters the locked text**, so no tie-rate figure is recorded here. `NATURE_TRANSFORMATION` marked a descriptive placeholder with an explicit statement that §7 mints no family name. Boundary held per operator instruction — §7 amendment only: the section records the defect and does **not** rule a remedy; no gap opened, no Contract 001 jurisdiction decision, nothing decided about `mythos_sync.py:185`
 - [x] §8 Normalization contract + three-vocabulary state mapping — signed 2026-08-11; §8's substance unamended, with one scope addition to §8.1: "proposal" is declared this section's own term (a family-classification submission) carrying no authority outside it, and §8 is stated to map onto Ruling 001 §4's fusion-result vocabulary without characterizing the scope of any of its states. The collision between §8's "proposal" and locked Ruling 001 §4's `BLOCKED` row ("validation rejected the proposal") is recorded as **§10.8** — observed, not resolved — rather than folded into §8's prose as a settled reading; jurisdiction over characterizing a locked Ruling 001 row is expressly left undecided. Not filed against the gap register, whose entries close on a Contract 001 invariant — a shape this collision does not have — so no gap number is opened.
-- [ ] §9 Regression Case 001 demonstrates two independent failures
+- [x] §9 Regression Case 001 — receipt of failure 2 — signed 2026-08-11, rewritten as a receipt: the section's duplicate of locked Ruling 001 §6's two-failure table is **removed rather than corrected**, because the duplicate had already drifted — its column header read *Fixed by* where the locked table reads *Governed by*, asserting a remedy where the locked text assigns jurisdiction, and claiming failure 1 fixed when no resolver exists (locked Ruling 001 §4: the tradeoff stands *"until the resolver exists"*). Also removed: the unconditional claim that normalization alone yields `GROUNDING_UNAVAILABLE`, which locked Ruling 001 §4 denies (*"Resolution alone does not determine the state"*) and which restated §5.2's relationship as mechanism after §5.2 settled it as class-only. §9 now cites Ruling 001 §6 as the record and §5.2 as the relationship, and states that Ruling 002 owns failure 2 without closing it. Section retitled to match. `docs/evidence/README.md` repointed in the same commit; `ruling_002:243`'s *"recorded in §9"* left standing in signed §5.2 and parked.
 - [ ] Addendum A — Domain Before Family
 - [ ] §10 Open questions
 

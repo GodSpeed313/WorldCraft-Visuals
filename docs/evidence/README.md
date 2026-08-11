@@ -34,10 +34,10 @@ defaulted to `GROUNDED` with `tags: ["unknown"]`, and a full profile emitted any
 `lore_summary` names `Unknown Entity (Neutral)` **twice** and proceeds. It wrote the ignorance down
 and continued.
 
-Ruling 002 §9 records the two distinct defects it demonstrates and requires that they stay separate:
-a **normalization bug** (unknown input silently became `GROUNDED`) and an **ontology boundary**
-failure (the registry has no honest place for non-human-excellence abilities). Fixing the first does
-not fix the second.
+The two distinct defects it demonstrates are recorded in **Ruling 001 §6**, which requires that they
+stay separate: a **normalization bug** (unknown input silently became `GROUNDED`) and an **ontology
+boundary** failure (the registry has no honest place for non-human-excellence abilities). Fixing the
+first does not fix the second. Ruling 002 §9 acknowledges the second as Ruling 002's to govern.
 
 **This file must not be regenerated.** Its value is that it is the original output of the engine at
 `v3.0`, before any of the governance work. A re-run would produce a different record — the same
