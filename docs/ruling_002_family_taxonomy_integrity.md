@@ -513,10 +513,15 @@ hope the neighbours are similar
 **10.2 — DISCHARGED → §5.4.** Ruled: terminal resolution *policy*, not terminal fallback. Some
 domains terminate with refusal (Option B); artificial bridge concepts are rejected.
 
-**10.3 — What replaces `dominant_family` as disposition.** §7.
+**10.3 — What replaces `dominant_family` as disposition.** §7 diagnoses the defect in full —
+ties are structural, the tie winner is process-dependent, and the expression already fails
+pre-domain — and rules no remedy. What replaces it remains undecided.
 
 **10.4 — Who may propose a family or domain.** Operator-authored only, or model-proposed under a
-stricter audit than powers receive. §3 argues the threshold must be higher than for powers either way.
+stricter audit than powers receive. §3 argues the family threshold must be higher than for powers;
+no equivalent threshold argument exists for domains. Domain naming is already settled as
+operator-only (§5, 10.1); domain admission — whether a new domain may ever be proposed at all — is
+not.
 
 **10.5 — Reclassification of the ten mis-fitted entries.** The audit identifies them; it does not
 reclassify them. Order and method are open, and `Electromagnetic Pulse` (§6) is the priority case
@@ -524,23 +529,25 @@ because it sits in the tier nobody was watching.
 
 **10.6 — DISCHARGED → §5.3.** Ruled: unresolvable grounding must surface. Fusion output preserves
 accepted powers, unresolved powers, and the reason for exclusion; `GROUNDING_UNAVAILABLE` is a valid
-ontology state rather than an error.
+ontology state rather than an error. Enforcement is currently partial — Contract 001 I5 carries the
+reason, I7 fixes terminality, and no invariant requires a `SURFACED` result to report the accepted
+set alongside the rejected — tracked as GAP-5.
 
 **10.7 — Modality placement of `Kinetic Mastery` and `Espionage`.** Both are marked GROUNDED under
 "the body exceeds ordinary human limits," yet real spies exist and the one-inch punch is documented.
 A modality question, not a family one; logged so it is not lost.
 
-**10.8 — The word "proposal" appears in two vocabularies, one of them locked.** Ruling 001 §4's
-`BLOCKED` row reads *"Resolution failed or validation rejected the proposal. No output."* §8 uses
-*proposal* for a family-classification submission, whose rejection maps to **CAUTIONARY** (§8.1,
-row 2), not `BLOCKED`. The two documents assign different referents to the same word.
-
-No state assignment is currently in dispute: §8.1 row 4 assigns `BLOCKED` to concepts that *could not
-be resolved at all*, and Ruling 001 §4 (lines 190–191) defers the `UNRESOLVED_FAMILY` case to
-Ruling 002 §2 and §8. The collision is lexical — observed here, not resolved here.
-
-Whether Ruling 002 may characterize the scope of a locked Ruling 001 row is a jurisdiction question
-this section does not decide.
+**10.8 — Ruling 001's locked `BLOCKED` row and Ruling 002's `CAUTIONARY` row assign different
+outcomes to the same proposed value.** Ruling 001 permits the model to propose `name`, `family`,
+`modality`, `cost_factor` (:47); §8 proposes `family`, `modality`, `cost_factor` (:410-412) — the
+same submission minus `name`. The vocabularies substantially overlap, not differ: what collides is
+not the word "proposal" but the outcome assigned to a rejected family value. Ruling 001 §4's
+`BLOCKED` row reads "Resolution failed or validation rejected the proposal. No output" (:182); §8
+routes the same case to `CAUTIONARY` instead (§8.1, row 2). Ruling 001 :190–191 expressly defers
+the `UNRESOLVED_FAMILY` case to Ruling 002 §2 and §8, so this state assignment is authorized by
+Ruling 001's own deferral and no dispute exists. The collision is in assigned outcome, not word
+meaning — observed here, not resolved here. Whether Ruling 002 may characterize the scope of that
+locked row is a jurisdiction question this section does not decide.
 
 ---
 
