@@ -192,7 +192,12 @@ def audit_power(power_name: str, fusion_profile: dict) -> dict:
     """
     Checks if a power is legal for the fusion's modality.
     Returns an audit result with status, cost, and any transposition.
-    
+
+    `state` is the machine-readable verdict and the authority for downstream
+    consumers — one of UNVERIFIED, APPROVED, TRANSPOSED. `status` is its
+    display form and must not be parsed. The three states are NOT recoverable
+    from `transposed_to`, which is None for both UNVERIFIED and APPROVED.
+
     fusion_profile = output from classify_fusion() in modality_classifier.py
     """
     fusion_modality = fusion_profile.get("modality", "GROUNDED")
@@ -206,6 +211,7 @@ def audit_power(power_name: str, fusion_profile: dict) -> dict:
             "fusion":       fusion_name,
             "power":        power_name,
             "status":       "⚠️  UNVERIFIED",
+            "state":        "UNVERIFIED",
             "message":      f"'{power_name}' is not in the Power Registry. Add it to enforce rules.",
             "cost_factor":  "?",
             "transposed_to": None
@@ -220,6 +226,7 @@ def audit_power(power_name: str, fusion_profile: dict) -> dict:
             "fusion":        fusion_name,
             "power":         power_name,
             "status":        "✅ APPROVED",
+            "state":         "APPROVED",
             "message":       f"'{power_name}' is legal for {fusion_modality} modality.",
             "cost_factor":   power["cost_factor"],
             "transposed_to": None
@@ -232,6 +239,7 @@ def audit_power(power_name: str, fusion_profile: dict) -> dict:
             "fusion":        fusion_name,
             "power":         power_name,
             "status":        "❌ FLAGGED → TRANSPOSED",
+            "state":         "TRANSPOSED",
             "message":       (
                 f"'{power_name}' requires {power['min_modality']} but fusion is {fusion_modality}. "
                 f"Grounding Filter activated."

@@ -180,12 +180,16 @@ def build_legacy_profile(
         so a power that gets audited is not necessarily a power that is gained.
         """
         result = audit_power(power, fusion)
+        # Carry the auditor's three-state verdict. Deriving status from
+        # transposed_to instead collapsed UNVERIFIED into "approved", because
+        # transposed_to is None for both — an unregistered power was logged and
+        # rendered as if the registry had cleared it.
         audit_log.append({
             "power": result["power"],
-            "status": "transposed" if result["transposed_to"] else "approved",
+            "status": result["state"].lower(),
             "transposed_to": result["transposed_to"],
             "cost": result["cost_factor"],
-            "reason": result["message"] if result["transposed_to"] else None
+            "reason": result["message"] if result["state"] != "APPROVED" else None
         })
         final = result["transposed_to"] or result["power"]
         if final not in approved_powers:

@@ -326,6 +326,33 @@ class TestPowerSelection(unittest.TestCase):
             "the thematic pool is being pre-filtered again",
         )
 
+    def test_unverified_powers_are_not_logged_as_approved(self):
+        """Regression guard: the audit log's `status` was derived from
+        `transposed_to` alone, which is None for UNVERIFIED *and* APPROVED —
+        so a power missing from the registry was logged as 'approved' and
+        rendered with the dashboard's ok-dot. The auditor's three-state
+        verdict must survive into the log."""
+        pool = mythos_sync.POWER_POOL
+        original = dict(pool)
+        self.addCleanup(lambda: (pool.clear(), pool.update(original)))
+        pool["LEGACY"] = ["Hypernova Fist"]  # deliberately not in POWER_REGISTRY
+
+        random.seed(0)
+        profile = quiet(build_legacy_profile, "Malcolm X", "Vash", 80)
+        entries = [e for e in profile["audit_log"] if e["power"] == "Hypernova Fist"]
+        self.assertTrue(entries, "the unregistered power never reached the auditor")
+
+        for entry in entries:
+            self.assertNotEqual(
+                entry["status"], "approved",
+                "a power absent from POWER_REGISTRY was logged as approved",
+            )
+            self.assertEqual(entry["status"], "unverified")
+            self.assertIsNotNone(
+                entry["reason"],
+                "the UNVERIFIED verdict's message was dropped with its status",
+            )
+
     def test_transposition_actually_fires_in_the_pipeline(self):
         random.seed(0)
         fired = 0
