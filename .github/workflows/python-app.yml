@@ -1,7 +1,13 @@
 # Tests the Mythos-Sync engine on every push and pull request.
 #
-# No install step: WorldCraft-Visuals is standard-library only, and the test
-# suite uses unittest rather than pytest to keep it that way.
+# The engine is standard-library only and the core suite uses unittest rather
+# than pytest to keep it that way. That property is now PROVEN rather than
+# assumed: the core suite runs first, before anything is installed, and would
+# fail there if the engine or test_engine.py ever acquired a runtime import.
+#
+# One test file does need a dependency. test_hypothesis_properties.py uses
+# Hypothesis (see requirements-dev.txt for the Ruling 001 §5 record) and is
+# therefore run only after the dev install, in a later step.
 
 name: Python application
 
@@ -34,7 +40,18 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Run test suite
+      # Runs BEFORE any install. This step is the standing proof that the
+      # engine and its core suite need no third-party package.
+      - name: Run core test suite (no dependencies installed)
+        run: python -m unittest test_engine -v
+
+      - name: Install dev dependencies (test-only)
+        run: python -m pip install -r requirements-dev.txt
+
+      # Discovery now picks up every test_*.py, including the property tests.
+      # test_engine runs a second time here; it takes ~0.1s and keeps discovery
+      # authoritative so a future test file is never silently skipped.
+      - name: Run full suite including property tests
         run: python -m unittest discover -p "test_*.py" -v
 
       - name: Smoke-test the standalone lore generator

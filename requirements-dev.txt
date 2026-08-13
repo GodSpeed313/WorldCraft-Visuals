@@ -1,0 +1,38 @@
+# Development / CI dependencies — NOT required to run WorldCraft-Visuals.
+#
+# The engine itself remains standard-library only. requirements.txt is the
+# runtime contract and stays empty of third-party packages; nothing in
+# mythos_sync.py, logic_auditor.py, modality_classifier.py, server.py, or
+# fantasy_kingdom_generator.py imports anything listed here. `python
+# mythos_sync.py` and `python -m unittest test_engine` both continue to work
+# with no install step at all.
+#
+# ------------------------------------------------------------------
+# Ruling 001 §5 record (:254-256)
+#
+# §5 is signed (2026-08-06) and requires "documented justification, explicit
+# scope, and review before adoption" for external dependencies. That clause's
+# stated TRIGGER is "when a resolver capability cannot be implemented without
+# one" — a resolver capability, which this is not. Whether the clause reaches
+# a test-only dependency is therefore a reading question about signed text and
+# is NOT settled here. This record exists so the adoption is documented either
+# way, rather than a dependency entering a stdlib-only project unrecorded.
+#
+# JUSTIFICATION. test_engine.py already property-tests invariants by sweeping
+# power x modality under a fixed seed (test_transposition_never_yields_an_
+# illegal_power, test_grounding_prefers_a_relative_when_one_is_legal). Those
+# sweeps assert the right things but report failure as whichever case the seed
+# reached, not as a minimal case. Hypothesis generates the same space and
+# shrinks a failure to its smallest counterexample. It is an upgrade of an
+# existing pattern, not a new testing philosophy.
+#
+# SCOPE. Test files only, and only test_hypothesis_properties.py. Hypothesis
+# is deliberately NOT imported by test_engine.py, whose own header promises
+# "Standard library only (unittest). No install step required" — a promise
+# that stays true. The engine's runtime dependency surface is unchanged.
+#
+# REVIEW. Adopted 2026-08-13 for the GAP-4 fact-finding work. Not reviewed as
+# a permanent commitment; removing it costs one file and no engine change.
+# ------------------------------------------------------------------
+
+hypothesis>=6.100,<7
