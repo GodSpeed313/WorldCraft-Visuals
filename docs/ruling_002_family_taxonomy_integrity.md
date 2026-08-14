@@ -543,11 +543,9 @@ outcomes to the same proposed value.** Ruling 001 permits the model to propose `
 same submission minus `name`. The vocabularies substantially overlap, not differ: what collides is
 not the word "proposal" but the outcome assigned to a rejected family value. Ruling 001 §4's
 `BLOCKED` row reads "Resolution failed or validation rejected the proposal. No output" (:182); §8
-routes the same case to `CAUTIONARY` instead (§8.1, row 2). Ruling 001 :190–191 expressly defers
-the `UNRESOLVED_FAMILY` case to Ruling 002 §2 and §8, so this state assignment is authorized by
-Ruling 001's own deferral and no dispute exists. The collision is in assigned outcome, not word
-meaning — observed here, not resolved here. Whether Ruling 002 may characterize the scope of that
-locked row is a jurisdiction question this section does not decide.
+routes the same case to `CAUTIONARY` instead (§8.1, row 2). The collision is in assigned outcome,
+not word meaning — observed here, not resolved here. Whether Ruling 002 may characterize the scope
+of that locked row is a jurisdiction question this section does not decide.
 
 ---
 
