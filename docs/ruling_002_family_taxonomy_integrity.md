@@ -508,24 +508,40 @@ hope the neighbours are similar
 ## 10. Open questions
 
 **10.1 — Which candidate domains become domains, and what are they called?** The audit identifies
-**one confirmed domain and several candidates requiring further evidence** (audit Q4). Names are lore.
+*"one confirmed domain and several candidate domains requiring additional evidence"* (audit Part 3,
+Q4). Names are lore.
+
+Signed §9 (`:462`) routes locked Ruling 001 §6's failure-2 "taxonomy extension" here, and this item
+is worded as a domain question. Whether it splits — domain adoption on one side, taxonomy extension
+on the other — or whether domain promotion **is** the taxonomy extension under Addendum A Point 3
+(*"Learned concepts require domain resolution before family grounding"*) is part of this question.
 
 **10.2 — DISCHARGED → §5.4.** Ruled: terminal resolution *policy*, not terminal fallback. Some
 domains terminate with refusal (Option B); artificial bridge concepts are rejected.
 
-**10.3 — What replaces `dominant_family` as disposition.** §7 diagnoses the defect in full —
+**10.3 — What replaces `dominant_family` as disposition?** §7 diagnoses the defect in full —
 ties are structural, the tie winner is process-dependent, and the expression already fails
 pre-domain — and rules no remedy. What replaces it remains undecided.
 
-**10.4 — Who may propose a family or domain.** Operator-authored only, or model-proposed under a
+**10.4 — Who may propose a family or domain?** Operator-authored only, or model-proposed under a
 stricter audit than powers receive. §3 argues the family threshold must be higher than for powers;
 no equivalent threshold argument exists for domains. Domain naming is already settled as
 operator-only (§5, 10.1); domain admission — whether a new domain may ever be proposed at all — is
 not.
 
-**10.5 — Reclassification of the ten mis-fitted entries.** The audit identifies them; it does not
-reclassify them. Order and method are open, and `Electromagnetic Pulse` (§6) is the priority case
-because it sits in the tier nobody was watching.
+`contract_001:31-38` routes domain names and domain count to "lore — operator" (`:33-34`). That is a
+routing assignment in a draft document, not a threshold argument, so it neither supplies the missing
+argument nor contradicts the negative above. Recorded as an observation; Contract 001 is unsigned
+and nothing here rests on it.
+
+**10.5 — How, and in what order, are the ten mis-fitted entries reclassified?** The audit identifies
+them; it does not reclassify them. Order and method are open, and `Electromagnetic Pulse` (§6) is
+the priority case because it sits in the tier nobody was watching.
+
+This item and 10.7 divide by **axis, not by entry**. 10.5 concerns family placement; 10.7 concerns
+modality placement. `Kinetic Mastery` appears in both — it is one of the ten (audit Part 3 Q1, a
+type-4 boundary case) and is also 10.7's subject. `Espionage` is expressly outside the count of ten,
+flagged there "on modality grounds," so it belongs to 10.7 alone.
 
 **10.6 — DISCHARGED → §5.3.** Ruled: unresolvable grounding must surface. Fusion output preserves
 accepted powers, unresolved powers, and the reason for exclusion; `GROUNDING_UNAVAILABLE` is a valid
@@ -533,12 +549,26 @@ ontology state rather than an error. Enforcement is currently partial — Contra
 reason, I7 fixes terminality, and no invariant requires a `SURFACED` result to report the accepted
 set alongside the rejected — tracked as GAP-5.
 
-**10.7 — Modality placement of `Kinetic Mastery` and `Espionage`.** Both are marked GROUNDED under
-"the body exceeds ordinary human limits," yet real spies exist and the one-inch punch is documented.
-A modality question, not a family one; logged so it is not lost.
+**10.7 — Are `Kinetic Mastery` and `Espionage` correctly placed on the modality axis?** Both are
+marked `GROUNDED` under "the body exceeds ordinary human limits" (`logic_auditor.py:47`), yet real
+spies exist and the one-inch punch is documented. A modality question, not a family one; see 10.5
+for the axis split.
 
-**10.8 — Ruling 001's locked `BLOCKED` row and Ruling 002's `CAUTIONARY` row assign different
-outcomes to the same proposed value.** Ruling 001 permits the model to propose `name`, `family`,
+The evidence just given is uneven, and that is recorded rather than repaired. "Real spies exist"
+supports `Espionage`; "the one-inch punch is documented" supports `One-Inch Punch`
+(`logic_auditor.py:51`) — same block, inside the confirmed 20-entry cluster, and not a subject of
+this question. Nothing above supports `Kinetic Mastery`.
+
+`Kinetic Mastery` carries a prior authorial ruling this question must account for. `bca630b`
+(2026-08-03) recorded: *"Kinetic Mastery stays GROUNDED. Promoting it would collapse the rung
+between 'the mind commands the body' and 'the body exceeds normal limits'. LEGACY-tier DISCIPLINE
+powers were added alongside it instead."* A reason, a classification, and a consequential action —
+one day before both Audit 001 and this section. It does **not** discharge this question: a commit
+message is not a governing document.
+
+**10.8 — May Ruling 002 characterize the scope of Ruling 001's locked `BLOCKED` row?** Ruling 001's
+locked `BLOCKED` row and Ruling 002's `CAUTIONARY` row assign different outcomes to the same
+proposed value. Ruling 001 permits the model to propose `name`, `family`,
 `modality`, `cost_factor` (:47); §8 proposes `family`, `modality`, `cost_factor` (:410-412) — the
 same submission minus `name`. The vocabularies substantially overlap, not differ: what collides is
 not the word "proposal" but the outcome assigned to a rejected family value. Ruling 001 §4's
@@ -546,6 +576,27 @@ not the word "proposal" but the outcome assigned to a rejected family value. Rul
 routes the same case to `CAUTIONARY` instead (§8.1, row 2). The collision is in assigned outcome,
 not word meaning — observed here, not resolved here. Whether Ruling 002 may characterize the scope
 of that locked row is a jurisdiction question this section does not decide.
+
+**10.9 — Are the thin single-member clusters real?** Audit Part 3 Q4 marks three clusters
+"Candidate — insufficient" at n = 1: biological transformation (`Titan-Shifting`), world laws /
+systems (`Equivalent Exchange`), and enhanced physical (`Kinetic Mastery`, "may be a sub-cluster of
+human excellence"). Distinct from 10.1: that item asks which candidates are **adopted** as domains;
+this asks whether the thin ones exist as clusters at all. The audit states them as separate
+sentences (Part 5).
+
+**10.10 — Which meaning of `DISCIPLINE` yields?** Audit 002 (C3, `audit_002:79-94`) records
+`DISCIPLINE` used simultaneously as a power family and as an accumulating resource pool in card
+output. §1's 2026-08-06 scope amendment named this finding and placed non-engine uses of `family`
+outside that section's governance, so the collision is *"acknowledged and excluded from §1's
+governance, not resolved"*, closing *"It remains open"* (`audit_002:92-94`). This is the only item
+here deferred **by** Ruling 002 rather than to it.
+
+**10.11 — Which document governs the per-power audit-state field?** The audit log's per-power state
+field is written by `mythos_sync.py`, and no document claims it. §7's sign-off parked the question
+explicitly — *"no gap opened, no Contract 001 jurisdiction decision, nothing decided about
+`mythos_sync.py:185`"* — and it has not been taken up since. Scoped to jurisdiction over the field
+alone: whether an unverified power is preserved or refused sits with Ruling 001 under locked §6
+row 1, and `dominant_family`'s disposition is 10.3's.
 
 ---
 
