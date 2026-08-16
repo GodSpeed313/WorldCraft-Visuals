@@ -20,11 +20,12 @@ and they are the place to look before changing how concepts are named, classifie
 - **`ruling_001_canonicalization_policy.md`** — concept identity: when two names are the same concept,
   when they may be merged, and what a learned vocabulary is permitted to propose. **LOCKED.**
 - **`ruling_002_family_taxonomy_integrity.md`** — what `family` is (a grounding behavior class, not an
-  ontology), the domain layer, and what happens when a concept cannot be placed.
+  ontology), the domain layer, and what happens when a concept cannot be placed. **LOCKED.**
 - **`contract_001_domain_resolution.md`** — the machine-enforceable form: domain resolution states,
-  transitions, and invariants.
+  transitions, and invariants. **DRAFT** — binding only once signed off and marked LOCKED.
 - **`audit_001_…` / `audit_002_…`** — measured evidence the rulings are argued from.
-- **`open_contract_gaps.md`** — known gaps between what is ruled and what is enforced.
+- **`open_contract_gaps.md`** — the register, in two categories: requirements ruled but not yet
+  enforceable, and *ownership gaps* — topics a document excludes that no document claims.
 - **`evidence/`** — preserved exhibits, including Regression Case 001.
 
 Each document carries its own sign-off checklist, which is the authority on what has been signed.
@@ -33,7 +34,10 @@ gaps register is where those differences are tracked.
 
 ### 🚀 Getting Started
 
-No third-party dependencies — everything runs on the Python standard library (3.10+).
+The engine has no third-party dependencies — it runs on the Python standard library (3.10+), and
+`python -m unittest test_engine` needs no install step. The one exception is the Hypothesis property
+suite, which is deliberately kept separate so that stays true: `pip install -r requirements-dev.txt`,
+then `python -m unittest test_hypothesis_properties`.
 
 **Quick lore sample:**
 ```bash
