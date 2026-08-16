@@ -10,7 +10,10 @@ document carried it into machine-enforceable form, which is how the `SURFACED` s
 name until 2026-08-05.
 
 This register exists so that gap can never again depend on someone remembering it. Entries are
-closed by Contract 001 gaining a corresponding invariant, not by discussion.
+closed by Contract 001 gaining a corresponding invariant, not by discussion. **Amended 2026-08-16:**
+the register also carries *ownership gaps* — topics an existing document excludes that no document
+claims. These close when a document claims the topic, never by discussion. Each such entry must
+state its own closure condition explicitly rather than borrow the rule above.
 
 **Contract 001 was not to be edited until Ruling 002 is fully signed** (operator instruction,
 2026-08-06). That condition was satisfied on 2026-08-15: Ruling 002's fifteenth and final section
@@ -220,6 +223,36 @@ against the incomplete set.
 the accepted components, the rejected components, and the reason for rejection.** Not before.
 
 Opened 2026-08-08.
+
+---
+
+## GAP-6 — Caching and storage strategy is unowned
+
+**Type:** ownership gap. **Ruled in:** nothing — no Ruling states a caching or storage requirement.
+**Contract invariant required:** none exists, and Contract 001 §1 excludes the topic.
+
+Contract 001 §1's exclusion table routed *caching, storage strategy* to Ruling 001 §5. §5's scope
+amendment of 2026-08-06 states that §5 owns **the provider authority boundary and taxonomy existence
+validation only**. Caching appears in §5 twice and neither is an ownership assignment: a Cost
+paragraph observing that the result "is cached permanently," and an illustrative file tree listing
+`cache.py`. Ruling 001 §1 makes one substantive claim about cache behaviour — a false identity "is
+hidden behind the cache, which makes it invisible precisely where it does the most damage" — but
+that is an argument for conservative canonicalization, not a grant of ownership over storage
+strategy. A corpus-wide search finds no other document claiming the topic.
+
+The exclusion therefore had no destination. Contract 001 §1 states that "anything in the right-hand
+column appearing as a condition in this contract is a defect in this contract," which makes the
+right-hand column load-bearing, and the row pointed at a section that by its own signed scope does
+not own what it was sent.
+
+**This entry does not close the way GAP-1 through GAP-5 close.** Those are requirements ruled in a
+Ruling and awaiting a Contract 001 invariant, so the register's standing closure rule reaches them.
+This is not a ruled requirement. **This is not a sixth Contract 001 invariant in waiting. Contract
+001 §1 forbids it from becoming one.** The standing rule therefore cannot reach this entry.
+
+**Closure condition: a document claims ownership of caching and storage strategy.**
+
+Opened 2026-08-16.
 
 ---
 

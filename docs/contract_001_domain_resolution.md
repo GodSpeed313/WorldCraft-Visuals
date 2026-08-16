@@ -33,7 +33,7 @@ can only be completed after the domains are named, it has failed its own purpose
 | domain names | lore — operator |
 | domain count | lore — operator, informed by `audit_001` |
 | provider choice, model usage, prompts | Ruling 001 §5 |
-| caching, storage strategy | Ruling 001 §5 |
+| caching, storage strategy | unassigned — tracked as GAP-6 |
 | registry expansion rules | Ruling 002 §3, §8 |
 
 Anything in the right-hand column appearing as a condition in this contract is a defect in this
