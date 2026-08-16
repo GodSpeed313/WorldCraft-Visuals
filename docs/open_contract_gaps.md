@@ -12,8 +12,11 @@ name until 2026-08-05.
 This register exists so that gap can never again depend on someone remembering it. Entries are
 closed by Contract 001 gaining a corresponding invariant, not by discussion.
 
-**Contract 001 is not to be edited until Ruling 002 is fully signed** (operator instruction,
-2026-08-06). These entries are therefore expected to remain open until then.
+**Contract 001 was not to be edited until Ruling 002 is fully signed** (operator instruction,
+2026-08-06). That condition was satisfied on 2026-08-15: Ruling 002's fifteenth and final section
+was signed and the document is marked LOCKED. This records the condition as met. It decides nothing
+about which entries, if any, should now be closed — entries are still closed only by Contract 001
+gaining a corresponding invariant, not by the freeze lifting.
 
 ---
 
