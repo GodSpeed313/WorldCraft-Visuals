@@ -566,16 +566,33 @@ powers were added alongside it instead."* A reason, a classification, and a cons
 one day before both Audit 001 and this section. It does **not** discharge this question: a commit
 message is not a governing document.
 
-**10.8 — May Ruling 002 characterize the scope of Ruling 001's locked `BLOCKED` row?** Ruling 001's
-locked `BLOCKED` row and Ruling 002's `CAUTIONARY` row assign different outcomes to the same
-proposed value. Ruling 001 permits the model to propose `name`, `family`,
-`modality`, `cost_factor` (:47); §8 proposes `family`, `modality`, `cost_factor` (:410-412) — the
-same submission minus `name`. The vocabularies substantially overlap, not differ: what collides is
-not the word "proposal" but the outcome assigned to a rejected family value. Ruling 001 §4's
-`BLOCKED` row reads "Resolution failed or validation rejected the proposal. No output" (:182); §8
-routes the same case to `CAUTIONARY` instead (§8.1, row 2). The collision is in assigned outcome,
-not word meaning — observed here, not resolved here. Whether Ruling 002 may characterize the scope
-of that locked row is a jurisdiction question this section does not decide.
+**10.8 — May Ruling 002 characterize the scope of Ruling 001's locked `BLOCKED` row?** Three scoped
+uses of *proposal* bear on this question, and this section establishes co-reference between none of
+them.
+
+Locked Ruling 001 uses the word twice, in different places and for different work. Invariant 3
+(`ruling_001:47`) constrains learned vocabulary: *"The model may propose `name`, `family`,
+`modality`, `cost_factor`."* §4's `BLOCKED` row (`ruling_001:182`) states a resolution-state
+trigger: *"Resolution failed or validation rejected the proposal. No output."* The row does not cite
+Invariant 3, and Ruling 001 nowhere states that §4's *the proposal* is Invariant 3's submission.
+
+§8 uses the word a third way, and signed §8.1 bounds it: *"Throughout §8, proposal means a
+family-classification proposal — the three-field submission this section governs. The term is this
+section's own and carries no authority outside it"* (`:436-439`; the three fields are `modality`,
+`family`, `cost_factor`, at `:410-412`). §8's sign-off (`:633`) records the collision between that
+term and Ruling 001 §4's row as observed and not resolved.
+
+The comparison this section must not make follows from that boundary. §8.1 row 2 routes
+`UNRESOLVED_FAMILY` to `CAUTIONARY`. Whether that conflicts with the locked `BLOCKED` row can only
+be asked after deciding whether the case §8.1 row 2 describes is one `ruling_001:182` would refuse —
+and that cannot be decided without reading §8's term past the boundary §8.1 sets for it. Comparing
+the two outcomes presupposes the co-reference at issue.
+
+Field lists that overlap do not establish co-reference; neither does shared terminology, nor an
+apparently shared case whose identification requires that same import. What is established is a
+collision between independently scoped usages. Whether they co-refer to one submission or one case
+is unresolved, and whether Ruling 002 may characterize the scope of a locked Ruling 001 row in order
+to settle it is the jurisdiction question this section does not decide.
 
 **10.9 — Are the thin single-member clusters real?** Audit Part 3 Q4 marks three clusters
 "Candidate — insufficient" at n = 1: biological transformation (`Titan-Shifting`), world laws /
