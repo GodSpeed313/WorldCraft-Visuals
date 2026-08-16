@@ -32,12 +32,14 @@ can only be completed after the domains are named, it has failed its own purpose
 |---|---|
 | domain names | lore — operator |
 | domain count | lore — operator, informed by `audit_001` |
-| provider choice, model usage, prompts | Ruling 001 §5 |
+| provider choice | Ruling 001 §5 |
+| prompts | unassigned — see GAP-7 |
+| model usage | coupled to GAP-6 — no independent owner; resolves only if the document that claims caching/storage ownership also addresses model usage, not on GAP-6's closure alone |
 | caching, storage strategy | unassigned — tracked as GAP-6 |
 | registry expansion rules | Ruling 002 §3, §8 |
 
-Anything in the right-hand column appearing as a condition in this contract is a defect in this
-contract.
+Anything from the left-hand column — a topic this contract has excluded — appearing as a normative
+condition anywhere in this contract is a defect in this contract.
 
 ## 2. Contract validity constraints
 
@@ -255,7 +257,7 @@ Ruling 002 §1.1 identifies as the thing WorldCraft is leaving behind.
 - [ ] §4 Transition graph — two terminal branches, one continuing
 - [ ] §5 Consolidated pipeline + four-state fusion result + terminal mapping; reasons are lossless
 - [ ] §6 Invariants I1–I7
-- [ ] §7 The conservative principle at three levels
+- [ ] §7 The conservative principle at three levels — cites Ruling 002 §3's threshold observationally to build the cross-ruling pattern; does not assert ownership or restate it as a binding condition of this contract.
 - [ ] §8 Future extensibility clause
 
 Drafted 2026-08-04. Not binding until signed off and marked LOCKED.

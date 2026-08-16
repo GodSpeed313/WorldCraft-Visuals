@@ -245,12 +245,66 @@ column appearing as a condition in this contract is a defect in this contract," 
 right-hand column load-bearing, and the row pointed at a section that by its own signed scope does
 not own what it was sent.
 
+**Historical note (added 2026-08-16).** The paragraph above quotes Contract 001 §1's self-test as it
+read when this entry was opened, and derives the defect from it. That sentence was subsequently
+corrected to test the **left-hand** column — an excluded topic appearing as a normative condition —
+and under the corrected text it no longer reaches a misaddressed destination. Both the quotation and
+the derivation are preserved as the record of what was reasoned on 2026-08-16, and neither is
+restated as current. **This entry's finding is unaffected:** that no document claims caching and
+storage strategy was established by corpus search, independently of the self-test.
+
 **This entry does not close the way GAP-1 through GAP-5 close.** Those are requirements ruled in a
 Ruling and awaiting a Contract 001 invariant, so the register's standing closure rule reaches them.
 This is not a ruled requirement. **This is not a sixth Contract 001 invariant in waiting. Contract
 001 §1 forbids it from becoming one.** The standing rule therefore cannot reach this entry.
 
 **Closure condition: a document claims ownership of caching and storage strategy.**
+
+Opened 2026-08-16.
+
+**Dependency note (added 2026-08-16):** Contract 001 §1's "model usage" row is coupled to this
+gap's resolution pending further definition. Closing this gap does not automatically resolve
+model usage. Model usage resolves only if the document that claims caching/storage ownership
+also explicitly addresses model usage — closure on caching/storage strategy alone leaves model
+usage open.
+
+---
+
+## GAP-7 — Prompts is unowned
+
+**Type:** ownership gap. **Ruled in:** nothing — no Ruling states a prompt-design or
+prompt-content requirement.
+**Contract invariant required:** none exists, and Contract 001 §1 excludes the topic.
+
+Contract 001 §1's exclusion table routed *provider choice, model usage, prompts* to Ruling 001
+§5 as a single bundled row. §5's scope amendment of 2026-08-06 states that §5 owns **the provider
+authority boundary and taxonomy existence validation only**. A corpus-wide search for "prompt"
+across all governance documents returns exactly one hit outside this register: Contract 001 §1's
+own exclusion table. Ruling 001 §5 does not use the word "prompt" anywhere in its text — not in
+the resolver diagram, not in the cost paragraph, not in the dependencies sketch. No document
+claims this topic.
+
+The exclusion therefore had no destination, for the same reason GAP-6 did. An exclusion table must
+route each excluded topic to a document that owns it; this row routed *prompts* to a section whose
+signed scope does not cover it, and no other document covers it either. That is a defect in the
+table on its own terms. **This entry does not rest that conclusion on §1's self-test.** As corrected,
+that test governs an excluded topic leaking back in as a normative condition, which is a different
+failure from a misaddressed destination, and it does not reach this one.
+
+**This entry does not close the way GAP-1 through GAP-5 close.** Those are requirements ruled in
+a Ruling and awaiting a Contract 001 invariant, so the register's standing closure rule reaches
+them. This is not a ruled requirement. **This is not a sixth Contract 001 invariant in waiting —
+nor a seventh. Contract 001 §1 forbids it from becoming one.** The standing rule therefore cannot
+reach this entry.
+
+**Distinct from GAP-6.** GAP-6 concerns *caching, storage strategy* only. Its supporting sentence,
+Ruling 001 §5:251, bundles two observations — that "2–3 calls per novel concept is reasonable" and
+that "the result is cached permanently" — and GAP-6 draws only the caching clause from it. The
+call-volume clause is not within GAP-6's scope and GAP-6 makes no claim about it. This entry
+concerns *prompts*, a topic with no candidate owner and no supporting sentence anywhere in the
+corpus to dispute. The two are not merged and do not share a closure condition.
+
+**Closure condition: a document claims ownership of prompt design or content.**
 
 Opened 2026-08-16.
 
