@@ -47,6 +47,15 @@ condition anywhere in this contract is a defect in this contract.
 valid.** The distinction matters: treated as features they become negotiable, and this document
 becomes the place hidden assumptions creep back in.
 
+**Scope.** V1 and V2 are conditions on the whole of this contract, §1 through §8. A signature on
+either constraint attests that the document satisfies that condition.
+
+**Scoped term.** In this contract, *domain candidate* means a domain that is a defensible placement
+for the concept currently being resolved. It is distinct from *candidate domain* as used in
+`audit_001` Part 3 Q4 and Ruling 002 §10.1 — a cluster proposed for adoption into the taxonomy — and
+from *grounding candidate* (§5, I4), a substitution target for a power. This contract uses the term
+in the first sense only. A domain candidate need not be a registered domain.
+
 ### V1 — Cardinality independence
 
 > **A valid domain resolution contract must produce identical state semantics regardless of the
@@ -60,9 +69,9 @@ domain count: 1        domain count: 5        domain count: 20
 
 At every count it must still distinguish:
 
-- a candidate domain exists
-- multiple candidates exist
-- no candidate exists
+- a domain candidate exists
+- multiple domain candidates exist
+- no domain candidate exists
 
 **Invalid, and the canonical example of the failure:**
 
@@ -76,8 +85,9 @@ else:
 That is no longer resolution logic. **That is taxonomy.**
 
 **Conformance check.** Substitute the domain set with any other domain set, of any size, including a
-set of one. If any state definition or transition changes, V1 is violated. No state, transition, or
-terminal condition in this contract may contain a predicate that names a specific domain.
+set of one. If any state definition, transition, or terminal condition changes, V1 is violated. No
+state, transition, or terminal condition in this contract may contain a predicate that names a
+specific domain.
 
 **The contract must be able to run before the ontology is finalized.**
 
@@ -93,7 +103,9 @@ be reported as another:
 | *"I have enough evidence to continue."* | `RESOLVED_DOMAIN` |
 
 **Those are three different realities.** Collapsing any pair destroys the operator's ability to know
-what action is required.
+what action is required. No case may be reported as one of these three unless it satisfies that
+condition's stated definition. Where no condition's definition is satisfied, the case may not be
+assigned to any of the three.
 
 ## 3. Domain resolution states
 
