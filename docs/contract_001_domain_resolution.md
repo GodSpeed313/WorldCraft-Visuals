@@ -111,7 +111,7 @@ assigned to any of the three.
 
 ### 3.1 `UNRESOLVED_DOMAIN`
 
-**Meaning:** the system cannot currently establish a valid domain assignment.
+**Meaning:** the system cannot currently establish a valid domain candidate.
 
 ```
 Unknown ability
@@ -125,7 +125,7 @@ UNRESOLVED_DOMAIN
 
 ### 3.2 `AMBIGUOUS_DOMAIN`
 
-**Meaning:** multiple domain assignments are defensible, and current evidence does not justify
+**Meaning:** multiple domain candidates are defensible, and current evidence does not justify
 selecting one.
 
 ```
@@ -150,7 +150,7 @@ cross-domain leakage* — but that requires more registry evidence and is out of
 
 ### 3.3 `RESOLVED_DOMAIN`
 
-**Meaning:** one domain assignment has sufficient support.
+**Meaning:** one domain candidate has sufficient support.
 
 **This is the only state that proceeds into family resolution.**
 
@@ -218,7 +218,7 @@ from the silent-default failure both rulings exist to eliminate.
 
 **I2 — Resolution order is fixed.** Domain → family → grounding. Ruling 002 Addendum A.
 
-**I3 — Ambiguity is preserved, never collapsed.** A concept with multiple defensible placements stays
+**I3 — Ambiguity is preserved, never collapsed.** A concept with multiple domain candidates stays
 in `AMBIGUOUS_DOMAIN` until evidence discharges it. Selecting arbitrarily is prohibited.
 
 **I4 — No cross-domain substitution.** No transition may produce a grounding candidate outside the
