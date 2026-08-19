@@ -48,7 +48,7 @@ valid.** The distinction matters: treated as features they become negotiable, an
 becomes the place hidden assumptions creep back in.
 
 **Scope.** V1 and V2 are conditions on the whole of this contract, §1 through §8. A signature on
-either constraint attests that the document satisfies that condition.
+either constraint attests that the document satisfies that condition as of that signature.
 
 **Scoped term.** In this contract, *domain candidate* means a domain that is a defensible placement
 for the concept currently being resolved. It is distinct from *candidate domain* as used in
