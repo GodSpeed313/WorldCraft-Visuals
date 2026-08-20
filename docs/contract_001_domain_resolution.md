@@ -54,7 +54,7 @@ either constraint attests that the document satisfies that condition as of that 
 for the concept currently being resolved. It is distinct from *candidate domain* as used in
 `audit_001` Part 3 Q4 and Ruling 002 §10.1 — a cluster proposed for adoption into the taxonomy — and
 from *grounding candidate* (§5, I4), a substitution target for a power. This contract uses the term
-in the first sense only. A domain candidate need not be a registered domain.
+in the first sense only. Defensibility is evidence-relative: a placement stops qualifying as a domain candidate once current evidence justifies selecting a competing placement over it. A domain candidate need not be a registered domain.
 
 ### V1 — Cardinality independence
 
