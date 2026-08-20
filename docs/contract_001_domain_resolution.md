@@ -111,7 +111,7 @@ assigned to any of the three.
 
 ### 3.1 `UNRESOLVED_DOMAIN`
 
-**Meaning:** the system cannot currently establish a valid domain candidate.
+**Meaning:** the system cannot currently establish a domain candidate.
 
 ```
 Unknown ability
@@ -150,7 +150,7 @@ cross-domain leakage* — but that requires more registry evidence and is out of
 
 ### 3.3 `RESOLVED_DOMAIN`
 
-**Meaning:** one domain candidate has sufficient support.
+**Meaning:** exactly one domain candidate is defensible.
 
 **This is the only state that proceeds into family resolution.**
 
