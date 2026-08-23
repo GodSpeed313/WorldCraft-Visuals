@@ -178,3 +178,207 @@ rows; and (4) the :245/:248 boundary is confirmed, and reserved, as Beat 2's jur
 stated as: can a normative synthesis over an observational proposition create a new normative
 condition about an excluded subject? This acknowledgment does not resolve that question, does not
 authorize any edit to §7's text, and does not affect §7's unsigned status."*
+
+---
+
+## CR-003
+
+```
+Target:            Contract 001 §7, :248 — the synthesis sentence.
+                   UNSIGNED at time of recording.
+Recorded:          2026-08-23
+Defect class:      jurisdictional — an excluded topic appearing as a
+                   normative condition, contrary to §1's self-test (:41-42)
+Basis commit:      55b55d0 (origin/main; audited against origin/main blobs)
+Prior record:      CR-002 (2026-08-22) reserved this question as "Beat 2"
+                   and gave no answer. This entry answers it.
+Authorizes:        no edit to contract_001_domain_resolution.md
+Status:            recorded; §7 remains unsigned
+```
+
+**Scope note.** This entry records a defect and the reasoning establishing it. It authorizes no
+edit to §7, closes no gap, and does **not** decide what §7's text should say instead. Like CR-002
+it records a finding in *unsigned* text, so it corrects no attestation.
+
+**Text stability.** §7 (`:237-248`) is byte-identical to its state at `545d846`, §1's signing
+commit, and has never been amended. Every `:NNN` reference below resolves identically at
+`545d846`, `bc1b8d3`, and `55b55d0`.
+
+### The question, as reserved
+
+CR-002 ruling 4 stated it: *Can a normative synthesis over an observational proposition create a
+new normative condition about an excluded subject?*
+
+**Answer: yes, and at `:248` it does.**
+
+### The test, element by element
+
+§1's self-test (`:41-42`): *"Anything from the left-hand column — a topic this contract has
+excluded — appearing as a **normative condition** anywhere in this contract is a defect in this
+contract."*
+
+**(a) A topic from the left-hand column.** `:39` excludes *registry expansion rules → Ruling 002
+§3, §8*. §1's own signature (`:265`) fixes §3's share of that exclusion: *"§3 the family admission
+threshold."* §7's row 2 (`:245`) names exactly that — *"family threshold higher than power
+threshold."* Element satisfied.
+
+**(b) Appearing as a normative condition.** The contested element. Addressed below.
+
+**(c) Anywhere in this contract.** `:41-42` says *anywhere*; `:50` binds V1 and V2 across §1
+through §8. No provision anywhere in the contract exempts narrative, summary, or pattern-recording
+sections from either. §7 is in scope without qualification.
+
+### Why `:245` passes and `:248` fails — the quantifier
+
+Beat 1 established that `:245` is observational and survives the test. That holds: a table cell
+reporting what another document's rule *is* states no condition of this contract.
+
+`:248` — *"In each case the system is permitted to be incomplete but never permitted to be falsely
+certain"* — is deontic in form, and its grammatical subject is **the system**, not the three cited
+rules. It does not report that each rule has a shared shape; it states what the system may and may
+not do. *"In each case"* is not naming sources. It distributes the predicate onto each of the three
+rows individually, and one of those rows is the family admission threshold. Unpacked at row 2, the
+sentence reads: *with respect to family admission, the system is permitted to be incomplete but
+never permitted to be falsely certain.* That is a first-order normative claim about how family
+admission must behave, stated by a document that excludes family admission at `:39`.
+
+**The defect localizes in the quantifier**, not in the deontic vocabulary and not in the table.
+
+### The control case — I6
+
+I6 (`:230-232`) is deontic, names the same three documents (*"across 001, 002 and this contract"*),
+and is **signed** via §6 on 2026-08-21 (`:271`). It does not trip `:41-42`, and the difference is
+precisely the one identified above: I6's normative subject is the epistemic distinction itself — a
+topic inside this contract's remit per `:22-27`. 001 and 002 appear in I6 as *where the pattern was
+observed*, not as subjects the sentence binds.
+
+I6 therefore establishes that cross-document pattern language is not itself the defect. What
+distinguishes `:248` is that its quantifier binds the norm to an enumerated excluded case.
+
+### The evidentiary limb — Beat 1 finding 1
+
+Finding 1 (`corrections.md:100`) is the only one of Beat 1's four findings that can support this
+ruling, because it is the only one showing **divergence on the excluded row specifically**, rather
+than absence of support on a non-excluded row.
+
+Its verbatim terms: *"Rule cell faithful; the 'what is preserved' cell ('the meaning of a
+category') is §7's own gloss — the source grounds the threshold in **inheritance** (classification
+today, grounding prospectively, per the 2026-08-06 amendment), not in 'meaning.'"* Verified against
+the source at `ruling_002_family_taxonomy_integrity.md:103-108`. Ruled a fidelity defect by the
+operator on 2026-08-22 (CR-002 ruling 1).
+
+The consequence for jurisdiction: when `:248` distributes its norm over row 2, it distributes over
+**§7's own divergent characterization of the excluded topic**, not over what Ruling 002 §3 states.
+The contract is therefore not reporting the owner's norm. It is norming its own gloss of a subject
+it excluded — origination, not restatement.
+
+**On finding 1's PARTIALLY SUPPORTED classification.** Recorded explicitly so a later reader need
+not re-derive that the divergence claim survives the qualifier. PARTIALLY SUPPORTED is the more
+precise fact pattern for this ruling than NOT SUPPORTED would have been, not a weaker one. It
+records that §7's row 2 *did* connect to Ruling 002 §3 — its rule cell is faithful — but connected
+its "what is preserved" cell through a paraphrase rather than the source's own terms. Mere absence
+of support would leave a use/mention defense open: an unrepeated but accurate mention. Divergence
+forecloses it. A source's proposition cannot be inaccurately mentioned and still be mention; the
+inaccuracy is the document's own contribution, which makes it assertion by construction.
+
+### The counter-reading, and why it does not hold
+
+The available defense is that §7 is second-order reporting — `:239` frames the section as
+*"recording the pattern"* — supported by the V1 precedent at `:79`, where a domain name appears
+inside the fence opened at `:76` and §2's signature (`:266`) records it as *"a counter-example, not
+a live predicate."*
+
+The precedent does not reach `:248`. At `:79` the fence is labeled *"Invalid, and the canonical
+example of the failure"* (`:76`), and that frame is what converts mention into non-assertion.
+`:248` carries no such frame: it is the contract's summary prose, stated flatly in its own voice,
+in a document whose self-test reaches *anywhere* (`:41-42`) and whose validity constraints reach
+§1 through §8 (`:50`). The mechanism that rescues `:79` is absent here.
+
+### Beat 1 finding 3 — recorded as row-1-scoped and NOT load-bearing
+
+Finding 3 (`corrections.md:102`) does **not** support this ruling, and is recorded here to prevent
+a later reader from enlisting it.
+
+Its verbatim terms: *"'Permitted to be incomplete' holds for rows 2-3 but not row 1, which licenses
+redundancy/noise (over-completeness), not incompleteness."* The unsourced half therefore attaches
+to **row 1 — Ruling 001 §1, concept identity** — verified independently at
+`ruling_001_canonicalization_policy.md:31`, *"The system prefers a slightly noisy ontology over a
+falsely unified one"*: noise is over-completeness. For **row 2** the incompleteness half **is**
+sourced — a higher admission bar leaves the taxonomy incomplete rather than admitting a family on
+weak evidence.
+
+Row 1's subject is not excluded. §1's exclusion table (`:33-39`) names Ruling 001 **§5** at `:35`
+(provider choice) and nowhere names Ruling 001 §1. An unsourced normative claim on row 1 is
+therefore a citation-fidelity defect with no jurisdictional dimension.
+
+**Direction of dependence between sourcing and jurisdiction.** Curing a sourcing defect does not
+cure a jurisdiction defect: a perfectly-sourced normative condition about an excluded topic still
+trips `:41-42`. The converse — that a sourcing failure can be *evidence* of a jurisdiction
+violation — is valid, and is the reasoning this entry uses, but it runs through finding 1's
+divergence, not finding 3's absence.
+
+**Consequence for CR-002 ruling 3.** That ruling preserved the possibility of a *surgical*
+correction addressing only the unsupported half of `:248`. Such a repair would not reach this
+defect. Both halves are deontic and both are distributed by the same quantifier over row 2.
+
+### `:272` is not clearance
+
+§7's checklist row (`:272`) asserts that §7 *"cites Ruling 002 §3's threshold observationally to
+build the cross-ruling pattern; does not assert ownership or restate it as a binding condition of
+this contract."* That qualifier was added by `2dac6ff` — the same commit that corrected §1's
+self-test — and §1's signature then expressly declined to adjudicate it: *"§7's observational
+citation of Ruling 002 §3 is recorded on §7's own line and not adjudicated here"* (`:265`).
+
+It is a proposition placed on the record by §1's work and attested by no signature. It is also the
+proposition this entry tests. §7's eventual signature may not cite `:272` as support; doing so
+would be the row clearing itself.
+
+Also recorded: §1's signature states the corrected self-test *"was then run against this document
+and returns nothing."* That run is not evidence against this finding. It is expressly qualified by
+the carve-out above, and the record shows it considered §7's *citation* — table-cell-shaped,
+singular — with no indication `:248` was examined separately.
+
+### Not decided by this entry
+
+- What `:248` should say. No repair is authorized, proposed, or implied.
+- Whether the same analysis reaches `:246` (row 3, this contract's own I3) or any other row. Only
+  row 2's subject is on `:39`; other rows were not tested for jurisdiction.
+- The "one idea" / "two principles" / "inversion" reconciliation, parked by CR-002 and still
+  parked. This entry's use of I6 concerns the *scope of I6's normative subject* only, and takes no
+  position on whether I6's "two principles" and §7's "one idea" describe the same recurrence.
+- §7's signability. §7 remains unsigned; this entry records what a signature would have to
+  confront.
+
+### Recording note
+
+Four anchor errors were caught during drafting and verification and are recorded rather than silently dropped,
+this file existing to record exactly this defect class.
+
+1. The session analysis cited provider choice at `:36`. It is `:35`; `:36` is *prompts*. Analyst
+   error, corrected before drafting.
+2. A review remark characterized the exclusion table as naming Ruling 001 §5 for "provider choice,
+   caching." The table does not bundle these: provider choice is `:35` → Ruling 001 §5; caching,
+   storage strategy is `:38` → *unassigned — tracked as GAP-6*. The conclusion drawn from the
+   remark — that Ruling 001 §1 is nowhere excluded — is unaffected and independently verified
+   against `:33-39`.
+3. The phrase *"partially supported, interpretive gloss replacing the source's mechanism claim"*
+   was attributed in review to Beat 1. It appears nowhere in this corpus. Finding 1's actual text
+   is quoted verbatim above from `corrections.md:100`.
+
+4. The draft of this entry cited `ruling_001_canonicalization_policy.md:29` for *"The system
+   prefers a slightly noisy ontology over a falsely unified one."* That line is `:31`; `:29` is
+   *"Never merge on name similarity alone."* Analyst error, caught by the post-drafting anchor
+   sweep of this entry's own citations, before commit. The proposition it supports — that Ruling
+   001 §1 licenses over-completeness, not incompleteness — is unchanged and verified at `:31`.
+
+None of the four alters the ruling.
+
+**Acknowledgment** — an acknowledgment, not a section signature, and deliberately narrower than
+what a Contract 001 row receives.
+
+```
+Acknowledged (operator): [PENDING]
+Acknowledged at: [PENDING]
+```
+
+Statement: *[pending operator review — not drafted on the operator's behalf]*
