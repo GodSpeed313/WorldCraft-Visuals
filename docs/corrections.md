@@ -377,8 +377,12 @@ None of the four alters the ruling.
 what a Contract 001 row receives.
 
 ```
-Acknowledged (operator): [PENDING]
-Acknowledged at: [PENDING]
+Acknowledged (operator): Kevin Brown
+Acknowledged at: 2026-08-23 19:06 EDT
 ```
 
-Statement: *[pending operator review — not drafted on the operator's behalf]*
+Statement: *"CR-003 stands as filed. The jurisdiction violation at `:248` is confirmed; finding 1
+is the evidentiary limb, with the PARTIALLY SUPPORTED qualifier addressed on the record; finding 3
+is correctly scoped to row 1 and is non-load-bearing for jurisdiction; `:272` is rejected as
+clearance. `:246`/row 3 is explicitly left untested and unbounded by this ruling. This
+acknowledgment authorizes no edit to §7's text and does not affect §7's unsigned status."*
