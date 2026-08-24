@@ -242,10 +242,10 @@ single rule:
 | Level | Ruling | The rule | What is preserved |
 |---|---|---|---|
 | Concept identity | 001 §1 | minting is cheap, merging is expensive | distinctions between concepts |
-| Category integrity | 002 §3 | family threshold higher than power threshold | the meaning of a category |
-| Epistemic state | this contract, I3 | ambiguity is preserved, never collapsed | the honest description of what is known |
+| Category integrity | 002 §3 | family threshold higher than power threshold | the integrity of what members inherit from a family |
+| Epistemic state | this contract, I3 | ambiguity is preserved, never collapsed; selecting arbitrarily is prohibited | the honest description of what is known |
 
-In each case the system is permitted to be *incomplete* but never permitted to be *falsely certain*.
+Each of the three rules accepts a less resolved result rather than a wrongly resolved one: a duplicate left unmerged, a family left unadmitted, a domain left unselected.
 
 ## 8. Future extensibility
 
