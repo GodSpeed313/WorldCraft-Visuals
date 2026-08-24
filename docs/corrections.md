@@ -481,3 +481,93 @@ other two fidelity items as not findings is correct. The §8 audit's classificat
 deliberately not recorded here; it is GAP-8, because it closes and a correction entry closes
 nothing. This acknowledgment authorizes no edit to §8's text and does not affect §8's unsigned
 status."*
+
+---
+
+## CR-005
+
+```
+Target:            AUTH-001's "Known consequence, recorded not addressed"
+                   clause, authorizations.md:126-129 — ACKNOWLEDGED, not
+                   signed, at time of recording
+Recorded:          2026-08-23
+Defect class:      incomplete enumeration — the clause names two entries
+                   whose quotations its own disposition governs, and there
+                   are three
+Basis commit:      c0f7ec7 (origin/main), the commit that exercised AUTH-001
+                   and made the quotations historical
+Authorizes:        no edit to authorizations.md, and no edit to CR-004
+Status:            recorded; AUTH-001 remains exercised and unamended
+```
+
+**Scope note.** This entry records a defect in AUTH-001's text. It does **not** correct CR-004, whose
+status changed without CR-004 becoming wrong, and it does **not** extend AUTH-001's authorization by
+so much as one line. AUTH-001 was bounded to `:245`, `:246` and `:248` of
+`contract_001_domain_resolution.md` and to specific wording at each; nothing here alters that, and
+AUTH-001 is now exercised and spent.
+
+**Why this targets AUTH-001 and not CR-004.** CR-004 is not defective. Its quotation of the
+pre-amendment wording was accurate when recorded and is now historical, which is the ordinary fate of
+a quotation in this corpus and requires no correction. AUTH-001's clause, by contrast, states
+something that was already incomplete when written. The defective text is the one that gets the
+entry.
+
+### The defect
+
+AUTH-001's known-consequence clause (`authorizations.md:126-129`) reads, in relevant part:
+
+> *"CR-002 and CR-003 quote `:245`, `:246`, and `:248` as they read **before** these edits. Those
+> quotations become historical on the authorized commit. Both entries are true as of their recording
+> dates and are left as recorded…"*
+
+**Three entries quote the pre-amendment wording, not two.** CR-004 does so at `corrections.md:445`,
+quoting *"the meaning of a category"* while comparing its own finding to CR-002 finding 1. The clause
+names CR-002 and CR-003 only, and its phrase *"Both entries"* forecloses a third by its own wording.
+
+**Timing.** AUTH-001 was granted and acknowledged on 2026-08-23 (`11efeab`). CR-004 was filed later
+the same day (`06e707b`). The enumeration was therefore complete when written and became incomplete
+before AUTH-001 was exercised, with nothing in the corpus recording the change.
+
+### Effect — none on the disposition, only on the enumeration
+
+The clause's **substance** reaches CR-004 unchanged: a quotation is true as of its recording date and
+is left as recorded, per the standing disposition this corpus applies to signatures. CR-004's
+quotation is historical on `c0f7ec7` for exactly the reason CR-002's and CR-003's are, and is left as
+recorded for exactly the same reason.
+
+Only the count and the list are wrong. No proposition AUTH-001 asserts about what it authorizes,
+bounds, or forbids is affected, and the three authorized edits landed exactly as specified.
+
+### Verified at recording
+
+By extraction against `c0f7ec7`, the corpus references quoting the pre-amendment wording of `:245`,
+`:246` or `:248` are:
+
+| Location | Entry | Status |
+|---|---|---|
+| `corrections.md:100`, `corrections.md:112`, `corrections.md:172` | CR-002 | historical, left as recorded |
+| `corrections.md:236`, `corrections.md:241` | CR-003 | historical, left as recorded |
+| `corrections.md:445` | CR-004 | historical, left as recorded — **not named by AUTH-001** |
+| `authorizations.md:56`, `authorizations.md:79`, `authorizations.md:84` | AUTH-001's own From specimens | not historical; recording the replaced text is their purpose |
+
+`open_contract_gaps.md:398` cites all three line numbers but quotes none of the wording, and is
+unaffected. In total 42 corpus references point at the edited lines; none resolves to a different row
+after the amendment.
+
+### Not decided by this entry
+
+- Whether AUTH-001's clause should be amended to name CR-004. No repair is authorized or proposed,
+  and amending an exercised authorization would itself require a separate act.
+- Whether future authorizations should state their known-consequence scope by rule rather than by
+  enumeration. That is a drafting question for AUTH-002 onward, not a finding about AUTH-001.
+- Anything about §7's signature, which remains unsigned at `:272`.
+
+**Acknowledgment** — an acknowledgment, not a section signature, and deliberately narrower than
+what a Contract 001 row receives.
+
+```
+Acknowledged (operator): [PENDING]
+Acknowledged at: [PENDING]
+```
+
+Statement: *[pending operator review — not drafted on the operator's behalf]*
