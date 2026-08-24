@@ -566,8 +566,14 @@ after the amendment.
 what a Contract 001 row receives.
 
 ```
-Acknowledged (operator): [PENDING]
-Acknowledged at: [PENDING]
+Acknowledged (operator): Kevin Brown
+Acknowledged at: 2026-08-23 21:35 EDT
 ```
 
-Statement: *[pending operator review — not drafted on the operator's behalf]*
+Statement: *"CR-005 is acknowledged. AUTH-001's known-consequence clause names two entries where
+three quote the pre-amendment wording; CR-004's quotation at `corrections.md:445` is governed by the
+clause's substance but excluded by its enumeration. Targeting AUTH-001 rather than CR-004 is
+correct — CR-004 is not being fixed, its status is being recorded as changed, which is what keeps
+this consistent with the standing rule that records are never retroactively rewritten and a
+correction is always a separate act. This acknowledgment authorizes no edit to `authorizations.md`
+and no edit to CR-004, and does not extend AUTH-001, which is exercised and spent."*
