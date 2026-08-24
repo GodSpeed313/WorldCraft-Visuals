@@ -85,6 +85,17 @@ text being audited.
 *Evidence:* a wrong anchor supplied in analysis reached a filed entry and had to be recorded as a
 defect inside that entry's own Recording note.
 
+### M8 — Qualify every item in a list of anchors, not just the first
+
+In a comma- or semicolon-separated list of cross-document anchors, qualify every item individually.
+A qualifier on the first item does not carry to the rest.
+
+*Evidence:* a draft table cell read `` `corrections.md:100`, `:112`, `:172` ``. Only the first was
+qualified; the second and third resolved into `contract_001_domain_resolution.md` by house
+convention, landing on unrelated lines. Five such anchors occurred across two lists in one entry.
+This is M3's failure in the shape that evades it — the eye reads the group as covered by the label
+on its first member.
+
 ---
 
 Opened 2026-08-23.
