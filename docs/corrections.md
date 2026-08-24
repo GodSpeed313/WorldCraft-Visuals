@@ -386,3 +386,98 @@ is the evidentiary limb, with the PARTIALLY SUPPORTED qualifier addressed on the
 is correctly scoped to row 1 and is non-load-bearing for jurisdiction; `:272` is rejected as
 clearance. `:246`/row 3 is explicitly left untested and unbounded by this ruling. This
 acknowledgment authorizes no edit to §7's text and does not affect §7's unsigned status."*
+
+---
+
+## CR-004
+
+```
+Target:            Contract 001 §8, :258-259 — the Ruling 002 §1.1 citation.
+                   UNSIGNED at time of recording.
+Recorded:          2026-08-23
+Defect class:      citation fidelity — the citing text carries a valence the
+                   cited source expressly declines
+Basis commit:      11efeab (origin/main; audited against origin/main blobs)
+Authorizes:        no edit to contract_001_domain_resolution.md
+Status:            recorded; §8 remains unsigned
+```
+
+**Scope note.** This entry records **one** finding, from a four-check audit of §8. The audit's other
+finding — that §8's normative requirement at `:252-254` is unclassified, unscoped and untestable — is
+**not recorded here.** It is filed as **GAP-8** in `open_contract_gaps.md`, because it closes when
+Contract 001 gains text, and this file's own definition (`corrections.md:9`) is that a correction
+entry *"closes nothing."* The two findings are different species and are deliberately not merged.
+
+**Text stability.** §8 (`:250-259`) is byte-identical to its state at `545d846` and has never been
+amended. Line references resolve identically at `545d846`, `bc1b8d3`, `55b55d0` and `11efeab`.
+
+### Citation existence — clean
+
+§8 makes exactly one citation. Ruling 002 §1.1 exists at
+`ruling_002_family_taxonomy_integrity.md:40`, titled *"The transition this ruling actually governs"*;
+LOCKED 2026-08-15, §1 signed at `ruling_002_family_taxonomy_integrity.md:622`. **No CR-001-class
+referential defect.** The line numbers are right and the section says something on the subject.
+
+### Three fidelity items, one of which is the finding
+
+| Item | Verdict | Basis |
+|---|---|---|
+| *"assumption"* vs *"model"* | recorded, not a finding | `ruling_002_family_taxonomy_integrity.md:42` says *"It was a closed-world **model**."* The word *assumption* appears nowhere in §1.1; ruling_002's only use is at `ruling_002_family_taxonomy_integrity.md:278`, on an unrelated subject. §8's word choice, carrying no change in substance. |
+| *"the thing WorldCraft is leaving behind"* | recorded, not a finding | *leaving behind* appears nowhere in ruling_002. §1.1's own framing is *"WorldCraft is becoming an open-world model"* (`:47`) and *"the domain layer is the boundary between those two realities"* (`:48-49`). Becoming open-world from a closed-world starting point entails leaving it behind. Faithful paraphrase. |
+| **The valence** | **PARTIALLY SUPPORTED** | See below. |
+
+**The finding.** §1.1 opens: *"The original LEGACY design was **not wrong.** It was a closed-world
+model"* (`ruling_002_family_taxonomy_integrity.md:42`). It closes: every invariant *"exists to make
+that transition safe **rather than to repair a defect**"* (`:48-49`). §1.1 twice, deliberately,
+refuses to treat the closed-world model as an error.
+
+§8 deploys it as one. At `:257-259` a contract that could not be extended without a rewrite *"would
+reproduce, at the level of the state machine, exactly the closed-world assumption Ruling 002 §1.1
+identifies as the thing WorldCraft is leaving behind"* — the closed-world assumption appearing purely
+as the bad outcome to be avoided, with §1.1 named as the source of that characterization.
+
+**§8's proposition is defensible on the merits.** Reproducing a closed-world assumption *in an
+open-world context* is a real error even where the closed-world model was correct for its own world.
+But §8 does not say that. It attributes the negative valence to §1.1, and §1.1 declines to supply it.
+
+**Class.** The same shape as CR-002 finding 1 — the citing text's gloss differs from the cited
+source's own ground — and milder in degree. Finding 1 substituted a **different ground**
+(*"the meaning of a category"* for inheritance). This **adds a valence the source disclaims** while
+leaving the underlying proposition intact.
+
+**Not a defect: the level shift.** §1.1's subject is the LEGACY family taxonomy; §8's is the state
+machine. §8 flags the analogy itself — *"at the level of the state machine"* — so the shift is
+disclosed, not smuggled.
+
+### Not decided by this entry
+
+- What `:258-259` should say. No repair is authorized, proposed, or implied.
+- Whether §8 is signable, and on what terms. §8 remains unsigned.
+- GAP-8's classification question, which is filed separately and is not a defect in what §8 says.
+- Whether the two prior items in the table above should be corrected. They are recorded as accurate
+  or immaterial, not as pending.
+
+### Recording note
+
+A methodology finding arose during this audit and is **not** recorded here, because this file records
+defects in corpus text and that finding is about how sweeps are run: a phrase split by a blockquote
+line-wrap is invisible to line-based `grep`, which nearly caused a term collision at
+`contract_001_domain_resolution.md:253` to be missed. It is filed as **M2** in `docs/audit_method.md`.
+
+**Acknowledgment** — an acknowledgment, not a section signature, and deliberately narrower than
+what a Contract 001 row receives.
+
+```
+Acknowledged (operator): Kevin Brown
+Acknowledged at: 2026-08-23 19:41 EDT
+```
+
+Statement: *"CR-004 is acknowledged. §8's citation of Ruling 002 §1.1 carries a valence the source
+expressly declines: §1.1 states that the original LEGACY design was not wrong, and that the
+invariants exist to make the transition safe rather than to repair a defect. The finding is a
+fidelity defect of the same class as CR-002 finding 1 and milder in degree — it adds a valence
+rather than substituting a ground — and §8's underlying proposition is left intact. Recording the
+other two fidelity items as not findings is correct. The §8 audit's classification finding is
+deliberately not recorded here; it is GAP-8, because it closes and a correction entry closes
+nothing. This acknowledgment authorizes no edit to §8's text and does not affect §8's unsigned
+status."*
