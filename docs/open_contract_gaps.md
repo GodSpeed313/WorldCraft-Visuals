@@ -310,6 +310,102 @@ Opened 2026-08-16.
 
 ---
 
+## GAP-8 — §8's normative requirement is unclassified
+
+**Type:** classification gap. **Ruled in:** nothing — no Ruling states a requirement about Contract
+001's own extensibility. §8's clause originates in the contract.
+**Contract invariant required:** none, and an invariant is probably the wrong instrument — see the
+closure condition below.
+
+Contract 001 §8 states a normative requirement at `contract_001_domain_resolution.md:252-254`:
+*"This contract must permit additional resolution states without invalidating existing states,
+provided new states preserve the distinction between unknown, ambiguous, and resolved knowledge
+conditions."* Nothing in the contract says what kind of instrument that "must" is.
+
+Every other normative element in the document carries scaffolding that §8's clause lacks:
+
+| | §2 (V1/V2) | §6 (I1–I7) | §8 |
+|---|---|---|---|
+| Self-classification | `:46-48` — *"not features… conditions the contract must satisfy to be valid"* | §6's heading names them invariants; each is numbered | none |
+| Scope declaration | `:50` — *"conditions on the whole of this contract, §1 through §8"* | carried by the contract's own definition list, `:24-27` | none |
+| Operational test | V1 `:87-90` conformance check, with a stated violation condition at `:88`; V2 `:99-103` plus `:106-108` | GAP-4 and GAP-5 record which are enforced and which are not | none |
+| Membership in a named set | V1, V2 | I1 through I7 | belongs to no set |
+
+**There is no V3.** A search for `V3` across all of `docs/` returns nothing. §8's requirement is not
+a third validity constraint, is not among §6's seven invariants, and is not reached by `:50`, which
+names V1 and V2 only. The contract therefore contains exactly one normative requirement that no
+scope clause governs, no set contains, and no procedure tests.
+
+**§1's signature routed this question here.** `contract_001_domain_resolution.md:265` records, as
+not attested by §1: *"whether §1's 'defines only' list reaches §8, which states a normative
+requirement on the contract without the reconciling clause §2 carries for itself — that belongs to
+§8's signature."* The clause §1 refers to is `:46-48`. §2 faces the same objection §8 faces — a
+normative statement in a document whose §1 says it *defines only* states, transitions, terminals and
+invariants — and §2 answers it in text. §8 does not.
+
+**Related, and not filed separately:** §8's proviso restates V2's substance in V2's own coined term
+without citing V2. *knowledge conditions* occurs exactly twice in the contract, at `:96` (V2) and
+`:253` (§8). Whether that is duplication to remove, a cross-reference to add, or correct as written
+is part of what closing this entry must decide.
+
+### This is an absence, not a violation
+
+**§8 breaks no rule this contract states.** It passes §1's self-test: `:41-42` catches an excluded
+topic appearing as a normative condition, and §8's subject is the contract itself — every one of the
+seven excluded topics at `:33-39` was checked against §8's full text and none appears. No rule
+anywhere requires a normative statement to be classified, scoped, or testable.
+
+**This entry is therefore not the same shape as §7's defects.** CR-002 and CR-003 record text that
+asserts something the source does not support, or states a condition about a subject the contract
+excludes. Those are defects in what is written. This is the absence of something that was never
+written. **A reader must not conclude from this entry that §8 failed the test §7 failed.** §7 failed
+`:41-42`; §8 passes it. They fail differently, and only one of them fails at all.
+
+**Nearest precedent, and how it differs.** Ruling 001 §7.4 (`ruling_001_canonicalization_policy.md:358-364`)
+leaves `SURFACED` component-neutral and says so — *"Deferred deliberately: gating a state on a
+`required` predicate today would make the state machine depend on an undefined component model"*
+(`ruling_001_canonicalization_policy.md:363`). That is a **recorded** deferral: it names the absence, the reason, and what must happen
+once the prerequisite exists. §8's absence is **unrecorded** — nothing states that leaving the clause
+unclassified was a decision. This entry exists to convert an unrecorded absence into a recorded one.
+It does not assert the absence was accidental; it records that the corpus does not say either way.
+
+### This entry does not close the way GAP-1 through GAP-5 close
+
+Those are requirements ruled in a Ruling and awaiting a Contract 001 invariant, so the register's
+standing closure rule reaches them. This is not a ruled requirement, and an invariant is not what it
+needs — adding I8 would create an eighth member of a set §8's clause does not belong to, without
+saying what the clause itself is. Per the register's 2026-08-16 amendment, this entry states its own
+closure condition.
+
+**Closure condition — Contract 001 §8 gains text that does all three:**
+
+1. **Classifies its own requirement** — states what kind of instrument `:252-254` is, mirroring what
+   `:46-48` does for §2, or states that it is a fourth thing and names it.
+2. **Is reached by a scope statement** — either brought under an amended `:50`, or given its own
+   scope clause stating what the requirement binds and what a signature on it attests.
+3. **Is testable, or says why not** — an operational check in V1's form (`:87-90`), including what
+   violating the requirement looks like; or an explicit statement that no such test exists and why,
+   in the manner of Ruling 001 §7.4's recorded deferral.
+
+Partial satisfaction does not close this entry. Discussion never closes it.
+
+### Dependency chain — this entry cannot close in one step
+
+Closing GAP-8 requires **authored new text**, not a wording substitution. It therefore requires, in
+order:
+
+1. **AUTH-002** — a new authorization. **AUTH-001 does not cover this.** AUTH-001 is bounded to
+   `:245`, `:246` and `:248`, and to specific From/To wording specimens at each; new authored text at
+   §8 falls outside both bounds.
+2. **Drafted text**, produced under that authorization.
+3. **Operator wording review** of that text before it lands — AUTH-style authorization clears the
+   permission question only, never the wording question.
+4. **The commit**, after which this entry closes.
+
+Opened 2026-08-23.
+
+---
+
 ## Closed
 
 *(none yet)*
