@@ -258,6 +258,55 @@ is preventing forced classification.** A contract that could not itself be exten
 rewrite would reproduce, at the level of the state machine, exactly the closed-world assumption
 Ruling 002 §1.1 identifies as the thing WorldCraft is leaving behind.
 
+### What kind of requirement this is
+
+**This is not a feature of the contract, and it is not one of §2's validity constraints. It is
+a condition on an act — extending this contract — and it is named here as such: an amendment
+condition.** The distinction matters. V1 and V2 are conditions this document satisfies, or fails,
+as it stands on a given date, and `:50` scopes them on exactly that footing. Read the same way,
+the requirement at `:252-254` is satisfied by any contract nobody has yet tried to extend —
+which is the one circumstance in which it does no work.
+
+**It is not a third validity constraint.** `:50` names V1 and V2. A V3 that `:50` did not reach
+would leave this requirement governed by no scope clause — the condition this text exists to
+end — under a name suggesting otherwise.
+
+**It is not an invariant.** §6's seven are numbered members of one set, each stating what
+must hold of resolution: of its predicates, its order, its transitions, its terminals. This
+requirement states what must hold of an edit to this document. An eighth number would place
+the clause without saying what it is.
+
+**Nothing is numbered here, and no set is created.** This contract states exactly one amendment
+condition. If a second is ever written, what the two share can be decided then, on the two.
+
+**Scope.** This condition binds any amendment to this contract that adds a resolution state,
+wherever in the document that amendment's text lands. It does not bind the present text, which
+no amendment has extended. A signature on §8 attests that the requirement is classified and
+scoped as stated here, and that no amendment made before that signature violated it. **It does
+not attest that a future amendment will comply.** That is attested by the amending signature,
+on the date of the amendment, under this condition.
+
+**The proviso is V2, carried forward.** *knowledge conditions* at `:253` is V2's term, used
+at `:96` in V2's sense; the proviso requires of an amended contract what V2 requires of this
+one. The citation is placed here rather than in the clause, and the clause is unchanged.
+
+**Conformance check.** Compare the contract as amended against the contract as it stood immediately
+before the amendment. The first limb — *without invalidating existing states* — is violated
+if a state defined before the amendment is, after it, removed, contradicted by the amended text,
+or left with a definition no case can satisfy. The second limb is violated whenever the amended
+contract violates V2, and is tested by V2's own checks (`:99-103`, `:106-108`); a new state
+that takes cases from `AMBIGUOUS_DOMAIN` and reports them as resolved violates both.
+
+**One reading is not tested, and that is recorded here rather than left to be discovered.**
+Whether an existing state is invalidated by losing cases to a new state — as against being
+removed, contradicted or made unsatisfiable — is settled nowhere in this corpus, and the
+check above is stated on the narrower reading only. Deciding the wider one would fix what
+a future amendment may take from an existing state: a rule about amendment mechanics that
+`:252-254` does not state, and that classifying `:252-254` does not require. Ruling 001 §7.4
+(`ruling_001_canonicalization_policy.md:358-364`) is the form followed — the absence named,
+the reason given, and the prerequisite stated: the wider reading becomes testable when a ruling
+or an amendment defines what invalidating an existing state means.
+
 ---
 
 ## Sign-off checklist
