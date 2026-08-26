@@ -216,8 +216,8 @@ reason"*). Contract 001 §5 opens by describing itself as a consolidation of alr
 ruling brings a behavior into existence and nothing states which document must carry it into
 machine-enforceable form.
 
-**Not yet load-bearing:** Contract 001 is unsigned in full, so no implementation has been authorized
-against the incomplete set.
+**Load-bearing as of 2026-08-25:** Contract 001 is signed in full and marked LOCKED, so the
+condition that made this entry latent no longer holds. It remains open on its own terms.
 
 **This entry closes when Contract 001 carries an invariant requiring a `SURFACED` result to preserve
 the accepted components, the rejected components, and the reason for rejection.** Not before.
