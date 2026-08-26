@@ -408,6 +408,96 @@ Closed 2026-08-25 by `696738e`. See **Closed** below.
 
 ---
 
+## GAP-9 — No instrument states how locked text may be amended
+
+**Type:** procedural gap. **Ruled in:** nothing — no Ruling and no contract states a procedure for
+amending a document after it is locked.
+**Contract invariant required:** none, and an invariant cannot be the instrument here — see **Why
+the standing closure rule cannot reach this entry** below.
+
+Contract 001 was marked LOCKED on 2026-08-25 (`:6`), joining Ruling 001
+(`ruling_001_canonicalization_policy.md:3`) and Ruling 002
+(`ruling_002_family_taxonomy_integrity.md:3`). All three governing documents are now locked. **No
+document in this corpus states what may be done to a locked document's text, who may authorize it,
+or what a signature on the result would attest.**
+
+The absence has three consequences already on the record.
+
+1. **Two entries in this register have closure conditions that no stated procedure can reach.**
+   GAP-4 closes only when Contract 001 *"carries an invariant"* of a described kind, and GAP-5 only
+   when Contract 001 carries one *"requiring a `SURFACED` result to preserve the accepted
+   components, the rejected components, and the reason for rejection."* Contract 001 is locked, so
+   carrying either invariant means amending locked text, and no instrument says how.
+2. **Contract 001 §8 presupposes the mechanism.** `:282-287` binds *"any amendment to this contract
+   that adds a resolution state"*, and `:286` states that compliance is *"attested by the amending
+   signature, on the date of the amendment."* That clause is correct as written and is signed at
+   `:322`. It names an act — an amending signature on a locked contract — that no instrument
+   defines.
+3. **The authorizations file rests on the opposite condition.** Both its entries are grounded in the
+   target being unsigned. AUTH-001's basis reads *"§7 is UNSIGNED, so no attestation is disturbed by
+   an edit made before signature"* (`authorizations.md:38-39`), and AUTH-002 records that *"this
+   corpus has no precedent for amending text a signature attests, and establishing one is not a side
+   effect this authorization should carry"* (`authorizations.md:213`). That sentence is the corpus's
+   own clearest statement of this gap.
+
+A fourth consequence is already visible and is left uncorrected: the sweep run at the lock found
+`ruling_002_family_taxonomy_integrity.md:533-534` calling Contract 001 *"a draft document"* and
+recording it as unsigned. Both statements went stale on 2026-08-25, and neither can be repaired,
+because the document carrying them is locked.
+
+### This is an absence, not a violation
+
+**No document broke a rule.** Locking each document was correct and is what its own closing line
+provides for. `:286` asserts nothing the corpus contradicts: it describes what a future amendment's
+signature would attest, and is right that §8's own signature does not attest it. Nothing here is a
+defect in written text, and **this entry must not be read as one** — defects in text are
+`corrections.md`'s subject, and nothing belongs there on these facts. The absence became
+load-bearing only on 2026-08-25, when the last document locked while two entries in this register
+were still open against it.
+
+**Nearest precedent, and how it differs.** GAP-8 recorded a normative requirement that no scope
+clause governed, and closed when §8 gained text classifying and scoping itself. That gap sat inside
+one document and closed by that document gaining text. This one sits between documents: no single
+document's text is missing anything, and what is absent is a procedure the corpus as a whole does
+not state.
+
+### Why the standing closure rule cannot reach this entry
+
+The standing rule closes an entry when Contract 001 gains a corresponding invariant. Here that rule
+is circular — adding an invariant to Contract 001 now requires amending locked text, which is the
+procedure this entry records as missing. An invariant is also the wrong instrument on the merits: an
+invariant of Contract 001 binds resolution under Contract 001 and could not govern what may be done
+to Ruling 001 or Ruling 002. Per the register's 2026-08-16 amendment, this entry states its own
+closure condition.
+
+### What this entry does not decide
+
+- **It does not decide that locked text may be amended.** A stated procedure could as easily hold
+  that locked text is never amended and that a superseding document is the only route. Either answer
+  closes this entry; neither is preferred here.
+- **It does not decide which instrument owns the question.** Ruling 002 §10's signature records that
+  *"drafting and process rules were ruled not to belong in Ruling 002; which instrument owns them is
+  a separate, later decision, and this signature creates and amends no such instrument"*
+  (`ruling_002_family_taxonomy_integrity.md:636`). This entry is a member of that undecided class,
+  and filing it here is a ledger act, not that decision.
+- **It does not reopen GAP-4, GAP-5, or any lock**, all of which stand exactly as written.
+- **It creates no authorization** and permits no edit to any locked document.
+
+**Closure condition — a document claims this topic and states the procedure, answering all three:**
+
+1. **What authorizes an amendment to locked text**, if anything does — or that nothing does, and
+   what replaces it.
+2. **What attests the result** — whether an existing signature is disturbed, re-taken, or left as
+   recorded, and what a signature on amended text covers.
+3. **What becomes of the amended text's prior signatures and of references into it**, against the
+   standing disposition that a record is true as of its date and is left as recorded.
+
+Claiming the topic without stating the procedure does not close this entry. Discussion never does.
+
+Opened 2026-08-25.
+
+---
+
 ## Closed
 
 ### GAP-8 — §8's normative requirement is unclassified
