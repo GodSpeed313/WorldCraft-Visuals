@@ -404,10 +404,46 @@ order:
 
 Opened 2026-08-23.
 
+Closed 2026-08-25 by `696738e`. See **Closed** below.
+
 ---
 
 ## Closed
 
-*(none yet)*
+### GAP-8 — §8's normative requirement is unclassified
+
+**Closed 2026-08-25 by `696738e`**, which inserted 49 lines into Contract 001 §8 under AUTH-002
+(`authorizations.md:153-314`) after `:259`. This is the register's first closure.
+
+The entry's three-part closure condition is met:
+
+1. **Classifies its own requirement.** `:252-254` is named a fourth kind of thing — an *amendment
+   condition*, a condition on the act of extending the contract rather than on the document's
+   present state, which is what V1 and V2 are. Not V3, not an invariant, and no set is created.
+2. **Is reached by a scope statement.** Its own, on the second of the two routes the closure
+   condition offers. A signature on §8 attests that the requirement is classified and scoped as
+   stated and that no amendment made before that signature violated it; it does not attest that a
+   future amendment will comply.
+3. **Is testable in part, and says why not for the rest.** The second limb is V2 carried forward and
+   is tested by V2's own checks; the first limb is tested on the narrow reading — a state removed,
+   contradicted, or left with a definition no case can satisfy — and the wide reading, a state
+   invalidated by losing cases to a new state, is a recorded deferral in Ruling 001 §7.4's form
+   (`ruling_001_canonicalization_policy.md:358-364`).
+
+**Recorded rather than left to be discovered: this closed on a partial test.** The entry holds that
+partial satisfaction does not close it. The closing text was accepted on the reading that the rule
+bites at the level of the three parts, and that part 3's *"or says why not"* is satisfied by one
+limb tested and the other deferred with its reason and its prerequisite stated. That reading was put
+to the operator at the wording review and accepted. A reader who takes the rule to bite limb by limb
+should know the question was seen and decided, not missed.
+
+**The `knowledge conditions` question** the entry left to closure is decided on the cross-reference
+branch, the only branch AUTH-002 permits: the new text cites V2 at `:96`, and `:252-254` is
+unchanged.
+
+**What this closure does not do.** It does not sign §8 — the box at `:322` still reads `- [ ]`, and
+extension and signature are separate acts. It does not repair CR-004, which AUTH-002 does not reach
+and which never blocked §8. GAP-4 and GAP-5 remain open exactly as recorded. This register rules
+nothing, and this entry records a closure rather than performing one; the commit does that.
 
 Opened 2026-08-06.
