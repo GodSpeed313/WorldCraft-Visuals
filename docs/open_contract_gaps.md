@@ -654,3 +654,106 @@ instrument, is the operator's to rule on as its own act.
   (`amendment_policy.md:160`); `2009c1d` landed the text and this entry records the effect.
 
 Opened 2026-08-25.
+
+---
+
+## Closure conditions restated for successor contracts — 2026-08-28
+
+**Status:** proposed / not operative.
+
+This section restates what would satisfy GAP-4 and GAP-5 under the instrument set as it now stands.
+It replaces nothing. Each entry's closure condition remains operative exactly as written, at
+`open_contract_gaps.md:183-186` and `open_contract_gaps.md:222-223`, and neither line is changed by
+this section. Nothing here closes an entry, records a defect, or authorizes an edit.
+
+**Why these are appended rather than written into the entries.** Editing either condition in place
+would shift every line below it, and signed, locked text cites into this file below that point.
+`contract_001_domain_resolution.md:320` carries five such anchors — `open_contract_gaps.md:197`,
+`open_contract_gaps.md:201`, `open_contract_gaps.md:203`, `open_contract_gaps.md:205-206` and
+`open_contract_gaps.md:222-223` — and cites `open_contract_gaps.md:183-186` twice besides;
+`contract_001_domain_resolution.md:322` cites `open_contract_gaps.md:390`. Every anchor in that list
+is qualified deliberately: a bare `:NNN` in this file resolves to Contract 001 by house convention,
+so an unqualified list would point at the wrong document. Contract 001 is locked, and under
+`amendment_policy.md:31-33` a citation stranded by such a shift could never be corrected. The
+restatements are therefore appended, at the
+cost that a reader of either entry does not learn from the entry that this section exists. That
+trade was chosen deliberately by the operator on 2026-08-28 and is recorded here rather than left to
+be discovered.
+
+### GAP-4 — successor-contract restatement
+
+**Status:** proposed / not operative.
+
+**Chronology.** GAP-4's closure condition (`open_contract_gaps.md:183-186`) was written when Contract
+001 could still gain an invariant by direct amendment. Contract 001 was marked LOCKED on 2026-08-25,
+and `amendment_policy.md:31-33` forecloses amendment of locked text; the operator determined *"that
+locked text has no amendment route and that supersession is the only route"*
+(`amendment_policy.md:20-21`). The existing condition is therefore now satisfiable only through a
+successor contract. The entry did not anticipate this and claims nothing about it; that consequence
+is recorded here as history.
+
+**Restated closure condition, proposed:**
+
+This entry closes when a successor contract supersedes the Contract 001 division that carries the
+relevant enforcement invariants and carries an invariant that (a) makes terminal conditions halting
+rather than advisory, and (b) for each of the two fallback sites identified above, either authorizes
+the fallback with an explicit bound or removes it.
+
+The two fallback sites remain implementation sites; this closure condition does not require two
+successor-contract invariants or two successor-contract divisions. The `(a)` and `(b)` requirements
+are components of the single invariant described by GAP-4's existing closure condition.
+
+The successor-contract wording must preserve the distinction between the two fallback sites and
+their triggers. A successor provision that addresses only one site does not satisfy this closure
+condition.
+
+This restatement does not itself authorize a change to Contract 001, create the successor contract,
+determine its section structure, or close GAP-4. Those are separate acts.
+
+This restatement also does not decide whether superseding the relevant Contract 001 division
+requires that division to be restated in full, or whether partial supersession within a division is
+possible. That is a separate act.
+
+**On the periphrasis.** The condition names *"the Contract 001 division that carries the relevant
+enforcement invariants"* rather than a section number, because GAP-4's own text never names one. The
+only Contract 001 section GAP-4 names is §5.1. Identifying the division is left to the successor
+contract and is not decided here.
+
+### GAP-5 — successor-contract restatement
+
+**Status:** proposed / not operative.
+
+**Chronology.** GAP-5's closure condition (`open_contract_gaps.md:222-223`) was written when Contract
+001 could still gain an invariant by direct amendment. Contract 001 was marked LOCKED on 2026-08-25,
+and `amendment_policy.md:31-33` forecloses amendment of locked text; the operator determined *"that
+locked text has no amendment route and that supersession is the only route"*
+(`amendment_policy.md:20-21`). The existing condition is therefore now satisfiable only through a
+successor contract. The entry did not anticipate this and claims nothing about it; that consequence
+is recorded here as history.
+
+**Restated closure condition, proposed:**
+
+This entry closes when a successor contract supersedes Contract 001 §6 and carries an invariant
+requiring a `SURFACED` result to preserve the accepted components, the rejected components, and the
+reason for rejection.
+
+The successor contract must preserve all three payload requirements. An invariant that preserves
+only the rejected components and reason, or only the accepted components and reason, does not
+satisfy this closure condition.
+
+This restatement does not itself authorize a change to Contract 001, create the successor contract,
+determine its section structure, or close GAP-5. Those are separate acts.
+
+This restatement also does not decide whether superseding §6 requires §6 to be restated in full, or
+whether partial supersession within §6 is possible. That is a separate act.
+
+**On naming §6.** Unlike GAP-4, this condition names its division, because GAP-5's own text does:
+*"§6 is the enforcement layer, and §6 is silent"* (`open_contract_gaps.md:215`). Naming it here
+carries that identification forward and establishes nothing new about it.
+
+**What this section does not do.** It amends no entry and changes no existing line in this file. It
+closes neither GAP-4 nor GAP-5, both of which remain open on their existing conditions. It creates
+no authorization, opens no gap, and records no defect. It does not revisit GAP-9's closure record,
+whose statement that neither entry says this was true when written and stands as recorded.
+
+Restated 2026-08-28.
