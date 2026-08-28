@@ -713,5 +713,5 @@ a Contract 001 row receives.
 
 ```
 Acknowledged (operator): Kevin Brown
-Acknowledged at: 2026=08-28 19:16 EDT
+Acknowledged at: 2026-08-28 19:16 EDT
 ```
