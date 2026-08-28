@@ -22,10 +22,16 @@ and they are the place to look before changing how concepts are named, classifie
 - **`ruling_002_family_taxonomy_integrity.md`** — what `family` is (a grounding behavior class, not an
   ontology), the domain layer, and what happens when a concept cannot be placed. **LOCKED.**
 - **`contract_001_domain_resolution.md`** — the machine-enforceable form: domain resolution states,
-  transitions, and invariants. **DRAFT** — binding only once signed off and marked LOCKED.
+  transitions, and invariants. **LOCKED.**
 - **`audit_001_…` / `audit_002_…`** — measured evidence the rulings are argued from.
 - **`open_contract_gaps.md`** — the register, in two categories: requirements ruled but not yet
   enforceable, and *ownership gaps* — topics a document excludes that no document claims.
+- **`corrections.md`** — defects found in already-signed text. It records them and closes nothing, and
+  authorizes no edit, so the text stays exactly as attested.
+- **`authorizations.md`** — bounded, one-time permission to edit specific lines with specific wording.
+- **`amendment_policy.md`** — what may be done to a locked document's text: nothing. A locked document
+  is superseded, never amended.
+- **`audit_method.md`** — how the corpus is swept for defects, never what a particular sweep found.
 - **`evidence/`** — preserved exhibits, including Regression Case 001.
 
 Each document carries its own sign-off checklist, which is the authority on what has been signed.
