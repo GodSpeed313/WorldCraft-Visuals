@@ -537,3 +537,120 @@ and which never blocked §8. GAP-4 and GAP-5 remain open exactly as recorded. Th
 nothing, and this entry records a closure rather than performing one; the commit does that.
 
 Opened 2026-08-06.
+
+---
+
+### GAP-9 — No instrument states how locked text may be amended
+
+**Closed 2026-08-28 by `2009c1d`**, which added `amendment_policy.md`, a standing instrument claiming
+this topic in its own text: *"The corpus's answer to a single question: once a document is locked,
+what may be done to its text"* (`amendment_policy.md:6-7`). This is the register's second closure.
+
+The entry required a document that claims the topic **and** states the procedure, answering all
+three parts. Each is answered below against the landed text.
+
+1. **What authorizes an amendment — nothing does, and what replaces it is stated.** The condition
+   offered two branches and the policy takes the second, without reservation:
+   *"Text in a document that carries a LOCKED status is not amended. No instrument in this corpus
+   authorizes such an amendment, and no instrument may. There is no bounded exception, no
+   minor-repair exception, and no exception for a defect the corpus itself has recorded"*
+   (`amendment_policy.md:31-33`), and *"The act of marking a document LOCKED is the last edit that
+   document receives"* (`amendment_policy.md:35`). The replacement is operative rather than
+   gestured at: *"Supersession is the only route by which locked text stops governing"*
+   (`amendment_policy.md:69`), with a superseding document defined as one that *"states in its own
+   text that it supersedes identified text in another document"* (`amendment_policy.md:70`) and
+   granularity fixed at the addressable division (`amendment_policy.md:72-78`).
+
+2. **What attests the result — the existing signature is left as recorded, necessarily.** The
+   superseded document *"is not touched. It is not edited, not annotated, not marked, and not
+   corrected"* (`amendment_policy.md:80-82`), so an existing signature is neither disturbed nor
+   re-taken; there is no act upon which it could be. The condition's second limb — what a signature
+   on amended text covers — has no instances, because `amendment_policy.md:31` leaves no amended
+   text for a signature to cover. What attests a superseding document is that document's own
+   sign-off, under the corpus's existing practice, which this policy expressly declines to redefine:
+   it *"does not decide when a document should be locked, who may lock it, or what locking
+   attests"* (`amendment_policy.md:63-65`).
+
+3. **What becomes of prior signatures and of references into the text — both survive intact.**
+   Because the text is never touched (`amendment_policy.md:80-82`), no signature over it is
+   reopened and no anchor into it shifts. The standing disposition — a record is true as of its date
+   and is left as recorded — is preserved by the mechanism itself rather than by an exception carved
+   into it. What changes is not whether a reference resolves but whether what it resolves to still
+   governs, and the policy states that consequence plainly rather than leaving it to be discovered:
+   *"a reader of a locked document cannot learn from that document that one of its divisions has
+   stopped governing. The information exists only in the superseding document"*
+   (`amendment_policy.md:108-110`). The corresponding duty is placed on the superseding document,
+   which must identify what it supersedes *"precisely enough to resolve without inference"*
+   (`amendment_policy.md:112-115`).
+
+**Recorded rather than left to be discovered: part 2 is answered by emptying its class, not by
+ruling on it.** The entry asked what a signature on amended text covers. The policy's answer is that
+no such signature can exist. A reader could take that as the question going unanswered rather than
+answered, so the reading is recorded here instead of left implicit: a closure condition that asks
+what happens in a case is satisfied by an instrument that rules the case out, provided it says so in
+terms and states what happens instead — which parts 1 and 3 supply. This reading was put to the
+operator at the wording review and accepted. GAP-8's closure recorded its own partial-test reading
+for the same reason.
+
+**The entry's four recorded consequences.**
+
+- **Consequence 1 — GAP-4 and GAP-5's closure conditions.** Confirmed and made permanent rather than
+  resolved. Treated separately below.
+- **Consequence 2 — Contract 001 §8's *"amending signature"*.** The entry recorded that
+  `contract_001_domain_resolution.md:286` names an act no instrument defines. The policy answers by
+  ruling the act out rather than by defining it, which is one of the two answers the entry itself
+  named as sufficient (`open_contract_gaps.md:475-477`). Nothing in §8 becomes false: it was correct
+  when signed, it stands as attested, and this closure does not adjudicate what its clause now
+  governs — that would be a reading of signed locked text, which no closure record is the place to
+  perform. No correction entry lies against §8 on these facts.
+- **Consequence 3 — the authorizations file resting on the opposite condition.** Resolved as an
+  absence. AUTH-002 recorded that *"This corpus has no precedent for amending text a signature
+  attests, and establishing one is not a side effect this authorization should carry while its
+  actual subject is elsewhere"* (`authorizations.md:213-214`). That sentence was written to bound
+  AUTH-002's own reach, not to state a general rule, and this closure does not enlarge it. What it
+  observed remains true: no such precedent existed then, and under `amendment_policy.md:31-33` none
+  can be established now.
+- **The fourth consequence — the stale text in Ruling 002.** Unchanged and still unrepairable.
+  `ruling_002_family_taxonomy_integrity.md:533-534` calls Contract 001 a draft and unsigned; both
+  statements went stale on 2026-08-25. The policy confirms they can never be edited
+  (`amendment_policy.md:31`) while recording that unrepairable is not the same as ungoverned
+  (`amendment_policy.md:44-47`). This closure repairs nothing and proposes no supersession.
+
+**Consequence for GAP-4 and GAP-5, stated plainly and flagged for separate ruling.** GAP-4 closes
+*"when Contract 001 carries an invariant that (a) makes terminal conditions halting rather than
+advisory, and (b) for **each** of the two sites above, either authorizes the fallback with an
+explicit bound or removes it"* (`open_contract_gaps.md:183-186`), and GAP-5 *"when Contract 001
+carries an invariant requiring a `SURFACED` result to preserve the accepted components, the rejected
+components, and the reason for rejection"* (`open_contract_gaps.md:222-223`). Contract 001 is
+locked. Under `amendment_policy.md:31-33` it can never
+carry another invariant, so **both conditions are now reachable only by a successor contract that
+supersedes the relevant divisions and carries the invariant itself** — and neither entry says so.
+Before the policy landed, the two conditions were unreachable because no procedure existed; they are
+now unreachable by amendment as a matter of settled rule. This closure records that consequence and
+does **not** act on it: neither entry is amended, re-scoped, or reopened, and both stand exactly as
+written. Whether to restate their closure conditions in successor-contract terms, and under which
+instrument, is the operator's to rule on as its own act.
+
+**What this closure does not do.**
+
+- **It does not lock `amendment_policy.md`**, which states that it is deliberately unlocked and that
+  *"Its protection is disclosure, not immutability"* (`amendment_policy.md:127-128`). Should it ever
+  be locked, it falls under its own rule (`amendment_policy.md:149-151`).
+- **It does not decide which instrument owns process rules.** That remains the undecided class
+  Ruling 002 §10 recorded (`ruling_002_family_taxonomy_integrity.md:636`), which GAP-9 named itself a
+  member of. The policy's placement was chosen by behaviour rather than subject matter
+  (`amendment_policy.md:21-25`); recording that choice here does not convert it into the general
+  ownership decision.
+- **It does not rely on or extend CR-006's admission.** CR-006 was admitted to the corrections
+  register on the narrow ground that a commit message is unamendable, and expressly left undecided
+  whether commit messages are generally within that register's reach. Nothing in this closure rests
+  on that reach, and the citation of `2009c1d` above is a citation of the commit that landed text —
+  the same act GAP-8's closure performs in citing `696738e` — not a treatment of any commit message
+  as corpus text. The general question stays exactly where CR-006 left it.
+- **It does not amend GAP-4 or GAP-5**, or any other entry, and it reopens no lock and no signature.
+- **It creates no authorization** and permits no edit to any locked document.
+- **It records a closure rather than performing one.** The policy itself provides that it *"closes
+  no register entry. Recording a closure is a separate act under that register's rules"*
+  (`amendment_policy.md:160`); `2009c1d` landed the text and this entry records the effect.
+
+Opened 2026-08-25.
