@@ -577,3 +577,141 @@ correct — CR-004 is not being fixed, its status is being recorded as changed, 
 this consistent with the standing rule that records are never retroactively rewritten and a
 correction is always a separate act. This acknowledgment authorizes no edit to `authorizations.md`
 and no edit to CR-004, and does not extend AUTH-001, which is exercised and spent."*
+
+---
+
+## CR-006
+
+```
+Target:            commit 2009c1d's message, VERIFICATION paragraph — the
+                   line-endings sentence, and the "normalized to LF"
+                   qualifier in the sentence that follows it
+Recorded:          2026-08-28
+Defect class:      false verification claim — a check reported as performed
+                   at blob level was not performed there, and the
+                   proposition it reported is false
+Basis commit:      2009c1d (origin/main), the commit whose message carries
+                   the claim
+Authorizes:        no edit to docs/amendment_policy.md, no edit to any
+                   document in this corpus, and no rewrite of git history
+Status:            recorded; 2009c1d stands as committed
+```
+
+**Scope note.** This entry records a defect in a commit message. It does **not** touch, re-verify, or
+reopen `docs/amendment_policy.md`, whose content is unaffected and independently confirmed below. It
+does **not** reopen GAP-9, which remains open on its own three-part closure condition, and it closes
+nothing — per this register's standing rule (`corrections.md:9`), a correction entry "records a
+defect in text that is already signed, and closes nothing."
+
+**Why this targets the commit message and not the file.** The file is not defective. It landed with
+LF line endings, which is what every other document in this corpus uses, so the outcome was correct;
+only the message describing how that outcome was verified is wrong. The defective text is the one
+that gets the entry, which is CR-005's holding on the same point.
+
+**Why this register, for a target of a new kind.** Every prior entry targets document text — CR-001
+through CR-004 target Contract 001 sections, and CR-005 targets AUTH-001, which is acknowledged
+rather than signed. A commit message is neither signed nor a document in `docs/`. It is admitted here
+on the register's **behaviour** rather than its subject matter: the text cannot be edited, because
+correcting it in place would require rewriting published history, and this register exists precisely
+for text that must stand as recorded while the corrected fact lives beside it (`corrections.md:13`,
+"the signed text stays as attested"). Whether commit messages are generally within this register's
+reach is **not** decided here; see below.
+
+### The defect
+
+The VERIFICATION paragraph of `2009c1d` reads, in relevant part:
+
+> *"164 lines, CRLF, matching the corpus convention in the blob rather than only in the worktree."*
+
+**Three propositions, all false.**
+
+1. **The landed blob is not CRLF.** `HEAD:docs/amendment_policy.md` is blob `9e6119f8`, 10491 bytes,
+   containing **zero** CR bytes. 10491 is exactly the byte count of the reviewed LF draft; a CRLF
+   encoding of the same 164 lines would be 10655.
+2. **There is no CRLF convention in this corpus's blobs.** Every document blob checked contains zero
+   CR bytes (table below). No `.gitattributes` exists, so nothing is forcing normalization in either
+   direction. The convention the sentence claims to match does not exist and never did.
+3. **The stated distinction was not drawn.** The phrase "in the blob rather than only in the
+   worktree" asserts that the check discriminated between the git object and the checked-out file.
+   It did not, and could not have — see the root cause.
+
+The sentence that follows carries the same defect in its qualifier: *"The staged blob, **normalized
+to LF**, is byte-identical to the reviewed draft."* No normalization was required, because the blob
+was already LF. The **conclusion** of that sentence is true and is re-verified below; only its stated
+method is wrong.
+
+### Root cause — the check reported line counts, not CR counts
+
+The check was run as `git show <ref>:<path>` piped into `grep -c` with an ANSI-C carriage-return
+pattern. In the shell used, inside command substitution, that pattern reached `grep` as an **empty
+pattern**, which matches every line. The command therefore returned each file's line count under a CR
+label. Demonstrated against `authorizations.md`, whose blob contains zero CR bytes:
+
+| Measurement of `HEAD:docs/authorizations.md` | Result |
+|---|---|
+| piped `grep -c` with the carriage-return pattern | 314 |
+| piped `grep -c` with an explicitly empty pattern (control) | 314 |
+| `wc -l` (line count) | 314 |
+
+Every figure reported as a CR count in that session — 314, 101, 579, 539, and 164 — is the
+corresponding line count. The premise that this corpus stores CRLF blobs originated in the first such
+reading and was never independently tested before the commit message asserted it.
+
+The failure is not that the check read the worktree instead of the blob. It read the blob and
+measured the wrong property, which is why its result did not disagree with the worktree and so raised
+no suspicion. A blob-level claim must be confirmed by a method that cannot silently degrade to a
+trivially-true one — raw object size via `git cat-file -s`, or byte counting over `git cat-file blob`
+output.
+
+### Effect — none on the landed text
+
+`docs/amendment_policy.md` is unaffected in content, and its integrity claim holds once the defective
+qualifier is removed. Blob `9e6119f8` hashes to
+`8f6cd0bf3ab8f6df7f96463477712258900002bde1161a63028c407064372bbd`, byte-identical to the reviewed
+draft with **no normalization applied**. The sha256 stated in the commit message is correct as
+stated.
+
+The remaining verification claims in that paragraph are unaffected, having been performed by an
+independent method: the five-anchor sweep was resolved in Python against the remote blobs by content,
+and the test result (53 passed, 1156 subtests passed) was read from the runner's own output.
+
+### Verified at recording
+
+Measured with `git cat-file`, which returns the raw object and applies no working-tree conversion:
+
+| Blob (`HEAD:docs/`) | Object | Bytes | CR bytes |
+|---|---|---|---|
+| `amendment_policy.md` | `9e6119f8` | 10491 | 0 |
+| `authorizations.md` | `69da5612` | 19616 | 0 |
+| `corrections.md` | `2c6d45bb` | 34335 | 0 |
+| `contract_001_domain_resolution.md` | `9f445e04` | 38206 | 0 |
+| `open_contract_gaps.md` | `3624d0d0` | 34368 | 0 |
+| `audit_method.md` | `365cc674` | 5206 | 0 |
+
+**Recorded as fact, not as defect:** the working copy of `docs/amendment_policy.md` on the machine
+that made the commit is CRLF — 10655 bytes, 164 CR bytes — because it was written that way before
+staging, and `core.autocrlf=true` normalized it on add. Every other document's working copy is LF and
+byte-identical to its blob. This is a local artifact outside the repository, produces no diff, and
+changes nothing about what landed. It is recorded because a correct worktree-level check on this one
+file would still have reported CRLF while the blob is LF, so the worktree could not have served as a
+fallback confirmation.
+
+### Not decided by this entry
+
+- Whether commit messages are generally within this register's reach. This entry is admitted on the
+  narrow ground that its target is unamendable and its claim is verifiable; no rule of general
+  application is stated, and no instrument is amended to accommodate it.
+- Whether a line-ending convention should be established for this corpus, or recorded anywhere. The
+  corpus is uniformly LF as a matter of fact; nothing here converts that fact into a rule.
+- Anything about GAP-9, which remains open, and anything about the content of
+  `docs/amendment_policy.md`, which is not in question.
+- Whether the verification technique should be recorded in `audit_method.md` as a further M-item.
+  That is a separate act under that instrument's own rules.
+
+**Acknowledgment** — an acknowledgment, not a section signature, and deliberately narrower than what
+a Contract 001 row receives.
+
+```
+Acknowledged (operator): [PENDING]
+Acknowledged at: [PENDING]
+```
