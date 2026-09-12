@@ -1035,6 +1035,14 @@ Conceptually, it must be capable of recording:
 - violations
 - unresolved conditions
 
+**INV-19 — Partial-Success Preservation**
+
+An aggregate fusion-level Compatibility classification of Conditionally Compatible, Incompatible, or Unresolved must not cause the authoritative structured record to omit, discard, or overwrite any source contribution, interaction/transformation rule, or emergent property that already holds an independent mechanic-derivation provenance state under INV-01 and does not depend, directly or through any ancestor in its provenance chain, on the specific interaction or dependency responsible for that classification.
+
+This invariant does not extend to any contribution, interaction, or emergent property excluded from preservation by INV-07's unresolved-dependency propagation.
+
+It does not authorize treating the disqualifying interaction itself as operative, valid, resolved, or Compatible. That interaction's own classification is unchanged and continues to be governed by INV-01, INV-03, INV-07, and §14.
+
 ## 25. Structured State Before Presentation
 
 Creative prose must not be the only authoritative record of reasoning.
@@ -1314,6 +1322,7 @@ Every invariant in this section should eventually be convertible into one or mor
 - INV-16 — Substantive Minority Participation
 - INV-17 — Zero-Novelty Validity
 - INV-18 — State / Presentation Separation
+- INV-19 — Partial-Success Preservation
 
 These are the authoritative invariant identifiers for this v0.1 Lock Candidate.
 
@@ -1493,7 +1502,7 @@ Source-Derived does not mean scientifically established.
 
 **CHECK-11 — Invariant Index**
 
-Exactly one authoritative INV-01 through INV-18 sequence must exist.
+Exactly one authoritative INV-01 through INV-19 sequence must exist.
 
 There must be:
 
@@ -1517,13 +1526,25 @@ The final document must continue to state:
 - Round 2 — NOT DESIGNED
 - v0.12 — NOT DESIGNED
 
+**CHECK-13 — INV-19**
+
+Every occurrence of INV-19 must resolve to:
+
+Partial-Success Preservation
+
+The authoritative definition must preserve unaffected, independently-classified contributions, interactions, and emergent properties in the structured record under a Conditionally Compatible, Incompatible, or Unresolved aggregate classification.
+
+The authoritative definition must not override INV-07: nothing excluded from preservation by INV-07's unresolved-dependency propagation may be reintroduced as preserved under INV-19.
+
+No surviving language may imply that the interaction or dependency responsible for the aggregate classification is itself rendered operative, valid, resolved, or Compatible.
+
 If a contradiction is discovered during this sweep, the lock process stops.
 
 The contradiction must be reported rather than silently repaired.
 
 ## 41. Lock Condition and Next Gate
 
-If CHECK-01 through CHECK-12 all pass and no contradictory superseded language remains, this document may transition from:
+If CHECK-01 through CHECK-13 all pass and no contradictory superseded language remains, this document may transition from:
 
 Canonical Revision 3 — LOCK CANDIDATE
 
@@ -1593,6 +1614,6 @@ Canonical Revision 3
 
 Status: LOCK CANDIDATE — NOT YET LOCKED
 
-Next action: Independent CHECK-01 through CHECK-12 mechanical verification
+Next action: Independent CHECK-01 through CHECK-13 mechanical verification
 
 No implementation authorized.
