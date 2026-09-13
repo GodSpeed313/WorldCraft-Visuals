@@ -2,7 +2,7 @@
 
 **Revision:** Canonical Revision 3
 
-**Status:** LOCK CANDIDATE — NOT YET LOCKED
+**Status:** LOCKED (2026-09-12)
 
 **Purpose:** Define the implementation-neutral capabilities, invariants, boundaries, and output requirements of the WorldCraft Fusion Engine before Architecture Reconciliation or implementation begins.
 
@@ -1606,14 +1606,35 @@ Creativity is not the absence of rules.
 
 For WorldCraft, creativity emerges from understanding exactly where the rules meet.
 
+## Lock Attestation
+
+Independent mechanical verification of CHECK-01 through CHECK-13 was performed
+against commit `28e4abe3e6403936cb9b2001031609b0c63e0423` on 2026-09-12. All
+thirteen checks PASS. No contradictory superseded language was found.
+
+Per the lock condition stated in §41, this document transitions from Canonical
+Revision 3 — LOCK CANDIDATE to:
+
+WorldCraft Fusion Engine
+Requirements & Architecture Specification v0.1
+LOCKED
+
+Locked by the operator, 2026-09-12.
+
+A locked specification states what the Fusion Engine must do; it does not
+assert that any implementation exists or conforms to it. Architecture
+Reconciliation (§37) is the active next gate. Implementation remains
+unauthorized. The successor contract, GAP-4, and GAP-5 are untouched by this
+lock.
+
 ---
 
 WorldCraft Fusion Engine — Requirements & Architecture Specification v0.1
 
-Canonical Revision 3
+Canonical Revision 3 — LOCKED
 
-Status: LOCK CANDIDATE — NOT YET LOCKED
+Status: LOCKED, 2026-09-12
 
-Next action: Independent CHECK-01 through CHECK-13 mechanical verification
+Next gate: Architecture Reconciliation (§37)
 
 No implementation authorized.
