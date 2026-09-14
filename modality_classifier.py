@@ -32,10 +32,14 @@ def classify(character_name: str) -> dict:
     if profile:
         return {"name": character_name, **profile}
     else:
-        print(f"  [CLASSIFIER] ⚠️  '{character_name}' not in registry. Defaulting to GROUNDED.")
+        # Ruling 001 §4: resolve-then-proceed, never silently default. No
+        # normalization resolver exists in this codebase yet, so an
+        # unrecognized character is CAUTIONARY — pending, not GROUNDED.
+        print(f"  [CLASSIFIER] ⚠️  '{character_name}' not in registry. CAUTIONARY — normalization required, no fusion output generated.")
         return {
             "name": character_name,
-            "modality": "GROUNDED",
+            "state": "CAUTIONARY",
+            "modality": None,
             "tags": ["unknown"],
             "trait": "Unknown Entity",
             "element": "Neutral"
@@ -47,9 +51,22 @@ def classify_fusion(alpha_name: str, beta_name: str, dominance: int = 50) -> dic
     Classifies a FUSION of two characters.
     dominance = 0–100, where 100 means Alpha fully dominates.
     Returns a blended modality profile.
+
+    Per Ruling 001 §4, if either input is CAUTIONARY (unresolved), no
+    modality can be honestly computed — the fusion carries CAUTIONARY
+    forward rather than fabricating a modality or raising on the lookup.
     """
     alpha = classify(alpha_name)
     beta  = classify(beta_name)
+
+    if alpha.get("state") == "CAUTIONARY" or beta.get("state") == "CAUTIONARY":
+        return {
+            "fusion_name": f"{alpha_name} x {beta_name}",
+            "state":       "CAUTIONARY",
+            "modality":    None,
+            "dominant":    None,
+            "tags":        [],
+        }
 
     # Modality priority ranking (higher = more "powerful" classification)
     rank = {"LEGACY": 1, "GROUNDED": 2, "HIGH_CONCEPT": 3}

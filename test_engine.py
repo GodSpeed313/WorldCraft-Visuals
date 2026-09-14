@@ -50,8 +50,11 @@ class TestModalityClassifier(unittest.TestCase):
         self.assertEqual(classify("Vash")["modality"], "HIGH_CONCEPT")
 
     def test_unknown_character_defaults_to_grounded(self):
+        # Name retained per AUTH-003 scope. Behavior corrected per Ruling 001
+        # §4: unrecognized input is CAUTIONARY, not silently GROUNDED.
         unknown = quiet(classify, "Some Nobody")
-        self.assertEqual(unknown["modality"], "GROUNDED")
+        self.assertEqual(unknown["state"], "CAUTIONARY")
+        self.assertIsNone(unknown["modality"])
         self.assertEqual(unknown["tags"], ["unknown"])
 
     def test_high_dominance_takes_alpha_modality(self):
@@ -420,11 +423,13 @@ class TestPowerSelection(unittest.TestCase):
                 self.assertIn(profile["biome"], mythos_sync.BIOMES[profile["modality"]])
 
     def test_unknown_characters_still_produce_a_valid_profile(self):
+        # Name retained per AUTH-003 scope. Behavior corrected per Ruling 001
+        # §4: an unresolved input halts before fusion output is generated,
+        # rather than producing a fabricated profile.
         random.seed(7)
         profile = quiet(build_legacy_profile, "Nobody Special", "Vash", 50)
-        self.assertGreaterEqual(len(profile["approved_powers"]), 2)
-        for power in profile["approved_powers"]:
-            self.assertTrue(is_legal(power, profile["modality"]))
+        self.assertEqual(profile["state"], "CAUTIONARY")
+        self.assertNotIn("approved_powers", profile)
 
 
 # ------------------------------------------------------------------

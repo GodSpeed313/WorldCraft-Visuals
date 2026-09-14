@@ -152,6 +152,18 @@ def build_legacy_profile(
 
     # --- STEP 1: Classify ---
     fusion = classify_fusion(alpha, beta, dominance)
+
+    # Ruling 001 §4: CAUTIONARY halts before any fusion output is generated.
+    # Stop here, before power selection/audit, so an unresolved input can
+    # never reach logic_auditor.py's audit_power()/ground_power().
+    if fusion.get("state") == "CAUTIONARY":
+        print(f"\n  [MYTHOS-SYNC] ⚠️  CAUTIONARY — one or both concepts require normalization. No fusion output generated.")
+        return {
+            "fusion_name": fusion["fusion_name"],
+            "state":       "CAUTIONARY",
+            "modality":    None,
+        }
+
     modality = fusion["modality"]
     print(f"\n  [CLASSIFIER] Modality resolved → {modality}")
     print(f"  [CLASSIFIER] Dominant         → {fusion['dominant']}")
