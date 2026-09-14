@@ -312,3 +312,163 @@ Acknowledged at: 2026-08-25 15:32 EDT
 Statement: *"I acknowledge AUTH-002 as drafted — all four decisions as you made them
 (own-scope-clause not amended `:50`, no V3, insertion after `:259`, cross-reference-only for
 "knowledge conditions")."*
+
+---
+
+## AUTH-003
+
+```
+Authorizes:        an independent operator determination narrowly releasing
+                   FE Requirements §39's "Existing WorldCraft-Visuals code —
+                   UNMODIFIED" hold, for Seam 1 conformance work only
+Target functions:  modality_classifier.py::classify()
+                   modality_classifier.py::classify_fusion()
+                   mythos_sync.py::build_legacy_profile()
+Target tests:      test_engine.py::test_unknown_character_defaults_to_grounded
+                   test_engine.py::test_unknown_characters_still_produce_a_valid_profile
+Route:             operator determination (independent act, releasing the
+                   hold) → recorded here for durability/discoverability →
+                   implement → verify against the checklist below → commit
+Granted by:        Kevin Brown, operator
+Granted at:        2026-09-14, in session
+Basis:             Ruling 001 §4 (`ruling_001_canonicalization_policy.md:153-218`),
+                   LOCKED, ruling "resolve-then-proceed, never silently
+                   default"; Ruling 001 §6 (`:276-322`), Normalization
+                   Regression Case 001, naming "Unknown character/power
+                   silently became GROUNDED" as failure #1 under Invariant 1;
+                   ADR-001 Seam 1 (`adr_001_....md:70-76`), finding "no new
+                   semantic ruling is required to prohibit unknown→GROUNDED;
+                   only the concrete implementation path and scoped
+                   authorization remain open"; FE Requirements §39, whose
+                   hold is released ONLY for the scope named above
+Status:            granted; NOT YET EXERCISED — no edit has been made to
+                   any file as of this recording
+```
+
+**What actually releases the hold, and what this entry is.** These are two different things and this
+entry keeps them separate on purpose:
+
+- **The operator determination** is Kevin Brown's own act, made independently of this file, narrowing
+  the FE §39 hold to permit exactly the work named above. That determination is what has legal force.
+  It does not derive its authority from `authorizations.md`.
+- **This AUTH-003 record** is the archive of that determination — the durable, discoverable place
+  where the corpus states that the determination was made, what it covers, and what it does not. It
+  performs the same function this register already performs for prior operator acts. It does not
+  create the authority; it preserves it.
+
+**On `authorizations.md`'s own stated scope — recorded explicitly, not glossed over:**
+
+1. `authorizations.md`'s introductory text presently describes itself as recording authorizations "to
+   edit corpus text." Read strictly, that sentence does not mention source code.
+2. This entry does **not** determine that the register's stated subject matter generally encompasses
+   source code. No such general finding is made here.
+3. This entry does **not** expand or amend the register's introductory definition. That sentence is
+   untouched by this entry, and this entry does not depend on it being read broadly.
+4. The FE §39 hold release, for the narrow scope named above, is an **independent operator act** —
+   its authority comes from Kevin Brown's own determination, not from this register's jurisdiction.
+5. AUTH-003 exists to **record** that act, in the same durable/discoverable form every prior
+   authorization uses, so it is not lost to a chat turn or an unlabeled commit message
+   (`authorizations.md:3-5`, restating why this file exists at all).
+6. Whether future code authorizations generally belong in this register, and under what definitional
+   revision, is **not decided here** and remains open.
+7. **AUTH-003's validity does not depend on resolving that broader question.** If the register's
+   scope is later formally extended to code, or if code authorizations are later routed to some other
+   instrument instead, this entry's validity is unaffected either way — it stands on the operator
+   determination it records, not on a jurisdictional reading of this file's own definition.
+
+### What "resolve-then-proceed" must do here, stated behaviorally
+
+Restated so the authorized work has something to be checked against, not invented at implementation
+time. Corrected against Ruling 001 §4's actual text rather than a shorthand attribution:
+
+1. Unknown/unregistered character input passed to `classify()` must no longer silently become
+   `GROUNDED`. Per §4's own diagram (`:160-172`), unrecognized input must instead follow the
+   `normalization request` branch to either a resolved-and-validated result or an `unresolved →
+   blocked` outcome — not default straight to a fabricated profile.
+2. `classify_fusion()` must safely propagate or handle that outcome rather than failing through, or
+   silently succeeding past, its modality-rank lookup (`MODALITY_RANK[...]` keyed off a fabricated
+   modality would either `KeyError` or silently succeed today; neither is acceptable).
+3. `build_legacy_profile()` must stop, or propagate, that outcome before it reaches downstream
+   grounding/audit logic (`audit_power`/`ground_power`, untouched by this authorization, must not be
+   reached with fabricated input as a result of this change).
+4. The two named tests must be changed to assert the corrected Ruling-001 behavior for unrecognized
+   input, rather than the superseded assertion that it yields `GROUNDED`.
+5. No new unresolved-state semantics may be invented under this authorization. Ruling 001 §4 presents
+   the four-state output framework (ADMITTED/SURFACED/CAUTIONARY/BLOCKED) at `:175-182`, but the table
+   itself attributes SURFACED's governance to Ruling 002 §5.3, not to Ruling 001 alone. For
+   unrecognized-character input specifically, §4's own diagram routes only to `CAUTIONARY` (pending,
+   normalization requested) or `BLOCKED` (resolution/validation failed) — `ADMITTED` and `SURFACED`
+   describe post-recognition or post-grounding outcomes and are not what `classify()` is expected to
+   produce here. Implementation must map onto `CAUTIONARY`/`BLOCKED` as already defined; it must not
+   invent a new state, and must not silently reach for `SURFACED`, which is Ruling 002's terminal
+   grounding-layer concept, not a character-recognition outcome.
+
+### This authorization does NOT authorize
+
+- Any edit to `logic_auditor.py`. It must remain byte-identical.
+- Either GAP-4 fallback site (`logic_auditor.py:136`, `:173-174`) or any GAP-4 resolution.
+- Any Fusion Engine C1–C6 implementation.
+- Anything concerning §10.3 / Seam 3, resolved as non-blocking by CR-007 but not otherwise touched.
+- Anything concerning GAP-5.
+- Any edit to `server.py`.
+- Any dashboard/UI work, including `export_for_web` or `dashboard.html`.
+- Any unrelated cleanup or refactoring in any file this authorization touches or elsewhere.
+- Any change outside the three named production functions and two named tests.
+- General release of the §39 existing-code UNMODIFIED hold. The hold remains in force for every file
+  and function not named above, including the rest of `modality_classifier.py` and `mythos_sync.py`.
+- Release of the successor-contract hold.
+- Any amendment to `authorizations.md`'s introductory definition of what this register covers.
+
+### Known residual limitation — recorded, not corrected, not legitimized
+
+`server.py` calls `build_legacy_profile()` directly (`server.py:48`) and has no handling today for an
+unresolved outcome distinct from a completed profile. Its current generic-error / non-render behavior
+when something goes wrong upstream is **outside this authorization**. This authorization does not
+correct that behavior and does not legitimize it as the intended handling of Ruling 001's
+`CAUTIONARY`/`BLOCKED` states reaching an HTTP boundary. Encountering this limitation during
+implementation is not grounds to expand this authorization's scope to `server.py`; that would require
+a separate authorization.
+
+### Verification required before any commit under this authorization lands
+
+- Diff touches only: `modality_classifier.py::classify()`, `modality_classifier.py::classify_fusion()`,
+  `mythos_sync.py::build_legacy_profile()`, `test_engine.py::test_unknown_character_defaults_to_grounded`,
+  `test_engine.py::test_unknown_characters_still_produce_a_valid_profile`.
+- `logic_auditor.py` byte-identical to its pre-commit state (`git diff --stat` empty for that path).
+- No Fusion Engine C1–C6 component is introduced anywhere in the diff.
+- Full existing test suite (`test_engine.py`, `test_hypothesis_properties.py`) is run, not only the
+  two named tests.
+- Every test failure, if any, beyond the two intentionally-changed tests is accounted for by name.
+- No unrelated refactor or cleanup accompanies the change, in the touched files or elsewhere.
+
+**Acknowledgment** — records Kevin Brown's own determination, in his own words.
+
+```
+Acknowledged (operator): Kevin Brown
+Acknowledged at: 2026-09-14 00:11 EDT
+```
+
+Statement: *"I independently authorize the narrow release of the Fusion Engine Requirements §39
+'Existing WorldCraft-Visuals code — UNMODIFIED' hold for Seam 1 conformance work only.
+
+This release permits changes only to `modality_classifier.py::classify()`,
+`modality_classifier.py::classify_fusion()`, and `mythos_sync.py::build_legacy_profile()`, together
+with the corresponding updates to `test_engine.py::test_unknown_character_defaults_to_grounded` and
+`test_engine.py::test_unknown_characters_still_produce_a_valid_profile`, for the purpose of
+implementing Ruling 001 §4's already-established resolve-then-proceed model and eliminating the
+silent unknown/unregistered-character → GROUNDED behavior.
+
+I am exercising this authority independently of `authorizations.md`'s stated scope. I am not
+determining that its definition generally encompasses source code, and I am not amending that
+definition. AUTH-003 records this operator determination for durability and discoverability; it does
+not supply the authority for it.
+
+This authorization does not extend to `logic_auditor.py`, either GAP-4 fallback site, GAP-4
+resolution, Fusion Engine C1–C6 implementation, §10.3 / Seam 3, GAP-5, `server.py`, dashboard/UI
+work, unrelated cleanup or refactoring, or any other code or test outside the specifically named
+scope. The remainder of the §39 existing-code UNMODIFIED hold remains in force, and the
+successor-contract hold remains intact.
+
+This authorization does not itself declare Seam 1 implemented or verified. The authorized
+implementation must still satisfy AUTH-003's verification requirements before its implementation
+commit lands."*
