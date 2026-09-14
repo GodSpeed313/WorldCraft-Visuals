@@ -715,3 +715,85 @@ a Contract 001 row receives.
 Acknowledged (operator): Kevin Brown
 Acknowledged at: 2026-08-28 19:16 EDT
 ```
+
+---
+
+## CR-007
+
+```
+Target:            ADR-001 §5 (`docs/adr_001_fusion_engine_architecture_reconciliation.md:103`)
+                   and §6 (`:109`) — internal inconsistency in scope of §0
+                   item 3 (Ruling 002 §10.3 / Seam 3) for §38-gating purposes
+Recorded:          2026-09-13
+Defect class:      internal inconsistency — two sections of the same
+                   ACCEPTED document state conflicting scope for the same
+                   named item
+Basis commit:      b2e1124 (origin/main), the commit that accepted ADR-001
+Authorizes:        no edit to docs/adr_001_fusion_engine_architecture_reconciliation.md
+Status:            recorded; ADR-001 stands as accepted, defect and all
+```
+
+**Scope note.** This entry records a defect in ADR-001's own text. It does not amend, reopen, or
+supersede ADR-001, does not adjudicate Ruling 002 §10.3, GAP-4, or GAP-5, and does not touch the
+successor-contract hold or the existing-code UNMODIFIED hold. Per this register's standing rule
+(`corrections.md:9`), it closes nothing.
+
+### The defect
+
+ADR-001 §5 (`:103`) states: *"FE §38's Pre-Implementation Gate items ... are not satisfied by this
+ADR — items 1–3 above are exactly the unruled conflicts §38 has in mind."* Item 3 of §0 is Ruling
+002 §10.3 (Seam 3). Read plainly, §5 places Seam 3 among the unruled conflicts §38 gates on.
+
+ADR-001 §6 (`:109`) states the opposite of Seam 3 specifically: *"Seam 3 does not block Fusion
+Engine implementation unless a future §10.3 decision chooses to connect disposition synthesis to
+C4."* §6 is ADR-001's own "Status and next steps" section — its final, most specific word on what
+each seam actually requires.
+
+Both sentences are part of the same ACCEPTED document. They cannot both be read as unqualified with
+respect to Seam 3.
+
+### Operator determination
+
+Recorded here as the operator's determination regarding the intended meaning of accepted ADR-001,
+not as a new substantive ruling:
+
+- §10.3 / Seam 3 does not block satisfaction of the Fusion Engine §38 Pre-Implementation Gate.
+- §10.3 / Seam 3 does not block Fusion Engine implementation.
+- ADR-001 §6 reflects the operator's intended determination.
+- ADR-001 §5's "items 1–3" reference is overinclusive for §38-gating purposes.
+
+### Not decided by this entry
+
+- §10.3 itself, which remains unresolved.
+- Whether disposition synthesis is ever connected to C4 — no connection is created here.
+- GAP-4, which remains unresolved.
+- GAP-5, which remains unresolved and non-blocking.
+- The successor-contract hold, which remains intact.
+- The existing-code UNMODIFIED hold, which remains intact.
+- Whether §38 is satisfied — it is not declared satisfied by this entry; Seams 1 and 2 remain
+  open per ADR-001 §6 itself.
+- Any implementation or code change, none of which is authorized here.
+- Whether an ACCEPTED ADR may later be directly amended, which remains unresolved.
+
+**Acknowledgment** — an acknowledgment, not a section signature, and deliberately narrower than
+what a Contract 001 row receives.
+
+```
+Acknowledged (operator): Kevin Brown
+Acknowledged at: 2026-09-13 23:26 EDT
+```
+
+Statement: *"I confirm that CR-007 accurately records my determination regarding the inconsistency
+between ADR-001 §5 and §6. My intent in accepting ADR-001 was that Ruling 002 §10.3 / Seam 3 does
+not block satisfaction of the Fusion Engine §38 Pre-Implementation Gate and does not block Fusion
+Engine implementation. ADR-001 §6 reflects that intent, and the §5 reference to 'items 1–3' is
+overinclusive for §38-gating purposes.
+
+I am not resolving §10.3 itself or deciding what replaces `dominant_family`, and I am not creating a
+connection between disposition synthesis and C4. GAP-4 remains unresolved. GAP-5 remains unresolved
+and non-blocking. The successor-contract hold and existing-code UNMODIFIED hold remain in place.
+
+This acknowledgment does not declare §38 satisfied, authorize implementation or any code change,
+amend ADR-001, or decide whether an ACCEPTED ADR may later be directly amended. I am acknowledging
+CR-007 only as the accurate record of my intended meaning of ADR-001 on the Seam 3 / §10.3 gating
+question."*
