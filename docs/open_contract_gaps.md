@@ -734,6 +734,14 @@ enforcement invariants"* rather than a section number, because GAP-4's own text 
 only Contract 001 section GAP-4 names is §5.1. Identifying the division is left to the successor
 contract and is not decided here.
 
+**Substantive determinations recorded separately — 2026-09-15.** Disposition 002
+(`docs/disposition_002_gap4_grounding_terminal_policy.md`) records Kevin's operator determination
+of the substantive content GAP-4's eventual invariant must carry — halt behavior for both fallback
+sites, the causal distinction to preserve between them, terminal-propagation enforcement, and
+§5.4's preserved scope. That disposition is authoritative operator input for future governing
+text, not itself the governing invariant; it closes nothing recorded here, and this entry's status
+and closure condition are unchanged by its existence.
+
 ### GAP-5 — successor-contract restatement
 
 **Status:** proposed / not operative.
