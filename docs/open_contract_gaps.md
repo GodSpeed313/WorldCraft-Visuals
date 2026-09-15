@@ -185,6 +185,8 @@ rather than advisory, and (b) for **each** of the two sites above, either author
 an explicit bound or removes it.** Not before, and not by the registry continuing to be authored in a
 way that hides them.
 
+Closed 2026-09-15 by `42427a6`. See **Closed** below.
+
 ---
 
 ## GAP-5 — `SURFACED` payload completeness
@@ -657,6 +659,60 @@ Opened 2026-08-25.
 
 ---
 
+### GAP-4 — Grounding-target fallback authority
+
+**Closed 2026-09-15 by `42427a6`**, which locked `docs/contract_002_domain_resolution_invariants.md`
+("WorldCraft Contract 002 — Domain Resolution Invariants"), superseding Contract 001 §6 in full and
+carrying I8 as the required invariant. This is the register's third closure.
+
+The operative closure condition — the successor-contract restatement approved 2026-09-15
+(`open_contract_gaps.md:768-788`), not the original pre-lock text at `:183-186` — is met:
+
+1. **A successor contract supersedes the Contract 001 division that carries the relevant enforcement
+   invariants.** Contract 002 states, in its own text, that it supersedes Contract 001 §6
+   (`contract_001_domain_resolution.md:215-235`) in full, and no other division. Contract 002 reached
+   LOCKED status 2026-09-15, at which point this supersession became operative; Contract 001 §6's own
+   text remains untouched and historically intact, per `amendment_policy.md:80-82`.
+2. **(a) is met.** I8(a) states that a terminal condition at any resolution stage actually prevents
+   progression into a downstream stage requiring that stage's successful resolution — not merely
+   implying it should stop — naming `UNRESOLVED_DOMAIN`, `AMBIGUOUS_DOMAIN`, and `UNRESOLVED_FAMILY`
+   concretely.
+3. **(b) is met for both sites.** Site 1 (`logic_auditor.py:136`) and Site 2
+   (`logic_auditor.py:173-174`) are addressed distinctly, by I8(b) and I8(c) respectively; both
+   resolve under I8(d) to `GROUNDING_UNAVAILABLE`, and I8(e) confirms no new generic or universal
+   fallback is authorized for either — removal, not a bounded exception, satisfies (b) for both.
+4. **One invariant, not two**, as `:775-777` requires — I8 alone carries both (a) and (b); no I9, no
+   second successor-contract division.
+5. **The distinction between the two sites' triggers is preserved**, not merged — I8(b) and (c) are
+   separate clauses with separate triggers, and I8(f) additionally requires the underlying cause
+   remain recoverable in authoritative state wherever the shared terminal is produced, exceeding
+   `:779-781`'s bare wording requirement.
+6. **The full-vs-partial restatement question** left open at `:786-788` is resolved by operator
+   determination: full restatement. Contract 002 §3 carries I1–I7 forward in full, with three
+   disclosed, non-substantive reference qualifications only, alongside I8.
+
+**What this closure does not do.**
+
+- It does not close GAP-5. GAP-5's own restatement (`:805-807`) remains "proposed / not operative,"
+  untouched by this closure.
+- It does not authorize any implementation of I8, Seam 2, or any Fusion Engine component. Contract
+  002's own exclusions (§5) and "what this document does not do" section expressly withhold that
+  authorization; this closure does not supply it either.
+- It does not edit Contract 001. Contract 001 §6's text remains on the page exactly as attested; only
+  what it *governs* has changed, via supersession, not amendment.
+- It does not touch or reinterpret Ruling 002 §5.4, which I8(g) preserves exactly as narrow as already
+  governed.
+- It does not decide any question the operative closure condition left open beyond full-vs-partial
+  restatement.
+- It records a closure rather than performing one, per this register's own established rule
+  (`amendment_policy.md:160`, cited identically in GAP-8's and GAP-9's own closures) — `42427a6` locks
+  Contract 002 and performs the act; this entry records the effect.
+
+Opened 2026-08-06 (original entry); restated as a successor-contract route 2026-08-28; routing
+approved 2026-09-15.
+
+---
+
 ## Closure conditions restated for successor contracts — 2026-08-28
 
 **Status:** proposed / not operative.
@@ -682,8 +738,9 @@ be discovered.
 
 ### GAP-4 — successor-contract restatement
 
-**Status:** operative / not closed. Approved as the operative tracking/closure route for GAP-4 by
-operator determination, 2026-09-15; see below.
+**Status:** operative / **CLOSED 2026-09-15**. Approved as the operative tracking/closure route for
+GAP-4 by operator determination, 2026-09-15; closed the same date when Contract 002 reached LOCKED
+status. See **Closed** below.
 
 **Chronology.** GAP-4's closure condition (`open_contract_gaps.md:183-186`) was written when Contract
 001 could still gain an invariant by direct amendment. Contract 001 was marked LOCKED on 2026-08-25,
@@ -698,7 +755,8 @@ tracking/closure route for GAP-4. **This is a routing determination only:** it i
 instrument's closure condition GAP-4 will eventually satisfy, and does not itself satisfy any part
 of that condition, open or draft the successor contract, determine its structure or language, decide
 which Contract 001 division it will eventually supersede, decide how either fallback site below will
-ultimately be treated, or authorize implementation. GAP-4 remains **OPEN**. Its substantive closure
+ultimately be treated, or authorize implementation. GAP-4 remained **OPEN** as of this determination.
+Its substantive closure
 requirements — that terminal conditions become actually halting, and that each of the two fallback
 sites be either explicitly bounded/authorized or removed — are unresolved and unchanged by this
 determination. The successor-contract hold stands exactly as it did before this determination.
@@ -741,6 +799,8 @@ sites, the causal distinction to preserve between them, terminal-propagation enf
 §5.4's preserved scope. That disposition is authoritative operator input for future governing
 text, not itself the governing invariant; it closes nothing recorded here, and this entry's status
 and closure condition are unchanged by its existence.
+
+Closed 2026-09-15 by `42427a6`. See **Closed** below.
 
 ### GAP-5 — successor-contract restatement
 
