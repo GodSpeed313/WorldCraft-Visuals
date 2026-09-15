@@ -472,3 +472,183 @@ successor-contract hold remains intact.
 This authorization does not itself declare Seam 1 implemented or verified. The authorized
 implementation must still satisfy AUTH-003's verification requirements before its implementation
 commit lands."*
+
+---
+
+## AUTH-004
+
+```
+Authorizes:        creation of new, additive Fusion Engine implementation files for the
+                   minimum C1 -> C2 -> C3 vertical slice: foundational types, C1
+                   (Contribution/Placement Classifier — admission/validation only, no
+                   automated semantic classification required), C2 (Provenance Ledger),
+                   C3 (Contradiction/Compatibility Evaluator), one integration/pipeline
+                   entrypoint, one hand-authored development fixture module, new
+                   automated tests for the above, and optionally one minimal demo/
+                   __main__ entrypoint
+Target scope:      new files only, under a new top-level package (illustratively
+                   `fusion_engine/`); minor filename/module-boundary adjustments within
+                   this functional scope are permitted, expansion of responsibility
+                   beyond it is not
+Route:             operator authorization (direct act, permitting new-file
+                   implementation of already-locked FE v0.1 requirements; no locked
+                   text is amended and no existing-code hold requires release) →
+                   recorded here for durability/discoverability → implement → verify
+                   against the checklist below → commit
+Granted by:        Kevin Brown, operator
+Granted at:        2026-09-15 01:39 EDT, in session
+Basis:             WorldCraft Fusion Engine Requirements & Architecture Specification
+                   v0.1, LOCKED 2026-09-12 (`fusion_engine_requirements_v0.1.md`) —
+                   §5 Source Model, §6 Source Preservation, §7 Contribution Types,
+                   §8 Architectural Placement, §9/INV-01-08 (Interaction Provenance,
+                   Authoritative Provenance, Recursive Provenance), §14/INV-09-11
+                   (Contradiction Handling), INV-19 (Partial-Success Preservation);
+                   ADR-001, ACCEPTED 2026-09-13
+                   (`adr_001_fusion_engine_architecture_reconciliation.md`) — §2's
+                   naming and responsibilities for C1/C2/C3, and AD-1's boundary that
+                   the Fusion Engine does not read `POWER_REGISTRY`/`CHARACTER_REGISTRY`
+                   or call `classify()`/`classify_fusion()`/`audit_power()`/
+                   `ground_power()` as part of its own reasoning
+Status:            granted; NOT YET EXERCISED — no edit has been made to any file as
+                   of this recording
+```
+
+**What actually authorizes implementation, and what this entry is.** As with AUTH-003, these are
+two different things:
+
+- **The operator authorization** is Kevin Brown's own act, made by acknowledging the statement
+  below. That act is what has legal force. It does not derive its authority from this file's own
+  stated scope.
+- **This AUTH-004 record** is the archive of that act — the durable, discoverable place recording
+  that it was made, what it covers, and what it does not.
+
+**On `authorizations.md`'s own stated scope.** As AUTH-003 already recorded (`:359-377`), this
+file's introductory text describes itself as recording authorizations "to edit corpus text," and
+whether that sentence's stated subject matter generally encompasses source code remains open. This
+entry does not resolve that question either, and does not need to: like AUTH-003, its validity
+rests on the operator act it records, not on a jurisdictional reading of this file's own
+definition.
+
+**Unlike AUTH-003, this entry does not release the FE Requirements §39 "Existing
+WorldCraft-Visuals code — UNMODIFIED" hold.** New, additive files are not "existing"
+WorldCraft-Visuals code within that hold's plain terms, so no release is required for them. What
+this entry supplies instead is the operator authorization act that FE Requirements §41 and
+ADR-001 §6 both state is still required before any Fusion Engine implementation — new files
+included — may begin: *"implementation remains unauthorized"* until such an act occurs. The §39
+hold itself remains fully in force for every existing file, exactly as before.
+
+**This entry decides no new substantive question.** C1, C2, and C3's responsibilities are already
+fixed by the locked FE v0.1 specification and ADR-001's accepted architecture, cited above. This
+authorization grants permission to build already-governed behavior; it does not further specify
+what that behavior must be beyond what those two documents already state.
+
+### What the authorized work must do, stated behaviorally
+
+1. New Fusion Engine code must not read `CHARACTER_REGISTRY` or `POWER_REGISTRY`, and must not
+   call `classify()`, `classify_fusion()`, `audit_power()`, or `ground_power()` — per ADR-001 AD-1
+   (`adr_001_....md:33-35`).
+2. C1 must classify hand-authored Source properties by Contribution Type (§7) and Architectural
+   Placement (§8), preserve the preservation-relevant constraints named in §6, and confirm each
+   unfused property as Source-Derived (§9.1). Validation/admission of already-classified fixture
+   data satisfies this; automated semantic classification is not required.
+3. C2 must maintain one authoritative provenance state per tracked item (INV-01) as the sole
+   source every other component reads from (INV-02), compute descendant provenance as the
+   weakest link across required dependencies and each interaction/rule's own independently
+   classified provenance (INV-04, INV-05), propagate that recursively through multi-hop chains
+   without any hop resetting it (INV-06), propagate Unresolved dependencies (INV-07), and preserve
+   Invented Bridge ancestry visibility throughout the dependency chain (INV-08).
+4. C3 must be capable of returning each of Compatible, Conditionally Compatible, Incompatible, and
+   Unresolved (§14), with refusal and Unresolved as legitimate successful results rather than
+   exceptions, and must not launder a formal contradiction into a false compatible result through
+   relabeling, suppression, or hidden exception (INV-11). Explicit deterministic predicates are
+   sufficient; general semantic reasoning is not required.
+5. The integration path must preserve an independently-classified contribution in the structured
+   result even when another interaction's classification is Conditionally Compatible,
+   Incompatible, or Unresolved — except where INV-07's own unresolved-dependency propagation
+   already excludes that contribution (INV-19).
+6. Development fixtures must be clearly labeled as synthetic/development data, must not be named
+   or presented as canonical registry entries, and must not require any edit to
+   `CHARACTER_REGISTRY` or `POWER_REGISTRY`.
+
+### Relationship to Disposition 002 and GAP-4 — recorded explicitly, not left to be inferred
+
+Disposition 002 (`docs/disposition_002_gap4_grounding_terminal_policy.md`) records Kevin's
+substantive determination for GAP-4's eventual invariant. It is authoritative operator input for
+future governing text, not an implementation authorization, and authorizes nothing here. This
+entry is independent of it: the slice it authorizes does not implement, depend on, or presuppose
+GAP-4's eventual resolution, because the authorized code never reaches `logic_auditor.py`'s
+grounding layer at all (per AD-1, restated at item 1 above). **GAP-4 remains OPEN**, exactly as
+before this entry.
+
+### This authorization does NOT authorize
+
+- Any edit to `logic_auditor.py`, `modality_classifier.py`, `mythos_sync.py`, `server.py`,
+  `console.py`, `fantasy_kingdom_generator.py`, or `dashboard.html`. All must remain
+  byte-identical.
+- Any edit to `CHARACTER_REGISTRY` or `POWER_REGISTRY`.
+- C4 (Dominance/Substantive-Participation Evaluator), C5 (Structured Reasoning Record), or C6
+  (Presentation Renderer) implementation, in whole or in part.
+- Resource-accounting implementation (FE §16/INV-13).
+- Real WorldCraft-registry character ingestion into the Fusion Engine Source model.
+- Any legacy-engine integration, server/API integration, or dashboard/UI work.
+- Any edit to any existing test file (`test_engine.py`, `test_hypothesis_properties.py`), including
+  a test-discovery configuration change. If one appears genuinely necessary during implementation,
+  that necessity must be stopped on and reported rather than assumed to already be covered here.
+- GAP-4 implementation, GAP-4 resolution, or any edit to `open_contract_gaps.md`.
+- Any successor-contract work.
+- Any unrelated cleanup or refactoring in any file this authorization touches or elsewhere.
+- General release of the FE §39 existing-code UNMODIFIED hold. It remains in force for every
+  existing file.
+- Release of the successor-contract hold.
+- Any amendment to `authorizations.md`'s introductory definition of what this register covers.
+
+### Verification required before any commit under this authorization lands
+
+- Diff touches only new files within the authorized implementation scope: the new Fusion Engine
+  package (foundational types, C1, C2, C3, pipeline, fixtures), new Fusion Engine test files, and
+  optional minimal demo/`__main__` entrypoint — every file named in the exclusion list above is
+  absent from the diff.
+- No import anywhere in the new code of `logic_auditor`, `modality_classifier`, or `mythos_sync`;
+  no reference anywhere to `CHARACTER_REGISTRY` or `POWER_REGISTRY`.
+- No C4-, C5-, or C6-shaped component is introduced anywhere in the diff.
+- The full existing test suite (`test_engine.py`, `test_hypothesis_properties.py`) still passes,
+  unmodified, confirming no accidental coupling was introduced.
+- New tests cover at minimum: happy-path C1->C2->C3 execution; authoritative-provenance
+  consistency; deterministic repeated execution; malformed/missing-input rejection; unresolved
+  provenance propagation; an explicit contradiction/refusal case; and INV-19 partial-success
+  preservation — plus foundational tests for provenance rank ordering, provenance-vs-compatibility
+  type separation, weakest-link computation, multi-hop ancestry, and all four compatibility
+  outcomes.
+- Development fixtures are clearly labeled as synthetic/development data in their own text or
+  docstrings.
+- No unrelated refactor or cleanup accompanies the change.
+
+**Acknowledgment** — records Kevin Brown's own determination, in his own words.
+
+```
+Acknowledged (operator): Kevin Brown
+Acknowledged at:          2026-09-15 01:39 EDT
+```
+
+Statement:
+
+*"I authorize creation of new, additive files implementing the minimum C1 -> C2 -> C3 Fusion
+Engine vertical slice — foundational types, C1's admission/validation, C2's provenance ledger, C3's
+compatibility evaluator, one integration entrypoint, one hand-authored development fixture, and new
+automated tests — under a new top-level package, per the scope and behavioral requirements recorded
+in this entry.
+
+This authorization does not extend to `logic_auditor.py`, `modality_classifier.py`,
+`mythos_sync.py`, `server.py`, `console.py`, `fantasy_kingdom_generator.py`, `dashboard.html`,
+either registry, C4/C5/C6 implementation, resource accounting, real registry ingestion, legacy-
+engine or server/dashboard integration, any existing test file, GAP-4 implementation or
+`open_contract_gaps.md`, or any successor-contract work. The FE §39 existing-code UNMODIFIED hold
+remains in force for every existing file, and the successor-contract hold remains intact.
+
+I acknowledge that Disposition 002 is authoritative operator input for GAP-4's eventual governing
+text and is not, and does not function as, an authorization of any kind — it authorizes nothing
+here, and this entry authorizes nothing for GAP-4. GAP-4 remains OPEN.
+
+This authorization does not itself declare the C1-C3 slice implemented or verified. The authorized
+implementation must still satisfy this entry's verification requirements before its implementation
+commit lands."*
