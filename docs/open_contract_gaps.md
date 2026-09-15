@@ -682,7 +682,8 @@ be discovered.
 
 ### GAP-4 — successor-contract restatement
 
-**Status:** proposed / not operative.
+**Status:** operative / not closed. Approved as the operative tracking/closure route for GAP-4 by
+operator determination, 2026-09-15; see below.
 
 **Chronology.** GAP-4's closure condition (`open_contract_gaps.md:183-186`) was written when Contract
 001 could still gain an invariant by direct amendment. Contract 001 was marked LOCKED on 2026-08-25,
@@ -692,7 +693,21 @@ locked text has no amendment route and that supersession is the only route"*
 successor contract. The entry did not anticipate this and claims nothing about it; that consequence
 is recorded here as history.
 
-**Restated closure condition, proposed:**
+**Operator determination — 2026-09-15.** Kevin approved this restatement as the operative
+tracking/closure route for GAP-4. **This is a routing determination only:** it identifies which
+instrument's closure condition GAP-4 will eventually satisfy, and does not itself satisfy any part
+of that condition, open or draft the successor contract, determine its structure or language, decide
+which Contract 001 division it will eventually supersede, decide how either fallback site below will
+ultimately be treated, or authorize implementation. GAP-4 remains **OPEN**. Its substantive closure
+requirements — that terminal conditions become actually halting, and that each of the two fallback
+sites be either explicitly bounded/authorized or removed — are unresolved and unchanged by this
+determination. The successor-contract hold stands exactly as it did before this determination.
+GAP-4's original closure condition (`open_contract_gaps.md:183-186`) remains the historical record of
+what this entry required before Contract 001 locked; the restatement below now supplies the operative
+route by which that requirement is to be satisfied going forward. This determination does not affect
+GAP-5, and it does not amend Contract 001 or Ruling 002.
+
+**Restated closure condition, operative:**
 
 This entry closes when a successor contract supersedes the Contract 001 division that carries the
 relevant enforcement invariants and carries an invariant that (a) makes terminal conditions halting
