@@ -192,7 +192,7 @@ def build_legacy_profile(
         so a power that gets audited is not necessarily a power that is gained.
         """
         result = audit_power(power, fusion)
-        # Carry the auditor's three-state verdict. Deriving status from
+        # Carry the auditor's four-state verdict. Deriving status from
         # transposed_to instead collapsed UNVERIFIED into "approved", because
         # transposed_to is None for both — an unregistered power was logged and
         # rendered as if the registry had cleared it.
@@ -201,8 +201,18 @@ def build_legacy_profile(
             "status": result["state"].lower(),
             "transposed_to": result["transposed_to"],
             "cost": result["cost_factor"],
-            "reason": result["message"] if result["state"] != "APPROVED" else None
+            "reason": result["message"] if result["state"] != "APPROVED" else None,
+            # Contract 002 I8(f) — which of the two grounding-halt causes this
+            # was, kept alongside the rest of the entry. None for every state
+            # other than GROUNDING_UNAVAILABLE. AUTH-005.
+            "unavailable_cause": result.get("unavailable_cause"),
         })
+        # Contract 002 I8(d) — a halted grounding must not be promoted into
+        # approved_powers as if it had resolved to something concrete.
+        # GROUNDING_UNAVAILABLE contributes neither a substitute nor the
+        # original illegal power. AUTH-005.
+        if result["state"] == "GROUNDING_UNAVAILABLE":
+            return
         final = result["transposed_to"] or result["power"]
         if final not in approved_powers:
             approved_powers.append(final)

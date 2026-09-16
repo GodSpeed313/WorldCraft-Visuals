@@ -5,6 +5,7 @@
 # =============================================================
 
 import random
+from dataclasses import dataclass
 
 from console import use_utf8_output
 
@@ -135,6 +136,39 @@ TRANSPOSITION_MAP = {
 # Last-resort fallback — universal, so legal at every modality.
 DEFAULT_TRANSPOSITIONS = ["Indomitable Will", "Strategic Genius", "Art of War"]
 
+# Contract 002 I8 — the terminal state both grounding-failure conditions halt
+# to (I8(d)), and the two machine-recoverable causes I8(f) requires stay
+# distinguishable. AUTH-005.
+GROUNDING_UNAVAILABLE = "GROUNDING_UNAVAILABLE"
+CAUSE_NO_LEGITIMATE_CANDIDATE = "NO_LEGITIMATE_CANDIDATE"              # I8(b)
+CAUSE_NO_LEGAL_CANDIDATE_FOR_FUSION = "NO_LEGAL_CANDIDATE_FOR_FUSION"  # I8(c)
+
+
+class _GroundingCandidates(list):
+    """`_grounding_candidates()`'s return type — a plain list of candidate
+    power names to every existing caller (equality and iteration behave
+    exactly like a bare list; `_GroundingCandidates(x, legitimate=b) == x`
+    for any list `x`), plus an explicit `legitimate` flag so `ground_power`
+    does not need to infer legitimacy from object identity against
+    DEFAULT_TRANSPOSITIONS.
+
+    `legitimate` is False only for the DEFAULT_TRANSPOSITIONS menu — no
+    legitimate candidate exists for the resolved family at all (I8(b)).
+    True for a curated TRANSPOSITION_MAP entry or the power's own family.
+    """
+    def __init__(self, iterable, legitimate: bool):
+        super().__init__(iterable)
+        self.legitimate = legitimate
+
+
+@dataclass(frozen=True)
+class _GroundingHalt:
+    """`ground_power()`'s halt signal (Contract 002 I8(d)) — carries which
+    of the two governed causes fired so `audit_power` reads it directly
+    instead of re-deriving it. AUTH-005.
+    """
+    cause: str
+
 
 def _grounding_candidates(power_name: str) -> list:
     """Where a power may ground to, curated entry first, family second.
@@ -143,20 +177,25 @@ def _grounding_candidates(power_name: str) -> list:
     wins. Without one, the power's own family supplies the neighbours — which
     is the point of families: a power no longer needs a hand-written mapping
     to ground somewhere thematically adjacent.
+
+    Returns a `_GroundingCandidates` (a `list` subclass — every existing
+    caller that treats the result as a plain list of names is unaffected)
+    whose `.legitimate` flag records which of the three branches below
+    produced it.
     """
     if power_name in TRANSPOSITION_MAP:
-        return TRANSPOSITION_MAP[power_name]
+        return _GroundingCandidates(TRANSPOSITION_MAP[power_name], legitimate=True)
 
     family = family_of(power_name)
     if family:
         kin = [p for p in family_members(family) if p != power_name]
         if kin:
-            return kin
+            return _GroundingCandidates(kin, legitimate=True)
 
-    return DEFAULT_TRANSPOSITIONS
+    return _GroundingCandidates(DEFAULT_TRANSPOSITIONS, legitimate=False)
 
 
-def ground_power(power_name: str, fusion_rank: int) -> str:
+def ground_power(power_name: str, fusion_rank: int):
     """Pick a legal stand-in for a power that exceeds the fusion's ceiling.
 
     Keeps the richest tier still legal for the fusion — Soul Resonance
@@ -164,14 +203,40 @@ def ground_power(power_name: str, fusion_rank: int) -> str:
     to Art of War or Rhetoric & Legacy, for a LEGACY one — then prefers a
     stand-in from the power's own family, and chooses at random among what
     remains so grounded fusions don't all look alike.
+
+    Callers must not assume every return value is a grounded power-name
+    string. On success, returns a power name (`str`). On either of
+    Contract 002 I8's two governed causes, returns a `_GroundingHalt`
+    instead — never `None`, never a string — carrying exactly which cause
+    fired:
+
+    - I8(b): `_grounding_candidates` returned its DEFAULT_TRANSPOSITIONS
+      menu (`.legitimate` is False) — no legitimate candidate exists for
+      the resolved family at all. That menu is a last resort, not a
+      legitimate one, so it is never searched here even though one of its
+      members (`Indomitable Will`) is always modality-legal — using it
+      would silently manufacture the exact "ordinary transposition" I8(d)
+      forbids.
+    - I8(c): a genuine, legitimate candidate list existed, but the
+      modality-legality filter left none of it standing.
+
+    No universal fallback is substituted in either case (I8(e)). Ruling
+    002 §5.4's `Indomitable Will` exception is not reached by this
+    function — its own human-excellence-domain predicate has no
+    implemented prover, and I8(g) forbids assuming it satisfied merely to
+    fill either branch.
     """
+    raw_candidates = _grounding_candidates(power_name)
+    if not raw_candidates.legitimate:
+        return _GroundingHalt(CAUSE_NO_LEGITIMATE_CANDIDATE)  # I8(b)
+
     candidates = [
-        p for p in _grounding_candidates(power_name)
+        p for p in raw_candidates
         if p in POWER_REGISTRY
         and MODALITY_RANK[POWER_REGISTRY[p]["min_modality"]] <= fusion_rank
     ]
     if not candidates:
-        return "Indomitable Will"  # universal — legal at every modality
+        return _GroundingHalt(CAUSE_NO_LEGAL_CANDIDATE_FOR_FUSION)  # I8(c)
 
     # Fall as little as possible: keep the richest legal tier.
     best = max(MODALITY_RANK[POWER_REGISTRY[p]["min_modality"]] for p in candidates)
@@ -194,9 +259,15 @@ def audit_power(power_name: str, fusion_profile: dict) -> dict:
     Returns an audit result with status, cost, and any transposition.
 
     `state` is the machine-readable verdict and the authority for downstream
-    consumers — one of UNVERIFIED, APPROVED, TRANSPOSED. `status` is its
-    display form and must not be parsed. The three states are NOT recoverable
-    from `transposed_to`, which is None for both UNVERIFIED and APPROVED.
+    consumers — one of UNVERIFIED, APPROVED, TRANSPOSED, GROUNDING_UNAVAILABLE
+    (Contract 002 I8; AUTH-005). `status` is its display form and must not be
+    parsed. `transposed_to` is None for UNVERIFIED, APPROVED, and
+    GROUNDING_UNAVAILABLE — none of the four states are recoverable from it
+    alone. `unavailable_cause` is populated only for GROUNDING_UNAVAILABLE,
+    and distinguishes I8(b) (`NO_LEGITIMATE_CANDIDATE`) from I8(c)
+    (`NO_LEGAL_CANDIDATE_FOR_FUSION`) — the machine-recoverable distinction
+    I8(f) requires; it is None (absent as a meaningful value) for the other
+    three states.
 
     fusion_profile = output from classify_fusion() in modality_classifier.py
     """
@@ -235,6 +306,26 @@ def audit_power(power_name: str, fusion_profile: dict) -> dict:
     # ❌ ILLEGAL — power exceeds fusion's modality ceiling
     else:
         transposed = ground_power(power_name, fusion_rank)
+
+        # Contract 002 I8 — grounding halted rather than a concrete power
+        # being substituted (AUTH-005). `ground_power` already determined
+        # which governed cause this is at the point of decision; consumed
+        # directly here, never re-derived — a single computation, not two.
+        if isinstance(transposed, _GroundingHalt):
+            return {
+                "fusion":            fusion_name,
+                "power":             power_name,
+                "status":            "🛑 GROUNDING UNAVAILABLE",
+                "state":             GROUNDING_UNAVAILABLE,
+                "message":           (
+                    f"'{power_name}' requires {power['min_modality']} but fusion is {fusion_modality}. "
+                    f"Grounding is unavailable — halted, not substituted."
+                ),
+                "cost_factor":       None,
+                "transposed_to":     None,
+                "unavailable_cause": transposed.cause,
+            }
+
         return {
             "fusion":        fusion_name,
             "power":         power_name,
