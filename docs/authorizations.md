@@ -652,3 +652,178 @@ here, and this entry authorizes nothing for GAP-4. GAP-4 remains OPEN.
 This authorization does not itself declare the C1-C3 slice implemented or verified. The authorized
 implementation must still satisfy this entry's verification requirements before its implementation
 commit lands."*
+
+---
+
+## AUTH-005
+
+```
+Authorizes:        an independent operator determination narrowly releasing
+                   FE Requirements §39's "Existing WorldCraft-Visuals code —
+                   UNMODIFIED" hold, plus the implementation authority to
+                   discharge Contract 002 I8 within that released surface only
+Target functions:  logic_auditor.py::_grounding_candidates()
+                   logic_auditor.py::ground_power()
+                   logic_auditor.py::audit_power()
+                   mythos_sync.py::build_legacy_profile() (audit_and_take
+                   nested logic only)
+                   dashboard.html::openCase() (audit-log/status rendering
+                   and all-clear determination only)
+                   dashboard.html::renderGrid() (aggregate audit-status
+                   reporting only)
+Target tests:      test_hypothesis_properties.py::Gap4UnresolvedFamilyTests::
+                     test_unsanctioned_family_falls_through_to_the_blanket_default
+                   test_hypothesis_properties.py::Gap4UnresolvedFamilyTests::
+                     test_unsanctioned_family_is_reported_as_an_ordinary_transposition
+                   test_hypothesis_properties.py::Gap4UnresolvedFamilyTests::
+                     test_family_set_to_none_also_falls_through
+                   plus new regression coverage per the Required Tests
+                   section below
+Route:             operator determination (independent act, releasing the
+                   §39 hold for the named surface) → recorded here for
+                   durability/discoverability → implement → verify against
+                   the checklist below → commit
+Granted by:        Kevin Brown, operator
+Granted at:        2026-09-16, in session
+Basis:             Contract 002 I8 ("Grounding-Terminal Halting and Causal
+                   Preservation"), `contract_002_domain_resolution_invariants.md:190-230`,
+                   LOCKED, governing invariant; GAP-4 CLOSED 2026-09-15
+                   by `42427a6`, `open_contract_gaps.md:664-712`, naming both
+                   fallback sites explicitly — Site 1 `logic_auditor.py:136`
+                   (I8(b)) and Site 2 `logic_auditor.py:173-174` (I8(c))
+                   (`open_contract_gaps.md:680-683`); the same closure record
+                   stating in terms that "it does not authorize any
+                   implementation of I8, Seam 2, or any Fusion Engine
+                   component" (`open_contract_gaps.md:698-700`) — this entry
+                   is what that closure withheld, and closure alone supplies
+                   no implementation authority; Disposition 002
+                   (`disposition_002_gap4_grounding_terminal_policy.md`),
+                   acknowledged 2026-09-15, substantive determination that
+                   both conditions halt to `GROUNDING_UNAVAILABLE` with no
+                   new generic fallback — Disposition 002 itself likewise
+                   authorizes nothing and supplies no implementation
+                   authority on its own; ADR-001 Seam 2
+                   (`adr_001_fusion_engine_architecture_reconciliation.md:78-84`),
+                   confirming the fallback "always terminate[s] in a
+                   concrete, legal power with no distinguishable 'unresolved'
+                   signal"; Ruling 002 §5.3 (`ruling_002_family_taxonomy_integrity.md:445`),
+                   requiring accepted and rejected components both reported,
+                   with reason; Ruling 002 §5.4
+                   (`ruling_002_family_taxonomy_integrity.md:316-339`), the
+                   `Indomitable Will` exception this entry does not disturb;
+                   FE Requirements §39, whose hold is released ONLY for the
+                   scope named above, and which itself grants no
+                   implementation authority — the separate implementation
+                   determination below is what supplies that
+Status:            granted; NOT YET EXERCISED — no edit has been made to
+                   any file as of this recording
+```
+
+**What actually releases the hold, what actually authorizes implementation, and what this entry is.** Three separate things, kept separate on purpose, extending AUTH-003's two-act structure to three:
+
+- **The §39 release** is Kevin Brown's own act, stated in his own words below. It releases the hold for the named surface only. It does not, by itself, authorize any implementation — releasing a hold removes a prohibition; it does not supply an affirmative grant.
+- **The GAP-4 closure** (`42427a6`, `open_contract_gaps.md:664`) is a separate, prior act. Its own record states plainly that it "does not authorize any implementation of I8, Seam 2, or any Fusion Engine component" (`open_contract_gaps.md:698-700`). Nothing in this entry treats that closure as if it had.
+- **The implementation authorization**, below, is a third, independent operator act. It is what actually permits code to be written. It presupposes the §39 release (without it, the named files remain held) but is not identical to it.
+- **This AUTH-005 record** is the archive of all three, in the same durable/discoverable form every prior authorization uses. It creates none of the authority it records.
+
+**Relationship to GAP-4's closure — stated because AUTH-004 could say the opposite and this entry cannot.** AUTH-004 authorized work that did not implement, depend on, or presuppose GAP-4's resolution, and recorded "GAP-4 remains OPEN" (`authorizations.md:580-581`, `:650`). That is no longer true of anything this entry touches: **GAP-4 is CLOSED**. This entry exists specifically to implement the invariant whose closure the register already recorded, and which the closure record itself named as unauthorized by the closure act alone. This entry supplies exactly that missing authorization, for the narrow surface named, and for no other purpose. This entry does not reopen, amend, or re-record GAP-4's closure.
+
+### What the authorized work must do, stated behaviorally
+
+Restated from Contract 002 I8(a)-(g), because an authorization that does not state what it is buying cannot be checked against what lands:
+
+1. Where family resolution succeeds but no legitimate grounding candidate exists for the resolved family (`_grounding_candidates()`'s fallback at `:150-156`, reached via the `DEFAULT_TRANSPOSITIONS` constant at `:136`), grounding must halt — I8(b).
+2. Where legitimate grounding candidates exist but none is legal under the fusion's modality constraints (`ground_power()`'s `if not candidates:` branch at `:173-174`), grounding must halt on the same basis — I8(c).
+3. The terminal outcome for both (1) and (2) is `GROUNDING_UNAVAILABLE` — I8(d). Neither condition may search further, substitute a candidate, or manufacture one merely to return something concrete — I8(d).
+4. No new generic or universal grounding fallback is authorized for either condition — I8(e).
+5. The distinction between (1) and (2) — whether no legitimate candidate ever existed, or legitimate candidates existed but were all illegal — must remain available in authoritative, machine-readable state, recoverable by any downstream consumer — I8(f). No particular representation, schema, or field is prescribed.
+6. **`GROUNDING_UNAVAILABLE` must not be classified, represented, routed, counted, or surfaced as either `TRANSPOSED` or `UNVERIFIED`, anywhere in the diff.** It is the distinct governed terminal outcome required by Contract 002 I8(d), with the I8(b)/I8(c) originating cause remaining machine-recoverable as required by I8(f). This is the governing constraint for items 7, 8, 10, and 11 below, stated once here so it is not read as weaker in any of them.
+7. `audit_power()` must be changed so that it does not wrap either terminal outcome into its existing `state: "TRANSPOSED"` branch, and does not represent it via the existing `state: "UNVERIFIED"` branch either — per item 6. Its own docstring names `state` "the authority for downstream consumers"; an unmodified `audit_power()` would itself manufacture the exact misrepresentation item 6 forbids, because it currently wraps whatever `ground_power()` returns as a successful transposition unconditionally.
+8. `audit_and_take()` (inside `build_legacy_profile()`, `mythos_sync.py:188-208`) must be changed so that `final = result["transposed_to"] or result["power"]` (`:206`) does not promote the original, declared-illegal power into `approved_powers` when the result is terminal. This is a demonstrated defect in existing code, not new design: as written today, that line would silently re-admit the excluded power the moment `ground_power()` starts returning `None`/a sentinel for a terminal case — exactly I8(d)'s forbidden "fall through to a concrete grounding," reproduced one call frame up.
+9. The existing `audit_log` append in `audit_and_take()` (`:199-205`) is already generic over `result["state"]`/`result["message"]` and needs no change to carry a fourth state — the terminal result and its reason propagate through this path automatically once (7) and (8) land.
+10. `dashboard.html::openCase()` must represent a `GROUNDING_UNAVAILABLE` audit-log entry distinctly, not through its current unconditional else-branch (`:538-546`, `class="audit-dot ok"`, no reason shown) — verified as an active misrepresentation, not an absence of presentation, because that branch is the literal fall-through for anything not `'transposed'`/`'unverified'`. Per item 6, the distinct representation must not itself be built by reusing the `'transposed'` or `'unverified'` branches. The all-clear determination (`:548`, gated on `transposed.length === 0 && unverified.length === 0`) must also stop asserting "All powers cleared — no transpositions needed" when a grounding-terminal entry is present.
+11. **`renderGrid()`'s aggregate reporting must not make a fusion containing one or more `GROUNDING_UNAVAILABLE` audit entries indistinguishable, with respect to aggregate grounding/audit status, from a fusion containing none. `GROUNDING_UNAVAILABLE` must not be counted, classified, represented, or surfaced as either `TRANSPOSED` or `UNVERIFIED` merely to reuse an existing bucket. This requirement does not prescribe or independently authorize any particular new counter, badge, stat tile, or broader dashboard redesign. The implementation must use the minimum change necessary to preserve the distinct terminal outcome accurately in the aggregate view.**
+12. Ruling 002 §5.4's `Indomitable Will` exception (`ruling_002_family_taxonomy_integrity.md:325-328`) is not deleted, generalized, or assumed available — I8(g). Its governing predicate (resolution within the human-excellence domain) has no implemented prover today (Disposition 002 §2); until one exists, every case reaching (1) or (2) above resolves to `GROUNDING_UNAVAILABLE`, never to `Indomitable Will`, regardless of which power is involved.
+13. All existing, non-GAP-4 grounding behavior is unchanged. This is verifiable directly: every real `POWER_REGISTRY` entry (30/30) carries a sanctioned family with a legal LEGACY-rank kin, so no code path reachable with current registry data is altered by this authorization — confirmed, not assumed, by the read-only propagation analysis this entry is drafted from.
+
+### This authorization does NOT authorize
+
+- Any edit to `logic_auditor.py`, `mythos_sync.py`, or `dashboard.html` outside the six named functions/surfaces above.
+- Any edit to `POWER_REGISTRY`, `TRANSPOSITION_MAP`, `CHARACTER_REGISTRY`, or any registry/taxonomy content.
+- Any edit to `modality_classifier.py`, or any Seam 1 work. AUTH-003's scope and exclusions stand untouched.
+- Any edit to `fusion_engine/`, any C1-C6 component, or `fusion_engine/tests/`. AUTH-004's scope and exclusions stand untouched; this entry does not extend it.
+- Any edit to `open_contract_gaps.md`. GAP-4 is already CLOSED and this entry does not reopen, amend, or re-record that closure.
+- GAP-5 — untouched, "proposed / not operative" exactly as the closure record left it (`open_contract_gaps.md:696-697`).
+- Any edit to Contract 002, Ruling 002, Ruling 001, Contract 001, Disposition 002, or ADR-001 — all LOCKED or otherwise not amendable by this entry.
+- Any new generic or universal grounding fallback, for either I8(b) or I8(c) — I8(e) is exclusionary, not merely silent.
+- **Classifying, representing, routing, counting, or surfacing `GROUNDING_UNAVAILABLE` as either `TRANSPOSED` or `UNVERIFIED`, anywhere in the diff, including inside `dashboard.html`'s counters and all-clear text.** This does not authorize redesigning unrelated state machinery, or changing the existing meaning of `TRANSPOSED` or `UNVERIFIED` for any other case.
+- Broadening Ruling 002 §5.4 by analogy, extension, or by treating its predicate as satisfied without an actual domain-resolution capability.
+- Any dashboard redesign, new UI infrastructure, or new test framework introduced merely because `dashboard.html`/`server.py` currently have zero automated test coverage. The absence of existing coverage is not license to build coverage infrastructure beyond the narrowest mechanism that regression-guards the two authorized dashboard changes.
+- Any edit to `server.py` or `console.py`. Both confirmed, by direct reading, to contain no status-dependent logic this entry's changes could affect.
+- Any edit to `test_engine.py`. Confirmed by direct reading that every relevant assertion there draws from real, sanctioned-family registry data and is unaffected by this entry's changes; if implementation evidence shows otherwise, that is grounds to stop and report, not to proceed.
+- Any edit to any test in `test_hypothesis_properties.py` other than the three named above, and the new coverage named below.
+- Solving the `signature_ability = approved_powers[0]` all-terminal edge case (`mythos_sync.py:232`). Recorded as a known, currently-dormant limitation — the same structural dormancy property that keeps GAP-4 itself unreachable with current registry data keeps this edge case unreachable too. If implementation evidence shows the authorized changes make it reachable with current real data, that is grounds to stop and report, not to expand this authorization's scope to cover it.
+- Any unrelated cleanup or refactoring in any file this authorization touches or elsewhere.
+
+### Required tests
+
+**Deliberate revision required** (fact-finding assertions pinning pre-fix behavior, explicitly not regressions to preserve):
+- `test_hypothesis_properties.py::Gap4UnresolvedFamilyTests::test_unsanctioned_family_falls_through_to_the_blanket_default` — currently asserts `_grounding_candidates(name) == DEFAULT_TRANSPOSITIONS`; must assert the I8(b) terminal instead.
+- `test_hypothesis_properties.py::Gap4UnresolvedFamilyTests::test_unsanctioned_family_is_reported_as_an_ordinary_transposition` — currently asserts `state == "TRANSPOSED"` and no `cautionary` field; must assert the new terminal state and that the two causes are distinguishable.
+- `test_hypothesis_properties.py::Gap4UnresolvedFamilyTests::test_family_set_to_none_also_falls_through` — same fallback site as the first, `family: None` variant; same revision.
+
+**Unchanged, confirmed by direct code reading, not assumed:**
+- `test_missing_family_key_raises_rather_than_falling_through` — different code path (`family_of` raises `KeyError` before any fallback logic runs).
+- `test_unregistered_power_never_reaches_grounding` — different code path (`audit_power`'s `UNVERIFIED` short-circuit, before grounding is attempted).
+- `GeneratedInvariantTests` in the same file, and all of `test_engine.py` — both draw exclusively from `REGISTERED_POWERS = tuple(sorted(POWER_REGISTRY))`, real data only, which never reaches either dormant site.
+
+**New regression coverage required** (none of this exists today — confirmed by full-file reads, not inferred):
+- I8(c): a case where legitimate grounding candidates exist but all are illegal for the fusion. No existing test constructs this; every current GAP-4 test targets I8(b) only.
+- I8(f): a case proving the I8(b) and I8(c) causes remain distinguishable from each other in the returned state, not just distinguishable from `APPROVED`/`TRANSPOSED`.
+- `audit_power()` returns the terminal state, and not `TRANSPOSED` or `UNVERIFIED`, for both (b) and (c).
+- `audit_and_take()`/`build_legacy_profile()` does not promote a terminal/rejected power into `approved_powers`.
+- Existing valid (non-GAP-4) grounding behavior is unchanged — a regression check over real registry data, not merely inferred from the analysis above.
+- The narrowest reasonable regression mechanism for the two authorized `dashboard.html` changes, covering both the `openCase()` distinct-representation requirement and the `renderGrid()` aggregate-accuracy requirement. No dashboard test framework exists today; this authorization does not license building one. Implementation must find or state the minimum mechanism (e.g., a pure-function extraction of the affected rendering logic, or a documented manual verification step) rather than treating the absence of a framework as permission to add one.
+
+### Known residual limitation — recorded, not corrected, not legitimized
+
+`mythos_sync.py:232`'s `signature_ability = approved_powers[0]` would raise `IndexError` if every candidate in every pool terminated `GROUNDING_UNAVAILABLE`. This is unreachable with current real registry data (same dormancy property as GAP-4 itself) and has no sanctioned fix under I8(e)'s prohibition on new universal fallbacks. This authorization does not correct it and does not legitimize the current absence of a fix. Encountering it during implementation is not grounds to expand this authorization's scope; that would require a separate authorization.
+
+### Verification required before any commit under this authorization lands
+
+- Diff touches only: the six named functions/surfaces, the three named test revisions, and the new tests required above.
+- `modality_classifier.py`, `server.py`, `console.py`, `fantasy_kingdom_generator.py`, every file under `fusion_engine/`, and `open_contract_gaps.md` byte-identical to their pre-commit state.
+- No edit to `POWER_REGISTRY`, `TRANSPOSITION_MAP`, or `CHARACTER_REGISTRY` content.
+- The full existing test suite (`test_engine.py`, `test_hypothesis_properties.py`, `fusion_engine/tests`) run, not only the touched tests; every failure beyond the three intentionally-revised tests accounted for by name.
+- No occurrence anywhere in the diff of `GROUNDING_UNAVAILABLE` being assigned `state`/`status` value `"TRANSPOSED"` or `"UNVERIFIED"`, and no occurrence of it being counted by any `'transposed'`-keyed or `'unverified'`-keyed filter.
+- `renderGrid()`'s aggregate reporting, post-change, does not make a fusion containing one or more `GROUNDING_UNAVAILABLE` entries indistinguishable from a fusion containing none, and does not achieve this by counting or classifying `GROUNDING_UNAVAILABLE` as `TRANSPOSED` or `UNVERIFIED`. No new counter/badge/stat tile exists in the diff unless it is the minimum change necessary to satisfy this requirement.
+- `Indomitable Will` does not appear as a returned grounding target from either I8(b) or I8(c)'s branch anywhere in the diff, absent an implemented, provable §5.4 domain predicate (none is authorized or expected to exist after this commit).
+- The I8(b)/I8(c) distinction is present in the returned state in a form a new test can assert against — not merely asserted in a docstring or comment.
+- No unrelated refactor or cleanup accompanies the change, in the touched files or elsewhere.
+
+**Acknowledgment** — records Kevin Brown's own determinations and authorization, in his own words, given across two statements in this session.
+
+```
+Acknowledged (operator): Kevin Brown
+Acknowledged at:          2026-09-16 14:50 EDT
+```
+
+Statement 1 — §39 release (as given, with the `renderGrid()` paragraph carried forward in its final, synchronized form per this entry's own correction):
+
+*"I release the §39 UNMODIFIED hold, narrowly, for `logic_auditor.py::_grounding_candidates`, `logic_auditor.py::ground_power`, `logic_auditor.py::audit_power`, `mythos_sync.py::build_legacy_profile` (`audit_and_take` logic only), and the two demonstrated `dashboard.html` consumer surfaces: `openCase()`'s audit-log/status rendering and all-clear determination, and `renderGrid()`'s aggregate audit-status reporting — solely to implement and accurately surface Contract 002 I8(a)–(g), preserving I8(f)'s distinction between the two `GROUNDING_UNAVAILABLE` causes and I8(g)'s Ruling 002 §5.4 restriction exactly as written, and for no other purpose.
+
+`renderGrid()`'s aggregate reporting must not make a fusion containing one or more `GROUNDING_UNAVAILABLE` audit entries indistinguishable, with respect to aggregate grounding/audit status, from a fusion containing none. `GROUNDING_UNAVAILABLE` must not be counted, classified, represented, or surfaced as either `TRANSPOSED` or `UNVERIFIED` merely to reuse an existing bucket. This requirement does not prescribe or independently authorize any particular new counter, badge, stat tile, or broader dashboard redesign. The implementation must use the minimum change necessary to preserve the distinct terminal outcome accurately in the aggregate view.
+
+All other §39-held code, every other function or section of those files, and every other existing WorldCraft-Visuals file remain under the §39 UNMODIFIED hold exactly as recorded."*
+
+Statement 2 — implementation authorization (as given):
+
+*"I authorize the narrowly scoped implementation described by AUTH-005, and no broader work. The implementation may modify only the released functions and dashboard surfaces named in AUTH-005, together with the specifically authorized test revisions and new regression coverage, solely to enforce and accurately propagate Contract 002 I8(a)–(g).
+
+The implementation must make both governed grounding-failure conditions halt as `GROUNDING_UNAVAILABLE`, preserve which condition occurred in machine-recoverable authoritative state, prevent either terminal from being converted back into a successful transposition or approved power downstream, and prevent the authorized dashboard surfaces from presenting the terminal as cleared, approved, `TRANSPOSED`, `UNVERIFIED`, or otherwise invisible in aggregate grounding/audit status.
+
+Ruling 002 §5.4 remains exactly as governed. This authorization does not broaden or presume the `Indomitable Will` exception, authorize a domain resolver, create a generic fallback, modify registry or taxonomy content, touch GAP-5, modify the Fusion Engine/C2, reopen GAP-4, or authorize unrelated cleanup or refactoring.
+
+The known all-terminal `signature_ability = approved_powers[0]` edge case remains outside this authorization. If implementation evidence shows that this authorization makes that condition reachable with current real registry data, stop and report rather than expanding scope.
+
+AUTH-005 may be recorded in `docs/authorizations.md` with this implementation statement and the previously given §39 release statement. Recording AUTH-005 does not authorize anything beyond the exact scope AUTH-005 records."*
