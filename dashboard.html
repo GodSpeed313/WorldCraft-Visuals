@@ -443,6 +443,16 @@
     const ground = MATRIX.filter(f => f.modality === 'GROUNDED').length;
     const high   = MATRIX.filter(f => f.modality === 'HIGH_CONCEPT').length;
     const trans  = MATRIX.reduce((a,f) => a + (f.audit_log||[]).filter(l => l.status === 'transposed').length, 0);
+    // Contract 002 I8 terminal (AUTH-005). Deliberately never folded into
+    // `trans` above — a halted grounding is not a transposition and must
+    // not be counted as one. Tracked per-fusion (not as a single global
+    // number) so the grid can keep a fusion that halted grounding visibly
+    // distinct from one that didn't, which is what the aggregate view
+    // actually needs to avoid making the two indistinguishable.
+    const fusionsWithUnavailable = new Set(
+      MATRIX.map((f, i) => (f.audit_log||[]).some(l => l.status === 'grounding_unavailable') ? i : null)
+        .filter(i => i !== null)
+    );
 
     document.getElementById('stat-total').textContent  = MATRIX.length;
     document.getElementById('stat-legacy').textContent = legacy;
@@ -461,6 +471,7 @@
         <p class="card-name">${f.fusion_name}</p>
         <p class="card-sig">${f.signature_ability}</p>
         <p class="card-biome">${f.biome}</p>
+        ${fusionsWithUnavailable.has(i) ? '<p style="font-size:10px;color:#D85A30;font-family:var(--mono);margin:4px 0 0;">⚠ grounding unavailable</p>' : ''}
         <div class="card-footer">
           <span class="card-id">${f.id}</span>
           <span class="card-arrow">→</span>
@@ -479,6 +490,9 @@
 
     const transposed = (f.audit_log||[]).filter(l => l.status === 'transposed');
     const unverified = (f.audit_log||[]).filter(l => l.status === 'unverified');
+    // Contract 002 I8 terminal (AUTH-005) — kept out of `transposed` and
+    // `unverified` so it is never counted or gated as either.
+    const groundingUnavailable = (f.audit_log||[]).filter(l => l.status === 'grounding_unavailable');
     const alphaMod = f.alpha?.modality || f.modality;
     const betaMod  = f.beta?.modality  || f.modality;
     const dom = f.dominance ?? 50;
@@ -535,6 +549,16 @@
                   </div>
                   <span class="audit-cost">cost ${l.cost}</span>
                 </div>
+              ` : l.status === 'grounding_unavailable' ? `
+                <div class="audit-row">
+                  <div class="audit-dot" style="background:#D85A30;"></div>
+                  <div class="audit-info">
+                    <p class="audit-power struck">${l.power}</p>
+                    <p class="audit-trans">grounding unavailable — halted, not transposed</p>
+                    ${l.reason ? `<p class="audit-reason">${l.reason}</p>` : ''}
+                  </div>
+                  <span class="audit-cost">—</span>
+                </div>
               ` : `
                 <div class="audit-row">
                   <div class="audit-dot ok"></div>
@@ -545,8 +569,9 @@
                 </div>
               `).join('')}
             </div>
-            ${transposed.length === 0 && unverified.length === 0 ? '<p class="all-clear" style="margin-top:10px;">All powers cleared — no transpositions needed.</p>' : ''}
-            ${unverified.length > 0 ? `<p class="audit-reason" style="margin-top:10px;">${unverified.length} power(s) could not be verified against the Power Registry. Not an approval.</p>` : ''}`
+            ${transposed.length === 0 && unverified.length === 0 && groundingUnavailable.length === 0 ? '<p class="all-clear" style="margin-top:10px;">All powers cleared — no transpositions needed.</p>' : ''}
+            ${unverified.length > 0 ? `<p class="audit-reason" style="margin-top:10px;">${unverified.length} power(s) could not be verified against the Power Registry. Not an approval.</p>` : ''}
+            ${groundingUnavailable.length > 0 ? `<p class="audit-reason" style="margin-top:10px;">${groundingUnavailable.length} power(s) had grounding unavailable — halted, not an approval or a transposition.</p>` : ''}`
         }
       </div>
 
