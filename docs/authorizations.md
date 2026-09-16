@@ -827,3 +827,92 @@ Ruling 002 §5.4 remains exactly as governed. This authorization does not broade
 The known all-terminal `signature_ability = approved_powers[0]` edge case remains outside this authorization. If implementation evidence shows that this authorization makes that condition reachable with current real registry data, stop and report rather than expanding scope.
 
 AUTH-005 may be recorded in `docs/authorizations.md` with this implementation statement and the previously given §39 release statement. Recording AUTH-005 does not authorize anything beyond the exact scope AUTH-005 records."*
+
+---
+
+## Authorization Exercise and Closure
+
+An authorization recorded in this register is a bounded, one-time grant.
+
+This lifecycle rule governs the exercise and closure of entries recorded in this register. Its application to an existing entry does not determine, ratify, or generalize the register's subject-matter jurisdiction, including the unresolved question of whether future source-code authorizations generally belong in this register.
+
+### 1. Grant state
+
+At the time an authorization is granted and recorded, its operative lifecycle state is `GRANTED — NOT YET EXERCISED`.
+
+Existing authorization records that express that grant-time state using formatting such as `granted; NOT YET EXERCISED` represent the same lifecycle state for purposes of this rule.
+
+That state describes the authorization at the time of its grant. It does not constitute a perpetual assertion that the authorized act has never subsequently occurred.
+
+### 2. Exercise and spend
+
+For purposes of this rule, the `authoritative branch` is the repository branch whose landed state constitutes authoritative project history for the authorization at issue. Where an authorization does not expressly identify another branch or repository state for exercise, the authoritative branch is `main`.
+
+An authorization becomes `EXERCISED AND SPENT` upon the first qualifying exercise: the first time any part of the authorized act, as scoped by that authorization, lands on the authoritative branch or otherwise reaches a repository state that the authorization expressly identifies as constituting exercise.
+
+Exercise and spend are one atomic lifecycle transition. They are not separate sequential states.
+
+There is no partial-exercise state. The first qualifying exercise spends the authorization in full. Any portion of the original authorized scope not exercised in that qualifying act carries no residual authority and requires independent authority before it may later be exercised.
+
+Accordingly, where an authorization permits multiple edits, surfaces, components, tests, or other acts, the first qualifying exercise of any one or more of them spends the entire authorization unless that authorization expressly defines a different exercise condition.
+
+Once an authorization is `EXERCISED AND SPENT`, the authority granted by that authorization may not be reused to authorize another edit, commit, merge, or governance act.
+
+Any further act requires independent authority.
+
+### 3. Closure recording
+
+Exercise does not retroactively alter the historical fact that the authorization was unexercised when originally granted.
+
+Accordingly, the original grant record, including its original `Status:` statement, must not be rewritten solely to reflect later exercise.
+
+Exercise is recorded append-only within that authorization's entry by adding a closure record.
+
+The closure record must identify:
+
+* `Exercise status: EXERCISED AND SPENT`
+* `Landed as:` the immutable commit SHA establishing the first qualifying exercise
+* `Exercise recorded at:` the timestamp at which the closure record is added
+
+Where the first qualifying exercise occurred through a pull request, the closure record should also identify:
+
+* `Pull request:` the applicable PR number
+
+Additional immutable repository evidence may be recorded when necessary to establish or preserve the exercise chain, but is not required merely because such evidence exists.
+
+### 4. Exercise time and recording time
+
+The act that exercises an authorization and the later act that records that exercise are distinct.
+
+`Landed as:` identifies the repository event that first exercised and spent the authorization.
+
+`Exercise recorded at:` identifies when that already-existing exercise was entered into this register.
+
+A later closure record must not imply that the authorization remained operative between its actual exercise and the later recording of that exercise.
+
+Absence or delay of a closure record does not preserve, restore, or reactivate authority that was already spent by a qualifying exercise.
+
+### 5. Historical closure
+
+An authorization exercised before adoption of this closure convention may be brought into conformity by appending a closure record supported by immutable repository evidence.
+
+Such a record documents prior exercise; it does not newly exercise the authorization, recreate the authorization, extend it, or alter the scope originally granted.
+
+Once this closure convention has been adopted by the operator, recording a historical closure whose first qualifying exercise is already established unambiguously by immutable repository evidence is a mechanical register-maintenance act and does not require a new operator acknowledgment for that individual closure.
+
+Mechanical historical closure may record only what the immutable repository evidence establishes. It may not manufacture, presume, or supply missing evidence.
+
+If the available repository evidence does not establish the first qualifying exercise unambiguously, the historical authorization must not be closed mechanically. The uncertainty must instead be surfaced for operator determination.
+
+### 6. Scope and jurisdiction preservation
+
+Closing an authorization does not amend, broaden, narrow, reinterpret, ratify, or supersede the authority originally granted.
+
+The authorization's original scope, exclusions, conditions, acknowledgments, historical grant state, and any express unresolved questions remain part of the record.
+
+Application of this lifecycle rule to an existing authorization establishes only that the recorded authorization was exercised and that its one-time authority is spent. It does not establish that the authorization's placement in this register resolved any previously open question about the register's general subject-matter jurisdiction or the proper placement of future authorizations.
+
+### Adoption
+
+Adopted by: Kevin Brown, operator
+Adopted on: 2026-09-16 19:00 EDT
