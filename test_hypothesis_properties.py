@@ -346,12 +346,56 @@ class Auth005AuditAndTakePromotionTests(unittest.TestCase):
     """
 
     def test_grounding_unavailable_is_not_promoted_into_approved_powers(self):
-        forced = {}
+        """AUTH-005 / Contract 002 I8(d) — a GROUNDING_UNAVAILABLE result
+        must not itself promote the rejected original power or a
+        substitute into `approved_powers`.
+
+        `build_legacy_profile` selects powers via an unseeded
+        `random.shuffle`/`random.choice` pipeline (`mythos_sync.py:176-238`)
+        over a set-derived pool, so which power is audited first, and
+        whether that SAME power name is drawn again later from a
+        different pool, is not deterministic run to run.
+
+        Two distinct sources of non-determinism were found, empirically,
+        not assumed, via a 500-iteration stochastic stress run of an
+        earlier version of this test:
+
+        1. The forced power can be drawn a SECOND time from a different
+           pool later in the same run (`generic_pool`/`universal_candidates`
+           only filter `p not in approved_powers`, `mythos_sync.py:228`,
+           `:236` — not "already audited this run"). Fixed by forcing
+           EVERY encounter of the drawn power, not just the first, so
+           there is no unforced legitimate encounter of that name to
+           confuse a per-entry check with.
+        2. Even with every encounter of the forced power's own SUBJECT
+           audit forced, the SAME name can still legitimately enter
+           `approved_powers` as the `transposed_to` TARGET of some
+           unrelated OTHER power's legitimate grounding — 8 of 500
+           stress-run iterations failed exactly this way (e.g. a
+           different illegal power legitimately transposing to "The
+           Scientific Method" while "The Scientific Method" was itself
+           the forced power). This is correct production behavior, not a
+           bug, and a blanket `assertNotIn(name, approved_powers)` cannot
+           tell it apart from an actual promotion of the terminal itself.
+
+        Fixed by reconstructing the governed rule directly from
+        `audit_log` — never let a `grounding_unavailable` entry
+        contribute to `approved_powers` — in the same order
+        `audit_and_take` applies it, and requiring the actual, real
+        `approved_powers` to match that reconstruction exactly. This
+        tests the invariant itself, entry by entry, rather than a
+        specific power's final membership, so it is correct regardless
+        of which power gets drawn, how many times, or what any other
+        power's legitimate grounding target happens to be — no
+        production randomness is touched to achieve this.
+        """
+        forced_name = {}
         real_audit_power = mythos_sync.audit_power
 
         def fake_audit_power(power_name, fusion_profile):
-            if not forced:
-                forced["power"] = power_name
+            if not forced_name:
+                forced_name["name"] = power_name
+            if power_name == forced_name.get("name"):
                 return {
                     "fusion": fusion_profile.get("fusion_name", "t"),
                     "power": power_name,
@@ -370,18 +414,42 @@ class Auth005AuditAndTakePromotionTests(unittest.TestCase):
         finally:
             mythos_sync.audit_power = real_audit_power
 
-        self.assertIn("power", forced, "the fake was never invoked — nothing was audited")
-        forced_power = forced["power"]
+        self.assertIn("name", forced_name, "the fake was never invoked — nothing was audited")
+        name = forced_name["name"]
+        audit_log = profile["audit_log"]
 
-        matching_log_entries = [l for l in profile["audit_log"] if l["power"] == forced_power]
+        matching_log_entries = [l for l in audit_log if l["power"] == name]
         self.assertTrue(matching_log_entries, "the forced terminal never reached audit_log")
-        self.assertEqual(matching_log_entries[0]["status"], "grounding_unavailable")
-        self.assertEqual(matching_log_entries[0]["unavailable_cause"], CAUSE_NO_LEGITIMATE_CANDIDATE)
+        # Every encounter of this power was forced to the terminal, so
+        # every one of its audit_log entries must show it — not merely
+        # the first — confirming there is no unforced, legitimate
+        # encounter of the same power hiding among them.
+        for entry in matching_log_entries:
+            self.assertEqual(entry["status"], "grounding_unavailable")
+            self.assertEqual(entry["unavailable_cause"], CAUSE_NO_LEGITIMATE_CANDIDATE)
 
-        self.assertNotIn(
-            forced_power,
+        # The governed rule, reconstructed directly from audit_log in the
+        # same order audit_and_take applies it: a grounding_unavailable
+        # entry contributes nothing; anything else contributes its
+        # transposed_to (or itself), deduplicated. This is what the fix
+        # in mythos_sync.py::audit_and_take is required to produce, and it
+        # is checked here regardless of which power was forced or how
+        # many times, and regardless of what any other power's legitimate
+        # grounding target happens to be.
+        expected_approved = []
+        for entry in audit_log:
+            if entry["status"] == "grounding_unavailable":
+                continue
+            final = entry["transposed_to"] or entry["power"]
+            if final not in expected_approved:
+                expected_approved.append(final)
+
+        self.assertEqual(
+            expected_approved,
             profile["approved_powers"],
-            f"{forced_power!r} was ruled GROUNDING_UNAVAILABLE but still appears in approved_powers",
+            "approved_powers does not match the governed reconstruction from audit_log "
+            "(a grounding_unavailable entry must never contribute) — a terminal result "
+            "may have been promoted",
         )
 
 
