@@ -916,3 +916,65 @@ Application of this lifecycle rule to an existing authorization establishes only
 
 Adopted by: Kevin Brown, operator
 Adopted on: 2026-09-16 19:00 EDT
+
+---
+
+## Authorization Exercise and Closure — Amendment 1 (Closure Placement)
+
+This is Amendment 1 to the `Authorization Exercise and Closure` rule adopted 2026-09-16. It
+affects §3 ("Closure recording") only. The original September 16 text, and its own
+`Adopted by: Kevin Brown, operator` / `Adopted on: 2026-09-16 19:00 EDT` block, remain
+unedited and historically accurate as attesting to the rule as it read on that date. This
+amendment does not retroactively alter what that adoption attested to.
+
+### What this amendment adds
+
+§3's general rule is unchanged and remains the default: a closure record is recorded
+append-only within that authorization's own entry.
+
+**Narrow exception.** Where recording a closure record within that authorization's own entry
+would cause an existing citation — from a document that cannot itself be corrected, including
+but not limited to a document carrying LOCKED status — to become a stranded citation (a
+citation that would no longer accurately identify the material it presently identifies), the
+closure record for that authorization may instead be recorded in a dedicated, append-only
+closure section placed at the tail of this register, after every existing AUTH entry and after
+this lifecycle rule's own text.
+
+This exception does not apply merely because an insertion would change a line number. It
+applies only where the shift would cause a citation to stop identifying its intended material,
+and only where that citation cannot be corrected by a compliant, separately authorized edit to
+the document that carries it. An ordinary citation in an editable, unattested document is not,
+by itself, evidence that this exception applies.
+
+Convenience, consistency of formatting, or ease of future maintenance are not evidence that
+this exception applies and do not trigger it.
+
+### Attribution requirement for a remotely placed closure
+
+A closure record placed under this exception must identify, with no ambiguity, which
+authorization it closes, by AUTH number, and must contain every field §3 already requires:
+`Exercise status:`, `Landed as:`, `Exercise recorded at:`, and `Pull request:` where applicable.
+
+### What this amendment does not do
+
+It does not change the meaning of `GRANTED — NOT YET EXERCISED`, `EXERCISED AND SPENT`, first
+qualifying exercise, the authoritative-branch definition, express alternate exercise
+conditions, atomic exercise/spend, the no-partial-exercise/no-residual-authority rule,
+`Landed as:`, `Exercise recorded at:`, PR evidence, or any historical-closure eligibility
+requirement in §5. A closure record — whether placed in-entry or under this exception — may
+still be added only for an authorization whose first qualifying exercise is already
+established unambiguously by immutable repository evidence; this amendment supplies no
+evidence and creates no new closure eligibility.
+
+It does not authorize any edit to any document other than `docs/authorizations.md`, and no
+edit to any LOCKED document under any circumstance. It creates no citation-repair authority
+and no general reference-maintenance power.
+
+It does not address, resolve, or imply resolution of the unresolved question preserved by this
+rule's own opening paragraph and §6, concerning whether future source-code authorizations
+generally belong in this register.
+
+### Adoption
+
+Adopted by: Kevin Brown, operator
+Adopted on: 2026-09-16 20:36 EDT
