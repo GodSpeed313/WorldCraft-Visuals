@@ -797,3 +797,153 @@ This acknowledgment does not declare §38 satisfied, authorize implementation or
 amend ADR-001, or decide whether an ACCEPTED ADR may later be directly amended. I am acknowledging
 CR-007 only as the accurate record of my intended meaning of ADR-001 on the Seam 3 / §10.3 gating
 question."*
+
+---
+
+## CR-008
+
+```
+Target:            20 distinct exact-line citations into open_contract_gaps.md
+                   (23 citation instances across 19 source lines), from:
+                     contract_001_domain_resolution.md :320 (5 instances), :322 (1)
+                     contract_002_domain_resolution_invariants.md :328 (1)
+                     corrections.md :553 (1)
+                     authorizations.md :160,163,164,176,183,191,202,208,
+                       221,222,230,247,249,253,277 (15)
+
+Signed:            contract_001 §5 (cbf14c45, 2026-08-20), §6 (bc1b8d36,
+                   2026-08-21), §8 (7ee64605, 2026-08-25); contract_002 §4
+                   (42427a6, 2026-09-15, LOCKED); corrections.md entry
+                   (92481f36, 2026-08-23); authorizations.md AUTH-002
+                   (cf4b79f5, 2026-08-25, acknowledged)
+
+Defect:            each citation below resolved correctly in
+                   docs/open_contract_gaps.md as it stood at commit dddaa09
+                   (5a3ba9f's immediate predecessor for this file — no
+                   intervening commit touches it) and resolves to different,
+                   wrong content at HEAD. Commit 5a3ba9f ("docs: record
+                   GAP-4 closure in the gap register", 2026-09-15) inserted
+                   text at four points in open_contract_gaps.md — 2 lines
+                   after old :186, 54 lines after old :658, and 1+1+2 lines
+                   at three points inside the GAP-4 successor-restatement
+                   section — without updating any citation from outside the
+                   file. Verified via `git show 5a3ba9f -- docs/open_contract_gaps.md`
+                   (5 hunks) and by diffing each target below between
+                   dddaa09 and HEAD directly, not by arithmetic. Re-verified
+                   against the repository baseline current at filing
+                   (8de5b5f, which post-dates 5a3ba9f but touches only
+                   open_contract_gaps.md lines 844 onward — none of the
+                   ranges below).
+
+Corrected references (old target → corrected target, dddaa09 → HEAD):
+
+  | # | Citing document                                | Source line(s) | Old target | Corrected target |
+  |---|-------------------------------------------------|-----------------|------------|-------------------|
+  | 1 | contract_001_domain_resolution.md               | :320            | :197       | :199              |
+  | 2 | contract_001_domain_resolution.md               | :320            | :201       | :203              |
+  | 3 | contract_001_domain_resolution.md               | :320            | :203       | :205              |
+  | 4 | contract_001_domain_resolution.md               | :320            | :205-206   | :207-208          |
+  | 5 | contract_001_domain_resolution.md               | :320            | :222-223   | :224-225          |
+  | 6 | contract_001_domain_resolution.md               | :322            | :390       | :392              |
+  | 7 | contract_002_domain_resolution_invariants.md    | :328            | :717-719   | :775-777          |
+  | 8 | corrections.md                                  | :553            | :398       | :400              |
+  | 9 | authorizations.md                               | :160            | :397-403   | :399-405          |
+  | 10| authorizations.md                               | :163            | :313-405   | :315-407          |
+  | 11| authorizations.md                               | :164, :191      | :380-388   | :382-390          |
+  | 12| authorizations.md                               | :176            | :394       | :396              |
+  | 13| authorizations.md                               | :183, :277      | :401-402   | :403-404          |
+  | 14| authorizations.md                               | :202            | :390       | :392              |
+  | 15| authorizations.md                               | :208            | :384-385   | :386-387          |
+  | 16| authorizations.md                               | :221            | :334-336   | :336-338          |
+  | 17| authorizations.md                               | :222            | :383       | :385              |
+  | 18| authorizations.md                               | :230            | :346-348   | :348-350          |
+  | 19| authorizations.md                               | :247            | :317-318   | :319-320          |
+  | 20| authorizations.md                               | :249            | :375-377   | :377-379          |
+  | 21| authorizations.md                               | :253            | :403       | :405              |
+
+  (Rows 11, 13 each cover 2 of the 23 citation instances, sharing one
+  target pair; all other rows cover 1 instance each — 21 rows, 23
+  instances.)
+
+Classification:    factual/referential defect — same shape as CR-001. For
+                   every row, the underlying proposition the citing
+                   document draws from that line is unchanged; only the
+                   line number is wrong.
+
+Basis:             Immediate predecessor for docs/open_contract_gaps.md is
+                   dddaa09 (confirmed via `git log --oneline -- docs/open_contract_gaps.md`
+                   — no other commit touches this file between dddaa09 and
+                   5a3ba9f). For each row above: `git show dddaa09:docs/open_contract_gaps.md`
+                   at the "Old target" line contains the proposition the
+                   citing source line states; the same line at HEAD
+                   (`docs/open_contract_gaps.md`) does not; the "Corrected
+                   target" line at HEAD does. Every row independently
+                   verified this way, not inferred from a shared offset,
+                   and re-verified against HEAD at commit 8de5b5f.
+
+Effect:            None on any signed proposition's substance. For all 21
+                   rows, the content each citation was written to support
+                   still exists in open_contract_gaps.md, at the corrected
+                   line shown above. This entry:
+                     - does not amend contract_001_domain_resolution.md,
+                       contract_002_domain_resolution_invariants.md,
+                       corrections.md, or authorizations.md — all cited
+                       text stays exactly as attested;
+                     - does not reopen any signature, acknowledgment, or
+                       grant;
+                     - does not change Contract 001 or Contract 002;
+                     - does not change or reopen GAP-4 or GAP-5;
+                     - closes no open_contract_gaps.md register entry;
+                     - authorizes no implementation of any kind;
+                     - edits open_contract_gaps.md nowhere — this entry
+                       records corrected references only, in
+                       corrections.md, exactly as CR-001 through CR-007
+                       already do for other locked-text citations.
+
+Scope note — why these 21 rows are one batch:
+                   All share (a) the same causal commit, 5a3ba9f; (b) the
+                   same affected target file, open_contract_gaps.md; (c)
+                   the same mechanism, insertion-driven exact-line drift
+                   with no corresponding update to external citations; (d)
+                   the same remediation constraint — every citing document
+                   is locked, LOCKED, or an acknowledged/granted record,
+                   none of which this corpus's amendment_policy.md permits
+                   editing in place; (e) the same substantive effect —
+                   every underlying proposition remains true and findable,
+                   only its address moved. No other stranded citation
+                   found in this audit shares all five properties, and
+                   none of the following is included on that basis:
+                     - ruling_002_family_taxonomy_integrity.md:635 →
+                       open_contract_gaps.md:111 — different cause
+                       (109fafe7 and 5229f9f1, 2026-08-15/16, a month
+                       before 5a3ba9f); tracked as a separate candidate,
+                       not filed here.
+                     - authorizations.md:256 → open_contract_gaps.md:409-411
+                       — different cause (20f2a43, 2026-08-25) and a
+                       different defect shape: no corrected target exists
+                       because the cited fact itself later became untrue,
+                       not merely relocated; held separately, not filed
+                       here.
+                     - open_contract_gaps.md's own self-citations at
+                       :604, :626, :722, :727, :728 (x3), :729, :730, :809,
+                       :834 — displaced by the same commit, but the citing
+                       document (the register itself) is editable, so the
+                       remediation is a direct in-register fix, not a
+                       corrections.md entry; excluded per (d), not repaired
+                       here.
+
+Recorded:          2026-09-17
+```
+
+**Acknowledgment** — an acknowledgment, not a section signature, and deliberately narrower than
+what a Contract 001 row receives.
+
+```
+Acknowledged (operator): Kevin Brown
+Acknowledged at: 2026-09-17 21:07 EDT
+```
+
+Statement: *"I acknowledge CR-008 as filed. The exact-line citation drift caused by commit 5a3ba9f
+is confirmed for the 23 citation instances recorded here. CR-008 corrects those references only; it
+does not amend the underlying signed or acknowledged text, change any substantive proposition, or
+authorize any implementation."*
