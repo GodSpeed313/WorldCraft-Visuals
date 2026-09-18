@@ -840,3 +840,77 @@ no authorization, opens no gap, and records no defect. It does not revisit GAP-9
 whose statement that neither entry says this was true when written and stands as recorded.
 
 Restated 2026-08-28.
+
+---
+
+### Proposed successor-contract restatement — 2026-09-17
+
+**Status:** operative / not closed. Approved as the operative routing target for GAP-5's closure
+condition by operator determination, 2026-09-17; see below.
+
+The 2026-08-28 restatement named Contract 001 §6 specifically. That was a deliberate departure from
+GAP-4's periphrastic routing language, made because GAP-5's own entry text named §6 by number.
+
+Contract 002 subsequently superseded Contract 001 §6 in full and reached LOCKED status on 2026-09-15.
+Contract 001 §6 remains historically intact but no longer governs.
+
+The intervening supersession demonstrates that routing GAP-5 permanently to a numbered division does
+not survive even one supersession cycle. This restatement therefore reverses the 2026-08-28 routing
+choice on that basis: it identifies the governing target by **role**, rather than by a permanent
+document or section number.
+
+Accordingly, GAP-5 does not close merely because a future document supersedes Contract 001 §6. That
+target has already been superseded and is no longer the governing enforcement division.
+
+**Operator determination — 2026-09-17.** Kevin approved this restatement as the operative routing
+target for GAP-5's closure condition, replacing the 2026-08-28 restatement in that capacity only.
+**This is a routing determination only:** it identifies the currently governing enforcement division
+(Contract 002 §§3-4, carrying I1-I8) as the target GAP-5's eventual closure must supersede, by role
+rather than by a fixed document or section number. It does not close GAP-5, does not draft or adopt
+the eventual payload invariant, and does not authorize any implementation. It decides no payload
+schema, field, enum, or storage representation; nothing about reason cardinality (one-per-component
+or shared across causally identical failures); and nothing about whether I8(f)'s causal distinction
+must appear in the outward payload or may remain internal, machine-readable state. It does not amend
+Contract 001 or Contract 002, and does not affect GAP-4, GAP-6, GAP-7, Ruling 002 §10.5, or any other
+open item. The 2026-08-28 restatement is not edited, retracted, or marked defective by this approval
+— it remains on the page exactly as written, historical as of its date. This approval changes which
+restatement is operative going forward; it does not assert the earlier one was wrong when made, only
+that the intervening Contract 002 supersession of Contract 001 §6 demonstrated that a permanent
+numbered-division target does not survive a single supersession cycle, which is this restatement's own
+stated reason for existing.
+
+**Closure condition, operative:** this entry closes when a contract division that supersedes the
+division currently carrying the enforcement invariants for domain/family/grounding resolution carries
+an invariant requiring every `SURFACED` result to preserve and report:
+
+- the components that resolved successfully;
+- the components that did not resolve or were rejected; and
+- the governed reason associated with the components that did not resolve,
+
+without permitting the accepted portion of a fusion to be discarded merely because another component
+terminates unsuccessfully.
+
+As of this restatement, the currently governing enforcement division is Contract 002 §§3–4, carrying
+I1–I8. This record identifies that target by role rather than permanently by document or section
+number so the routing condition does not itself become stale if the current division is superseded in
+turn.
+
+This restatement changes only the routing target for GAP-5's already-ruled requirement.
+
+It does **not**:
+
+- add a new payload requirement;
+- choose a schema, enum, field, API, serialization, or storage representation;
+- decide whether reasons must be one-per-component or may be shared where causally identical;
+- decide whether I8(f)'s causal distinctions must appear in the outward payload or may remain in
+  machine-readable internal state;
+- draft the eventual invariant;
+- authorize implementation;
+- close GAP-5;
+- reopen or amend Contract 001;
+- reopen or amend Contract 002;
+- affect GAP-4, GAP-6, GAP-7, Ruling 002 §10.5, or any other open item.
+
+**Status: operative / not closed.** The required operator approval was given by the determination
+above; the 2026-08-28 restatement remains historical, and this restatement is now GAP-5's operative
+closure-condition routing, in the capacity described there.
