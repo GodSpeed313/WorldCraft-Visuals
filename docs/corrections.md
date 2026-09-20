@@ -947,3 +947,186 @@ Statement: *"I acknowledge CR-008 as filed. The exact-line citation drift caused
 is confirmed for the 23 citation instances recorded here. CR-008 corrects those references only; it
 does not amend the underlying signed or acknowledged text, change any substantive proposition, or
 authorize any implementation."*
+
+---
+
+## CR-009
+
+```
+Target:            3 passages in Contract 002, all bearing on GAP-5's
+                   successor-contract routing status:
+
+                     1. Preamble, "What this document does not do"
+                        (docs/contract_002_domain_resolution_invariants.md:67-68):
+                        "It does not touch, bundle, or reserve a place for
+                        GAP-5. GAP-5's own successor-contract restatement
+                        remains 'proposed / not operative'; nothing here
+                        changes that, and no invariant number is reserved
+                        for it." — the defect is not the quoted historical
+                        fact (see Defect, Target 1 below) but the
+                        present-state implication carried by "nothing here
+                        changes that": that GAP-5 had no operative routing
+                        as of this reading.
+                     2. §5 Exclusions, table row (:243):
+                        "GAP-5 (`SURFACED` payload completeness) | tracked
+                        separately; its successor-contract routing is not
+                        operative and is not addressed here" — direct state
+                        assertion.
+                     3. §7 Sign-off checklist, §5-row attestation clause
+                        (:334-338, clause at :338): "...GAP-5 to its own,
+                        not-yet-operative routing;..." — direct state
+                        assertion.
+
+Signed:            contract_002, attested in full (`:362`) — every row of §7
+                   signed 2026-09-15, LOCKED 2026-09-15, single commit
+                   (42427a6). Target 2 is itself the §5 body; Target 3 is
+                   §7's own verification of §5; Target 1 is preamble text
+                   the LOCKED status line (`:362`, "attested in full")
+                   covers along with the rest of the document, not only the
+                   seven numbered §7 rows.
+
+Defect:            Common chronology. GAP-5's closure condition has carried
+                   exactly one successor-contract restatement since
+                   2026-08-28 (`open_contract_gaps.md:805-843`), Status
+                   "proposed / not operative," until 2026-09-17, when the
+                   operator approved a second, later restatement as GAP-5's
+                   operative routing target (`docs/open_contract_gaps.md:846-916`,
+                   "Proposed successor-contract restatement — 2026-09-17,"
+                   Status: "operative / not closed"; closing paragraph
+                   `:914-916` — "now GAP-5's operative closure-condition
+                   routing"). That determination is substantively recorded
+                   in open_contract_gaps.md; commit 8de5b5f ("docs: approve
+                   GAP-5 successor routing restatement") is the
+                   repository-history record of when it was committed, not
+                   the substantive authority for the determination itself.
+                   Contract 002 was LOCKED 2026-09-15, two days before that
+                   determination. None of the three passages is mislocated
+                   or misquoted; the defect is in the governance-state
+                   proposition or implication each carries, not in where the
+                   passage resides.
+
+                   Target 2 (`:243`). Direct state assertion. "Its
+                   successor-contract routing is not operative" was true at
+                   LOCK (2026-09-15) and is false as of 2026-09-17.
+
+                   Target 3 (`:338`). Direct state assertion, same shape as
+                   Target 2. "GAP-5 to its own, not-yet-operative routing"
+                   was true at LOCK and is false as of 2026-09-17.
+
+                   Target 1 (`:67-68`). Different shape from Targets 2/3 —
+                   preserved as such, not flattened into the same wording.
+                   The quoted historical sub-clause — "GAP-5's own
+                   successor-contract restatement remains 'proposed / not
+                   operative'" — is NOT the defect and did NOT become
+                   false: it names the 2026-08-28 restatement specifically,
+                   which was never edited or retracted and still carries
+                   that literal Status label today. The defect is the
+                   present-state implication the sentence carries via
+                   "nothing here changes that" — read at the time Contract
+                   002 was LOCKED, this told a reader that GAP-5 currently
+                   had no operative routing at all. That implication became
+                   stale on 2026-09-17: GAP-5 does now have an operative
+                   routing target, created by a separate, later restatement
+                   the 2026-08-28 text and this preamble sentence could not
+                   have anticipated. The historical fact quoted remains
+                   true; the present-state reading it invites is what is
+                   now misleading.
+
+                   Contract 002 is LOCKED and, per its own §6 text
+                   (`:260-262`) and `amendment_policy.md`, no part of a
+                   LOCKED document's text is amended for any reason,
+                   including a defect this or a later act discovers; none
+                   of the three passages can be corrected in place.
+
+Classification:    historical-state defect batch. Targets 2 and 3 are
+                   direct state assertions made false by subsequent
+                   governance; Target 1 is a present-state implication made
+                   stale by the same governance act while its literal
+                   quoted historical clause remains true. Distinct in kind
+                   from CR-008 (referential/pointer drift). See scope note
+                   below.
+
+Basis:             Substantive authority for all three: `docs/open_contract_gaps.md:846-916`,
+                   the 2026-09-17 operator determination. Provenance only:
+                   commit 8de5b5f, confirmed via `git show 8de5b5f --
+                   docs/open_contract_gaps.md`. Contract 002's LOCKED status
+                   and 2026-09-15 date confirmed at
+                   `docs/contract_002_domain_resolution_invariants.md:7`.
+
+                   Sweep scope note. All three targets were located by a
+                   full-document sweep of contract_002 for "GAP-5" (4
+                   instances total) and "operative" (8 instances total,
+                   case-insensitive). The sweep found one further GAP-5
+                   instance (`:344`, "no GAP-5 content") and five further
+                   "operative" instances (`:7`, `:8`, `:17`, `:36` — Contract
+                   002's own supersession status; `:48-49` — GAP-4's,
+                   not GAP-5's, routing) and excluded all of them: none
+                   depends on GAP-5's routing status, so none is made false
+                   or stale by the 2026-09-17 determination. They are not
+                   correction targets and are noted here only to record why
+                   the sweep stopped at three. Re-verified against the
+                   repository baseline current at drafting (`main` at
+                   2371880).
+
+Effect:            None on Contract 002's substance and none on GAP-5's
+                   status. This entry:
+                     - does not amend contract_002_domain_resolution_invariants.md
+                       at any of the three locations — the LOCKED text stays
+                       exactly as attested;
+                     - does not reopen Contract 002's LOCK or any signature,
+                       including any individual §7 row;
+                     - does not close GAP-5, which remains open;
+                     - does not itself create the operative routing — that
+                       was already done by the 2026-09-17 operator
+                       determination; this entry only records that three
+                       passages of Contract 002's text are now stale with
+                       respect to it;
+                     - does not draft or authorize the GAP-5 successor
+                       contract, and does not authorize any implementation;
+                     - does not extend beyond these three proven
+                       historical-state defects — the excluded items noted
+                       under Basis are not corrected here and require their
+                       own separate treatment, if any, to be added.
+
+                   Unaffected propositions, stated narrowly per target:
+                     - Target 1: "It does not touch, bundle, or reserve a
+                       place for GAP-5" and "no invariant number is reserved
+                       for it" remain true; the literal quoted historical
+                       clause about the 2026-08-28 restatement's own Status
+                       label remains true.
+                     - Target 2: "tracked separately" and "is not addressed
+                       here" remain true.
+                     - Target 3: the other eight exclusion-routing clauses
+                       in the same §7 sentence (domain names, provider
+                       choice, registry expansion, implementation mechanism,
+                       Seam 3, Ruling 002 §10.5/§10.7, Fusion Engine, other
+                       governance-document edits) remain true and are
+                       unaffected.
+
+Scope note — CR-009 is state drift, not pointer drift like CR-008:
+                   CR-008 corrects citations whose exact-line target moved
+                   because an editable file had text inserted above the
+                   cited line — the underlying proposition stayed true
+                   throughout; only its address changed, and each of its 21
+                   rows corrects a distinct citation to a distinct
+                   proposition. CR-009 is the opposite shape: no address
+                   ever moved or was wrong, but a factual proposition (or,
+                   for Target 1, a present-state implication) written into
+                   LOCKED text — true, or not yet stale, when LOCKED — was
+                   made false or stale by a later, independent governance
+                   act that the LOCKED text has no mechanism to reflect.
+                   CR-009's three targets are batched together, not as
+                   distinct claims sharing only a cause (CR-008's shape),
+                   but as one recurring claim about GAP-5's routing status,
+                   asserted twice directly and implied once, all three
+                   overtaken by the same 2026-09-17 act. Both entries are
+                   recorded here only because the affected text cannot be
+                   edited in place; the distinction between them is kept as
+                   register precedent for classifying future candidates of
+                   either shape.
+
+Recorded:          2026-09-20
+```
+
+**Acknowledgment** — pending. No operator acknowledgment has been given for CR-009.
+
