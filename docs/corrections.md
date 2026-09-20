@@ -1128,5 +1128,15 @@ Scope note — CR-009 is state drift, not pointer drift like CR-008:
 Recorded:          2026-09-20
 ```
 
-**Acknowledgment** — pending. No operator acknowledgment has been given for CR-009.
+**Acknowledgment** — Statement: *"I acknowledge CR-009 as filed. I confirm that it correctly records three historical-state defects in Contract 002 arising from the 2026-09-17 GAP-5 routing determination: two direct statements that GAP-5 routing was not operative, and one present-state implication that became stale while its quoted historical statement remained true.
+
+I acknowledge CR-009 only as a correction record. This acknowledgment does not amend or reopen Contract 002, does not alter its LOCKED status or any signature, does not close GAP-5, does not create or change the operative GAP-5 routing, does not draft or authorize the GAP-5 successor contract, and does not authorize implementation.
+
+I also confirm the distinction recorded by CR-009 between referential or pointer drift, as in CR-008, and historical-state drift caused by subsequent governance."*
+
+Acknowledged (operator): Kevin Brown
+Acknowledged at: 2026-09-20 19:05 EDT
+```
+
+
 
