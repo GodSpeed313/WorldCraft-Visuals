@@ -135,9 +135,10 @@ acknowledgment supplies no new authority and does not broaden, complete, perfect
 independently grant the authority established by my 2026-09-20 determination.
 
 This acknowledgment does not approve any GAP-5 successor-contract text, does not authorize
-signing or LOCK of a successor contract, does not supersede Contract 001 or Contract 002,
-does not close GAP-5, does not authorize implementation or code changes, does not release any
-other FE Requirements §39 hold, and does not amend or reopen any LOCKED instrument."*
+signing, acknowledgment, ratification, LOCK, or supersession of any GAP-5 successor contract,
+does not supersede Contract 001 or Contract 002, does not close GAP-5, does not authorize
+implementation or code changes, does not release any other FE Requirements §39 hold, and does
+not amend or reopen any LOCKED instrument."*
 
 ---
 
