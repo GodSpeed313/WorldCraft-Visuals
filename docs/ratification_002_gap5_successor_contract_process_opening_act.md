@@ -119,7 +119,25 @@ disclaims, any effect on GAP-5's OPEN status, on Contract 001, Contract 002, or 
 
 ## 3. Acknowledgment
 
-**Acknowledgment — pending. No operator acknowledgment has been given for Ratification 002.**
+```
+Acknowledged (operator): Kevin Brown
+Acknowledged at: 2026-09-20
+```
+
+Statement: *"I acknowledge Ratification 002 as filed.
+
+I confirm that Ratification 002 correctly and accurately archives my 2026-09-20 operator
+determination narrowing the `fusion_engine_requirements_v0.1.md` §39 `Successor contract — ON
+HOLD` item solely to permit preparation and review of a GAP-5 successor-contract draft.
+
+I acknowledge Ratification 002 only as the archival record of that prior operator act. This
+acknowledgment supplies no new authority and does not broaden, complete, perfect, replace, or
+independently grant the authority established by my 2026-09-20 determination.
+
+This acknowledgment does not approve any GAP-5 successor-contract text, does not authorize
+signing or LOCK of a successor contract, does not supersede Contract 001 or Contract 002,
+does not close GAP-5, does not authorize implementation or code changes, does not release any
+other FE Requirements §39 hold, and does not amend or reopen any LOCKED instrument."*
 
 ---
 
