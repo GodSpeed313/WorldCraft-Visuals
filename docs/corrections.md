@@ -1142,4 +1142,152 @@ I acknowledge CR-009 only as a correction record. This acknowledgment does not a
 
 I also confirm the distinction recorded by CR-009 between referential or pointer drift, as in CR-008, and historical-state drift caused by subsequent governance."*
 
+---
+
+## CR-010
+
+```
+Target:            4 defective lifecycle-state passages in
+                   docs/contract_003_gap5_surfaced_payload_preservation.md:
+
+                     1. :3 — "DRAFT." (document-status characterization)
+                     2. :79 — "It does not sign, attest, or lock itself.
+                        Every row in §7 is blank."
+                     3. :359-362 — "Every row below is blank... No row's
+                        box is filled in during this drafting pass."
+                     4. :435-444 — PORTIONS ONLY: "Drafted, not signed,
+                        not locked." and "This draft's existence, by
+                        itself, satisfies and records nothing." The
+                        same passage's other clause, "GAP-5 remains open
+                        against `open_contract_gaps.md`," is NOT a
+                        target — it remains accurate and is expressly
+                        excluded below.
+
+Signed:            Contract 003, attested in full — all seven §7 rows
+                   individually dated 2026-09-20 (:364-431), Status
+                   line reading "LOCKED (2026-09-20)" (:13). The
+                   underlying operator acts producing that state — §7
+                   attestation, a separate SIGNED act, a separate LOCK
+                   act, and a separate filing authorization — are
+                   independently archived in
+                   ratification_003_contract_003_lifecycle_operator_acts.md
+                   (filed 721039b, acknowledged dbda26b).
+
+Defect:            Each target passage was a true description of
+                   Contract 003 during an earlier stage of the same
+                   drafting session — confirmed by
+                   ratification_003...md §1.1, which cites a
+                   pre-attestation tool result (2026-09-21T03:22:01Z)
+                   showing all seven §7 rows literally unchecked at
+                   that point. Each became false before the single
+                   commit (d0a191a) that landed the document's current
+                   text, because the four operator acts archived in
+                   ratification_003...md §1.1-§1.4 (§7 attestation
+                   03:26:38Z, SIGNED act 03:40:22Z, LOCK act
+                   03:55:46Z, filing authorization 04:03:29Z) all
+                   completed roughly 40 minutes before that commit,
+                   without the earlier drafting-stage language being
+                   reconciled to match. The falsifying event therefore
+                   PRECEDES the commit that carries the false text,
+                   not a later, independent act overtaking previously
+                   accurate text.
+
+Classification:    Stale drafting-stage residue producing a direct
+                   internal lifecycle contradiction in the artifact as
+                   landed. Distinct from both existing correction
+                   shapes in this file, cited here as contrasting
+                   precedent rather than controlling precedent:
+                     - CR-008's shape is citation/pointer drift — an
+                       unrelated later insertion elsewhere shifted line
+                       numbers while the underlying proposition stayed
+                       true throughout. No line-number pointer is wrong
+                       here.
+                     - CR-009's shape is historical-state drift — a
+                       statement true when its document LOCKED, later
+                       made false by an INDEPENDENT, SUBSEQUENT
+                       governance act occurring after that lock (the
+                       2026-09-17 GAP-5 routing determination,
+                       overtaking Contract 002 two days after its own
+                       lock). Here there is no such gap: the acts that
+                       falsify the target passages occurred BEFORE, not
+                       after, the commit that landed them, inside the
+                       same continuous drafting-to-LOCK process.
+
+Basis:             corrections.md:3 ("This file records defects
+                   discovered in already-signed corpus text") states
+                   this file's scope generally, not limited to either
+                   existing narrower shape.
+                   ratification_003_contract_003_lifecycle_operator_acts.md
+                   §1.1-§1.4 and its evidentiary-basis section (session
+                   log SHA-256 464e1805601944fd52230a13204e6a9656f698f
+                   c67df39c694d9d5aac45e9bc2; locked-artifact SHA-256
+                   7ebcafae3824a7bac9e7f446a89263402603f9e76ca4eea5f37
+                   aac532d07e50d, independently matched against the
+                   d0a191a git blob) is the archival evidence
+                   establishing that the four lifecycle acts occurred
+                   and when. Contract 003 :13 and :364-431 are the
+                   current, operative text this correction reads
+                   against. amendment_policy.md §1 (no exception, ever,
+                   to LOCKED text) is why this defect is recorded here
+                   rather than edited in Contract 003 itself.
+
+Effect:            None on Contract 003's substance, status, or
+                   supersession. This entry:
+                     - does not edit, amend, or reopen Contract 003;
+                     - does not repeat or perform any §7 attestation;
+                     - does not perform a new SIGNED act;
+                     - does not perform a new LOCK act;
+                     - does not create or repeat supersession;
+                     - does not alter Contract 003's existing LOCKED
+                       status;
+                     - does not alter its existing supersession of
+                       Contract 002 §§3-4;
+                     - does not close GAP-5;
+                     - does not alter GAP-5's OPEN status;
+                     - does not authorize implementation of any kind;
+                     - does not amend Contract 001 or Contract 002;
+                     - does not modify any FE Requirements §39 hold.
+
+Scope note —       Three things this entry deliberately does NOT
+what is NOT        touch, stated so a later reader does not mistake
+corrected:          silence for oversight:
+                     1. "GAP-5 remains open against
+                        `open_contract_gaps.md`" (:435-436, part of the
+                        same passage as target 4) remains true right
+                        now and is not a defect. GAP-5's register
+                        status is independent of Contract 003's own
+                        lifecycle status. The "GAP-5 remains open"
+                        statement in this Contract 003 passage remains
+                        accurate and is not a target of this
+                        correction.
+                     2. The naming-determination statements at :4-6
+                        and :448-451 ("this determination... does not
+                        itself attest any §7 row or mark this document
+                        SIGNED or LOCKED") are narrow, true statements
+                        about what that ONE specific act (fixing the
+                        document's title/filename) did and did not do.
+                        They remain accurate regardless of what later,
+                        separate acts subsequently did, and are not
+                        targets.
+                     3. The historical LOCK-readiness verification
+                       process's coverage of this specific defect type
+                       is a separate procedural question, addressed
+                       only to the extent needed to distinguish it from
+                       this textual defect: this entry corrects the
+                       TEXT; it does not evaluate or revise the
+                       verification PROCEDURE that preceded LOCK.
+
+Recorded:          2026-09-23
+```
+
+**Acknowledgment** — an acknowledgment, not a section signature, and deliberately narrower than
+what a Contract 001 row receives, per the pattern CR-008 and CR-009 already establish.
+
+```
+Acknowledged (operator): [PENDING]
+Acknowledged at:          [PENDING]
+```
+
+Statement: *[reserved for Kevin's own wording — not drafted here]*
+
 
