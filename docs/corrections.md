@@ -1284,10 +1284,10 @@ Recorded:          2026-09-23
 what a Contract 001 row receives, per the pattern CR-008 and CR-009 already establish.
 
 ```
-Acknowledged (operator): [PENDING]
-Acknowledged at:          [PENDING]
+Acknowledged (operator): Kevin Brown
+Acknowledged at:          2026-09-23 14:15:54 EDT (-0400)
 ```
 
-Statement: *[reserved for Kevin's own wording — not drafted here]*
+Statement: *"I acknowledge CR-010 as filed."*
 
 
