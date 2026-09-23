@@ -166,12 +166,20 @@ searched window and file produced.
 ## 3. Acknowledgment
 
 ```
-Acknowledged (operator): [PENDING]
-Acknowledged at:          [PENDING]
+Acknowledged (operator): Kevin Brown
+Acknowledged at:          2026-09-23 13:52:20 EDT (-0400)
 ```
 
-Statement: *[reserved for Kevin's own wording, per this corpus's established practice — not
-drafted here]*
+Statement: *"I acknowledge Ratification 003 as filed.
+
+I confirm that Ratification 003 retrospectively records and archives the recovered Contract 003
+lifecycle operator acts and does not create, complete, perfect, repeat, or retroactively supply
+those acts or their authority.
+
+This acknowledgment does not amend, reopen, sign, or lock Contract 003; does not resolve or
+repair its residual DRAFT-language passages; does not amend Contract 001 or Contract 002; does
+not close GAP-5; does not alter any FE Requirements §39 hold; and does not authorize
+implementation."*
 
 ---
 
