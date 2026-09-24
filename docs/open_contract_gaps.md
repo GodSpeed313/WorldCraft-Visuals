@@ -226,6 +226,8 @@ the accepted components, the rejected components, and the reason for rejection.*
 
 Opened 2026-08-08.
 
+Closed 2026-09-23 by operator closure-recording act. See **Closed** below.
+
 ---
 
 ## GAP-6 — Caching and storage strategy is unowned
@@ -713,6 +715,94 @@ approved 2026-09-15.
 
 ---
 
+### GAP-5 — `SURFACED` payload completeness
+
+**Closed on 2026-09-23, by the operator's explicit instruction to record GAP-5 as closed,
+subsequently filed in the repository commit that introduces this entry.** That instruction is the operative act;
+this register text records its effect; the filing commit places that record into repository
+history and is not itself a source of operator authority. Neither this closure-recording
+instruction nor its filing commit caused, performed, or contributed to Contract 003's earlier
+LOCK or its supersession of Contract 002 §§3–4 — both were already complete and operative
+beforehand, exactly as the Chronology below states. This entry records that the operative
+closure condition (`open_contract_gaps.md:882-891`) is satisfied by
+`docs/contract_003_gap5_surfaced_payload_preservation.md` ("WorldCraft Contract 003 — Surfaced
+Payload Preservation"), which supersedes Contract 002 §§3–4 in full and carries I9 as the
+required invariant. This is the register's fourth closure.
+
+**Chronology, stated precisely so this entry cannot be read as performing, or as the source of,
+any part of it.** Contract 003's supersession of Contract 002 §§3–4 **became operative by the
+operator's LOCK act** (2026-09-20 23:55:46 EDT), which was **preceded by** the operator's §7
+attestation (23:26:38 EDT) and the operator's separate SIGNED act (23:40:22 EDT), and **followed
+by** the operator's separate filing authorization (2026-09-21 00:03:29 EDT). That filing
+authorization was **subsequently executed by** the repository filing commit
+`d0a191aaa01a01474370b919c59bc7e4037affa2` (2026-09-21) — a mechanical act of committing
+already-authorized text to version control, **not itself an operator act and not a source of
+operator authority**. All four operator acts — attestation, SIGNED act, LOCK act, filing
+authorization — are archived, with their exact timestamps and quoted text, in
+`ratification_003_contract_003_lifecycle_operator_acts.md` §1.1-§1.4 (filed `721039b`,
+acknowledged `dbda26b`). This GAP-5 closure-recording act is separate from and later than all
+four; its own operator act timestamp is 2026-09-23 22:11:30 EDT (Claude Code session record
+fc33a3f8-2f92-4b7c-9c52-71e5e9b40711). This entry does not recreate,
+repeat, or retroactively supply any of the four operator acts, and does not itself cause
+Contract 003's supersession of Contract 002 §§3–4 — that supersession was already operative, by
+the operator's own LOCK act alone, before this entry existed.
+
+The operative closure condition — the 2026-09-17 restatement (`open_contract_gaps.md:846-916`),
+not the 2026-08-28 restatement or the original pre-lock text at `:222-223` — is met:
+
+1. **A contract division supersedes the division currently carrying the enforcement invariants
+   for domain/family/grounding resolution.** Contract 003 states, in its own text, that it
+   supersedes Contract 002 §§3–4 (`contract_002_domain_resolution_invariants.md:139-230`) in
+   full, and no other division. **The operator's LOCK act (2026-09-20 23:55:46 EDT) made this
+   supersession operative**, per the Chronology above; Contract 002 §§3–4's own text remains
+   untouched and historically intact, per `amendment_policy.md:80-82`.
+2. **The invariant preserves successfully resolved components.** I9(b).
+3. **The invariant preserves unresolved/rejected components**, scoped exactly to components
+   legitimately halted to `GROUNDING_UNAVAILABLE` under I8(b)/(c) — the only component-level
+   terminal condition Contract 001 §5.1 maps to `SURFACED` (`:198-207`). I9(c).
+4. **The invariant requires per-component reason attribution**, with cardinality and
+   causal-recoverability limits beyond the closure condition's own bare wording. I9(d), (e), (g).
+5. **The invariant forbids discarding the accepted portion merely because another component
+   terminates unsuccessfully.** I9(f), drafted to track the closure condition's own causal
+   language directly, not a narrower paraphrase (`contract_003...md:404-406`).
+
+**What this closure does not do.**
+
+- **It does not recreate, repeat, or retroactively supply Contract 003's §7 attestation,
+  SIGNED act, LOCK act, or filing authorization.** Those four operator acts (see Chronology
+  above) already possessed their own independent force when made; this entry adds nothing to
+  that force and subtracts nothing from it, exactly as Ratification 003 itself states of its
+  own archival function (`ratification_003...md:6-8`).
+- **It does not itself cause, perform, or supply Contract 003's supersession of Contract 002
+  §§3–4.** That supersession is already operative, independently of this entry, as of the
+  operator's 2026-09-20 LOCK act alone.
+- It does not authorize any implementation of I9, Seam 2, GAP-4's I8, or any Fusion Engine
+  component. Contract 003's own exclusions (§5) expressly withhold that authorization; this
+  closure does not supply it either.
+- It does not release any FE Requirements v0.1 §39 hold. `Successor contract — ON HOLD` was
+  narrowed only for preparation/review of the Contract 003 draft
+  (`ratification_002_gap5_successor_contract_process_opening_act.md`), a scope that expressly
+  excludes GAP-5 closure (`:91-94`); the `Existing WorldCraft-Visuals code — UNMODIFIED` hold is
+  wholly untouched.
+- It does not edit Contract 001 or Contract 002. Both remain on the page exactly as attested;
+  only what Contract 002 §§3-4 governs has changed, via supersession, not amendment.
+- It does not decide Ruling 002 §10.3 / Seam 3, which I9(a) and Disposition 003 §1/§2.5/§2.8
+  both expressly leave open and non-blocking to this closure.
+- It does not repair, characterize, or resolve Contract 003's residual DRAFT-language passages
+  (`:3`, `:79`, `:359-362`, `:435-444`); that is CR-010's separate, already-filed and
+  acknowledged matter (`corrections.md:1147-1291`).
+- **It records a closure rather than performing one**, per this register's own established rule
+  (`amendment_policy.md:160`: *"It closes no register entry. Recording a closure is a separate
+  act under that register's rules"* — cited identically in GAP-8's, GAP-9's, and GAP-4's own
+  closures). The performing acts already occurred, separately and earlier — see Chronology
+  above. This entry's own act is limited to recording, in `open_contract_gaps.md`, that GAP-5's
+  closure condition is now satisfied by what those earlier operator acts already produced.
+
+Opened 2026-08-08 (original entry); restated as a successor-contract route 2026-08-28; routing
+re-approved by role 2026-09-17; closed 2026-09-23.
+
+---
+
 ## Closure conditions restated for successor contracts — 2026-08-28
 
 **Status:** proposed / not operative.
@@ -845,8 +935,10 @@ Restated 2026-08-28.
 
 ### Proposed successor-contract restatement — 2026-09-17
 
-**Status:** operative / not closed. Approved as the operative routing target for GAP-5's closure
-condition by operator determination, 2026-09-17; see below.
+**Status:** operative / **CLOSED 2026-09-23**. Approved as the operative routing target for GAP-5's closure
+condition by operator determination, 2026-09-17; closed 2026-09-23 by separate operator
+closure-recording act, once Contract 003's supersession of Contract 002 §§3–4 — operative via the
+operator's 2026-09-20 LOCK act — satisfied this routing's target. See **Closed** below.
 
 The 2026-08-28 restatement named Contract 001 §6 specifically. That was a deliberate departure from
 GAP-4's periphrastic routing language, made because GAP-5's own entry text named §6 by number.
@@ -911,6 +1003,8 @@ It does **not**:
 - reopen or amend Contract 002;
 - affect GAP-4, GAP-6, GAP-7, Ruling 002 §10.5, or any other open item.
 
-**Status: operative / not closed.** The required operator approval was given by the determination
+**Status: operative / CLOSED 2026-09-23.** The required operator approval was given by the determination
 above; the 2026-08-28 restatement remains historical, and this restatement is now GAP-5's operative
-closure-condition routing, in the capacity described there.
+closure-condition routing, in the capacity described there. See **Closed** below.
+
+Closed 2026-09-23 by operator closure-recording act. See **Closed** below.
