@@ -48,7 +48,12 @@ and they are the place to look before changing how concepts are named, classifie
 - **`ruling_002_family_taxonomy_integrity.md`** — what `family` is (a grounding behavior class, not an
   ontology), the domain layer, and what happens when a concept cannot be placed. **LOCKED.**
 - **`contract_001_domain_resolution.md`** — the machine-enforceable form: domain resolution states,
-  transitions, and invariants. **LOCKED.**
+  transitions, and invariants. **LOCKED.** Its §6 (the invariants) has since been superseded in full by
+  Contract 002; the rest of Contract 001 stands.
+- **`contract_002_domain_resolution_invariants.md`** — supersedes Contract 001 §6 in full; carries the
+  grounding-terminal halting invariant (I8), which closed GAP-4. **LOCKED** (2026-09-15).
+- **`contract_003_gap5_surfaced_payload_preservation.md`** — supersedes Contract 002 §§3–4 in full;
+  carries the surfaced-payload-preservation invariant (I9), which closed GAP-5. **LOCKED** (2026-09-20).
 - **`fusion_engine_requirements_v0.1.md`** — the Fusion Engine's own spec: capabilities and invariants
   (provenance, compatibility, dominance, refusal) for the `fusion_engine/` package above. **LOCKED.**
 - **`adr_001_fusion_engine_architecture_reconciliation.md`** — how the Fusion Engine's architecture
@@ -56,18 +61,26 @@ and they are the place to look before changing how concepts are named, classifie
 - **`audit_001_…` / `audit_002_…`** — measured evidence the rulings are argued from.
 - **`open_contract_gaps.md`** — the register, in two categories: requirements ruled but not yet
   enforceable, and *ownership gaps* — topics a document excludes that no document claims. GAP-4
-  (grounding-target fallback authority) is open; its substantive terminal policy is recorded in
-  `disposition_002_gap4_grounding_terminal_policy.md`, pending a successor contract to formally carry it.
+  (grounding-target fallback authority) and GAP-5 (`SURFACED` payload completeness) are closed, by
+  Contract 002 and Contract 003 respectively, as are GAP-8 and GAP-9; GAP-1, GAP-2, GAP-3, GAP-6 and
+  GAP-7 remain open.
 - **`corrections.md`** — defects found in already-signed text. It records them and closes nothing, and
   authorizes no edit, so the text stays exactly as attested.
 - **`authorizations.md`** — bounded, one-time permission to edit specific lines or create specific new
-  files, with specific wording and scope.
+  files, with specific wording and scope (AUTH-001 through AUTH-005), together with the standing rule for
+  when an authorization counts as exercised and closed.
 - **`amendment_policy.md`** — what may be done to a locked document's text: nothing. A locked document
   is superseded, never amended.
 - **`audit_method.md`** — how the corpus is swept for defects, never what a particular sweep found.
-- **`disposition_001_…` / `disposition_002_…`** — dated operator determinations that close a narrow
+- **`disposition_001_…` through `disposition_003_…`** — dated operator determinations that close a narrow
   open question, or preserve authoritative input for a future governing text, without amending any
   locked document.
+- **`ratification_001_…` through `ratification_003_…`** — dated archival records of operator acts
+  (contract lifecycle acts, the GAP-5 process-opening act) that already had independent force. They add
+  nothing to, and subtract nothing from, the acts they record, and authorize no edit.
+- **`proposals/`** — non-binding proposals (currently
+  `proposal_001_compositional_capability_ontology.md`) that rule nothing, close nothing, and authorize
+  no edit.
 - **`evidence/`** — preserved exhibits, including Regression Case 001.
 
 Each document carries its own sign-off checklist, which is the authority on what has been signed.
@@ -110,6 +123,12 @@ The Fusion Engine (`fusion_engine/`) is new: its v0.1 requirements are locked an
 this codebase, and the minimum C1→C2→C3 slice (contribution classification, provenance, compatibility)
 is implemented, tested (51 tests), and merged. C4 (dominance), C5 (the full structured reasoning
 record), and C6 (creative presentation) are not yet built.
+
+Contract 002's grounding-terminal invariant (I8) has been implemented in the Mythos-Sync engine under
+`AUTH-005`: when grounding fails, the engine now halts as `GROUNDING_UNAVAILABLE` and preserves which
+condition occurred, instead of silently falling back to a generic power. Contract 003 (surfaced-payload
+preservation) is locked, but no authorization to implement it has been recorded in
+`docs/authorizations.md`.
 
 Separately, the engine is being taken from a closed-world model — a hand-authored registry that is correct for the vocabulary it contains — toward one that can accept concepts it was never authored with. That transition is being specified in `docs/` before it is implemented, which is why much of the recent history is rulings rather than code.
 
