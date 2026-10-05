@@ -1,20 +1,12 @@
 # WorldCraft Ruling 003 — Fusion-Level Result Derivation Across Differing Component Resolution Stages
 
-**DRAFT — NOT LOCKED — NOT GOVERNING**
+**LOCKED — GOVERNING**
 
-**Status:** DRAFT — NOT LOCKED — NOT GOVERNING. This Ruling has no governing effect until full
-sign-off is complete and the document is separately marked LOCKED.
+**Status:** **LOCKED** — all fourteen rows signed off by the operator, 2026-10-04. Binding.
 
-**Revision:** Ruling 003 pre-sign correction candidate — not locked. Derived from the filed
-signing candidate (20,791 bytes, SHA-256
-`836BBD67E5F43AA73D46EFBD64BF4A4FC219388D7C71D89468D7D71DECFF0DF1`), itself derived from the v3
-candidate r3 (19,888 bytes, SHA-256
-`EA1B9FF1784D3A85F9627B7D2A5C801EAE02B75A88B830DB2DEC0BBE4CBCCECC`). Changes from that base: the
-operator-adjudicated pre-sign correction set — definitions and result-state attribution in §2, the
-categories statement, the §7.4 references in §1 and §2, the §4.1 vocabulary bound in §2, the §4.3
-partition, the I5 account in §6.2 and the Contract 001 §5.1 reference in §6.3, the `SURFACED`
-construction in §10, and the provenance note's account of §10 — together with lifecycle apparatus
-and the sign-off checklist.
+**Revision:** Substantive text frozen at the pre-sign correction candidate (24,019 bytes, SHA-256
+`9DCBCC514FE34D5BA5B2E7250EFE4E637ED5C9967E1F8D5649B730A526D48B85`); thereafter changed only by the
+fourteen row attestations and the LOCK edit to lifecycle apparatus.
 
 **Number:** 003, assigned by operator decision on 2026-10-04. "B3", wherever it appears in this
 document — including in the category label NEW B3 POLICY and in the verbatim quotation in §10 —
@@ -381,7 +373,7 @@ and they are the only text that the act of marking this Ruling LOCKED may change
   statement at :121 about this session identifier is reconciled with the preserved transcript; or
   any proposition in §§1–12, to which this note confers no authority.
 
-Not binding until every row above is signed off and this document is marked LOCKED.
+All fourteen rows signed off by the operator; marked LOCKED 2026-10-04. Binding. A locked ruling states what is true; it does not assert that implementations already obey it.
 
 ---
 
