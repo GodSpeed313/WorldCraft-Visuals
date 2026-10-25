@@ -1206,3 +1206,29 @@ Recorded explicitly, as AUTH-003 recorded it (`authorizations.md:359-377`):
 This entry is appended after the final line of the register as it stood at `4cedae0` (line 980),
 at the operator's direction, so that no existing line moves. Its position after the lifecycle rule
 and Amendment 1 carries no meaning, and it amends neither.
+
+### AUTH-006 — Closure record
+
+```
+Exercise status:        EXERCISED AND SPENT
+Landed as:              2e5cba46ad75e07562d161a00b1f4bed48749553
+Pull request:           #5
+Exercise recorded at:   2026-10-24 22:27:38 -0400
+```
+
+The first qualifying exercise was the merge of PR #5 into `main`, a merge commit made
+2026-10-25T02:23:57Z (2026-10-24 22:23:57 -0400). Under "Authorization Exercise and Closure" §2,
+that is the first time any part of the authorized act landed on the authoritative branch. This
+record was added later; per §4 it documents an exercise that had already occurred and does not
+imply AUTH-006 remained operative between the merge and this recording.
+
+Recorded because the merge SHA alone does not identify which reviewed commit was merged:
+
+- Second parent of the merge: `8b9409e5c20e7edb343b6fbedc0216bf6f0ff677`, the implementation commit, landed unchanged.
+- The merge adds exactly one file, `test_regression_case_001.py`, and modifies no existing file.
+  Its SHA-256 on `main` is `5cebe62e734edaa200afb04b0398fa0651ff363c274f140bd4ba067489babe44`.
+
+Per §6, this closure does not amend, broaden, narrow, reinterpret, ratify, or supersede
+AUTH-006's scope. AUTH-006's grant record, including its original `Status:` line, is unchanged
+and the question of the register's jurisdiction over code remains as the grant record left it.
+This record authorizes nothing further, including any future AUTH-007 candidate.
