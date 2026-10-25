@@ -978,3 +978,231 @@ generally belong in this register.
 
 Adopted by: Kevin Brown, operator
 Adopted on: 2026-09-16 20:36 EDT
+
+---
+
+## AUTH-006
+
+```
+Authorizes:        creation of one new top-level file, test_regression_case_001.py,
+                   protecting Regression Case 001 against recurrence of the
+                   unauthorized Hashirama Senju x William Vangeance profile
+Target scope:      one new file, repository root; no existing file modified;
+                   no existing-code hold other than the one scope determination
+                   below is touched
+Route:             operator determination (independent act; FE Requirements
+                   §39 scope determination, recorded below) -> recorded here ->
+                   implement on a dedicated branch -> verify against the
+                   checklist below -> PR -> merge
+Granted by:        Kevin Brown, operator
+Granted at:        2026-10-24, in session
+Basis:             Ruling 001 §6, Normalization Regression Case 001
+                   (`ruling_001_canonicalization_policy.md`), naming
+                   "Unknown character/power silently became GROUNDED" as
+                   failure #1 under Invariant 1; the preserved exhibit
+                   `docs/evidence/regression_case_001.json` (sha256
+                   3fa4d990c7877b63a5796bf33c43c28a0dc0c66f7c1df91d0279ffcb50fb86ac,
+                   see `docs/evidence/README.md`); AUTH-003 (Seam 1
+                   conformance, implemented at `c7f0ab7`); FE Requirements
+                   §39, whose hold is neither released nor modified by this
+                   entry
+Status:            granted; NOT YET EXERCISED — no file within the scope of
+                   this authorization has been created as of this recording
+```
+
+**What actually authorizes this, and what this entry is.** Two operator acts and one record, kept
+separate on purpose:
+
+- **The §39 scope determination** is Kevin Brown's own act, stated in his own words below. It
+  determines that one named additive file lies outside the existing-code hold. It releases nothing
+  and grants no implementation permission.
+- **The AUTH-006 authorization** is Kevin Brown's own act, stated in his own words below. It is
+  what permits the one implementation slice.
+- **This AUTH-006 record** is the archive of those acts — the durable, discoverable place recording
+  that they were made, what they cover, and what they do not. It creates no authority. Appending
+  this record is a documentation-only act; it is not the implementation slice and does not exercise
+  AUTH-006.
+
+**Preserved issuance record (outside the repository, not part of the corpus).** The operator's
+issuance message was preserved verbatim in `WorldCraft-Evidence` before this entry was written:
+
+- Path: `C:\Users\User\WorldCraft-Evidence\OPERATOR_ISSUANCE_FE_SECTION_39_SCOPE_AND_AUTH_006_20261024T210928-0400.txt`
+- Size: 8768 bytes
+- SHA-256: `29f6b124dbf4db0122e90f4a4430178493b9f9454581f9cd8db464e15b7d68ff`
+- Written: 2026-10-24 21:09:49 -0400 (file modification time — when the record was written, not
+  necessarily when the operator sent the message)
+- Form: UTF-8, LF, no BOM, no trailing newline. Transcribed by Claude Code from the message as
+  received in session; byte-level identity with the operator's original transmission is not
+  independently verifiable from inside the session.
+
+The quoted blocks below are generated from that file mechanically, not retyped.
+
+### Operator statement
+
+> I hereby issue the following two operator acts.
+
+### FE Requirements §39 scope determination (operator, verbatim)
+
+> I determine that creating the new top-level file `test_regression_case_001.py`, without modifying any existing repository file, is additive work outside the FE Requirements §39 hold on existing WorldCraft-Visuals code.
+>
+> This determination applies only to that named file.
+>
+> All existing-code holds remain unchanged. This determination alone grants no implementation permission.
+>
+> AUTH-004's treatment of additive files is precedent, not the source of this independent determination.
+
+### AUTH-006 authorization (operator, verbatim)
+
+> I authorize one implementation slice: creation of the new top-level file `test_regression_case_001.py` to protect Regression Case 001 against recurrence of the unauthorized Hashirama Senju × William Vangeance profile.
+>
+> This authorization is single-use and subject to the existing Authorization Exercise and Closure rule in `docs/authorizations.md`.
+>
+> ### Authorized scope
+>
+> - Create only `test_regression_case_001.py` in the repository root.
+> - Read `docs/evidence/regression_case_001.json` without modifying it.
+> - Use standard-library `unittest` and existing public functions.
+> - Implement the permanent regression detector and separately named baseline test.
+> - Work on a dedicated branch, verify the implementation, and prepare a PR.
+>
+> ### Required test behavior
+>
+> 1. Derive the exact character names and dominance value `50` from the preserved exhibit.
+>
+> 2. Reject the unauthorized `GROUNDED` classification with the `unknown` tag. Neither condition alone constitutes the prohibited combination.
+>
+> 3. Reject a `lore_summary` containing `"Unknown Entity"`.
+>
+> 4. Reject the exact Espionage / One-Inch Punch / Psychological Mastery power set. Do not reject an individual power or a larger set merely because it contains those powers. Document that this check is supplementary because the original power draw was random.
+>
+> 5. Use a generated-profile-field denylist for `CAUTIONARY` results, not a result-key allowlist. The denylist covers:
+>    - `approved_powers`
+>    - `power_families`
+>    - `dominant_family`
+>    - `signature_ability`
+>    - `influence_pattern`
+>    - `rhetorical_style`
+>    - `lore_summary`
+>    - `audit_log`
+>    - `biome`
+>
+>    Do not prohibit a future `reason` field merely because it adds a key to the result.
+>
+> 6. Verify that the permanent detector identifies the preserved exhibit's failure signatures. The detector must not pass vacuously.
+>
+> 7. Keep the registry-absence precondition in the baseline test only. The permanent regression tests must not depend on either character remaining unregistered.
+>
+> 8. Keep permanent regression protection independent of the current `CAUTIONARY` baseline.
+>
+> 9. Include a separately named baseline test confirming the current `4cedae0` behavior: `CAUTIONARY`, no modality, and no generated profile. Its docstring must explain that a future authorized resolver change may require a separately authorized modification of this existing baseline test.
+>
+> 10. If randomness is involved, save the random state, seed deterministically, and restore the state afterward. Do not use repeated random trials as a substitute for deterministic verification.
+>
+> 11. Suppress console output during test execution using an appropriate standard-library mechanism.
+>
+> ### Explicit exclusions
+>
+> - No modifications to existing source files.
+> - No modifications to existing test files.
+> - No modifications to character registries, evidence, CI configuration, or lore.
+> - Do not call `save_to_matrix` or `export_for_web`.
+> - Do not modify `containment_matrix.json`.
+> - Do not implement reason-travel remediation.
+> - Do not modify dashboard rendering or case-detail behavior.
+> - Do not implement a resolver.
+> - Do not undertake successor-contract work.
+> - Do not modify or release any other §39 hold.
+> - No `Co-Authored-By` trailer in any commit.
+> - No `"Generated with Claude Code"` line in the PR body.
+>
+> The implementation authorization covers one new test file only. The separate documentation-only recording act described below is not part of that implementation-file allowance.
+
+### Implementation sequence after recording (operator, verbatim)
+
+The operator's Stage A (preservation and recording of this entry) is the act that appends this
+record. The operator's Stage B follows, and its gate is part of this authorization:
+
+> Stage B may begin only after Stage A has been recorded, verified, pushed with my approval, and separately released to proceed.
+>
+> 1. **Create a dedicated implementation branch from `main` at the pushed Stage A documentation commit.**
+>
+> 2. Create only the authorized top-level file `test_regression_case_001.py`.
+>
+> 3. Implement the permanent regression detector and separately named baseline test according to §2.
+>
+> 4. Run:
+>    - The new regression test.
+>    - The existing `test_engine` suite.
+>    - The existing `fusion_engine/tests` suite.
+>    - The applicable CI test-discovery command.
+>
+> 5. Verify that `docs/evidence/regression_case_001.json` remains unchanged and has SHA-256:
+>
+>    `3fa4d990c7877b63a5796bf33c43c28a0dc0c66f7c1df91d0279ffcb50fb86ac`
+>
+> 6. Verify that `containment_matrix.json` remains byte-identical to its pre-test state.
+>
+> 7. Verify that the implementation diff against the pushed Stage A documentation commit contains exactly one added file, `test_regression_case_001.py`, and no modified or deleted files.
+>
+> 8. Commit without a `Co-Authored-By` trailer.
+>
+> 9. Obtain my explicit confirmation before pushing the implementation branch.
+>
+> 10. Obtain separate explicit confirmation before opening the PR.
+>
+> 11. Verify the PR's CI results and report the authorization's exercise status according to the existing Authorization Exercise and Closure rule.
+>
+> Do not claim AUTH-006 is spent merely because a branch commit exists. Apply the existing lifecycle rule to determine when the qualifying exercise occurs.
+
+### Boundaries (operator, verbatim)
+
+> The following issues remain outside AUTH-006:
+>
+> - The dashboard crash when `renderGrid()` encounters a `CAUTIONARY` result with `modality: null`.
+> - The separate `openCase()` handling of nullable modality and future reason display.
+> - The missing governed reason in the returned `CAUTIONARY` result.
+> - Resolver implementation and domain/family resolution.
+> - Successor-contract Draft v1 and its fidelity findings.
+> - Any additional FE Requirements §39 hold release.
+>
+> The dashboard and reason-travel issues are candidates for a separately scoped future AUTH-007, not permission to change them now.
+>
+> Do not silently broaden AUTH-006 to repair related defects.
+>
+> Do not introduce additional governance work unrelated to the authorized regression test.
+
+### Lifecycle
+
+AUTH-006 is subject to the `Authorization Exercise and Closure` rule in this register
+(`authorizations.md:833` onward) and defines no exercise condition of its own, so that rule's
+defaults apply. Appending this entry is not a qualifying exercise. A commit on an implementation
+branch is not, by itself, a qualifying exercise. Exercise status and any closure record are
+determined under that rule when the time comes and are not asserted here.
+
+### On `authorizations.md`'s own stated scope
+
+Recorded explicitly, as AUTH-003 recorded it (`authorizations.md:359-377`):
+
+1. `authorizations.md`'s introductory text (`authorizations.md:3-5`) describes the register as
+   recording authorizations "to edit corpus text". Read strictly, that sentence does not mention
+   source code or test files.
+2. This entry does **not** determine that the register's subject matter generally encompasses source
+   code or tests, and decides nothing about the register's jurisdiction over code.
+3. This entry does **not** expand or amend the register's introductory definition, and does not
+   depend on it being read broadly.
+4. The §39 scope determination and the AUTH-006 authorization are independent operator acts; their
+   authority comes from Kevin Brown's own determination, not from this register's jurisdiction.
+5. Whether future code authorizations generally belong in this register, and under what definitional
+   revision, is **not decided here** and remains open
+   (`authorizations.md:837` records the same reservation).
+6. AUTH-006's validity does not depend on resolving that question. If the register's scope is later
+   formally extended to code, or code authorizations are later routed elsewhere, this entry's
+   validity is unaffected either way.
+7. AUTH-004's treatment of additive files (`authorizations.md:532-534`) is precedent only. The
+   operator stated that it is not the source of the §39 scope determination above.
+
+### Placement
+
+This entry is appended after the final line of the register as it stood at `4cedae0` (line 980),
+at the operator's direction, so that no existing line moves. Its position after the lifecycle rule
+and Amendment 1 carries no meaning, and it amends neither.
