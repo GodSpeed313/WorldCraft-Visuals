@@ -1399,3 +1399,43 @@ the operator in the review response of 2026-10-25, quoted verbatim:
    pass vacuously.
 
 Nothing in this note changes the issuance's scope, exclusions or verification requirements.
+
+### AUTH-007 — Closure record
+
+```
+Exercise status:        EXERCISED AND SPENT
+Landed as:              cedc43fe37cba7d6ee658f28270b17f6ab1ae823
+Pull request:           #6
+Exercise recorded at:   2026-10-25 23:16:46 -0400
+```
+
+The first qualifying exercise was the merge of PR #6 into `main`, a merge commit made
+2026-10-25T23:15:35-04:00 (2026-10-26T03:15:35Z; GitHub reports `mergedAt` 2026-10-26T03:15:36Z). Under
+"Authorization Exercise and Closure" §2, that is the first time any part of the authorized act landed on
+the authoritative branch. This record was added later; per §4 it documents an exercise that had already
+occurred and does not imply AUTH-007 remained operative between the merge and this recording.
+
+Recorded because the merge SHA alone does not identify which reviewed commits were merged:
+
+- First parent of the merge: `40247cda7c251b0fb330512affe115396974e080`, the prior `main`.
+- Second parent of the merge: `7edd947896b4fc18167e41f566c022db76a4a19f`, the PR head the operator
+  approved for merging, landed unchanged. The PR carried two commits, `eb96b70` and `7edd947`, and no
+  others. The merge was made as a merge commit, not a squash or rebase, as the operator's merge approval
+  directed.
+- The merge changes exactly three files relative to the prior `main`: `dashboard.html` (modified),
+  `docs/authorizations.md` (appended; no existing line changed) and `test_dashboard_null_modality.py`
+  (added). On `main`, `dashboard.html` has SHA-256
+  `93555a8f8c3577b8e088d256b953fae304a9abfce2a682b8201f7f3cf9dc6122` and `test_dashboard_null_modality.py`
+  has SHA-256 `af938607571c4636f51618a99df77aab09d5fda862291d3f4f49672022b8bc49`.
+- CI: PR run 40262915948 on the approved head, and push run 40263186470 on the merge commit; `test (3.10)`,
+  `test (3.11)` and `test (3.12)` completed with conclusion `success` in both runs.
+- Neither commit in the PR nor the merge commit carries a `Co-Authored-By` trailer or a "Generated with"
+  line, and the PR body carried none, as the operator's attribution instruction directed.
+- `containment_matrix.json` is not tracked by git; its SHA-256 on the working machine was
+  `3FA4D990C7877B63A5796BF33C43C28A0DC0C66F7C1DF91D0279FFCB50FB86AC` before the implementation and after
+  the merge. That is a local observation, not repository evidence.
+
+Per §6, this closure does not amend, broaden, narrow, reinterpret, ratify, or supersede AUTH-007's scope.
+AUTH-007's grant record, including its original `Status:` line and the "Review clarifications" note, is
+unchanged, and the question of the register's jurisdiction over code remains as the grant record left it.
+This record authorizes nothing further, including any AUTH-008 or any other work.
