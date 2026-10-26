@@ -1232,3 +1232,145 @@ Per §6, this closure does not amend, broaden, narrow, reinterpret, ratify, or s
 AUTH-006's scope. AUTH-006's grant record, including its original `Status:` line, is unchanged
 and the question of the register's jurisdiction over code remains as the grant record left it.
 This record authorizes nothing further, including any future AUTH-007 candidate.
+
+---
+
+## AUTH-007
+
+```
+Authorizes:        two bounded edits to dashboard.html and one new top-level test
+                   file, so that a CAUTIONARY entry (modality: null) neither crashes
+                   renderGrid() nor causes loadMatrix() to report a false
+                   missing-file message
+Target scope:      dashboard.html::renderGrid() (card template, entries whose
+                   modality is null only)
+                   dashboard.html::loadMatrix() (error handling only)
+                   one new top-level test file under test_*.py discovery
+Route:             operator determination (independent act; FE Requirements
+                   §39 release, recorded below) -> implement on a dedicated
+                   branch -> verify against the checklist below -> this entry lands
+                   in the same PR as the fix -> operator review of the diff and
+                   test evidence -> PR merge on the operator's explicit approval ->
+                   closure record
+Granted by:        Kevin Brown, operator
+Granted at:        2026-10-25, in session
+Basis:             Ruling 001 §4 (`ruling_001_canonicalization_policy.md:209-218`),
+                   under which a CAUTIONARY result carries no modality and emits
+                   no fusion output; `mythos_sync.py:159-165`, which returns
+                   `{"fusion_name", "state": "CAUTIONARY", "modality": None}`;
+                   `server.py:48-50`, which persists that result into
+                   `containment_matrix.json`; the AUTH-006 boundaries
+                   (`authorizations.md:1159-1168`), which named this crash as
+                   outside AUTH-006 and as a candidate for a separately scoped
+                   future AUTH-007; FE Requirements §39
+                   (`fusion_engine_requirements_v0.1.md:1397`, `:1402`), whose
+                   hold is released ONLY for the two surfaces named above
+Status:            granted; NOT YET EXERCISED — no file within the scope of
+                   this authorization has landed on main as of this recording
+```
+
+**What actually authorizes this, and what this entry is.** Three operator acts and one record, kept
+separate on purpose:
+
+- **Act 1 — the §39 release** is Kevin Brown's own act, stated in his own words below. It removes
+  a prohibition and grants nothing.
+- **Act 2 — the implementation authorization** is Kevin Brown's own act. It is what permits the two
+  `dashboard.html` edits.
+- **Act 3 — the new-file determination** is Kevin Brown's own act. It is what permits the one new
+  test file.
+- **This AUTH-007 record** is the archive of those acts. It creates no authority. Per the operator's
+  issuance, the acts take effect on issue and the operator stated that implementation may begin
+  before this entry lands; this entry lands in the same PR as the fix.
+
+**Issuance record.** The operator's issuance message is quoted below as received in session. It was
+not separately preserved outside the repository before this entry was written, so byte-level identity
+with the operator's original transmission is not independently verifiable from inside the session.
+
+### Operator statement
+
+> AUTH-007 — issued by the operator, 2026-10-25. Three separate acts.
+
+### Act 1 — §39 release (operator, verbatim)
+
+> I release the FE §39 UNMODIFIED hold on dashboard.html, limited to two surfaces: (a) the renderGrid() card template’s handling of entries whose modality is null, and (b) loadMatrix()’s error handling. Every other function or section of dashboard.html, and all other §39-held code, remain held exactly as recorded. This release removes a prohibition and grants nothing.
+
+### Act 2 — Implementation authorization (operator, verbatim)
+
+> I authorize exactly:
+>
+> In renderGrid(), entries with modality == null get their own card: badge text from f.state, no signature or biome lines, no onclick, no invented reason text.
+> In loadMatrix(), fetch failures and rendering failures are reported separately. The missing-file message appears only when the fetch fails or returns a non-OK response. A rendering exception is shown as a rendering failure and logged to the console with its error message. Neither kind of failure is silently discarded, and no cause is invented for either.
+
+### Act 3 — New-file determination (operator, verbatim)
+
+> I authorize one new top-level test file under test_*.py discovery. It runs the dashboard script under node in a vm with a fake DOM and in-memory fetch. It fails, and does not skip, if node is unavailable. Its fixture is the literal CAUTIONARY stub dict, not build_legacy_profile(). It never calls save_to_matrix or export_for_web and never touches containment_matrix.json. It asserts:
+>
+> for [normal entry, CAUTIONARY stub], one card renders per entry and no missing-file message appears;
+> a forced rendering exception does not produce the missing-file message;
+> a failed fetch still produces it.
+>
+> It must fail against the current dashboard.html and pass after the fix.
+
+### Explicit exclusions (operator, verbatim)
+
+> Exclusions: openCase() in full, including reason display; CAUTIONARY persistence in server.py; the governed CAUTIONARY reason (Contract 003 I5); the “Total” tile; the Hypothesis flake and all existing tests; CI config; resolver work; successor-contract work; every other §39 hold; AUTH-005 closure.
+
+### Verification (operator, verbatim)
+
+> Verification: all CI suites pass; the new test fails before the fix and passes after; containment_matrix.json is byte-identical; the diff touches only dashboard.html, the new test file, and docs/authorizations.md.
+
+### Recording and attribution (operator, verbatim)
+
+> Recording: this message is the authorization and takes effect on issue, so implementation may begin now. The AUTH-007 entry in docs/authorizations.md records it and lands in the same PR as the fix. A closure record follows the merge. If you find any provision requiring the register entry to land before implementation, stop and report it with the citation before writing code.
+>
+> Attribution: no Co-Authored-By trailer and no “Generated with Claude Code” line on AUTH-007 commits or PRs.
+>
+> AUTH-007 is exercised and spent on merge to main. It authorizes nothing further.
+
+### Merge gate (operator instruction, same message)
+
+> Before merging, stop and present the diff and test evidence (including the pre-fix failure) for operator review. Do not merge without my explicit approval
+
+### Provision check required by the recording instruction
+
+The operator directed that any provision requiring this entry to land before implementation be
+reported before code was written. A pattern search across all of `docs/authorizations.md`, together with
+full reads of the `Authorization Exercise and Closure` rule and its Amendment 1, AUTH-005 and AUTH-006,
+found no such requirement. The "recorded, then implement" sequences in AUTH-005 and AUTH-006 are routes
+stated in those entries and are not a general rule. AUTH-001 to AUTH-004 were searched by pattern but not
+read in full, and the search covered `docs/authorizations.md` only; it was not an exhaustive sweep of the
+governance corpus.
+
+### Lifecycle
+
+AUTH-007 is subject to the `Authorization Exercise and Closure` rule in this register
+(`authorizations.md:833` onward). The operator's issuance states that AUTH-007 is exercised and spent on
+merge to `main`, which is that rule's default exercise condition (§2). Appending this entry is not a
+qualifying exercise. A commit on an implementation branch is not, by itself, a qualifying exercise. A
+closure record follows the merge; exercise status is determined under that rule when the time comes and
+is not asserted here.
+
+### On `authorizations.md`'s own stated scope
+
+Recorded explicitly, as AUTH-003 and AUTH-006 recorded it:
+
+1. `authorizations.md`'s introductory text (`authorizations.md:3-5`) describes the register as
+   recording authorizations "to edit corpus text". Read strictly, that sentence does not mention
+   source code or test files.
+2. This entry does **not** determine that the register's subject matter generally encompasses source
+   code or tests, and decides nothing about the register's jurisdiction over code.
+3. This entry does **not** expand or amend the register's introductory definition, and does not
+   depend on it being read broadly.
+4. The §39 release, the implementation authorization and the new-file determination are independent
+   operator acts; their authority comes from Kevin Brown's own determination, not from this register's
+   jurisdiction.
+5. Whether future code authorizations generally belong in this register, and under what definitional
+   revision, is **not decided here** and remains open (`authorizations.md:837` records the same
+   reservation).
+6. AUTH-007's validity does not depend on resolving that question.
+
+### Placement
+
+This entry is appended after the final line of the register as it stood at `40247cd` (line 1234), so
+that no existing line moves. Its position after AUTH-006 and its closure record carries no meaning, and
+it amends neither.

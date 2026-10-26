@@ -413,9 +413,21 @@
 
   // ── Load from containment_matrix.json ──
   async function loadMatrix() {
+    const grid = document.getElementById('matrix-grid');
+    // A failed fetch or a non-OK response is the only thing reported as a missing file.
+    let res = null;
     try {
-      const res = await fetch('containment_matrix.json?t=' + Date.now());
-      if (!res.ok) throw new Error('not found');
+      res = await fetch('containment_matrix.json?t=' + Date.now());
+    } catch(e) {}
+    if (!res || !res.ok) {
+      grid.innerHTML = `
+        <div class="empty-state">
+          No matrix file found.<br/>
+          Run <code>python mythos_sync.py</code> to generate fusions, then refresh.
+        </div>`;
+      return;
+    }
+    try {
       MATRIX = await res.json();
       // Patch missing fields
       MATRIX.forEach((f, i) => {
@@ -428,10 +440,13 @@
       });
       renderGrid();
     } catch(e) {
-      document.getElementById('matrix-grid').innerHTML = `
+      // Not a missing file: the matrix was fetched but could not be rendered.
+      console.error('Matrix failed to render:', e.message);
+      const detail = String(e.message).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      grid.innerHTML = `
         <div class="empty-state">
-          No matrix file found.<br/>
-          Run <code>python mythos_sync.py</code> to generate fusions, then refresh.
+          Matrix could not be rendered.<br/>
+          <code>${detail}</code>
         </div>`;
     }
   }
@@ -465,7 +480,15 @@
       return;
     }
 
-    grid.innerHTML = MATRIX.map((f, i) => `
+    grid.innerHTML = MATRIX.map((f, i) => f.modality == null ? `
+      <div class="fusion-card ${f.state ?? ''}">
+        <span class="card-badge ${f.state ?? ''}">${f.state ?? ''}</span>
+        <p class="card-name">${f.fusion_name}</p>
+        <div class="card-footer">
+          <span class="card-id">${f.id}</span>
+        </div>
+      </div>
+    ` : `
       <div class="fusion-card ${f.modality}" onclick="openCase(${i})">
         <span class="card-badge ${f.modality}">${f.modality.replace('_',' ')}</span>
         <p class="card-name">${f.fusion_name}</p>
