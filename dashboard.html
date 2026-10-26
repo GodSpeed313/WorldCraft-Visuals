@@ -418,7 +418,9 @@
     let res = null;
     try {
       res = await fetch('containment_matrix.json?t=' + Date.now());
-    } catch(e) {}
+    } catch(e) {
+      console.error('Matrix fetch failed:', e.message);
+    }
     if (!res || !res.ok) {
       grid.innerHTML = `
         <div class="empty-state">

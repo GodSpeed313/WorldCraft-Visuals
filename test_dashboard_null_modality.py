@@ -150,6 +150,11 @@ def count_cards(grid_html):
     return grid_html.count('class="fusion-card')
 
 
+def split_cards(grid_html):
+    """One string per rendered card, split on each card's opening tag."""
+    return grid_html.split('<div class="fusion-card')[1:]
+
+
 class DashboardNullModalityTests(unittest.TestCase):
 
     @classmethod
@@ -166,6 +171,20 @@ class DashboardNullModalityTests(unittest.TestCase):
         result = run_dashboard({"mode": "matrix", "matrix": matrix})
         self.assertNotIn(MISSING_FILE_MESSAGE, result["grid"])
         self.assertEqual(count_cards(result["grid"]), len(matrix))
+
+    def test_null_modality_card_has_no_case_detail_trigger(self):
+        """openCase() dereferences modality too, so a null-modality card must not reach it."""
+        matrix = [NORMAL_ENTRY, CAUTIONARY_STUB]
+        result = run_dashboard({"mode": "matrix", "matrix": matrix})
+        cards = split_cards(result["grid"])
+        self.assertEqual(len(cards), len(matrix))
+        by_name = {name: card for name in (e["fusion_name"] for e in matrix)
+                   for card in cards if name in card}
+        # Non-vacuity: the normal card does carry the trigger, so the check below can fail.
+        self.assertIn("onclick", by_name[NORMAL_ENTRY["fusion_name"]])
+        stub_card = by_name[CAUTIONARY_STUB["fusion_name"]]
+        self.assertNotIn("onclick", stub_card)
+        self.assertNotIn("openCase", stub_card)
 
     def test_rendering_exception_is_not_reported_as_a_missing_file(self):
         """A rendering failure is shown as one, with its message logged, not as a missing file."""

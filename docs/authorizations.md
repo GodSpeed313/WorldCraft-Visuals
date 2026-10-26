@@ -1374,3 +1374,28 @@ Recorded explicitly, as AUTH-003 and AUTH-006 recorded it:
 This entry is appended after the final line of the register as it stood at `40247cd` (line 1234), so
 that no existing line moves. Its position after AUTH-006 and its closure record carries no meaning, and
 it amends neither.
+
+### Review clarifications — 2026-10-25 (not part of the original AUTH-007 authorization)
+
+This note is a record of two operator directions given during review of the implementation diff, after
+the three acts above were issued. It is separate from the verbatim issuance, which is unchanged. It
+adds no scope to the issuance, and it releases no further hold. The two directions below were given by
+the operator in the review response of 2026-10-25, quoted verbatim:
+
+1. Fetch failures — console log:
+
+> Fetch failures: add a console log of the fetch error inside loadMatrix(). The missing-file message stays unchanged.
+
+   Implemented in `loadMatrix()`'s fetch stage only: the fetch exception's message is logged with
+   `console.error`. The missing-file message text is unchanged. A non-OK response throws nothing and so
+   logs nothing.
+
+2. Test assertion — no case-detail trigger on a null-modality card:
+
+> Add a test assertion that a null-modality card carries no onclick and no case-detail trigger. This verifies Act 2's existing requirement.
+
+   Implemented as one added test in the AUTH-007 test file. It asserts that the CAUTIONARY card carries
+   neither `onclick` nor `openCase`, and that the normal card does carry `onclick`, so the check cannot
+   pass vacuously.
+
+Nothing in this note changes the issuance's scope, exclusions or verification requirements.
