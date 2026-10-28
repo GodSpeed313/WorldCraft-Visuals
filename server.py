@@ -70,6 +70,12 @@ class MythosHandler(SimpleHTTPRequestHandler):
         self.wfile.write(body)
 
 
+def make_server(host='127.0.0.1', port=8000):
+    """Build the bound server without serving. AUTH-009 section H: exists so
+    startup and binding can be tested in an isolated process."""
+    return HTTPServer((host, port), MythosHandler)
+
+
 if __name__ == '__main__':
     use_utf8_output()
     port = 8000
@@ -77,4 +83,4 @@ if __name__ == '__main__':
     print(f"  🌌 MYTHOS-SYNC SERVER — LIVE ON PORT {port}")
     print(f"  Open: http://localhost:{port}/dashboard.html")
     print(f"{'═'*50}\n")
-    HTTPServer(('', port), MythosHandler).serve_forever()
+    make_server().serve_forever()
