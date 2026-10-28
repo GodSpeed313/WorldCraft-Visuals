@@ -1439,3 +1439,153 @@ Per §6, this closure does not amend, broaden, narrow, reinterpret, ratify, or s
 AUTH-007's grant record, including its original `Status:` line and the "Review clarifications" note, is
 unchanged, and the question of the register's jurisdiction over code remains as the grant record left it.
 This record authorizes nothing further, including any AUTH-008 or any other work.
+
+---
+
+## AUTH-008
+
+```
+Authorizes:        one escaping helper and its use in both card branches of
+                   dashboard.html's renderGrid(), so that matrix-derived text
+                   renders as text rather than being interpreted as HTML, plus one
+                   new top-level test file
+Target scope:      dashboard.html::renderGrid() (both card-template branches: the
+                   null-modality card and the normal card)
+                   dashboard.html Helpers section (one new helper, esc(v), only)
+                   one new top-level test file under test_*.py discovery
+Route:             operator determination (independent act; FE Requirements
+                   §39 release, recorded below) -> implement on a dedicated
+                   branch -> verify against the checklist below -> this entry lands
+                   in the same PR as the fix -> operator review of the diff and
+                   test evidence -> PR merge on the operator's explicit approval ->
+                   closure record
+Granted by:        Kevin Brown, operator
+Granted at:        2026-10-27, in session
+Basis:             a read-only AUTH-008 candidate assessment run in session on
+                   2026-10-27, which found every matrix-derived value in
+                   renderGrid()'s card template (`dashboard.html:485-505` at
+                   `a910ecb`) inserted into HTML without escaping, with a
+                   CAUTIONARY stub's `fusion_name` the one field reachable with
+                   typed text (`modality_classifier.py:63-69`, `mythos_sync.py:161-165`,
+                   `server.py:48-50`); GitHub issue #7 item 4 ("HTML escaping"),
+                   which records the finding as backlog and grants nothing; AUTH-007
+                   (`authorizations.md:1295`, `:1316`), whose §39 release and
+                   exclusions left `openCase()` and every other section of
+                   `dashboard.html` held and which is exercised and spent; FE
+                   Requirements §39 (`fusion_engine_requirements_v0.1.md:1397`,
+                   `:1402`), whose hold is released ONLY for the surfaces named above
+Status:            granted; NOT YET EXERCISED — no file within the scope of
+                   this authorization has landed on main as of this recording
+```
+
+**What actually authorizes this, and what this entry is.** Three operator acts and one record, kept
+separate on purpose:
+
+- **Act 1 — the §39 release** is Kevin Brown's own act, stated in his own words below. It removes
+  a prohibition and grants nothing.
+- **Act 2 — the implementation authorization** is Kevin Brown's own act. It is what permits the
+  `dashboard.html` edits.
+- **Act 3 — the new-file determination** is Kevin Brown's own act. It is what permits the one new
+  test file.
+- **This AUTH-008 record** is the archive of those acts. It creates no authority. Per the operator's
+  issuance, the acts take effect on issue and the operator stated that implementation may begin
+  before this entry lands; this entry lands in the same PR as the fix.
+
+**Issuance record.** The operator's issuance message is quoted below as received in session. It was
+not separately preserved outside the repository before this entry was written, so byte-level identity
+with the operator's original transmission is not independently verifiable from inside the session.
+Act 3 is quoted in a code fence so that the markup-like test string in it renders as text; its words
+are verbatim.
+
+### Operator statement
+
+> AUTH-008 — issued by the operator, 2026-10-27. Three separate acts.
+
+### Act 1 — §39 release (operator, verbatim)
+
+> I release the FE §39 UNMODIFIED hold on dashboard.html, limited to: (a) both branches of the renderGrid() card template (the null-modality card and the normal card), and (b) the Helpers section, solely to add one escaping helper. openCase() and every other function or section of dashboard.html, and all other §39-held code, remain held exactly as recorded. This release removes a prohibition and grants nothing.
+
+### Act 2 — Implementation authorization (operator, verbatim)
+
+> I authorize exactly:
+>
+> One helper esc(v) in the Helpers section that returns String(v) with &, <, >, " and ' replaced by their HTML entities.
+> In both renderGrid() card branches, wrap every matrix-derived value inserted into HTML text or attributes in esc(). Comparisons and logic keep using raw values. No other change to card structure, classes, onclick behavior or visible text.
+
+### Act 3 — New-file determination (operator, verbatim)
+
+```text
+I authorize one new top-level test file under test_*.py discovery. It may import helper functions from test_dashboard_null_modality.py but must not modify that file. It fails, and does not skip, if node is unavailable. It never calls save_to_matrix or export_for_web and never touches containment_matrix.json. Using the hostile string <img src=x onerror=alert(1)>&"', it asserts:
+
+for a CAUTIONARY stub with a hostile fusion_name: no raw <img in the grid, the escaped form present, the unescaped card-name text equals the hostile string, two cards render, and the stub card has no onclick;
+for a normal card, as a subtest per field (fusion_name, signature_ability, biome, id): no raw <img and the escaped form present;
+a hostile modality or state cannot break out of a class attribute;
+a benign fixture including “Rhetoric & Legacy” renders the same visible text as before.
+
+It must fail against the current dashboard.html and pass after the fix. The existing AUTH-007 tests must still pass unchanged.
+```
+
+### Explicit exclusions (operator, verbatim)
+
+> Exclusions: openCase() in full (Slice B); server.py, including CORS, Content-Type handling, binding and CSP; the fusion engine; loadMatrix(); the stat tiles and every other issue #7 item; all existing tests; CI config; AUTH-005 closure; resolver and governed-reason work.
+
+### Verification (operator, verbatim)
+
+> Verification: all CI suites pass; the new test fails before the fix and passes after; containment_matrix.json is byte-identical; the diff touches only dashboard.html, the new test file and docs/authorizations.md.
+
+### Recording and attribution (operator, verbatim)
+
+> Recording: this message is the authorization and takes effect on issue. The AUTH-008 entry in docs/authorizations.md records it and lands in the same PR as the fix. A closure record follows the merge. If you find any provision requiring the entry to land before implementation, stop and report it with the citation before writing code.
+>
+> Attribution: no Co-Authored-By trailer and no “Generated with Claude Code” line on AUTH-008 commits or PRs.
+
+### Merge gate (operator instruction, same message)
+
+> Before merging, stop and present the diff and test evidence (including the pre-fix failure) for operator review. Do not merge without my explicit approval.
+>
+> AUTH-008 is exercised and spent on merge to main. It authorizes nothing further.
+
+### Provision check required by the recording instruction
+
+The operator directed that any provision requiring this entry to land before implementation be
+reported before code was written. A pattern search across all of `docs/authorizations.md`, together with
+full reads of the `Authorization Exercise and Closure` rule and its Amendment 1, AUTH-005, AUTH-006 and
+the AUTH-007 entry, found no such requirement; the only match was AUTH-007's own quoted recording
+instruction. The "recorded, then implement" sequences in AUTH-005 and AUTH-006 are routes stated in those
+entries and are not a general rule. AUTH-001 to AUTH-004 were searched by pattern but not read in full,
+and the search covered `docs/authorizations.md` only; it was not an exhaustive sweep of the governance
+corpus.
+
+### Lifecycle
+
+AUTH-008 is subject to the `Authorization Exercise and Closure` rule in this register
+(`authorizations.md:833` onward). The operator's issuance states that AUTH-008 is exercised and spent on
+merge to `main`, which is that rule's default exercise condition (§2). Appending this entry is not a
+qualifying exercise. A commit on an implementation branch is not, by itself, a qualifying exercise. A
+closure record follows the merge; exercise status is determined under that rule when the time comes and
+is not asserted here.
+
+### On `authorizations.md`'s own stated scope
+
+Recorded explicitly, as AUTH-003, AUTH-006 and AUTH-007 recorded it:
+
+1. `authorizations.md`'s introductory text (`authorizations.md:3-5`) describes the register as
+   recording authorizations "to edit corpus text". Read strictly, that sentence does not mention
+   source code or test files.
+2. This entry does **not** determine that the register's subject matter generally encompasses source
+   code or tests, and decides nothing about the register's jurisdiction over code.
+3. This entry does **not** expand or amend the register's introductory definition, and does not
+   depend on it being read broadly.
+4. The §39 release, the implementation authorization and the new-file determination are independent
+   operator acts; their authority comes from Kevin Brown's own determination, not from this register's
+   jurisdiction.
+5. Whether future code authorizations generally belong in this register, and under what definitional
+   revision, is **not decided here** and remains open (`authorizations.md:837` records the same
+   reservation).
+6. AUTH-008's validity does not depend on resolving that question.
+
+### Placement
+
+This entry is appended after the final line of the register as it stood at `a910ecb` (line 1441),
+so that no existing line moves. Its position after AUTH-007 and its closure record carries no meaning, and
+it amends neither.
