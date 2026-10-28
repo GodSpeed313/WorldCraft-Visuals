@@ -1,0 +1,107 @@
+Odalys Fenn   (The Medicine Seller x Re-l Mayer)   dominance: 50/50 (fixed in Phase 1; not applied as a weighting)
+
+CONCEPT
+  An examiner who will not accuse or act until an event has been established three separate ways, what happened, what was done and why, and who then seals the cause with a single paper charm and punishes no one.
+
+APPEARANCE
+  subject: a composed figure binding three drifting ribbons of light into one paper seal
+  build: medium height, narrow frame, hands folded
+  face: a calm, rounded face with deep-set dark eyes and a faint, patient half-smile
+  hair: silver-streaked hair coiled low and held with a knotted cord
+  clothing: layered robes in ink blue with narrow ivory borders, soft-soled shoes
+  palette: ink blue, ivory and vermilion accents
+  signature_element: a nested stack of small lacquered drawers hung from a cord at the hip, one drawer slightly open
+  ability_manifestation: the ribbons tighten into one seal that flares briefly, then goes dark
+  setting: an empty lamp-lit teahouse at night, paper screens and a single guest
+  mood: calm, unhurried, quietly exacting
+  lighting: warm lantern light with cool moonlit edges
+  style: painterly cinematic character concept art, three-quarter view
+  composed paragraph:
+    A composed figure binding three drifting ribbons of light into one paper seal. Build: medium height, narrow frame, hands folded. Face: a calm, rounded face with deep-set dark eyes and a faint, patient half-smile. Hair: silver-streaked hair coiled low and held with a knotted cord. Clothing: layered robes in ink blue with narrow ivory borders, soft-soled shoes. Palette: ink blue, ivory and vermilion accents. Signature element: a nested stack of small lacquered drawers hung from a cord at the hip, one drawer slightly open. Ability in use: the ribbons tighten into one seal that flares briefly, then goes dark. Setting: an empty lamp-lit teahouse at night, paper screens and a single guest. Mood: calm, unhurried, quietly exacting. Lighting: warm lantern light with cool moonlit edges. Style: painterly cinematic character concept art, three-quarter view.
+
+VISUAL PROVENANCE
+  subject | a composed figure binding three drifting ribbons of light into one paper seal | new | the_medicine_seller__re_l_mayer.threefold_finding (emergent ability)
+  build | medium height, narrow frame, hands folded | new | the_medicine_seller__re_l_mayer.threefold_finding (emergent ability)
+  face | a calm, rounded face with deep-set dark eyes and a faint, patient half-smile | new | the_medicine_seller__re_l_mayer.threefold_finding (emergent ability)
+  hair | silver-streaked hair coiled low and held with a knotted cord | new | the_medicine_seller__re_l_mayer.threefold_finding (emergent ability)
+  clothing | layered robes in ink blue with narrow ivory borders, soft-soled shoes | new | the_medicine_seller__re_l_mayer.threefold_finding (emergent ability)
+  palette | ink blue, ivory and vermilion accents | new | the_medicine_seller__re_l_mayer.threefold_finding (emergent ability)
+  signature_element | a nested stack of small lacquered drawers hung from a cord at the hip, one drawer slightly open | transformed | the_medicine_seller.v_signature (The Medicine Seller)
+      design change (scale): a tall wooden cabinet of many small drawers strapped to the back  ->  a nested stack of small lacquered drawers
+  ability_manifestation | the ribbons tighten into one seal that flares briefly, then goes dark | new | the_medicine_seller__re_l_mayer.threefold_finding (emergent ability)
+  setting | an empty lamp-lit teahouse at night, paper screens and a single guest | new | the_medicine_seller__re_l_mayer.threefold_finding (emergent ability)
+  mood | calm, unhurried, quietly exacting | new | the_medicine_seller__re_l_mayer.threefold_finding (emergent ability)
+  lighting | warm lantern light with cool moonlit edges | new | the_medicine_seller__re_l_mayer.threefold_finding (emergent ability)
+  style | painterly cinematic character concept art, three-quarter view | new | the_medicine_seller__re_l_mayer.threefold_finding (emergent ability)
+
+TRAITS
+  inherited:
+    - Threefold Knowing [A: The Medicine Seller] (SOURCE_DERIVED, FICTIONAL)
+      Carried as a hard bound: nothing is alleged or sealed until all three records are complete.
+    - Warding Talismans [A: The Medicine Seller] (SOURCE_DERIVED, FICTIONAL)
+      Carried: the paper seal is the instrument of the sealing.
+    - Forensic Method [B: Re-l Mayer] (SOURCE_DERIVED, FICTIONAL)
+      Carried intact: it establishes the form and the truth.
+    - Institutional Standing [B: Re-l Mayer] (SOURCE_DERIVED, FICTIONAL)
+      Carried: official rank is what lets a finished finding be acted upon.
+    - Standing Boundary [B: Re-l Mayer] (SOURCE_DERIVED, FICTIONAL)
+      Carried as a hard bound: outside the institutions that grant standing, a finding is only advice.
+    - Guarded Composure [B: Re-l Mayer] (SOURCE_DERIVED, FICTIONAL)
+      Carried: a finding is kept to the facts, with no performance.
+  transformed:
+    - Spirit Discernment [A: The Medicine Seller] (SOURCE_DERIVED, FICTIONAL)
+      Reading the nature of a spirit becomes reading the unseen cause behind an act; the result is weighed as testimony.
+    - Exorcist Blade [A: The Medicine Seller] (SOURCE_DERIVED, FICTIONAL)
+      The sword that may be drawn only once all three are known becomes the closing act of the finding: a sealing, not a strike. The sword itself is not carried.
+  complementary:
+    - Inscrutable Manner [A: The Medicine Seller] (SOURCE_DERIVED, FICTIONAL)
+      A calm, cryptic courtesy complements the work: it leads witnesses to give their own account.
+  not carried:
+    - Wandering Peddler [A: The Medicine Seller] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: A cover and social role the authored rule does not use.
+    - Artificial Companions [B: Re-l Mayer] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: A relationship the authored rule does not use.
+    - Sidearm Competence [B: Re-l Mayer] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: A combat skill the authored rule does not use.
+
+EMERGENT ABILITY
+  Threefold Finding  [INVENTED_BRIDGE]
+  The user reconstructs an event in three separate records, its form (what physically happened), its truth (what was done and by whom) and its reason (why), and only when all three agree may the cause be sealed with a paper talisman, ending the harm without punishing anyone.
+  governing rule (INVENTED_BRIDGE): Forensic method establishes the form and the truth of an event from evidence; spirit discernment supplies the reason as a reading of the unseen cause, weighed as testimony; the threefold condition makes all three records mandatory before the user may seal the cause with a paper talisman, a binding that stops the harm without punishing anyone; the user's official standing bounds who is bound to honour the result.
+  derived from: the_medicine_seller.spirit_discernment, the_medicine_seller.threefold_knowing, re_l_mayer.forensic_method, the_medicine_seller.warding_talismans, re_l_mayer.standing_boundary
+  activation: Time and access to evidence, testimony and the place where the harm began.
+  limitations:
+    - All three records are required: with the form, the truth or the reason missing or in conflict, nothing can be alleged or sealed.
+    - The reason is a reading, not proof: it is weighed as testimony and never stands alone as evidence.
+    - Sealing stops a cause, not a consequence: harm already done is not undone, and nobody is punished or cleared by it.
+    - A finding carries weight only where the user has official standing; elsewhere it is advice that may be ignored.
+    - Assembling three agreeing records is slow, demanding work that force cannot hurry.
+  inherited limitations:
+    - Threefold Knowing [The Medicine Seller] (hard limitation): The sealed sword can be drawn only once the Form, the Truth and the Reason of the spirit are all known.
+    - Standing Boundary [Re-l Mayer] (hard limitation): Her authority exists only inside the city's institutions; beyond them it carries no weight.
+
+EXCLUSIONS
+  - the sealed sword and its imprisoned spirit [A: The Medicine Seller]: An object and its lore, not a transferable mechanic.
+  - the recurring spirit antagonists and their stories [A: The Medicine Seller]: Plot, not a mechanic.
+  - the closed city and its politics [B: Re-l Mayer]: Setting and politics, not a mechanic.
+  - inherited family rank [B: Re-l Mayer]: A lineage role, not a mechanic.
+
+COMPATIBILITY
+  COMPATIBLE (0 activation conditions evaluated)
+
+ANCESTRY
+  - the_medicine_seller.spirit_discernment (source property [The Medicine Seller], SOURCE_DERIVED)
+  - the_medicine_seller.threefold_knowing (source property [The Medicine Seller], SOURCE_DERIVED)
+  - re_l_mayer.forensic_method (source property [Re-l Mayer], SOURCE_DERIVED)
+  - the_medicine_seller.warding_talismans (source property [The Medicine Seller], SOURCE_DERIVED)
+  - re_l_mayer.standing_boundary (source property [Re-l Mayer], SOURCE_DERIVED)
+  - the_medicine_seller__re_l_mayer.three_record_rule (interaction rule, INVENTED_BRIDGE)
+
+IMAGE PROMPT
+  a composed figure binding three drifting ribbons of light into one paper seal, medium height, narrow frame, hands folded, a calm, rounded face with deep-set dark eyes and a faint, patient half-smile, silver-streaked hair coiled low and held with a knotted cord, layered robes in ink blue with narrow ivory borders, soft-soled shoes, ink blue, ivory and vermilion accents, a nested stack of small lacquered drawers hung from a cord at the hip, one drawer slightly open, the ribbons tighten into one seal that flares briefly, then goes dark, an empty lamp-lit teahouse at night, paper screens and a single guest, calm, unhurried, quietly exacting, warm lantern light with cool moonlit edges, painterly cinematic character concept art, three-quarter view --ar 3:4 --style raw
+  (772 / 900 characters)
+
+LEAK CHECK (implemented detector): PASS

@@ -1,0 +1,498 @@
+{
+  "schema": "fusion-synthesis-card/1",
+  "fusion_name": "Odalys Fenn",
+  "sources": {
+    "A": "The Medicine Seller",
+    "B": "Re-l Mayer"
+  },
+  "concept": "An examiner who will not accuse or act until an event has been established three separate ways, what happened, what was done and why, and who then seals the cause with a single paper charm and punishes no one.",
+  "dominance": {
+    "value": 50,
+    "applied": false,
+    "note": "fixed in Phase 1; not applied as a weighting"
+  },
+  "appearance": {
+    "subject": "a composed figure binding three drifting ribbons of light into one paper seal",
+    "slots": {
+      "build": "medium height, narrow frame, hands folded",
+      "face": "a calm, rounded face with deep-set dark eyes and a faint, patient half-smile",
+      "hair": "silver-streaked hair coiled low and held with a knotted cord",
+      "clothing": "layered robes in ink blue with narrow ivory borders, soft-soled shoes",
+      "palette": "ink blue, ivory and vermilion accents",
+      "signature_element": "a nested stack of small lacquered drawers hung from a cord at the hip, one drawer slightly open",
+      "ability_manifestation": "the ribbons tighten into one seal that flares briefly, then goes dark"
+    },
+    "scene": {
+      "setting": "an empty lamp-lit teahouse at night, paper screens and a single guest",
+      "mood": "calm, unhurried, quietly exacting",
+      "lighting": "warm lantern light with cool moonlit edges",
+      "style": "painterly cinematic character concept art, three-quarter view"
+    },
+    "composed_paragraph": "A composed figure binding three drifting ribbons of light into one paper seal. Build: medium height, narrow frame, hands folded. Face: a calm, rounded face with deep-set dark eyes and a faint, patient half-smile. Hair: silver-streaked hair coiled low and held with a knotted cord. Clothing: layered robes in ink blue with narrow ivory borders, soft-soled shoes. Palette: ink blue, ivory and vermilion accents. Signature element: a nested stack of small lacquered drawers hung from a cord at the hip, one drawer slightly open. Ability in use: the ribbons tighten into one seal that flares briefly, then goes dark. Setting: an empty lamp-lit teahouse at night, paper screens and a single guest. Mood: calm, unhurried, quietly exacting. Lighting: warm lantern light with cool moonlit edges. Style: painterly cinematic character concept art, three-quarter view."
+  },
+  "visual_provenance": [
+    {
+      "slot": "subject",
+      "descriptor": "a composed figure binding three drifting ribbons of light into one paper seal",
+      "origin": "new",
+      "parent_ids": [
+        "the_medicine_seller__re_l_mayer.threefold_finding"
+      ],
+      "parents": [
+        {
+          "id": "the_medicine_seller__re_l_mayer.threefold_finding",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "build",
+      "descriptor": "medium height, narrow frame, hands folded",
+      "origin": "new",
+      "parent_ids": [
+        "the_medicine_seller__re_l_mayer.threefold_finding"
+      ],
+      "parents": [
+        {
+          "id": "the_medicine_seller__re_l_mayer.threefold_finding",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "face",
+      "descriptor": "a calm, rounded face with deep-set dark eyes and a faint, patient half-smile",
+      "origin": "new",
+      "parent_ids": [
+        "the_medicine_seller__re_l_mayer.threefold_finding"
+      ],
+      "parents": [
+        {
+          "id": "the_medicine_seller__re_l_mayer.threefold_finding",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "hair",
+      "descriptor": "silver-streaked hair coiled low and held with a knotted cord",
+      "origin": "new",
+      "parent_ids": [
+        "the_medicine_seller__re_l_mayer.threefold_finding"
+      ],
+      "parents": [
+        {
+          "id": "the_medicine_seller__re_l_mayer.threefold_finding",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "clothing",
+      "descriptor": "layered robes in ink blue with narrow ivory borders, soft-soled shoes",
+      "origin": "new",
+      "parent_ids": [
+        "the_medicine_seller__re_l_mayer.threefold_finding"
+      ],
+      "parents": [
+        {
+          "id": "the_medicine_seller__re_l_mayer.threefold_finding",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "palette",
+      "descriptor": "ink blue, ivory and vermilion accents",
+      "origin": "new",
+      "parent_ids": [
+        "the_medicine_seller__re_l_mayer.threefold_finding"
+      ],
+      "parents": [
+        {
+          "id": "the_medicine_seller__re_l_mayer.threefold_finding",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "signature_element",
+      "descriptor": "a nested stack of small lacquered drawers hung from a cord at the hip, one drawer slightly open",
+      "origin": "transformed",
+      "parent_ids": [
+        "the_medicine_seller.v_signature"
+      ],
+      "parents": [
+        {
+          "id": "the_medicine_seller.v_signature",
+          "character": "The Medicine Seller"
+        }
+      ],
+      "design_delta": {
+        "changed": "scale",
+        "from": "a tall wooden cabinet of many small drawers strapped to the back",
+        "to": "a nested stack of small lacquered drawers"
+      }
+    },
+    {
+      "slot": "ability_manifestation",
+      "descriptor": "the ribbons tighten into one seal that flares briefly, then goes dark",
+      "origin": "new",
+      "parent_ids": [
+        "the_medicine_seller__re_l_mayer.threefold_finding"
+      ],
+      "parents": [
+        {
+          "id": "the_medicine_seller__re_l_mayer.threefold_finding",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "setting",
+      "descriptor": "an empty lamp-lit teahouse at night, paper screens and a single guest",
+      "origin": "new",
+      "parent_ids": [
+        "the_medicine_seller__re_l_mayer.threefold_finding"
+      ],
+      "parents": [
+        {
+          "id": "the_medicine_seller__re_l_mayer.threefold_finding",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "mood",
+      "descriptor": "calm, unhurried, quietly exacting",
+      "origin": "new",
+      "parent_ids": [
+        "the_medicine_seller__re_l_mayer.threefold_finding"
+      ],
+      "parents": [
+        {
+          "id": "the_medicine_seller__re_l_mayer.threefold_finding",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "lighting",
+      "descriptor": "warm lantern light with cool moonlit edges",
+      "origin": "new",
+      "parent_ids": [
+        "the_medicine_seller__re_l_mayer.threefold_finding"
+      ],
+      "parents": [
+        {
+          "id": "the_medicine_seller__re_l_mayer.threefold_finding",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "style",
+      "descriptor": "painterly cinematic character concept art, three-quarter view",
+      "origin": "new",
+      "parent_ids": [
+        "the_medicine_seller__re_l_mayer.threefold_finding"
+      ],
+      "parents": [
+        {
+          "id": "the_medicine_seller__re_l_mayer.threefold_finding",
+          "character": "emergent ability"
+        }
+      ]
+    }
+  ],
+  "traits": [
+    {
+      "property_id": "the_medicine_seller.spirit_discernment",
+      "name": "Spirit Discernment",
+      "source": "A",
+      "character": "The Medicine Seller",
+      "outcome": "transformed",
+      "result_text": "Reading the nature of a spirit becomes reading the unseen cause behind an act; the result is weighed as testimony.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "the_medicine_seller.threefold_knowing",
+      "name": "Threefold Knowing",
+      "source": "A",
+      "character": "The Medicine Seller",
+      "outcome": "inherited",
+      "result_text": "Carried as a hard bound: nothing is alleged or sealed until all three records are complete.",
+      "contribution_type": "GOVERNING_RULE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "the_medicine_seller.exorcist_blade",
+      "name": "Exorcist Blade",
+      "source": "A",
+      "character": "The Medicine Seller",
+      "outcome": "transformed",
+      "result_text": "The sword that may be drawn only once all three are known becomes the closing act of the finding: a sealing, not a strike. The sword itself is not carried.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "the_medicine_seller.warding_talismans",
+      "name": "Warding Talismans",
+      "source": "A",
+      "character": "The Medicine Seller",
+      "outcome": "inherited",
+      "result_text": "Carried: the paper seal is the instrument of the sealing.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "the_medicine_seller.wandering_peddler",
+      "name": "Wandering Peddler",
+      "source": "A",
+      "character": "The Medicine Seller",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "CONCEPTUAL_ROLE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "A cover and social role the authored rule does not use."
+    },
+    {
+      "property_id": "the_medicine_seller.inscrutable_manner",
+      "name": "Inscrutable Manner",
+      "source": "A",
+      "character": "The Medicine Seller",
+      "outcome": "complementary",
+      "result_text": "A calm, cryptic courtesy complements the work: it leads witnesses to give their own account.",
+      "contribution_type": "BEHAVIOR",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "re_l_mayer.forensic_method",
+      "name": "Forensic Method",
+      "source": "B",
+      "character": "Re-l Mayer",
+      "outcome": "inherited",
+      "result_text": "Carried intact: it establishes the form and the truth.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "re_l_mayer.institutional_standing",
+      "name": "Institutional Standing",
+      "source": "B",
+      "character": "Re-l Mayer",
+      "outcome": "inherited",
+      "result_text": "Carried: official rank is what lets a finished finding be acted upon.",
+      "contribution_type": "CONCEPTUAL_ROLE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "re_l_mayer.standing_boundary",
+      "name": "Standing Boundary",
+      "source": "B",
+      "character": "Re-l Mayer",
+      "outcome": "inherited",
+      "result_text": "Carried as a hard bound: outside the institutions that grant standing, a finding is only advice.",
+      "contribution_type": "GOVERNING_RULE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "re_l_mayer.artificial_companions",
+      "name": "Artificial Companions",
+      "source": "B",
+      "character": "Re-l Mayer",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "OBJECT_RELATIONSHIP",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "A relationship the authored rule does not use."
+    },
+    {
+      "property_id": "re_l_mayer.guarded_composure",
+      "name": "Guarded Composure",
+      "source": "B",
+      "character": "Re-l Mayer",
+      "outcome": "inherited",
+      "result_text": "Carried: a finding is kept to the facts, with no performance.",
+      "contribution_type": "BEHAVIOR",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "re_l_mayer.sidearm_competence",
+      "name": "Sidearm Competence",
+      "source": "B",
+      "character": "Re-l Mayer",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "A combat skill the authored rule does not use."
+    }
+  ],
+  "emergent_ability": {
+    "id": "the_medicine_seller__re_l_mayer.threefold_finding",
+    "name": "Threefold Finding",
+    "description": "The user reconstructs an event in three separate records, its form (what physically happened), its truth (what was done and by whom) and its reason (why), and only when all three agree may the cause be sealed with a paper talisman, ending the harm without punishing anyone.",
+    "governing_rule": {
+      "id": "the_medicine_seller__re_l_mayer.three_record_rule",
+      "description": "Forensic method establishes the form and the truth of an event from evidence; spirit discernment supplies the reason as a reading of the unseen cause, weighed as testimony; the threefold condition makes all three records mandatory before the user may seal the cause with a paper talisman, a binding that stops the harm without punishing anyone; the user's official standing bounds who is bound to honour the result.",
+      "provenance": "INVENTED_BRIDGE"
+    },
+    "provenance": "INVENTED_BRIDGE",
+    "direct_ancestor_ids": [
+      "the_medicine_seller.spirit_discernment",
+      "the_medicine_seller.threefold_knowing",
+      "re_l_mayer.forensic_method",
+      "the_medicine_seller.warding_talismans",
+      "re_l_mayer.standing_boundary"
+    ],
+    "activation": "Time and access to evidence, testimony and the place where the harm began.",
+    "limitations": [
+      "All three records are required: with the form, the truth or the reason missing or in conflict, nothing can be alleged or sealed.",
+      "The reason is a reading, not proof: it is weighed as testimony and never stands alone as evidence.",
+      "Sealing stops a cause, not a consequence: harm already done is not undone, and nobody is punished or cleared by it.",
+      "A finding carries weight only where the user has official standing; elsewhere it is advice that may be ignored.",
+      "Assembling three agreeing records is slow, demanding work that force cannot hurry."
+    ],
+    "inherited_limitations": [
+      {
+        "property_id": "the_medicine_seller.threefold_knowing",
+        "name": "Threefold Knowing",
+        "character": "The Medicine Seller",
+        "kind": "hard limitation",
+        "description": "The sealed sword can be drawn only once the Form, the Truth and the Reason of the spirit are all known."
+      },
+      {
+        "property_id": "re_l_mayer.standing_boundary",
+        "name": "Standing Boundary",
+        "character": "Re-l Mayer",
+        "kind": "hard limitation",
+        "description": "Her authority exists only inside the city's institutions; beyond them it carries no weight."
+      }
+    ]
+  },
+  "exclusions": [
+    {
+      "item": "the sealed sword and its imprisoned spirit",
+      "source": "A",
+      "character": "The Medicine Seller",
+      "reason": "An object and its lore, not a transferable mechanic."
+    },
+    {
+      "item": "the recurring spirit antagonists and their stories",
+      "source": "A",
+      "character": "The Medicine Seller",
+      "reason": "Plot, not a mechanic."
+    },
+    {
+      "item": "the closed city and its politics",
+      "source": "B",
+      "character": "Re-l Mayer",
+      "reason": "Setting and politics, not a mechanic."
+    },
+    {
+      "item": "inherited family rank",
+      "source": "B",
+      "character": "Re-l Mayer",
+      "reason": "A lineage role, not a mechanic."
+    }
+  ],
+  "compatibility": {
+    "status": "COMPATIBLE",
+    "evaluated_conditions": 0,
+    "contradiction": null,
+    "required_bridge": null,
+    "unresolved_reason": null
+  },
+  "ancestry": [
+    {
+      "id": "the_medicine_seller.spirit_discernment",
+      "kind": "source property",
+      "character": "The Medicine Seller",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "the_medicine_seller.threefold_knowing",
+      "kind": "source property",
+      "character": "The Medicine Seller",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "re_l_mayer.forensic_method",
+      "kind": "source property",
+      "character": "Re-l Mayer",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "the_medicine_seller.warding_talismans",
+      "kind": "source property",
+      "character": "The Medicine Seller",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "re_l_mayer.standing_boundary",
+      "kind": "source property",
+      "character": "Re-l Mayer",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "the_medicine_seller__re_l_mayer.three_record_rule",
+      "kind": "interaction rule",
+      "provenance": "INVENTED_BRIDGE"
+    }
+  ],
+  "recorded_contribution_ids": [
+    "the_medicine_seller.spirit_discernment",
+    "the_medicine_seller.threefold_knowing",
+    "the_medicine_seller.exorcist_blade",
+    "the_medicine_seller.warding_talismans",
+    "the_medicine_seller.wandering_peddler",
+    "the_medicine_seller.inscrutable_manner",
+    "re_l_mayer.forensic_method",
+    "re_l_mayer.institutional_standing",
+    "re_l_mayer.standing_boundary",
+    "re_l_mayer.artificial_companions",
+    "re_l_mayer.guarded_composure",
+    "re_l_mayer.sidearm_competence"
+  ],
+  "image_prompt": {
+    "text": "a composed figure binding three drifting ribbons of light into one paper seal, medium height, narrow frame, hands folded, a calm, rounded face with deep-set dark eyes and a faint, patient half-smile, silver-streaked hair coiled low and held with a knotted cord, layered robes in ink blue with narrow ivory borders, soft-soled shoes, ink blue, ivory and vermilion accents, a nested stack of small lacquered drawers hung from a cord at the hip, one drawer slightly open, the ribbons tighten into one seal that flares briefly, then goes dark, an empty lamp-lit teahouse at night, paper screens and a single guest, calm, unhurried, quietly exacting, warm lantern light with cool moonlit edges, painterly cinematic character concept art, three-quarter view --ar 3:4 --style raw",
+    "suppressed": false,
+    "order": [
+      "subject",
+      "build",
+      "face",
+      "hair",
+      "clothing",
+      "palette",
+      "signature_element",
+      "ability_manifestation",
+      "setting",
+      "mood",
+      "lighting",
+      "style",
+      "parameters"
+    ],
+    "length": 772,
+    "ceiling": 900
+  },
+  "leak_check": {
+    "detector": "implemented detector",
+    "status": "PASS",
+    "findings": [],
+    "claim": "A pass establishes compliance with the implemented detector only. It is not a guarantee that no recognizable proper noun, character reference or franchise reference is present."
+  }
+}
