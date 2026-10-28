@@ -6,6 +6,7 @@
 import json
 import os
 import socket
+import time
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlsplit
 
@@ -171,9 +172,13 @@ class MythosHandler(SimpleHTTPRequestHandler):
         if getattr(self, 'command', None) == 'POST':
             try:
                 self.connection.shutdown(socket.SHUT_WR)
-                self.connection.settimeout(0.5)
+                deadline = time.monotonic() + 0.5
                 left = MAX_BODY_BYTES
                 while left > 0:
+                    remaining = deadline - time.monotonic()
+                    if remaining <= 0:
+                        break
+                    self.connection.settimeout(remaining)
                     chunk = self.connection.recv(min(left, 4096))
                     if not chunk:
                         break

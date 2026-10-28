@@ -1881,6 +1881,46 @@ file changes in the same PR and its line numbers move.
 >
 > AUTH-009 IS ISSUED. AUTH-010 REMAINS UNAUTHORIZED.
 
+### Supplemental authorization — `finish()` (operator, verbatim)
+
+Issued by the operator in session on 2026-10-28, after review of the `finish()` override introduced in
+the PR's second commit. It was issued as a separate act, after AUTH-009's original issuance.
+
+> I accept the `finish()` review findings. I adopt the total-deadline correction and decline the removal alternative.
+>
+> **Supplemental authorization — `finish()` (operator).** I authorize, as a named lifecycle exception to the "Unrelated startup or lifecycle behavior" exclusion in AUTH-009 Act 2, exactly one `finish()` override in `MythosHandler` in `server.py`, and no other change. For POST requests only, it does the following, in order:
+>
+> 1. Half-closes the connection with `shutdown(SHUT_WR)`.
+> 2. Discards at most 65,536 bytes received, under a total elapsed-time bound of 0.5 seconds measured with a monotonic deadline.
+> 3. Ignores `OSError`.
+> 4. Calls `super().finish()`.
+>
+> It parses nothing from the discarded bytes and changes no check order. It adds no threading, keep-alive, timeout or connection handling elsewhere. No test change is authorized or required by this supplement.
+>
+> **Corrective commit.** I authorize one additional commit on `fix/auth-009-server-hardening`, containing only:
+>
+> - The total-deadline diff to `finish()`, exactly as presented in the review.
+> - The replacement of Implementation note 3, using the wording presented in the review.
+> - This supplemental authorization block, added after the "Amendments and issuance" section of the AUTH-009 register entry.
+>
+> Do not change any other file or any other part of the register.
+>
+> **Verification.**
+>
+> - Run `test_server_hardening.py` three times and the full suite once.
+> - Confirm the real matrix hash is unchanged.
+> - Confirm `dashboard.html`'s blob hash matches the baseline.
+> - Push, and report CI on Python 3.10, 3.11 and 3.12.
+>
+> Make the commit without attribution trailers.
+>
+> The idle-client wait of up to 0.5 seconds and the absence of a test that catches the TCP-reset defect are recorded residuals. They are not objectives.
+>
+> **Stop.** Do not merge. Merge approval follows my browser-gate observations. AUTH-010 remains unauthorized.
+
+This supplement is archived as received in session; as with the original issuance, byte-level identity
+with the operator's transmission is not independently verifiable from inside the session.
+
 ### Implementation notes (recorded at landing; not part of the operator's issuance)
 
 These notes record how the authorized text was implemented where the issuance left a mechanism open, and
@@ -1902,15 +1942,13 @@ one defect found during verification. They add no scope. The operator reviews th
    `_respond()` previously always wrote one. The change is one condition, `if self.command != 'HEAD'`,
    around the existing write; `Content-Length` and every header are unchanged. GET and POST bodies are
    untouched. Allowed files are served by the inherited `do_HEAD`, which already sends no body.
-3. **A defect found in verification, repaired within G.** With B-G in place, `POST /fuse` rejected for a
-   bad Host failed intermittently on the development machine (Windows) with `ConnectionAbortedError`
-   (10053): the request is rejected before its body is read, and closing a socket that still holds unread
-   request bytes sends a TCP reset that can destroy the 403 before the client reads it. The same hazard
-   applies to every early rejection of a POST that carries a body. The repair is one `finish()` override,
-   for POST only: half-close the connection, then drain at most 65,536 bytes for at most 0.5 seconds
-   before the normal close. Rejection ordering is unchanged; nothing is parsed from the drained bytes. The
-   operator should judge whether this sits within G's "controlled errors" scope; it is recorded here and
-   in the pull request so that it is not silent.
+3. **A defect found in verification, repaired by a named lifecycle exception.** With B-G in place,
+   `POST /fuse` rejected before its body was read failed intermittently on the development machine
+   (Windows) with `ConnectionAbortedError` (10053): closing a socket that holds unread request bytes sends
+   a TCP reset that can destroy the response. Measured outside the repository, without the repair 7 to 35%
+   of such requests failed and with it 0 of 450 did. The repair is the `finish()` override authorized by
+   the supplemental authorization above. It is not covered by Act 2, and the committed tests do not
+   reliably detect its absence.
 4. **Smaller choices.** The `else` branch of `do_POST` that returned 404 became unreachable once the path
    check moved ahead of Origin validation, so it was removed. The new error bodies use the existing
    `{"error": …}` form with messages the issuance did not specify. `Content-Length` is stripped of
