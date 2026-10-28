@@ -1,0 +1,108 @@
+Wren Calloway   (Maka x Vash)   dominance: 50/50 (fixed in Phase 1; not applied as a weighting)
+
+CONCEPT
+  A wandering peacekeeper who reads every soul in a crowd and tunes a devastating discharge down to exactly the force needed to stop a fight without ending a life.
+
+APPEARANCE
+  subject: a calm traveler casting fine threads of pale gold light
+  build: broad-shouldered, medium-height frame, low and planted
+  face: heavy-lidded grey-brown eyes, a calm weathered face, a faint scar through one eyebrow
+  hair: dark, close-cropped hair with a thin braided cord at the nape
+  clothing: a short quilted jerkin over a high-necked linen tunic, and a faded red sash knotted over a wide woven belt
+  palette: slate blue, undyed linen and oxidized brass
+  signature_element: a palm-length bundle of stacked brass rings, like a small chime, hung from a cord at the hip, humming faintly
+  ability_manifestation: the threads run from the stacked rings to every living person nearby, each pulsing at its own rhythm
+  setting: a salt-white tidal flat at dawn, stilt houses and a crowd on a wooden causeway
+  mood: tense, patient, quietly compassionate
+  lighting: soft pre-dawn light, cool blue-grey with a thin warm horizon line
+  style: painterly cinematic character concept art, three-quarter view
+  composed paragraph:
+    A calm traveler casting fine threads of pale gold light. Build: broad-shouldered, medium-height frame, low and planted. Face: heavy-lidded grey-brown eyes, a calm weathered face, a faint scar through one eyebrow. Hair: dark, close-cropped hair with a thin braided cord at the nape. Clothing: a short quilted jerkin over a high-necked linen tunic, and a faded red sash knotted over a wide woven belt. Palette: slate blue, undyed linen and oxidized brass. Signature element: a palm-length bundle of stacked brass rings, like a small chime, hung from a cord at the hip, humming faintly. Ability in use: the threads run from the stacked rings to every living person nearby, each pulsing at its own rhythm. Setting: a salt-white tidal flat at dawn, stilt houses and a crowd on a wooden causeway. Mood: tense, patient, quietly compassionate. Lighting: soft pre-dawn light, cool blue-grey with a thin warm horizon line. Style: painterly cinematic character concept art, three-quarter view.
+
+VISUAL PROVENANCE
+  subject | a calm traveler casting fine threads of pale gold light | new | maka__vash.mercy_frequency (emergent ability)
+  build | broad-shouldered, medium-height frame, low and planted | new | maka__vash.mercy_frequency (emergent ability)
+  face | heavy-lidded grey-brown eyes, a calm weathered face, a faint scar through one eyebrow | new | maka__vash.mercy_frequency (emergent ability)
+  hair | dark, close-cropped hair with a thin braided cord at the nape | new | maka__vash.mercy_frequency (emergent ability)
+  clothing | a short quilted jerkin over a high-necked linen tunic, and a faded red sash knotted over a wide woven belt | transformed | vash.v_clothing (Vash)
+      design change (form): a long red coat with a high collar and buckled straps, dark trousers and boots  ->  a faded red sash knotted over a wide woven belt
+  palette | slate blue, undyed linen and oxidized brass | new | maka__vash.mercy_frequency (emergent ability)
+  signature_element | a palm-length bundle of stacked brass rings, like a small chime, hung from a cord at the hip, humming faintly | transformed | maka.v_signature (Maka)
+      design change (form): a tall scythe with a curved blade carried at the side  ->  a palm-length bundle of stacked brass rings
+  ability_manifestation | the threads run from the stacked rings to every living person nearby, each pulsing at its own rhythm | new | maka__vash.mercy_frequency (emergent ability)
+  setting | a salt-white tidal flat at dawn, stilt houses and a crowd on a wooden causeway | new | maka__vash.mercy_frequency (emergent ability)
+  mood | tense, patient, quietly compassionate | new | maka__vash.mercy_frequency (emergent ability)
+  lighting | soft pre-dawn light, cool blue-grey with a thin warm horizon line | new | maka__vash.mercy_frequency (emergent ability)
+  style | painterly cinematic character concept art, three-quarter view | new | maka__vash.mercy_frequency (emergent ability)
+
+TRAITS
+  inherited:
+    - Soul Perception [A: Maka] (SOURCE_DERIVED, FICTIONAL)
+      Carried intact: it is the targeting sense behind the tuned release.
+    - Disciplined Study [A: Maka] (SOURCE_DERIVED, FICTIONAL)
+      Methodical preparation carries over: tuning a release is learned, deliberate work.
+    - Angel Arm [B: Vash] (SOURCE_DERIVED, FICTIONAL)
+      Carried as the stored source of the discharge.
+    - Arm Output Limit [B: Vash] (SOURCE_DERIVED, FICTIONAL)
+      Carried: the raw output stays enormous, which is why it is tuned or not used at all.
+    - Pacifist Vow [B: Vash] (SOURCE_DERIVED, FICTIONAL)
+      Carried as a hard bound: the ability has no lethal setting.
+  transformed:
+    - Soul Resonance [A: Maka] (SOURCE_DERIVED, FICTIONAL)
+      The wavelength-matching principle is carried, but applied to each target instead of to a partner.
+    - Partner Dependence [A: Maka] (SOURCE_DERIVED, FICTIONAL)
+      Dependence on a compatible partner becomes dependence on a perceivable target: with nothing perceived to tune to, the release cannot fire.
+    - Weapon Partnership [A: Maka] (SOURCE_DERIVED, FICTIONAL)
+      The partner's role as a channel that shapes and focuses energy becomes an instrument, a short chime of stacked rings. The partner as a person is not carried.
+    - Anti-Demon Calling [A: Maka] (SOURCE_DERIVED, FICTIONAL)
+      Cutting down corrupted souls becomes breaking corrupting resonance without ending the host.
+    - Sharpshooting [B: Vash] (SOURCE_DERIVED, FICTIONAL)
+      Precision in disabling shots becomes precision in choosing which targets the threads reach.
+  complementary:
+    (none)
+  not carried:
+    - Plant Resilience [B: Vash] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: Species physiology is not a mechanic this ability uses; carrying it would stack durability onto a perception-and-restraint design.
+    - Notorious Legend [B: Vash] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: A reputation is a narrative role, not a transferable mechanic.
+
+EMERGENT ABILITY
+  Mercy Frequency  [INVENTED_BRIDGE]
+  A tuned release: the user perceives each soul in range and sends the discharge as threads matched to chosen targets, disabling weapons and breaking corrupting resonance while sparing the living.
+  governing rule (INVENTED_BRIDGE): Soul perception maps every living soul in range; the stored discharge is released as narrow threads tuned to a chosen set of targets, sized to disable weapons and break corrupting resonance rather than lives, and the vow caps the output below lethal.
+  derived from: maka.soul_perception, vash.angel_arm, vash.arm_output_limit, vash.pacifist_vow
+  activation: Sustained perception of every target in range.
+  limitations:
+    - Cannot target what cannot be perceived: out of perception range, or against a soul too shielded or disguised to read, the release does not fire.
+    - Needs unbroken concentration: any break in perception collapses the tuning and the release is lost, never fired untuned.
+    - Only a handful of targets can be tuned at once; a crowd of aggressors exceeds what one release can hold.
+    - Each full release is a heavy strain: perception range shrinks for a while afterwards.
+    - The vow bounds the output: the ability has no lethal setting, so it cannot end a fight that only a lethal blow would end.
+  inherited limitations:
+    - Arm Output Limit [Vash] (hard limitation): The arm's discharge is enormous and indiscriminate; it is a last resort because it cannot be fine-tuned.
+    - Pacifist Vow [Vash] (prohibition): Refuses to take a life, even an enemy's.
+
+EXCLUSIONS
+  - the literal weapon partner as a carried companion [A: Maka]: A separate person; only the partner's channel-shaping role is carried, as an instrument.
+  - the academy setting and its hierarchy [A: Maka]: Setting and institution, not a mechanic.
+  - the arm's unrestrained destructive output [B: Vash]: Excluded by the vow: there is no setting that releases the discharge untuned.
+  - bounty and legend status [B: Vash]: A reputation is a narrative role, not a transferable mechanic.
+  - plant physiology and long lifespan [B: Vash]: A biological trait the authored rule does not use.
+
+COMPATIBILITY
+  COMPATIBLE (0 activation conditions evaluated)
+
+ANCESTRY
+  - maka.soul_perception (source property [Maka], SOURCE_DERIVED)
+  - vash.angel_arm (source property [Vash], SOURCE_DERIVED)
+  - vash.arm_output_limit (source property [Vash], SOURCE_DERIVED)
+  - vash.pacifist_vow (source property [Vash], SOURCE_DERIVED)
+  - maka__vash.tuned_release_rule (interaction rule, INVENTED_BRIDGE)
+
+IMAGE PROMPT
+  a calm traveler casting fine threads of pale gold light, broad-shouldered, medium-height frame, low and planted, heavy-lidded grey-brown eyes, a calm weathered face, a faint scar through one eyebrow, dark, close-cropped hair with a thin braided cord at the nape, a short quilted jerkin over a high-necked linen tunic, and a faded red sash knotted over a wide woven belt, slate blue, undyed linen and oxidized brass, a palm-length bundle of stacked brass rings, like a small chime, hung from a cord at the hip, humming faintly, the threads run from the stacked rings to every living person nearby, each pulsing at its own rhythm, a salt-white tidal flat at dawn, stilt houses and a crowd on a wooden causeway, tense, patient, quietly compassionate, soft pre-dawn light, cool blue-grey with a thin warm horizon line, painterly cinematic character concept art, three-quarter view --ar 3:4 --style raw
+  (897 / 900 characters)
+
+LEAK CHECK (implemented detector): PASS

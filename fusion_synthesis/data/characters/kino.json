@@ -1,0 +1,119 @@
+{
+  "schema": "fusion-synthesis-character/1",
+  "name": "Kino",
+  "epistemic_status": "FICTIONAL",
+  "properties": [
+    {
+      "id": "kino.three_day_rule",
+      "name": "Three Day Rule",
+      "description": "Never stays in any one country longer than three days.",
+      "contribution_type": "GOVERNING_RULE",
+      "architectural_placement": "LIMITATIONS",
+      "is_prohibition": true
+    },
+    {
+      "id": "kino.witness_stance",
+      "name": "Witness Stance",
+      "description": "Observes a place's customs without judging or interfering, and takes only what is needed.",
+      "contribution_type": "BEHAVIOR",
+      "architectural_placement": "SECONDARY_EFFECTS"
+    },
+    {
+      "id": "kino.quick_draw",
+      "name": "Quick Draw",
+      "description": "Exceptionally fast and accurate with handguns, used almost entirely in self-defence.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM"
+    },
+    {
+      "id": "kino.survival_craft",
+      "name": "Survival Craft",
+      "description": "Resourceful on the road: repairs, rations, scavenges and navigates hard terrain.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM"
+    },
+    {
+      "id": "kino.road_companion",
+      "name": "Road Companion",
+      "description": "Travels with a talking motorcycle that reasons and argues as an equal; a partnership, not ownership.",
+      "contribution_type": "OBJECT_RELATIONSHIP",
+      "architectural_placement": "INTERACTIONS"
+    },
+    {
+      "id": "kino.traveler_limits",
+      "name": "Traveler Limits",
+      "description": "Carries only what one vehicle can hold; no allies, resources or authority beyond what the road provides.",
+      "contribution_type": "MECHANISM",
+      "architectural_placement": "LIMITATIONS",
+      "is_hard_limitation": true
+    }
+  ],
+  "visual_traits": [
+    {
+      "id": "kino.v_build",
+      "slot": "build",
+      "descriptor": "lean, wiry frame of a seasoned wanderer, light on its feet",
+      "derives_from": ["kino.survival_craft"]
+    },
+    {
+      "id": "kino.v_face",
+      "slot": "face",
+      "descriptor": "a calm, even-featured face with steady dark eyes and a faint polite smile",
+      "derives_from": []
+    },
+    {
+      "id": "kino.v_hair",
+      "slot": "hair",
+      "descriptor": "short, unfussy dark hair",
+      "derives_from": []
+    },
+    {
+      "id": "kino.v_clothing",
+      "slot": "clothing",
+      "descriptor": "a belted brown travel coat with deep pockets, a wide-brimmed cap and pushed-up goggles",
+      "derives_from": []
+    },
+    {
+      "id": "kino.v_palette",
+      "slot": "palette",
+      "descriptor": "weathered brown, olive and dust grey",
+      "derives_from": []
+    },
+    {
+      "id": "kino.v_signature",
+      "slot": "signature_element",
+      "descriptor": "a pair of holstered handguns, one at the thigh and one at the small of the back",
+      "derives_from": ["kino.quick_draw"]
+    },
+    {
+      "id": "kino.v_manifestation",
+      "slot": "ability_manifestation",
+      "descriptor": "an utter stillness that settles over a crowd, as if everything nearby were being quietly noted",
+      "derives_from": ["kino.witness_stance"]
+    }
+  ],
+  "proper_nouns": [
+    "Kino",
+    "Kino's Journey",
+    "Hermes",
+    "Cannon",
+    "Woodsman",
+    "Shizu",
+    "Sakura",
+    "Riku"
+  ],
+  "exclusion_candidates": [
+    {
+      "item": "the talking motorcycle as a carried companion",
+      "reason": "A separate being, not a trait."
+    },
+    {
+      "item": "the episodic structure of visiting one country at a time",
+      "reason": "Narrative structure, not a mechanic."
+    },
+    {
+      "item": "the closing refrain about the beauty of the world",
+      "reason": "A theme, not a mechanic."
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "schema": "fusion-synthesis-character/1",
+  "name": "James Bond",
+  "epistemic_status": "FICTIONAL",
+  "properties": [
+    {
+      "id": "james_bond.covert_tradecraft",
+      "name": "Covert Tradecraft",
+      "description": "Infiltration, surveillance, disguise and deception carried out under cover.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM"
+    },
+    {
+      "id": "james_bond.close_combat",
+      "name": "Close Combat",
+      "description": "Formidable in hand-to-hand fighting and improvised brawling.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM"
+    },
+    {
+      "id": "james_bond.issued_gadgetry",
+      "name": "Issued Gadgetry",
+      "description": "Uses specialised equipment supplied by a state agency and adapts it on the fly.",
+      "contribution_type": "OBJECT_RELATIONSHIP",
+      "architectural_placement": "INTERACTIONS"
+    },
+    {
+      "id": "james_bond.suave_composure",
+      "name": "Suave Composure",
+      "description": "Charming and unflappable under danger; uses charm to draw out information.",
+      "contribution_type": "BEHAVIOR",
+      "architectural_placement": "SECONDARY_EFFECTS"
+    },
+    {
+      "id": "james_bond.licensed_agent",
+      "name": "Licensed Agent",
+      "description": "Acts under state authority and orders, deniable and expendable to the agency.",
+      "contribution_type": "CONCEPTUAL_ROLE",
+      "architectural_placement": "DOMAIN"
+    },
+    {
+      "id": "james_bond.human_limits",
+      "name": "Human Limits",
+      "description": "Injury, exhaustion, poison and fear all apply; no powers beyond human skill.",
+      "contribution_type": "MECHANISM",
+      "architectural_placement": "LIMITATIONS",
+      "is_hard_limitation": true
+    }
+  ],
+  "visual_traits": [
+    {
+      "id": "james_bond.v_build",
+      "slot": "build",
+      "descriptor": "tall, athletic, broad-shouldered frame with an easy, upright carriage",
+      "derives_from": ["james_bond.close_combat"]
+    },
+    {
+      "id": "james_bond.v_face",
+      "slot": "face",
+      "descriptor": "angular, clean-shaven face with cool blue-grey eyes and a dry half-smile",
+      "derives_from": ["james_bond.suave_composure"]
+    },
+    {
+      "id": "james_bond.v_hair",
+      "slot": "hair",
+      "descriptor": "short dark hair, neatly parted",
+      "derives_from": []
+    },
+    {
+      "id": "james_bond.v_clothing",
+      "slot": "clothing",
+      "descriptor": "a tailored dark suit, white shirt and narrow dark tie",
+      "derives_from": ["james_bond.licensed_agent"]
+    },
+    {
+      "id": "james_bond.v_palette",
+      "slot": "palette",
+      "descriptor": "charcoal, midnight blue and crisp white",
+      "derives_from": []
+    },
+    {
+      "id": "james_bond.v_signature",
+      "slot": "signature_element",
+      "descriptor": "a compact pistol in a shoulder holster",
+      "derives_from": ["james_bond.covert_tradecraft"]
+    },
+    {
+      "id": "james_bond.v_manifestation",
+      "slot": "ability_manifestation",
+      "descriptor": "a small gadget slipping into the palm, a tiny light blinking on its face",
+      "derives_from": ["james_bond.issued_gadgetry"]
+    }
+  ],
+  "proper_nouns": [
+    "James Bond",
+    "Bond",
+    "007",
+    "MI6",
+    "Walther PPK",
+    "Aston Martin",
+    "Moneypenny",
+    "Blofeld",
+    "SPECTRE"
+  ],
+  "exclusion_candidates": [
+    {
+      "item": "the agency, its codes and its chain of command",
+      "reason": "Institution, not a transferable mechanic."
+    },
+    {
+      "item": "signature catchphrases and drink order",
+      "reason": "Mannerisms, not mechanics."
+    },
+    {
+      "item": "the recurring villain organisations",
+      "reason": "Plot, not a mechanic."
+    }
+  ]
+}

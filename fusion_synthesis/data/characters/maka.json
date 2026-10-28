@@ -1,0 +1,123 @@
+{
+  "schema": "fusion-synthesis-character/1",
+  "name": "Maka",
+  "epistemic_status": "FICTIONAL",
+  "properties": [
+    {
+      "id": "maka.soul_perception",
+      "name": "Soul Perception",
+      "description": "Perceives the souls of living beings nearby, reading their presence and state of mind, including through disguise.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM"
+    },
+    {
+      "id": "maka.soul_resonance",
+      "name": "Soul Resonance",
+      "description": "Matches her soul's wavelength to a partner's so that their combined attack is amplified; it works only with a willing partner whose wavelength fits.",
+      "contribution_type": "MECHANISM",
+      "architectural_placement": "CORE_MECHANISM"
+    },
+    {
+      "id": "maka.partner_dependence",
+      "name": "Partner Dependence",
+      "description": "Resonance cannot be performed alone; without a compatible partner she cannot resonate.",
+      "contribution_type": "MECHANISM",
+      "architectural_placement": "LIMITATIONS",
+      "is_hard_limitation": true
+    },
+    {
+      "id": "maka.weapon_partnership",
+      "name": "Weapon Partnership",
+      "description": "Fights alongside a partner who transforms into a scythe; the bond is a working relationship between two people.",
+      "contribution_type": "OBJECT_RELATIONSHIP",
+      "architectural_placement": "INTERACTIONS"
+    },
+    {
+      "id": "maka.anti_demon_calling",
+      "name": "Anti-Demon Calling",
+      "description": "Trained to hunt corrupted souls; her role is to cut down demon-aligned souls.",
+      "contribution_type": "CONCEPTUAL_ROLE",
+      "architectural_placement": "DOMAIN"
+    },
+    {
+      "id": "maka.disciplined_study",
+      "name": "Disciplined Study",
+      "description": "Methodical, studious and persistent; she prepares and learns before she acts.",
+      "contribution_type": "BEHAVIOR",
+      "architectural_placement": "SECONDARY_EFFECTS"
+    }
+  ],
+  "visual_traits": [
+    {
+      "id": "maka.v_build",
+      "slot": "build",
+      "descriptor": "slight, compact frame with quick, springy posture",
+      "derives_from": []
+    },
+    {
+      "id": "maka.v_face",
+      "slot": "face",
+      "descriptor": "bright, steady green eyes and a stern, focused expression",
+      "derives_from": ["maka.disciplined_study"]
+    },
+    {
+      "id": "maka.v_hair",
+      "slot": "hair",
+      "descriptor": "ash-blonde hair gathered in two pigtails",
+      "derives_from": []
+    },
+    {
+      "id": "maka.v_clothing",
+      "slot": "clothing",
+      "descriptor": "a black trench-style coat over a white blouse, a plaid skirt and dark boots",
+      "derives_from": []
+    },
+    {
+      "id": "maka.v_palette",
+      "slot": "palette",
+      "descriptor": "black, white and muted red plaid",
+      "derives_from": []
+    },
+    {
+      "id": "maka.v_signature",
+      "slot": "signature_element",
+      "descriptor": "a tall scythe with a curved blade carried at her side",
+      "derives_from": ["maka.weapon_partnership"]
+    },
+    {
+      "id": "maka.v_manifestation",
+      "slot": "ability_manifestation",
+      "descriptor": "faint ripples of pale light tracing the outlines of nearby living beings",
+      "derives_from": ["maka.soul_perception"]
+    }
+  ],
+  "proper_nouns": [
+    "Maka",
+    "Maka Albarn",
+    "Albarn",
+    "Soul Eater",
+    "Soul Eater Evans",
+    "Evans",
+    "Shibusen",
+    "Death City",
+    "Grigori Meister",
+    "Maka Chop",
+    "Kishin",
+    "Medusa",
+    "Asura"
+  ],
+  "exclusion_candidates": [
+    {
+      "item": "the literal weapon partner as a carried companion",
+      "reason": "A separate person, not a trait; only the partner's channel-shaping role can be carried."
+    },
+    {
+      "item": "the academy setting and its hierarchy",
+      "reason": "Setting and institution, not a transferable mechanic."
+    },
+    {
+      "item": "slapstick book strike",
+      "reason": "Comic business, not a mechanic."
+    }
+  ]
+}

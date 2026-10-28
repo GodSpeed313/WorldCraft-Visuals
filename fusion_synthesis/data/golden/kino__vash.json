@@ -1,0 +1,506 @@
+{
+  "schema": "fusion-synthesis-card/1",
+  "fusion_name": "Hale Ostrander",
+  "sources": {
+    "A": "Kino",
+    "B": "Vash"
+  },
+  "concept": "A wanderer who watches a quarrel long enough to know every armed hand in it, ends it with one volley that strips the weapons and kills no one, and is gone before the third day ends.",
+  "dominance": {
+    "value": 50,
+    "applied": false,
+    "note": "fixed in Phase 1; not applied as a weighting"
+  },
+  "appearance": {
+    "subject": "a patient stranger sending weapons spinning from every armed hand",
+    "slots": {
+      "build": "compact, sturdy frame with a rolling gait",
+      "face": "a broad, sun-lined face with a level gaze, a single smoke-grey monocle on a brass clasp",
+      "hair": "a shaved head with a faint pale stubble",
+      "clothing": "a chest harness of small leather pouches over a loose sleeveless shirt, wide trousers and sandals",
+      "palette": "sand, indigo and bleached bone",
+      "signature_element": "a slim, double-barrelled pistol with a pale bone grip, worn crosswise at the belt",
+      "ability_manifestation": "a brief ring of kicked-up dust around a calm, unmoving figure, weapons clattering to the ground"
+    },
+    "scene": {
+      "setting": "a terraced hill town at midday, laundry lines and a packed market square",
+      "mood": "alert, unhurried, quietly watchful",
+      "lighting": "hard white noon sun with deep blue shadows",
+      "style": "painterly cinematic character concept art, angled half-length view"
+    },
+    "composed_paragraph": "A patient stranger sending weapons spinning from every armed hand. Build: compact, sturdy frame with a rolling gait. Face: a broad, sun-lined face with a level gaze, a single smoke-grey monocle on a brass clasp. Hair: a shaved head with a faint pale stubble. Clothing: a chest harness of small leather pouches over a loose sleeveless shirt, wide trousers and sandals. Palette: sand, indigo and bleached bone. Signature element: a slim, double-barrelled pistol with a pale bone grip, worn crosswise at the belt. Ability in use: a brief ring of kicked-up dust around a calm, unmoving figure, weapons clattering to the ground. Setting: a terraced hill town at midday, laundry lines and a packed market square. Mood: alert, unhurried, quietly watchful. Lighting: hard white noon sun with deep blue shadows. Style: painterly cinematic character concept art, angled half-length view."
+  },
+  "visual_provenance": [
+    {
+      "slot": "subject",
+      "descriptor": "a patient stranger sending weapons spinning from every armed hand",
+      "origin": "new",
+      "parent_ids": [
+        "kino__vash.quiet_volley"
+      ],
+      "parents": [
+        {
+          "id": "kino__vash.quiet_volley",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "build",
+      "descriptor": "compact, sturdy frame with a rolling gait",
+      "origin": "new",
+      "parent_ids": [
+        "kino__vash.quiet_volley"
+      ],
+      "parents": [
+        {
+          "id": "kino__vash.quiet_volley",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "face",
+      "descriptor": "a broad, sun-lined face with a level gaze, a single smoke-grey monocle on a brass clasp",
+      "origin": "transformed",
+      "parent_ids": [
+        "vash.v_face"
+      ],
+      "parents": [
+        {
+          "id": "vash.v_face",
+          "character": "Vash"
+        }
+      ],
+      "design_delta": {
+        "changed": "form",
+        "from": "round amber-tinted glasses over an easy, open smile",
+        "to": "a single smoke-grey monocle on a brass clasp"
+      }
+    },
+    {
+      "slot": "hair",
+      "descriptor": "a shaved head with a faint pale stubble",
+      "origin": "new",
+      "parent_ids": [
+        "kino__vash.quiet_volley"
+      ],
+      "parents": [
+        {
+          "id": "kino__vash.quiet_volley",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "clothing",
+      "descriptor": "a chest harness of small leather pouches over a loose sleeveless shirt, wide trousers and sandals",
+      "origin": "transformed",
+      "parent_ids": [
+        "kino.v_clothing"
+      ],
+      "parents": [
+        {
+          "id": "kino.v_clothing",
+          "character": "Kino"
+        }
+      ],
+      "design_delta": {
+        "changed": "form",
+        "from": "a belted brown travel coat with deep pockets, a wide-brimmed cap and pushed-up goggles",
+        "to": "a chest harness of small leather pouches"
+      }
+    },
+    {
+      "slot": "palette",
+      "descriptor": "sand, indigo and bleached bone",
+      "origin": "new",
+      "parent_ids": [
+        "kino__vash.quiet_volley"
+      ],
+      "parents": [
+        {
+          "id": "kino__vash.quiet_volley",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "signature_element",
+      "descriptor": "a slim, double-barrelled pistol with a pale bone grip, worn crosswise at the belt",
+      "origin": "new",
+      "parent_ids": [
+        "kino__vash.quiet_volley"
+      ],
+      "parents": [
+        {
+          "id": "kino__vash.quiet_volley",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "ability_manifestation",
+      "descriptor": "a brief ring of kicked-up dust around a calm, unmoving figure, weapons clattering to the ground",
+      "origin": "new",
+      "parent_ids": [
+        "kino__vash.quiet_volley"
+      ],
+      "parents": [
+        {
+          "id": "kino__vash.quiet_volley",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "setting",
+      "descriptor": "a terraced hill town at midday, laundry lines and a packed market square",
+      "origin": "new",
+      "parent_ids": [
+        "kino__vash.quiet_volley"
+      ],
+      "parents": [
+        {
+          "id": "kino__vash.quiet_volley",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "mood",
+      "descriptor": "alert, unhurried, quietly watchful",
+      "origin": "new",
+      "parent_ids": [
+        "kino__vash.quiet_volley"
+      ],
+      "parents": [
+        {
+          "id": "kino__vash.quiet_volley",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "lighting",
+      "descriptor": "hard white noon sun with deep blue shadows",
+      "origin": "new",
+      "parent_ids": [
+        "kino__vash.quiet_volley"
+      ],
+      "parents": [
+        {
+          "id": "kino__vash.quiet_volley",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "style",
+      "descriptor": "painterly cinematic character concept art, angled half-length view",
+      "origin": "new",
+      "parent_ids": [
+        "kino__vash.quiet_volley"
+      ],
+      "parents": [
+        {
+          "id": "kino__vash.quiet_volley",
+          "character": "emergent ability"
+        }
+      ]
+    }
+  ],
+  "traits": [
+    {
+      "property_id": "kino.three_day_rule",
+      "name": "Three Day Rule",
+      "source": "A",
+      "character": "Kino",
+      "outcome": "inherited",
+      "result_text": "Carried as a hard bound on every stay: the ability's clock runs out when the stay does.",
+      "contribution_type": "GOVERNING_RULE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "kino.witness_stance",
+      "name": "Witness Stance",
+      "source": "A",
+      "character": "Kino",
+      "outcome": "inherited",
+      "result_text": "Carried: watching comes first, and the ability never starts a fight.",
+      "contribution_type": "BEHAVIOR",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "kino.quick_draw",
+      "name": "Quick Draw",
+      "source": "A",
+      "character": "Kino",
+      "outcome": "inherited",
+      "result_text": "Carried: speed is what lets one volley cover many hands.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "kino.survival_craft",
+      "name": "Survival Craft",
+      "source": "A",
+      "character": "Kino",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "A general road skill the authored rule does not use."
+    },
+    {
+      "property_id": "kino.road_companion",
+      "name": "Road Companion",
+      "source": "A",
+      "character": "Kino",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "OBJECT_RELATIONSHIP",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "A separate being, not a trait; the rule needs no companion."
+    },
+    {
+      "property_id": "kino.traveler_limits",
+      "name": "Traveler Limits",
+      "source": "A",
+      "character": "Kino",
+      "outcome": "inherited",
+      "result_text": "Carried: no allies and no resources beyond what the user can carry.",
+      "contribution_type": "MECHANISM",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "vash.angel_arm",
+      "name": "Angel Arm",
+      "source": "B",
+      "character": "Vash",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "Its output cannot be tuned to a volley of disabling shots; this design uses only handgun precision."
+    },
+    {
+      "property_id": "vash.arm_output_limit",
+      "name": "Arm Output Limit",
+      "source": "B",
+      "character": "Vash",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "MECHANISM",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "The limit belongs to the arm, which is not carried."
+    },
+    {
+      "property_id": "vash.pacifist_vow",
+      "name": "Pacifist Vow",
+      "source": "B",
+      "character": "Vash",
+      "outcome": "inherited",
+      "result_text": "Carried as a hard bound: no setting of the volley is lethal.",
+      "contribution_type": "GOVERNING_RULE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "vash.sharpshooting",
+      "name": "Sharpshooting",
+      "source": "B",
+      "character": "Vash",
+      "outcome": "transformed",
+      "result_text": "Precision in disabling shots becomes the aimed, simultaneous disabling of every armed hand.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "vash.plant_resilience",
+      "name": "Plant Resilience",
+      "source": "B",
+      "character": "Vash",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "MECHANISM",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "Species physiology is not a mechanic this ability uses."
+    },
+    {
+      "property_id": "vash.notorious_legend",
+      "name": "Notorious Legend",
+      "source": "B",
+      "character": "Vash",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "CONCEPTUAL_ROLE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "A reputation is a narrative role, not a transferable mechanic."
+    }
+  ],
+  "emergent_ability": {
+    "id": "kino__vash.quiet_volley",
+    "name": "Quiet Volley",
+    "description": "After watching a dispute long enough to read who holds what and how each will move, the user ends it with one fast, precise volley that strips every weapon from every armed hand without killing anyone.",
+    "governing_rule": {
+      "id": "kino__vash.watch_then_disarm_rule",
+      "description": "Time spent watching a dispute teaches the user which hands hold weapons and in what order they will move; one fast volley then disables every weapon in a single breath, the vow keeps every shot non-lethal, and the three-day rule forces the user to leave before the place can adapt.",
+      "provenance": "DEFENSIBLY_DERIVED"
+    },
+    "provenance": "DEFENSIBLY_DERIVED",
+    "direct_ancestor_ids": [
+      "kino.witness_stance",
+      "kino.quick_draw",
+      "vash.sharpshooting",
+      "vash.pacifist_vow",
+      "kino.three_day_rule"
+    ],
+    "activation": "Sustained observation of a dispute, with the user not yet committed to either side.",
+    "limitations": [
+      "Needs watching first: without time spent observing a dispute, the volley cannot be aimed and does not fire.",
+      "It only reaches weapons held in a hand; it cannot stop a threat that is not held, such as gas, fire or a locked room.",
+      "Past a handful of armed targets, one volley cannot disable them all and is not attempted.",
+      "The vow bounds it: no setting is lethal, so it cannot end a fight that only a lethal shot would end.",
+      "The three-day rule applies: the user must leave before the third day ends, so a dispute that outlasts the stay is left unresolved."
+    ],
+    "inherited_limitations": [
+      {
+        "property_id": "vash.pacifist_vow",
+        "name": "Pacifist Vow",
+        "character": "Vash",
+        "kind": "prohibition",
+        "description": "Refuses to take a life, even an enemy's."
+      },
+      {
+        "property_id": "kino.three_day_rule",
+        "name": "Three Day Rule",
+        "character": "Kino",
+        "kind": "prohibition",
+        "description": "Never stays in any one country longer than three days."
+      }
+    ]
+  },
+  "exclusions": [
+    {
+      "item": "the talking motorcycle as a carried companion",
+      "source": "A",
+      "character": "Kino",
+      "reason": "A separate being, not a trait."
+    },
+    {
+      "item": "the episodic structure of visiting one country at a time",
+      "source": "A",
+      "character": "Kino",
+      "reason": "Narrative structure, not a mechanic."
+    },
+    {
+      "item": "the arm's unrestrained destructive output",
+      "source": "B",
+      "character": "Vash",
+      "reason": "The arm is not carried, so no setting releases it."
+    },
+    {
+      "item": "bounty and legend status",
+      "source": "B",
+      "character": "Vash",
+      "reason": "A reputation is a narrative role, not a transferable mechanic."
+    }
+  ],
+  "compatibility": {
+    "status": "COMPATIBLE",
+    "evaluated_conditions": 0,
+    "contradiction": null,
+    "required_bridge": null,
+    "unresolved_reason": null
+  },
+  "ancestry": [
+    {
+      "id": "kino.witness_stance",
+      "kind": "source property",
+      "character": "Kino",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "kino.quick_draw",
+      "kind": "source property",
+      "character": "Kino",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "vash.sharpshooting",
+      "kind": "source property",
+      "character": "Vash",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "vash.pacifist_vow",
+      "kind": "source property",
+      "character": "Vash",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "kino.three_day_rule",
+      "kind": "source property",
+      "character": "Kino",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "kino__vash.watch_then_disarm_rule",
+      "kind": "interaction rule",
+      "provenance": "DEFENSIBLY_DERIVED"
+    }
+  ],
+  "recorded_contribution_ids": [
+    "kino.three_day_rule",
+    "kino.witness_stance",
+    "kino.quick_draw",
+    "kino.survival_craft",
+    "kino.road_companion",
+    "kino.traveler_limits",
+    "vash.angel_arm",
+    "vash.arm_output_limit",
+    "vash.pacifist_vow",
+    "vash.sharpshooting",
+    "vash.plant_resilience",
+    "vash.notorious_legend"
+  ],
+  "image_prompt": {
+    "text": "a patient stranger sending weapons spinning from every armed hand, compact, sturdy frame with a rolling gait, a broad, sun-lined face with a level gaze, a single smoke-grey monocle on a brass clasp, a shaved head with a faint pale stubble, a chest harness of small leather pouches over a loose sleeveless shirt, wide trousers and sandals, sand, indigo and bleached bone, a slim, double-barrelled pistol with a pale bone grip, worn crosswise at the belt, a brief ring of kicked-up dust around a calm, unmoving figure, weapons clattering to the ground, a terraced hill town at midday, laundry lines and a packed market square, alert, unhurried, quietly watchful, hard white noon sun with deep blue shadows, painterly cinematic character concept art, angled half-length view --ar 3:4 --style raw",
+    "suppressed": false,
+    "order": [
+      "subject",
+      "build",
+      "face",
+      "hair",
+      "clothing",
+      "palette",
+      "signature_element",
+      "ability_manifestation",
+      "setting",
+      "mood",
+      "lighting",
+      "style",
+      "parameters"
+    ],
+    "length": 792,
+    "ceiling": 900
+  },
+  "leak_check": {
+    "detector": "implemented detector",
+    "status": "PASS",
+    "findings": [],
+    "claim": "A pass establishes compliance with the implemented detector only. It is not a guarantee that no recognizable proper noun, character reference or franchise reference is present."
+  }
+}

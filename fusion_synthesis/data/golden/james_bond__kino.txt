@@ -1,0 +1,108 @@
+Marlow Quince   (James Bond x Kino)   dominance: 50/50 (fixed in Phase 1; not applied as a weighting)
+
+CONCEPT
+  A short-stay operative who learns a place's customs by watching, builds a believable local role from them in hours, and is gone before the role wears thin.
+
+APPEARANCE
+  subject: an unremarkable newcomer whose dress and manner shift subtly to match the crowd
+  build: average height and build, shoulders slightly rounded, easy to overlook
+  face: an even, forgettable face with mild brown eyes and a ready, ordinary smile
+  hair: short brown hair, neither neat nor unkempt
+  clothing: a grey linen shirt with rolled sleeves and plain trousers, a narrow dark ribbon tied as a loose neckcloth
+  palette: faded grey, tan and soft green
+  signature_element: a pair of folded round spectacles hung on a cord at the neck, unused
+  ability_manifestation: the figure almost lost among the crowd, faces sliding past without noticing
+  setting: a bustling harbour market in a foreign port, awnings and strangers
+  mood: easy, attentive, faintly watchful
+  lighting: warm, flat afternoon light with few shadows
+  style: painterly cinematic character concept art, angled half-length view
+  composed paragraph:
+    An unremarkable newcomer whose dress and manner shift subtly to match the crowd. Build: average height and build, shoulders slightly rounded, easy to overlook. Face: an even, forgettable face with mild brown eyes and a ready, ordinary smile. Hair: short brown hair, neither neat nor unkempt. Clothing: a grey linen shirt with rolled sleeves and plain trousers, a narrow dark ribbon tied as a loose neckcloth. Palette: faded grey, tan and soft green. Signature element: a pair of folded round spectacles hung on a cord at the neck, unused. Ability in use: the figure almost lost among the crowd, faces sliding past without noticing. Setting: a bustling harbour market in a foreign port, awnings and strangers. Mood: easy, attentive, faintly watchful. Lighting: warm, flat afternoon light with few shadows. Style: painterly cinematic character concept art, angled half-length view.
+
+VISUAL PROVENANCE
+  subject | an unremarkable newcomer whose dress and manner shift subtly to match the crowd | new | james_bond__kino.passing_cover (emergent ability)
+  build | average height and build, shoulders slightly rounded, easy to overlook | new | james_bond__kino.passing_cover (emergent ability)
+  face | an even, forgettable face with mild brown eyes and a ready, ordinary smile | new | james_bond__kino.passing_cover (emergent ability)
+  hair | short brown hair, neither neat nor unkempt | new | james_bond__kino.passing_cover (emergent ability)
+  clothing | a grey linen shirt with rolled sleeves and plain trousers, a narrow dark ribbon tied as a loose neckcloth | transformed | james_bond.v_clothing (James Bond)
+      design change (form): a tailored dark suit, white shirt and narrow dark tie  ->  a narrow dark ribbon tied as a loose neckcloth
+  palette | faded grey, tan and soft green | new | james_bond__kino.passing_cover (emergent ability)
+  signature_element | a pair of folded round spectacles hung on a cord at the neck, unused | transformed | kino.v_clothing (Kino)
+      design change (placement): a belted brown travel coat with deep pockets, a wide-brimmed cap and pushed-up goggles  ->  a pair of folded round spectacles hung on a cord at the neck
+  ability_manifestation | the figure almost lost among the crowd, faces sliding past without noticing | new | james_bond__kino.passing_cover (emergent ability)
+  setting | a bustling harbour market in a foreign port, awnings and strangers | new | james_bond__kino.passing_cover (emergent ability)
+  mood | easy, attentive, faintly watchful | new | james_bond__kino.passing_cover (emergent ability)
+  lighting | warm, flat afternoon light with few shadows | new | james_bond__kino.passing_cover (emergent ability)
+  style | painterly cinematic character concept art, angled half-length view | new | james_bond__kino.passing_cover (emergent ability)
+
+TRAITS
+  inherited:
+    - Covert Tradecraft [A: James Bond] (SOURCE_DERIVED, FICTIONAL)
+      Carried: it supplies the deception once the customs are known.
+    - Human Limits [A: James Bond] (SOURCE_DERIVED, FICTIONAL)
+      Carried as a hard bound: nothing here exceeds human skill.
+    - Three Day Rule [B: Kino] (SOURCE_DERIVED, FICTIONAL)
+      Carried: the role's life is the length of the stay.
+    - Witness Stance [B: Kino] (SOURCE_DERIVED, FICTIONAL)
+      Carried: watching first is what the role is built from.
+    - Traveler Limits [B: Kino] (SOURCE_DERIVED, FICTIONAL)
+      Carried: no allies and no resources beyond what the user can carry.
+  transformed:
+    - Suave Composure [A: James Bond] (SOURCE_DERIVED, FICTIONAL)
+      Charm becomes fitting in: composure used to be unremarkable rather than impressive.
+    - Licensed Agent [A: James Bond] (SOURCE_DERIVED, FICTIONAL)
+      State backing becomes deniability by design: no agency stands behind the role.
+  complementary:
+    - Survival Craft [B: Kino] (SOURCE_DERIVED, FICTIONAL)
+      Resourcefulness on the road complements the role: the user makes do with whatever the place offers.
+  not carried:
+    - Close Combat [A: James Bond] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: A combat skill the authored rule does not use.
+    - Issued Gadgetry [A: James Bond] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: Equipment issued by an agency is not available on a short, unsupported stay.
+    - Quick Draw [B: Kino] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: A gunfighting skill; this ability is about not being noticed.
+    - Road Companion [B: Kino] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: A separate being, not a trait; a companion would be one more thing to explain.
+
+EMERGENT ABILITY
+  Passing Cover  [DEFENSIBLY_DERIVED]
+  After watching a place's customs, the user assumes a convincing local role built from them, holding it for the length of a short stay and leaving no trace when it ends.
+  governing rule (DEFENSIBLY_DERIVED): Observation of a place's customs is fed straight into covert tradecraft to build a short-lived, convincing local role, and the three-day rule bounds how long that role can hold; the whole of it stays within human limits.
+  derived from: kino.witness_stance, james_bond.covert_tradecraft, kino.three_day_rule, james_bond.human_limits
+  activation: Time spent watching the place's customs before committing to a role.
+  limitations:
+    - Needs watching first: a role built without observing the place's customs fails at the first test.
+    - It holds for about three days; after that, repeated contact exposes the seams and the user must be gone.
+    - It is ordinary skill, not disguise magic: a close acquaintance, an official check or a trained eye can break it.
+    - Human limits apply: injury, fatigue and fear are all real, and a role does not protect the body.
+    - One role at a time: two stories in the same place collapse each other.
+  inherited limitations:
+    - Three Day Rule [Kino] (prohibition): Never stays in any one country longer than three days.
+    - Human Limits [James Bond] (hard limitation): Injury, exhaustion, poison and fear all apply; no powers beyond human skill.
+
+EXCLUSIONS
+  - the agency, its codes and its chain of command [A: James Bond]: Institution, not a transferable mechanic.
+  - signature catchphrases and drink order [A: James Bond]: Mannerisms, not mechanics.
+  - the talking motorcycle as a carried companion [B: Kino]: A separate being, not a trait.
+  - the closing refrain about the beauty of the world [B: Kino]: A theme, not a mechanic.
+
+COMPATIBILITY
+  COMPATIBLE (0 activation conditions evaluated)
+
+ANCESTRY
+  - kino.witness_stance (source property [Kino], SOURCE_DERIVED)
+  - james_bond.covert_tradecraft (source property [James Bond], SOURCE_DERIVED)
+  - kino.three_day_rule (source property [Kino], SOURCE_DERIVED)
+  - james_bond.human_limits (source property [James Bond], SOURCE_DERIVED)
+  - james_bond__kino.watch_then_blend_rule (interaction rule, DEFENSIBLY_DERIVED)
+
+IMAGE PROMPT
+  an unremarkable newcomer whose dress and manner shift subtly to match the crowd, average height and build, shoulders slightly rounded, easy to overlook, an even, forgettable face with mild brown eyes and a ready, ordinary smile, short brown hair, neither neat nor unkempt, a grey linen shirt with rolled sleeves and plain trousers, a narrow dark ribbon tied as a loose neckcloth, faded grey, tan and soft green, a pair of folded round spectacles hung on a cord at the neck, unused, the figure almost lost among the crowd, faces sliding past without noticing, a bustling harbour market in a foreign port, awnings and strangers, easy, attentive, faintly watchful, warm, flat afternoon light with few shadows, painterly cinematic character concept art, angled half-length view --ar 3:4 --style raw
+  (794 / 900 characters)
+
+LEAK CHECK (implemented detector): PASS

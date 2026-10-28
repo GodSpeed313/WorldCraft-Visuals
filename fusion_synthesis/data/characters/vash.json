@@ -1,0 +1,122 @@
+{
+  "schema": "fusion-synthesis-character/1",
+  "name": "Vash",
+  "epistemic_status": "FICTIONAL",
+  "properties": [
+    {
+      "id": "vash.angel_arm",
+      "name": "Angel Arm",
+      "description": "A concealed prosthetic arm that releases a devastating energy discharge.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM"
+    },
+    {
+      "id": "vash.arm_output_limit",
+      "name": "Arm Output Limit",
+      "description": "The arm's discharge is enormous and indiscriminate; it is a last resort because it cannot be fine-tuned.",
+      "contribution_type": "MECHANISM",
+      "architectural_placement": "LIMITATIONS",
+      "is_hard_limitation": true
+    },
+    {
+      "id": "vash.pacifist_vow",
+      "name": "Pacifist Vow",
+      "description": "Refuses to take a life, even an enemy's.",
+      "contribution_type": "GOVERNING_RULE",
+      "architectural_placement": "LIMITATIONS",
+      "is_prohibition": true
+    },
+    {
+      "id": "vash.sharpshooting",
+      "name": "Sharpshooting",
+      "description": "Extraordinary precision with a revolver; disables weapons and wounds without killing.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM"
+    },
+    {
+      "id": "vash.plant_resilience",
+      "name": "Plant Resilience",
+      "description": "Plant physiology: long-lived and quick to recover from injury.",
+      "contribution_type": "MECHANISM",
+      "architectural_placement": "SECONDARY_EFFECTS"
+    },
+    {
+      "id": "vash.notorious_legend",
+      "name": "Notorious Legend",
+      "description": "A fearsome reputation that precedes him, at odds with the gentle man himself.",
+      "contribution_type": "CONCEPTUAL_ROLE",
+      "architectural_placement": "DOMAIN"
+    }
+  ],
+  "visual_traits": [
+    {
+      "id": "vash.v_build",
+      "slot": "build",
+      "descriptor": "tall, lean, loose-limbed frame with a relaxed slouch",
+      "derives_from": []
+    },
+    {
+      "id": "vash.v_face",
+      "slot": "face",
+      "descriptor": "round amber-tinted glasses over an easy, open smile",
+      "derives_from": []
+    },
+    {
+      "id": "vash.v_hair",
+      "slot": "hair",
+      "descriptor": "spiky, upswept golden hair",
+      "derives_from": []
+    },
+    {
+      "id": "vash.v_clothing",
+      "slot": "clothing",
+      "descriptor": "a long red coat with a high collar and buckled straps, dark trousers and boots",
+      "derives_from": []
+    },
+    {
+      "id": "vash.v_palette",
+      "slot": "palette",
+      "descriptor": "saturated red, brass and sun-bleached cream",
+      "derives_from": []
+    },
+    {
+      "id": "vash.v_signature",
+      "slot": "signature_element",
+      "descriptor": "a large chrome revolver worn low on the hip",
+      "derives_from": ["vash.sharpshooting"]
+    },
+    {
+      "id": "vash.v_manifestation",
+      "slot": "ability_manifestation",
+      "descriptor": "a concealed metal forearm whose seams glow white-blue as it charges",
+      "derives_from": ["vash.angel_arm"]
+    }
+  ],
+  "proper_nouns": [
+    "Vash",
+    "Vash the Stampede",
+    "Stampede",
+    "Humanoid Typhoon",
+    "Typhoon",
+    "Trigun",
+    "Knives",
+    "Meryl",
+    "Wolfwood",
+    "Gunsmoke",
+    "Gung-Ho Guns"
+  ],
+  "exclusion_candidates": [
+    {
+      "item": "bounty and legend status",
+      "reason": "A reputation is a narrative role, not a transferable mechanic."
+    },
+    {
+      "item": "the arm's unrestrained output",
+      "reason": "Excluded wherever the vow governs: the discharge is bounded, not released whole."
+    },
+    {
+      "item": "sibling-antagonist backstory",
+      "reason": "Relationship lore, not a mechanic."
+    }
+  ]
+}

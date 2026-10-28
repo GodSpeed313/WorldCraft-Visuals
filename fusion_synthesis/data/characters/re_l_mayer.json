@@ -1,0 +1,123 @@
+{
+  "schema": "fusion-synthesis-character/1",
+  "name": "Re-l Mayer",
+  "epistemic_status": "FICTIONAL",
+  "properties": [
+    {
+      "id": "re_l_mayer.forensic_method",
+      "name": "Forensic Method",
+      "description": "Reconstructs events methodically from physical evidence, records and testimony.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM"
+    },
+    {
+      "id": "re_l_mayer.institutional_standing",
+      "name": "Institutional Standing",
+      "description": "Holds official rank as an inspector inside a closed, controlled city; that rank opens records, doors and cooperation.",
+      "contribution_type": "CONCEPTUAL_ROLE",
+      "architectural_placement": "DOMAIN"
+    },
+    {
+      "id": "re_l_mayer.standing_boundary",
+      "name": "Standing Boundary",
+      "description": "Her authority exists only inside the city's institutions; beyond them it carries no weight.",
+      "contribution_type": "GOVERNING_RULE",
+      "architectural_placement": "LIMITATIONS",
+      "is_hard_limitation": true
+    },
+    {
+      "id": "re_l_mayer.artificial_companions",
+      "name": "Artificial Companions",
+      "description": "Works among artificial humans and comes to treat one as a companion rather than a tool.",
+      "contribution_type": "OBJECT_RELATIONSHIP",
+      "architectural_placement": "INTERACTIONS"
+    },
+    {
+      "id": "re_l_mayer.guarded_composure",
+      "name": "Guarded Composure",
+      "description": "Proud, controlled and unreadable under pressure.",
+      "contribution_type": "BEHAVIOR",
+      "architectural_placement": "SECONDARY_EFFECTS"
+    },
+    {
+      "id": "re_l_mayer.sidearm_competence",
+      "name": "Sidearm Competence",
+      "description": "Capable with a handgun when an investigation turns violent.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM"
+    }
+  ],
+  "visual_traits": [
+    {
+      "id": "re_l_mayer.v_build",
+      "slot": "build",
+      "descriptor": "slender, upright frame with a rigid, poised posture",
+      "derives_from": []
+    },
+    {
+      "id": "re_l_mayer.v_face",
+      "slot": "face",
+      "descriptor": "pale, sharp-featured face with cool violet-grey eyes and a closed, watchful expression",
+      "derives_from": ["re_l_mayer.guarded_composure"]
+    },
+    {
+      "id": "re_l_mayer.v_hair",
+      "slot": "hair",
+      "descriptor": "short dark hair cut in a sleek, angled bob",
+      "derives_from": []
+    },
+    {
+      "id": "re_l_mayer.v_clothing",
+      "slot": "clothing",
+      "descriptor": "a fitted dark-grey uniform coat with a high stiff collar and black gloves",
+      "derives_from": ["re_l_mayer.institutional_standing"]
+    },
+    {
+      "id": "re_l_mayer.v_palette",
+      "slot": "palette",
+      "descriptor": "charcoal, deep violet and cold white",
+      "derives_from": []
+    },
+    {
+      "id": "re_l_mayer.v_signature",
+      "slot": "signature_element",
+      "descriptor": "a slim, long-barrelled pistol kept at the hip",
+      "derives_from": ["re_l_mayer.sidearm_competence"]
+    },
+    {
+      "id": "re_l_mayer.v_manifestation",
+      "slot": "ability_manifestation",
+      "descriptor": "faint holographic case lines tracing connections between the objects in a room",
+      "derives_from": ["re_l_mayer.forensic_method"]
+    }
+  ],
+  "proper_nouns": [
+    "Re-l Mayer",
+    "Re-l",
+    "Mayer",
+    "Romdeau",
+    "Ergo Proxy",
+    "Proxy",
+    "Pino",
+    "Iggy",
+    "Vincent Law",
+    "Donov",
+    "Cogito",
+    "AutoReiv",
+    "Monad"
+  ],
+  "exclusion_candidates": [
+    {
+      "item": "the closed domed city and its politics",
+      "reason": "Setting and politics, not a transferable mechanic."
+    },
+    {
+      "item": "inherited family rank",
+      "reason": "A lineage role, not a mechanic."
+    },
+    {
+      "item": "the infection plot and its creatures",
+      "reason": "Plot, not a transferable mechanic."
+    }
+  ]
+}
