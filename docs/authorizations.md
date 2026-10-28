@@ -1656,3 +1656,297 @@ Per §6, this closure does not amend, broaden, narrow, reinterpret, ratify, or s
 AUTH-008's grant record, including its original `Status:` line, is unchanged, and the question of the
 register's jurisdiction over code remains as the grant record left it. This record authorizes nothing
 further, including any AUTH-009, the deferred `openCase()` escaping, or any `server.py` change.
+
+---
+
+## AUTH-009
+
+```
+Authorizes:        bounded hardening changes to server.py (sections A-H below) and
+                   one new top-level test file, test_server_hardening.py
+Target scope:      server.py: production binding; removal of the wildcard CORS
+                   header; endpoint-aware Content-Type, Origin, Host and
+                   Content-Length validation; a GET/HEAD allowlist; controlled
+                   request-validation errors; and one named startup-function
+                   extraction, make_server()
+                   one new top-level test file under test_*.py discovery
+Route:             operator determination (independent act; FE Requirements
+                   §39 release, recorded below) -> implement on a dedicated
+                   branch in two commits -> verify against the checklist below ->
+                   this entry lands in the same PR as the fix -> operator-performed
+                   real-browser smoke test from a disposable copy outside the
+                   repository -> operator review of the diff and test evidence ->
+                   PR merge on the operator's explicit approval -> closure record
+Granted by:        Kevin Brown, operator
+Granted at:        2026-10-28, in session
+Basis:             read-only AUTH-009 pre-issuance assessments run in session on
+                   2026-10-28 at `cb946702d3856742f359ffb07dd0d90946ac0d40`, which
+                   found `server.py` binding all interfaces (`server.py:80`),
+                   answering with a wildcard CORS header (`server.py:29`), accepting
+                   POSTs to `/fuse` and `/clear` with no Origin, Host or Content-Type
+                   check (`server.py:33-36`, `server.py:55-59`), parsing JSON and
+                   integers outside any error handling (`server.py:34-36`), and
+                   serving its whole working directory on GET and HEAD; GitHub
+                   issue #8, which records the `server.py` findings as backlog and
+                   grants nothing; AUTH-007 (`authorizations.md:1316`), whose
+                   exclusion of CAUTIONARY persistence in `server.py` this grant
+                   preserves; AUTH-008 (`authorizations.md:1530`), whose exclusions
+                   left `server.py`, including CORS, Content-Type handling, binding
+                   and CSP, held and which is exercised and spent; FE Requirements
+                   §39 (`fusion_engine_requirements_v0.1.md:1397`, `:1402`), whose
+                   hold is released ONLY for the surfaces named below
+Status:            granted; NOT YET EXERCISED — no file within the scope of
+                   this authorization has landed on main as of this recording
+```
+
+**What actually authorizes this, and what this entry is.** Three operator acts and one record, kept
+separate on purpose:
+
+- **Act 1 — the §39 release** is Kevin Brown's own act, stated in his own words below. It removes
+  a prohibition and grants nothing.
+- **Act 2 — the implementation authorization** is Kevin Brown's own act. It is what permits the
+  `server.py` changes.
+- **Act 3 — the new-file determination** is Kevin Brown's own act. It is what permits the one new
+  test file.
+- **This AUTH-009 record** is the archive of those acts. It creates no authority. Per the operator's
+  issuance, the acts take effect on issue and implementation may begin before this entry lands; this
+  entry lands in the same PR as the fix.
+
+**Issuance record.** The operator's issuance text is quoted below as it stood in session on 2026-10-28,
+when the operator adopted it "exactly as presented, subject only to" two additions that are shown in
+place. The text was drafted in session and then adopted by the operator, and the operator's issuance
+message was not separately preserved outside the repository before this entry was written, so byte-level
+identity with the operator's transmission is not independently verifiable from inside the session.
+Every `server.py:NNN` citation in this entry is to `server.py` at the baseline `cb94670`, because the
+file changes in the same PR and its line numbers move.
+
+### Operator statement
+
+> AUTH-009 — issued by the operator, 2026-10-28. Three separate acts.
+>
+> Baseline: `main` at `cb946702d3856742f359ffb07dd0d90946ac0d40`. An implementation branch must start from that SHA, or from a later `main` whose `server.py` is identical to it at the git blob level.
+
+### Act 1 — §39 release (operator, verbatim)
+
+> I release the FE §39 "Existing WorldCraft-Visuals code — UNMODIFIED" hold on `server.py`, limited to the changes enumerated in Act 2 and no others. Every other function or section of `server.py`, and all other §39-held code, remain held exactly as recorded. This release removes a prohibition and grants nothing.
+
+### Act 2 — Implementation authorization (operator, verbatim)
+
+> I authorize exactly the following changes to `server.py`.
+>
+> **A. Binding.** The production server binds to `127.0.0.1:8000`, not all interfaces.
+>
+> **B. CORS.** Remove `Access-Control-Allow-Origin: *` (`server.py:29`). No other CORS header is introduced. `OPTIONS` behavior is unchanged.
+>
+> **C. Content-Type.** `POST /fuse` requires media type `application/json` (case-insensitive; parameters such as `charset=utf-8` allowed), else HTTP 415. `POST /clear` requires no Content-Type and must keep accepting the dashboard's bodyless POST.
+>
+> **D. Origin.** On POST, a present `Origin` must equal exactly `http://localhost:8000` or `http://127.0.0.1:8000`, else HTTP 403. The literal `null` is a foreign Origin. A genuinely absent `Origin` is permitted and is a documented residual risk (local non-browser clients).
+>
+> **E. Host.** On GET, HEAD and POST, `Host` must equal exactly `localhost:8000` or `127.0.0.1:8000` (case-sensitive). Any other or missing Host gets HTTP 403. This check runs before path, Origin, Content-Type, Content-Length or body handling. The allowlist is a fixed production constant and is not derived from any bound port.
+>
+> **F. GET/HEAD allowlist.** Only `/dashboard.html` and `/containment_matrix.json` are served, matched on the parsed URL path with the query string removed, so `containment_matrix.json?t=123` keeps working. Everything else returns HTTP 404, including `/`, directory paths, dotfiles, `.git`, source files and docs. No redirect from `/` is introduced. Allowed paths are served by the existing handler behavior.
+>
+> **G. Request validation** (existing `{"error": …}` body form; existing successful response formats and the existing "Alpha and Beta are required." 400 are preserved). Order of checks: Host → path → Origin → Content-Type → Content-Length → body parsing → field validation.
+> - Invalid, non-numeric or negative `Content-Length`: HTTP 400.
+> - `Content-Length` above **65,536 bytes**: HTTP 413, decided before the body is read.
+> - Absent `Content-Length`: permitted on `/clear` (no body is read); on `/fuse`, treated as an empty body, which fails JSON parsing with HTTP 400.
+> - `Content-Length` validation applies to both `/fuse` and `/clear`.
+> - Malformed JSON, or a body that is not a JSON object: HTTP 400.
+> - `alpha` or `beta` not a string: HTTP 400.
+> - `dominance` not convertible by the existing `int()` conversion: HTTP 400. No new range check is added.
+>
+> **H. Startup-function extraction (named exception, required by the Act 3 test design).** I permit extraction of server startup into one function, `make_server(host='127.0.0.1', port=8000)`, that constructs and returns the bound `HTTPServer` without serving. This extraction is required solely to support process-isolated startup and binding verification. The production `__main__` path calls it without host or port overrides. Conditions:
+> 1. The production `__main__` path retains its existing startup behavior, `use_utf8_output()`, and `serve_forever()`, except for the authorized change from all-interface to `127.0.0.1` binding.
+> 2. The production default port remains 8000.
+> 3. The startup banner and dashboard URL are unchanged.
+> 4. No lifecycle, routing, threading, persistence or architecture change is permitted.
+> 5. The test confirms production defaults select `127.0.0.1:8000` and the isolated instance uses `127.0.0.1` with an ephemeral port.
+> 6. Production Host validation is not weakened for testing. The test client sends the literal `Host: localhost:8000` to the ephemeral-port server and asserts that a Host carrying the ephemeral port is rejected.
+>
+> This is a specifically named exception, not general refactoring authority. I acknowledge that H's loopback default and the `__main__` call also implement A.
+>
+> **Exclusions.**
+> - CSP, including the existing header, which stays byte-identical.
+> - `dashboard.html`.
+> - `openCase()` and all AUTH-010 work.
+> - `mythos_sync.py`.
+> - The resolver, classifier and fusion-engine modules.
+> - CAUTIONARY-stub persistence. `server.py:46-53` (fusion generation, `save_to_matrix`, `export_for_web`, the 200 and 500 responses) keeps its behavior, per AUTH-007's exclusion (`authorizations.md:1316`).
+> - Matrix format or storage behavior.
+> - Existing test files and CI configuration.
+> - Threading or server architecture.
+> - Unrelated startup or lifecycle behavior.
+> - Every other §39 hold.
+>
+> **Residual risks, accepted and not objectives.** Absent-Origin POSTs from local non-browser clients. Any local process can call the endpoints. A slow client can still block the single-threaded server. `server.py:47` prints raw input to the console.
+
+### Act 3 — New-file determination (operator, verbatim)
+
+> I authorize one new top-level file, `test_server_hardening.py`, under `test_*.py` discovery, using `unittest` and the standard library only. I do not authorize changes to any existing test file, CI configuration or unrelated module. It must fail, and not skip, if its subprocess cannot start.
+>
+> **Isolation.**
+> - Each test server runs in a separate subprocess (`sys.executable`, `PYTHONDONTWRITEBYTECODE=1`) whose working directory is a fresh temporary directory.
+> - The repository is made importable through an absolute path without changing the child's isolated working directory.
+> - The test verifies that imports and module initialization do not read, write or create production data.
+> - The child builds the server with `make_server('127.0.0.1', 0)`, prints its own `socket.getsockname()` as its first line, and then serves. The parent drains the child's remaining output.
+> - The test asserts that the working directory is not the repository, both before launch and in the child.
+> - The real matrix is never used as a fixture.
+> - Every test that exercises `/clear` establishes its own temporary matrix fixture.
+> - No test depends on another test having run first.
+> - The real matrix's SHA-256, or its absence, is recorded before and after as an additional safeguard, not as a substitute for isolation.
+> - Cleanup removes only the temporary directory, and the child is terminated in `tearDown`.
+> - Each rejection test seeds its own temporary matrix fixture, sends the rejected request, and asserts that the fixture is byte-identical afterward. No rejection test may rely on execution order or state left by another test.
+>
+> **Binding.** The test asserts the bound address reported by the child's own socket is `127.0.0.1` with an ephemeral, non-8000 port. It does not bind port 8000. It checks production defaults through the `make_server` signature (`127.0.0.1`, `8000`) and an AST check that `__main__` calls `make_server` without host or port overrides. The AST check fails with a clear message if the expected startup structure changes.
+>
+> **Required cases.**
+> - **Dashboard shapes:** the dashboard's exact `/fuse` and `/clear` requests succeed. Registered names persist to the temporary matrix, and unknown names persist a CAUTIONARY stub.
+> - **GET/HEAD:**
+>   - `dashboard.html` and `containment_matrix.json?t=123` return 200.
+>   - `/`, `/server.py`, `/.hidden`, `/.git/config`, `/secret.txt`, `/docs/…` and `//dashboard.html` return 404.
+>   - The `//dashboard.html` case asserts the HTTP 404 outcome only. It does not assert how the path is parsed.
+> - **Host:** bad, missing and ephemeral-port Hosts return 403 on GET, HEAD and POST.
+> - **Origin:** a foreign Origin and `Origin: null` return 403. An absent Origin is allowed, with the residual risk documented in the test.
+> - **Allowlist acceptance:** POST `/fuse` and POST `/clear` succeed with `Origin: http://localhost:8000` and with `Origin: http://127.0.0.1:8000`. GET `/dashboard.html` succeeds with `Host: localhost:8000` and with `Host: 127.0.0.1:8000`. (Amendment 1 — mandatory positive regression tests, using the existing process-isolated harness, disposable matrix fixtures and the production Host/Origin allowlist values; production validation is not weakened to satisfy them.)
+> - **Content-Type:** none, `text/plain` and `application/x-www-form-urlencoded` on `/fuse` return 415. `application/json; charset=utf-8` is accepted.
+> - **Content-Length:**
+>   - `/clear` with no Content-Length succeeds.
+>   - `/fuse` with no Content-Length returns 400.
+>   - A malformed value returns 400.
+>   - A negative value returns 400.
+>   - A value above 65,536 returns 413, with the body never read.
+> - **JSON and fields:** malformed JSON, a list body, a non-string `alpha` and a non-numeric `dominance` return 400. An empty Alpha or Beta keeps its existing 400.
+> - **Headers:** no response carries `Access-Control-Allow-Origin`, the CSP header is still present, and `OPTIONS` returns 501 with no CORS headers.
+
+### Lifecycle, verification and recording (operator, verbatim)
+
+> **Two commits on one dedicated branch and PR.**
+>
+> **Commit 1 — startup extraction and regression harness.**
+> - Implement section H's `make_server()` extraction and create `test_server_hardening.py`.
+> - I acknowledge that H's loopback default and the production `__main__` call also implement requirement A at this stage. Do not implement B–G.
+> - Run the new regression tests and record the actual results.
+> - Binding assertions may already pass at Commit 1. That is expected and must be reported accurately.
+> - Demonstrate pre-hardening failures through the remaining security-behavior tests, not through artificial binding failures.
+> - Do not alter the tests merely to force a particular failure result.
+> - Commit 1 is expected to fail those tests. CI must be green at the PR head (Commit 2), not at Commit 1.
+>
+> **Commit 2 — remaining hardening.**
+> - Implement B–G.
+> - Complete any remaining verification of A without unnecessarily modifying already-correct binding behavior.
+> - Run the new tests and the existing suite, and show the security-behavior tests that failed at Commit 1 now pass.
+> - Confirm CI passes on Python 3.10, 3.11 and 3.12.
+>
+> The AUTH-009 register entry lands in the same PR.
+>
+> **Evidence exception for A.** I accept that A has no failing test before its implementation, because section H's extraction introduces loopback binding in Commit 1. This is an acknowledged exception to the pre-fix failure expectation, not a missing test. Evidence for A is:
+> 1. The `make_server()` signature defaults to `127.0.0.1` and `8000`.
+> 2. The AST check that `__main__` calls the function without host or port overrides.
+> 3. The bound-socket assertion from the isolated subprocess, showing `127.0.0.1` and an ephemeral port.
+> 4. Diff review confirming production binding changed from all interfaces to loopback only.
+>
+> Record these results accurately. Do not manufacture a failing binding test.
+>
+> **Pre-merge real-browser gate (operator-performed).**
+> - Run against the PR branch head after Commit 2, from a **disposable copy outside the repository** with a disposable matrix, as in the 10/27 AUTH-007 observation.
+> - Never launch it from the repository working tree or against the real matrix.
+> - Because the Host allowlist is fixed to port 8000, the disposable server must listen on 8000, so stop any real instance first.
+> - Exercise (1) Generate a fusion, (2) Clear Matrix, (3) reload and observe the resulting state, including whether the same-origin POSTs succeed under the new Origin and Host checks.
+> - Record the observation in the AUTH-007 browser-verification format, claiming only what was directly observed. The record is an evidence-directory note written on my instruction after the observation. It is not a separate source-code authorization.
+>
+> **Verification.**
+> - All CI suites pass at the PR head.
+> - The new tests show the Commit 1 pre-hardening failures and the Commit 2 passes.
+> - The real matrix hash is unchanged.
+> - The diff touches only `server.py`, `test_server_hardening.py` and `docs/authorizations.md`.
+> - `dashboard.html` is unchanged at the git blob level (identical blob hash at baseline and PR head). Committed blob identity is the authoritative comparison, not raw working-tree bytes.
+>
+> **Recording.**
+> - This message is the authorization and takes effect on issue.
+> - Before merging, stop and present the diff, the test evidence and the browser observation. Do not merge without my explicit approval.
+> - AUTH-009 is exercised and spent on merge to `main`, and a closure record follows.
+> - No `Co-Authored-By` trailer and no "Generated with Claude Code" line on AUTH-009 commits or PRs.
+> - This issuance does not decide the register's jurisdiction over code authorizations, which remains open as AUTH-007 and AUTH-008 recorded.
+> - AUTH-010 remains separate and unauthorized.
+
+### Amendments and issuance (operator, verbatim)
+
+> I adopt the complete text exactly as presented, subject only to the two additions below, which are incorporated into the issued authorization.
+>
+> Amendment 1 — Positive Allowlist Acceptance Tests. Under Act 3, Required cases, immediately after the existing Origin test requirement, add: "Allowlist acceptance: POST `/fuse` and POST `/clear` succeed with `Origin: http://localhost:8000` and with `Origin: http://127.0.0.1:8000`. GET `/dashboard.html` succeeds with `Host: localhost:8000` and with `Host: 127.0.0.1:8000`." These are mandatory positive regression tests. They must use the existing process-isolated test harness, disposable matrix fixtures, and production Host/Origin allowlist values. Do not weaken production validation to satisfy these tests.
+>
+> Amendment 2 — CSP Preservation. Under Act 2, Exclusions, restore the explicit wording: "CSP, including the existing header, which stays byte-identical." No CSP changes are authorized.
+>
+> I APPROVE, ADOPT, AND ISSUE AUTH-009 IN FULL, incorporating the two amendments above. [...] AUTH-009 takes effect upon this issuance. Proceed with the authorized implementation on a dedicated branch, following the required two-commit sequence. Create the AUTH-009 register entry within the authorized pull request. Do not expand scope, alter unrelated files, or modify the real matrix. After Commit 2, complete the authorized automated verification and prepare the pull request. Present the diff, Commit 1 failure evidence, Commit 2 passing results, CI status, and matrix-integrity evidence. STOP before merging. The browser smoke test is an operator-performed pre-merge gate. Do not claim it has been completed or independently approved. Await my browser observation and explicit merge approval.
+>
+> AUTH-009 IS ISSUED. AUTH-010 REMAINS UNAUTHORIZED.
+
+### Implementation notes (recorded at landing; not part of the operator's issuance)
+
+These notes record how the authorized text was implemented where the issuance left a mechanism open, and
+one defect found during verification. They add no scope. The operator reviews them with the diff.
+
+1. **F matches the raw request-line target.** `_path_allowed()` reads the target from `self.requestline`
+   and applies `urlsplit()` to it, then compares the parsed path, which excludes the query string, to the
+   allowlist. It does not use `self.path` because `BaseHTTPRequestHandler.parse_request` rewrites a
+   leading `//` to `/` in `self.path` before the handler runs (CPython gh-87389); that rewrite is present
+   in the standard library source of the Python 3.12.10 used for development, and whether the other
+   supported versions carry it was not checked. Matching `self.path` would therefore let
+   `//dashboard.html` be served as `/dashboard.html` on some versions and return 404 on others.
+   `urlsplit('//dashboard.html')` reads the leading `//` as a network location, so its path is empty and
+   is not on the allowlist, which gives the required 404 whichever way the interpreter treats the prefix.
+   `containment_matrix.json?t=123` still parses to `/containment_matrix.json`. The test asserts the 404
+   outcome only, as the issuance directs.
+2. **`_respond()` suppresses the body on HEAD.** With E and F, HEAD requests can reach `_respond()` (a
+   403 for a bad Host, a 404 for an unapproved path). A HEAD response must not carry a body, and
+   `_respond()` previously always wrote one. The change is one condition, `if self.command != 'HEAD'`,
+   around the existing write; `Content-Length` and every header are unchanged. GET and POST bodies are
+   untouched. Allowed files are served by the inherited `do_HEAD`, which already sends no body.
+3. **A defect found in verification, repaired within G.** With B-G in place, `POST /fuse` rejected for a
+   bad Host failed intermittently on the development machine (Windows) with `ConnectionAbortedError`
+   (10053): the request is rejected before its body is read, and closing a socket that still holds unread
+   request bytes sends a TCP reset that can destroy the 403 before the client reads it. The same hazard
+   applies to every early rejection of a POST that carries a body. The repair is one `finish()` override,
+   for POST only: half-close the connection, then drain at most 65,536 bytes for at most 0.5 seconds
+   before the normal close. Rejection ordering is unchanged; nothing is parsed from the drained bytes. The
+   operator should judge whether this sits within G's "controlled errors" scope; it is recorded here and
+   in the pull request so that it is not silent.
+4. **Smaller choices.** The `else` branch of `do_POST` that returned 404 became unreachable once the path
+   check moved ahead of Origin validation, so it was removed. The new error bodies use the existing
+   `{"error": …}` form with messages the issuance did not specify. `Content-Length` is stripped of
+   surrounding whitespace, then must be ASCII digits; a value of more than 18 significant digits is
+   treated as oversize (413) without being converted to an integer.
+
+### Lifecycle
+
+AUTH-009 is subject to the `Authorization Exercise and Closure` rule in this register
+(`authorizations.md:833` onward). The operator's issuance states that AUTH-009 is exercised and spent on
+merge to `main`, which is that rule's default exercise condition (§2). Appending this entry is not a
+qualifying exercise. A commit on an implementation branch is not, by itself, a qualifying exercise. A
+closure record follows the merge; exercise status is determined under that rule when the time comes and
+is not asserted here.
+
+### On `authorizations.md`'s own stated scope
+
+Recorded explicitly, as AUTH-003, AUTH-006, AUTH-007 and AUTH-008 recorded it:
+
+1. `authorizations.md`'s introductory text (`authorizations.md:3-5`) describes the register as
+   recording authorizations "to edit corpus text". Read strictly, that sentence does not mention
+   source code or test files.
+2. This entry does **not** determine that the register's subject matter generally encompasses source
+   code or tests, and decides nothing about the register's jurisdiction over code.
+3. This entry does **not** expand or amend the register's introductory definition, and does not
+   depend on it being read broadly.
+4. The §39 release, the implementation authorization and the new-file determination are independent
+   operator acts; their authority comes from Kevin Brown's own determination, not from this register's
+   jurisdiction.
+5. Whether future code authorizations generally belong in this register, and under what definitional
+   revision, is **not decided here** and remains open (`authorizations.md:837` records the same
+   reservation).
+6. AUTH-009's validity does not depend on resolving that question.
+
+### Placement
+
+This entry is appended after the final line of the register as it stood at `cb94670` (line 1658),
+so that no existing line moves. Its position after AUTH-008 and its closure record carries no meaning, and
+it amends neither.
