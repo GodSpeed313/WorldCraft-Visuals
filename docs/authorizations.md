@@ -1988,3 +1988,95 @@ Recorded explicitly, as AUTH-003, AUTH-006, AUTH-007 and AUTH-008 recorded it:
 This entry is appended after the final line of the register as it stood at `cb94670` (line 1658),
 so that no existing line moves. Its position after AUTH-008 and its closure record carries no meaning, and
 it amends neither.
+
+### AUTH-009 — Closure record
+
+```
+Exercise status:        EXERCISED AND SPENT
+Landed as:              ca5c6cb1fcef09051c394f4bf2ec690954643c18
+Pull request:           #10
+Exercise recorded at:   2026-10-28 16:45:03 -0400
+```
+
+The first qualifying exercise was the merge of PR #10 into `main`, a merge commit made
+2026-10-28T16:42:06-04:00 (2026-10-28T20:42:06Z; GitHub reports `mergedAt` 2026-10-28T20:42:07Z). Under
+"Authorization Exercise and Closure" §2, that is the first time any part of the authorized act landed on
+the authoritative branch. This record was added later; per §4 it documents an exercise that had already
+occurred and does not imply AUTH-009 remained operative between the merge and this recording.
+
+Recorded because the merge SHA alone does not identify which reviewed commits were merged:
+
+- Parents of the merge, read from the merge commit object itself and not from GitHub's description:
+  exactly two. First parent `cb946702d3856742f359ffb07dd0d90946ac0d40`, the prior `main`. Second parent
+  `b68363d5c55f96c5bdfead3510a641fed2c2e5c8`, the PR head the operator approved for merging, landed
+  unchanged. The merged tree (`bb8fbb50769e247258cbe737c21e812bd434fc19`) is identical to the approved
+  head's tree, so nothing was added by the merge itself. The PR carried three commits and no others:
+  `1973f57` (commit 1, the `make_server()` extraction and the regression harness), `daa39c2` (commit 2,
+  changes B-G and the register entry) and `b68363d` (the corrective commit under the operator's
+  supplemental authorization for `finish()`). The merge was made as a merge commit, not a squash or
+  rebase, as AUTH-007 and AUTH-008 were.
+- The merge changes exactly three files relative to the prior `main`: `server.py` (modified),
+  `docs/authorizations.md` (appended; no existing line changed, and the register's first 1658 lines are
+  byte-identical to the prior `main`) and `test_server_hardening.py` (added). On `main`, `server.py` has
+  SHA-256 `a34f8c7c061a11125be62e29a105015d83f93c805b018258dc6223009e630bf5` and
+  `test_server_hardening.py` has SHA-256 `e3903268ae9dec00bfc3cc6d3ce227c52fbcc828d28e2944df9c8deff12a0e15`.
+- CI: PR run 40755704170 (`pull_request`, head `daa39c2`), PR run 40758343352 (`pull_request`, head
+  `b68363d`, the approved head) and push run 40765618161 (the merge commit); `test (3.10)`, `test (3.11)`
+  and `test (3.12)` completed with conclusion `success` in the approved-head and merge-commit runs. In the
+  raw logs of the full-suite step of each of those six jobs, all 43 `test_server_hardening` methods are
+  reported `ok`, no log line reports a failure or an error, and each summary is `Ran 176 tests`. Passing
+  subtests print no line of their own, so the logs establish that the 43 methods passed but not how many
+  subtests each ran.
+- None of the three PR commits, and not the merge commit, carries a `Co-Authored-By` trailer or a
+  "Generated with" line, and the PR body carried none, as the operator's attribution instruction directed.
+
+**Scope exercised.** Relative to the prior `main`, `server.py` now binds `127.0.0.1` by default through
+the new `make_server(host='127.0.0.1', port=8000)` (section H, with A), which the production `__main__`
+calls without overrides; no longer sends `Access-Control-Allow-Origin` (B); requires `application/json`
+on `POST /fuse` (C); checks a present `Origin` against two exact values on POST (D); checks `Host`
+against two exact values on GET, HEAD and POST (E); serves only `/dashboard.html` and
+`/containment_matrix.json` on GET and HEAD, matched on the raw request-line target with the query string
+removed (F); and returns controlled 400 and 413 errors for bad `Content-Length`, JSON and fields, with a
+65,536-byte cap (G). It also carries the `finish()` override, authorized by the supplemental authorization
+recorded in the AUTH-009 grant entry, which half-closes a POST connection and drains at most 65,536 bytes
+under a total 0.5-second monotonic deadline. The new test file runs the server in a separate subprocess with
+an isolated temporary working directory on an ephemeral port and asserts the behaviors above, including
+the positive Origin and Host allowlist cases of Amendment 1.
+
+**Excluded surfaces, confirmed untouched by the merge.** The merge changes no path other than the three
+above. `dashboard.html` has the same git blob (`b1e8202bae330f9f9e76b0e988383598b4f40f3a`) on `main` as at
+`cb94670`. The Content-Security-Policy header lines of `server.py` and the fusion-generation and
+persistence block (from the `try:` through the 500 response) are identical to their text at `cb94670`,
+compared programmatically. No path among `mythos_sync.py`, `modality_classifier.py`, `logic_auditor.py`,
+`console.py`, `fusion_engine/`, `.github/`, `test_engine.py`, `test_hypothesis_properties.py`,
+`test_regression_case_001.py`, `test_dashboard_null_modality.py`, `test_dashboard_escaping.py` or
+`docs/evidence/` changed. `openCase()` therefore remains unescaped (AUTH-010 is not authorized), and
+CAUTIONARY persistence in `server.py` is unchanged. `containment_matrix.json` is not tracked by git; its
+SHA-256 on the working machine was `3FA4D990C7877B63A5796BF33C43C28A0DC0C66F7C1DF91D0279FFCB50FB86AC`
+before the implementation, at each check made during verification and the browser gate, and after the merge. That is a
+local observation, not repository evidence.
+
+**Operator-performed browser gate.** The operator performed the real-browser gate on 2026-10-28 in
+Chrome 156 on Windows against the approved head `b68363d`, served from a disposable copy outside the
+repository with a disposable matrix. The operator reported what is listed in the evidence-directory note
+`BROWSER_VERIFICATION_AUTH_009_20261028T164308-0400\BROWSER_VERIFICATION_OBSERVATION_NOTE_AUTH_009_20261028T164308-0400.txt`
+(6946 bytes, SHA-256 `FBDEE823DE02B45E3A0F8BFF5BA45AC87D6D6356FB6CF6203F87FBCC391E4C0D`), which claims only those reports: CAUTIONARY cards for misspelled names that open nothing; `POST /fuse` returning
+200 with `Origin: http://localhost:8000`, `Host: localhost:8000` and `Sec-Fetch-Site: same-origin` and the
+Content-Security-Policy header; the case-file modal opening for a HIGH CONCEPT card; the matrix fetch
+returning 200; Clear Matrix removing all cards, with the following matrix fetch erroring and new cards
+numbered from `MSF-001`; and a successful generate after Clear. The operator did not perform the
+`127.0.0.1:8000` generation or the browser check that `/` returns 404; those behaviors are covered by the
+automated tests only and are not claimed as browser-verified.
+**Recorded residuals.** Per the operator's issuance and supplemental authorization, these are accepted
+and are not objectives: POSTs with no `Origin` header from local non-browser clients are allowed; any
+local process can call the endpoints; a slow client can still block the single-threaded server; the
+server prints raw request text to the console; a client that holds its connection open after a POST
+response can delay the next request by up to 0.5 seconds; and no committed test reliably detects the
+absence of the `finish()` repair (in a scratch copy with the drain disabled, the committed tests passed in
+five of five runs).
+
+Per §6, this closure does not amend, broaden, narrow, reinterpret, ratify, or supersede AUTH-009's scope.
+AUTH-009's grant record, including its original `Status:` line, the supplemental authorization and the
+Implementation notes, is unchanged, and the question of the register's jurisdiction over code remains as
+the grant record left it. This record authorizes nothing further, including AUTH-010, the deferred
+`openCase()` escaping, or any other `server.py` change.
