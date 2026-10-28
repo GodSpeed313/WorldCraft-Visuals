@@ -1589,3 +1589,70 @@ Recorded explicitly, as AUTH-003, AUTH-006 and AUTH-007 recorded it:
 This entry is appended after the final line of the register as it stood at `a910ecb` (line 1441),
 so that no existing line moves. Its position after AUTH-007 and its closure record carries no meaning, and
 it amends neither.
+
+### AUTH-008 — Closure record
+
+```
+Exercise status:        EXERCISED AND SPENT
+Landed as:              145993281b70499bd7da8b8d0885dfc15d914771
+Pull request:           #9
+Exercise recorded at:   2026-10-27 21:20:37 -0400
+```
+
+The first qualifying exercise was the merge of PR #9 into `main`, a merge commit made
+2026-10-27T21:17:48-04:00 (2026-10-28T01:17:48Z; GitHub reports `mergedAt` 2026-10-28T01:17:48Z). Under
+"Authorization Exercise and Closure" §2, that is the first time any part of the authorized act landed on
+the authoritative branch. This record was added later; per §4 it documents an exercise that had already
+occurred and does not imply AUTH-008 remained operative between the merge and this recording.
+
+Recorded because the merge SHA alone does not identify which reviewed commit was merged:
+
+- Parents of the merge, read from the merge commit object itself and not from GitHub's description:
+  exactly two. First parent `a910ecb26fe129c48daa122c554e9a0b8449a4ad`, the prior `main`. Second parent
+  `536297420d505a5db9c013dedfb9d41513c5d208`, the PR head the operator approved for merging, landed
+  unchanged. The PR carried one commit and no others. The merge was made as a merge commit, not a squash or
+  rebase, as the operator's merge approval directed.
+- The merge changes exactly three files relative to the prior `main`: `dashboard.html` (modified),
+  `docs/authorizations.md` (appended; no existing line changed) and `test_dashboard_escaping.py` (added).
+  The merged tree is identical to the approved head's tree, so nothing was added by the merge itself. On
+  `main`, `dashboard.html` has SHA-256
+  `69087767d85c2858d8a8893d799923dc641f4a965fd7acd95dfd88aa57d403a1` and `test_dashboard_escaping.py` has
+  SHA-256 `dfeecbae0ebd6ff0bff502a17e1bcb797fdb35e0799837082f8ae6cf08c455f9`.
+- CI: PR run 40613611351 (`pull_request`, head `5362974…`) and push run 40614176428 (the merge commit);
+  `test (3.10)`, `test (3.11)` and `test (3.12)` completed with conclusion `success` in both runs. In the
+  raw logs of the "Run full suite including property tests" step of each of those six jobs, all five
+  `test_dashboard_escaping` methods appear and each is reported `ok`: the CAUTIONARY-stub card, the
+  per-field normal-card test, the `modality` and `state` class-attribute breakout tests, and the benign
+  visible-text test. No log line in those steps reports a skip, an expected failure, an unexpected success,
+  a failure or an error, and each summary is `Ran 133 tests` followed by a bare `OK`. Passing subtests
+  print no line of their own, so the logs establish the five methods passed but not how many subtests each
+  ran.
+- Neither the PR commit nor the merge commit carries a `Co-Authored-By` trailer or a "Generated with" line,
+  and the PR body carried none, as the operator's attribution instruction directed.
+
+**Scope exercised.** Relative to the prior `main`, the change to `dashboard.html` is five hunks and
+nothing else: ten lines of the `renderGrid()` card template, in both branches (the null-modality card and
+the normal card), on which twelve matrix-derived insertions are now wrapped in `esc()`; and one new
+function, `esc(v)`, added at the end of the Helpers section, returning `String(v)` with `&`, `<`, `>`,
+`"` and `'` replaced by entities. No matrix-derived field is left unwrapped in either card branch. The
+new test file asserts, with the hostile string `<img src=x onerror=alert(1)>&"'`, that a CAUTIONARY stub's
+`fusion_name` renders as text, that each of `fusion_name`, `signature_ability`, `biome` and `id` does on
+the normal card, that a hostile `modality` or `state` cannot leave its class attribute, and that a benign
+fixture including "Rhetoric & Legacy" shows the same visible text as before. It imports helper functions
+from `test_dashboard_null_modality.py` and does not modify it.
+
+**Excluded surfaces, confirmed untouched by the merge.** In `dashboard.html`, `loadMatrix()`,
+`openCase()`, the markup and styles above `loadMatrix()`, and everything from `overlayClick()` to the end of
+the script are byte-identical to their text at `a910ecb`; the Helpers section differs only by the added
+`esc` function. The merge changes no path among `server.py`, `mythos_sync.py`, `modality_classifier.py`,
+`logic_auditor.py`, `console.py`, `fusion_engine/`, `.github/`, `test_engine.py`,
+`test_hypothesis_properties.py`, `test_regression_case_001.py`, `test_dashboard_null_modality.py` and
+`docs/evidence/`. `openCase()`, the case-file modal, therefore remains unescaped, and the `server.py`
+findings recorded in issue #8 are not addressed. `containment_matrix.json` is not tracked by git; its
+SHA-256 on the working machine was `3FA4D990C7877B63A5796BF33C43C28A0DC0C66F7C1DF91D0279FFCB50FB86AC`
+before the implementation and after the merge. That is a local observation, not repository evidence.
+
+Per §6, this closure does not amend, broaden, narrow, reinterpret, ratify, or supersede AUTH-008's scope.
+AUTH-008's grant record, including its original `Status:` line, is unchanged, and the question of the
+register's jurisdiction over code remains as the grant record left it. This record authorizes nothing
+further, including any AUTH-009, the deferred `openCase()` escaping, or any `server.py` change.
