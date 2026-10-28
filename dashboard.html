@@ -483,22 +483,22 @@
     }
 
     grid.innerHTML = MATRIX.map((f, i) => f.modality == null ? `
-      <div class="fusion-card ${f.state ?? ''}">
-        <span class="card-badge ${f.state ?? ''}">${f.state ?? ''}</span>
-        <p class="card-name">${f.fusion_name}</p>
+      <div class="fusion-card ${esc(f.state ?? '')}">
+        <span class="card-badge ${esc(f.state ?? '')}">${esc(f.state ?? '')}</span>
+        <p class="card-name">${esc(f.fusion_name)}</p>
         <div class="card-footer">
-          <span class="card-id">${f.id}</span>
+          <span class="card-id">${esc(f.id)}</span>
         </div>
       </div>
     ` : `
-      <div class="fusion-card ${f.modality}" onclick="openCase(${i})">
-        <span class="card-badge ${f.modality}">${f.modality.replace('_',' ')}</span>
-        <p class="card-name">${f.fusion_name}</p>
-        <p class="card-sig">${f.signature_ability}</p>
-        <p class="card-biome">${f.biome}</p>
+      <div class="fusion-card ${esc(f.modality)}" onclick="openCase(${i})">
+        <span class="card-badge ${esc(f.modality)}">${esc(f.modality.replace('_',' '))}</span>
+        <p class="card-name">${esc(f.fusion_name)}</p>
+        <p class="card-sig">${esc(f.signature_ability)}</p>
+        <p class="card-biome">${esc(f.biome)}</p>
         ${fusionsWithUnavailable.has(i) ? '<p style="font-size:10px;color:#D85A30;font-family:var(--mono);margin:4px 0 0;">⚠ grounding unavailable</p>' : ''}
         <div class="card-footer">
-          <span class="card-id">${f.id}</span>
+          <span class="card-id">${esc(f.id)}</span>
           <span class="card-arrow">→</span>
         </div>
       </div>
@@ -651,6 +651,14 @@
   }
   function modalityBd(m) {
     return m === 'LEGACY' ? 'var(--legacy-bd)' : m === 'GROUNDED' ? 'var(--ground-bd)' : 'var(--high-bd)';
+  }
+  function esc(v) {
+    return String(v)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
 
   function overlayClick(e, id) {
