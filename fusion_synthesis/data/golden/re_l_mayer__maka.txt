@@ -1,0 +1,107 @@
+Cassia Thorne   (Re-l Mayer x Maka)   dominance: 50/50 (fixed in Phase 1; not applied as a weighting)
+
+CONCEPT
+  An investigator who reads the faint traces souls leave behind at a scene and assembles them into a case, weighing what is perceived as evidence and never as a verdict.
+
+APPEARANCE
+  subject: a patient investigator surrounded by hairline traces of pale light
+  build: broad, heavy-set frame stooped slightly forward as if listening to the ground
+  face: round, freckled face with pale amber eyes and an absorbed, unhurried expression
+  hair: a thick grey-streaked braid coiled at the crown
+  clothing: layered robes in dusty teal, worn open over plain trousers, with a stiff upright collar of pale oilcloth
+  palette: dusty teal, bone and oxidized copper
+  signature_element: a palm-sized crescent-shaped magnifying glass with a dark tint, hung from a short cord at the chest
+  ability_manifestation: the traces bloom where someone once stood and fade like breath on glass
+  setting: a rain-streaked glass-roofed market hall after closing, a few lit windows
+  mood: hushed, meticulous, quietly unsettled
+  lighting: cool grey rain-light with a single amber lamp
+  style: painterly cinematic character concept art, three-quarter view
+  composed paragraph:
+    A patient investigator surrounded by hairline traces of pale light. Build: broad, heavy-set frame stooped slightly forward as if listening to the ground. Face: round, freckled face with pale amber eyes and an absorbed, unhurried expression. Hair: a thick grey-streaked braid coiled at the crown. Clothing: layered robes in dusty teal, worn open over plain trousers, with a stiff upright collar of pale oilcloth. Palette: dusty teal, bone and oxidized copper. Signature element: a palm-sized crescent-shaped magnifying glass with a dark tint, hung from a short cord at the chest. Ability in use: the traces bloom where someone once stood and fade like breath on glass. Setting: a rain-streaked glass-roofed market hall after closing, a few lit windows. Mood: hushed, meticulous, quietly unsettled. Lighting: cool grey rain-light with a single amber lamp. Style: painterly cinematic character concept art, three-quarter view.
+
+VISUAL PROVENANCE
+  subject | a patient investigator surrounded by hairline traces of pale light | new | re_l_mayer__maka.residual_reading (emergent ability)
+  build | broad, heavy-set frame stooped slightly forward as if listening to the ground | new | re_l_mayer__maka.residual_reading (emergent ability)
+  face | round, freckled face with pale amber eyes and an absorbed, unhurried expression | new | re_l_mayer__maka.residual_reading (emergent ability)
+  hair | a thick grey-streaked braid coiled at the crown | new | re_l_mayer__maka.residual_reading (emergent ability)
+  clothing | layered robes in dusty teal, worn open over plain trousers, with a stiff upright collar of pale oilcloth | transformed | re_l_mayer.v_clothing (Re-l Mayer)
+      design change (material): a fitted dark-grey uniform coat with a high stiff collar and black gloves  ->  a stiff upright collar of pale oilcloth
+  palette | dusty teal, bone and oxidized copper | new | re_l_mayer__maka.residual_reading (emergent ability)
+  signature_element | a palm-sized crescent-shaped magnifying glass with a dark tint, hung from a short cord at the chest | transformed | maka.v_signature (Maka)
+      design change (form): a tall scythe with a curved blade carried at the side  ->  a palm-sized crescent-shaped magnifying glass
+  ability_manifestation | the traces bloom where someone once stood and fade like breath on glass | new | re_l_mayer__maka.residual_reading (emergent ability)
+  setting | a rain-streaked glass-roofed market hall after closing, a few lit windows | new | re_l_mayer__maka.residual_reading (emergent ability)
+  mood | hushed, meticulous, quietly unsettled | new | re_l_mayer__maka.residual_reading (emergent ability)
+  lighting | cool grey rain-light with a single amber lamp | new | re_l_mayer__maka.residual_reading (emergent ability)
+  style | painterly cinematic character concept art, three-quarter view | new | re_l_mayer__maka.residual_reading (emergent ability)
+
+TRAITS
+  inherited:
+    - Forensic Method [A: Re-l Mayer] (SOURCE_DERIVED, FICTIONAL)
+      Carried intact: it orders what is perceived into a case.
+    - Institutional Standing [A: Re-l Mayer] (SOURCE_DERIVED, FICTIONAL)
+      Carried: official rank is what lets a reading be recorded and acted upon.
+    - Standing Boundary [A: Re-l Mayer] (SOURCE_DERIVED, FICTIONAL)
+      Carried as a hard bound: outside the institutions that grant standing, a reading carries no weight.
+    - Guarded Composure [A: Re-l Mayer] (SOURCE_DERIVED, FICTIONAL)
+      Carried: a reading is kept to the facts, with no performance.
+    - Disciplined Study [B: Maka] (SOURCE_DERIVED, FICTIONAL)
+      Carried: reading traces is learned, methodical work.
+  transformed:
+    - Artificial Companions [A: Re-l Mayer] (SOURCE_DERIVED, FICTIONAL)
+      Working among artificial persons becomes a known blind spot: they leave no residue, and the user learns to look for the gaps they leave.
+    - Soul Perception [B: Maka] (SOURCE_DERIVED, FICTIONAL)
+      Perception of the living becomes perception of what the living leave behind.
+    - Weapon Partnership [B: Maka] (SOURCE_DERIVED, FICTIONAL)
+      The partner's role as a channel that shapes and focuses energy becomes an instrument: a palm-sized crescent magnifier that focuses the reading. The partner as a person is not carried.
+  complementary:
+    (none)
+  not carried:
+    - Sidearm Competence [A: Re-l Mayer] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: A combat skill the authored rule does not use.
+    - Soul Resonance [B: Maka] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: Resonance needs a partner and an attack to amplify; this ability is investigative and is never an attack.
+    - Partner Dependence [B: Maka] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: The limitation belongs to partner resonance, which is not carried.
+    - Anti-Demon Calling [B: Maka] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: A hunting role; this ability is investigative, not a hunt.
+
+EMERGENT ABILITY
+  Residual Reading  [INVENTED_BRIDGE]
+  At a scene, the user reads the faint residue souls leave behind and orders it, by forensic method, into a timeline of who was present and in what state, recorded as evidence for a case.
+  governing rule (INVENTED_BRIDGE): Soul perception is turned from the living to what they leave behind: faint residues of recent presence are read at a scene and ordered by forensic method into a sequence of who was there and in what state, recorded as evidence for a case and bounded by the user's official standing.
+  derived from: maka.soul_perception, re_l_mayer.forensic_method, re_l_mayer.standing_boundary
+  activation: Quiet, undisturbed time at the scene, with perception turned to what is left behind.
+  limitations:
+    - Residue fades: traces older than a short window cannot be read, and a disturbed scene is partly lost.
+    - It records presence and state, not intent or guilt; a reading is evidence to be weighed, never a verdict.
+    - Artificial persons leave no residue, so anyone or anything without a soul is invisible to it.
+    - A reading carries weight only where the user has official standing; outside it, it is an unsupported claim.
+    - Overlapping traces are slow, demanding work and leave the user drained.
+  inherited limitations:
+    - Standing Boundary [Re-l Mayer] (hard limitation): Her authority exists only inside the city's institutions; beyond them it carries no weight.
+
+EXCLUSIONS
+  - the closed city and its politics [A: Re-l Mayer]: Setting and politics, not a mechanic.
+  - inherited family rank [A: Re-l Mayer]: A lineage role, not a mechanic.
+  - the literal weapon partner as a carried companion [B: Maka]: A separate person; only the partner's channel-shaping role is carried, as an instrument.
+  - the academy setting and its hierarchy [B: Maka]: Setting and institution, not a mechanic.
+
+COMPATIBILITY
+  COMPATIBLE (0 activation conditions evaluated)
+
+ANCESTRY
+  - maka.soul_perception (source property [Maka], SOURCE_DERIVED)
+  - re_l_mayer.forensic_method (source property [Re-l Mayer], SOURCE_DERIVED)
+  - re_l_mayer.standing_boundary (source property [Re-l Mayer], SOURCE_DERIVED)
+  - re_l_mayer__maka.trace_case_rule (interaction rule, INVENTED_BRIDGE)
+
+IMAGE PROMPT
+  a patient investigator surrounded by hairline traces of pale light, broad, heavy-set frame stooped slightly forward as if listening to the ground, round, freckled face with pale amber eyes and an absorbed, unhurried expression, a thick grey-streaked braid coiled at the crown, layered robes in dusty teal, worn open over plain trousers, with a stiff upright collar of pale oilcloth, dusty teal, bone and oxidized copper, a palm-sized crescent-shaped magnifying glass with a dark tint, hung from a short cord at the chest, the traces bloom where someone once stood and fade like breath on glass, a rain-streaked glass-roofed market hall after closing, a few lit windows, hushed, meticulous, quietly unsettled, cool grey rain-light with a single amber lamp, painterly cinematic character concept art, three-quarter view --ar 3:4 --style raw
+  (838 / 900 characters)
+
+LEAK CHECK (implemented detector): PASS

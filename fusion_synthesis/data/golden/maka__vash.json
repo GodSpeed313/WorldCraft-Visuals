@@ -1,0 +1,501 @@
+{
+  "schema": "fusion-synthesis-card/1",
+  "fusion_name": "Wren Calloway",
+  "sources": {
+    "A": "Maka",
+    "B": "Vash"
+  },
+  "concept": "A wandering peacekeeper who reads every soul in a crowd and tunes a devastating discharge down to exactly the force needed to stop a fight without ending a life.",
+  "dominance": {
+    "value": 50,
+    "applied": false,
+    "note": "fixed in Phase 1; not applied as a weighting"
+  },
+  "appearance": {
+    "subject": "a calm traveler casting fine threads of pale gold light",
+    "slots": {
+      "build": "broad-shouldered, medium-height frame, low and planted",
+      "face": "heavy-lidded grey-brown eyes, a calm weathered face, a faint scar through one eyebrow",
+      "hair": "dark, close-cropped hair with a thin braided cord at the nape",
+      "clothing": "a short quilted jerkin over a high-necked linen tunic, and a faded red sash knotted over a wide woven belt",
+      "palette": "slate blue, undyed linen and oxidized brass",
+      "signature_element": "a palm-length bundle of stacked brass rings, like a small chime, hung from a cord at the hip, humming faintly",
+      "ability_manifestation": "the threads run from the stacked rings to every living person nearby, each pulsing at its own rhythm"
+    },
+    "scene": {
+      "setting": "a salt-white tidal flat at dawn, stilt houses and a crowd on a wooden causeway",
+      "mood": "tense, patient, quietly compassionate",
+      "lighting": "soft pre-dawn light, cool blue-grey with a thin warm horizon line",
+      "style": "painterly cinematic character concept art, three-quarter view"
+    },
+    "composed_paragraph": "A calm traveler casting fine threads of pale gold light. Build: broad-shouldered, medium-height frame, low and planted. Face: heavy-lidded grey-brown eyes, a calm weathered face, a faint scar through one eyebrow. Hair: dark, close-cropped hair with a thin braided cord at the nape. Clothing: a short quilted jerkin over a high-necked linen tunic, and a faded red sash knotted over a wide woven belt. Palette: slate blue, undyed linen and oxidized brass. Signature element: a palm-length bundle of stacked brass rings, like a small chime, hung from a cord at the hip, humming faintly. Ability in use: the threads run from the stacked rings to every living person nearby, each pulsing at its own rhythm. Setting: a salt-white tidal flat at dawn, stilt houses and a crowd on a wooden causeway. Mood: tense, patient, quietly compassionate. Lighting: soft pre-dawn light, cool blue-grey with a thin warm horizon line. Style: painterly cinematic character concept art, three-quarter view."
+  },
+  "visual_provenance": [
+    {
+      "slot": "subject",
+      "descriptor": "a calm traveler casting fine threads of pale gold light",
+      "origin": "new",
+      "parent_ids": [
+        "maka__vash.mercy_frequency"
+      ],
+      "parents": [
+        {
+          "id": "maka__vash.mercy_frequency",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "build",
+      "descriptor": "broad-shouldered, medium-height frame, low and planted",
+      "origin": "new",
+      "parent_ids": [
+        "maka__vash.mercy_frequency"
+      ],
+      "parents": [
+        {
+          "id": "maka__vash.mercy_frequency",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "face",
+      "descriptor": "heavy-lidded grey-brown eyes, a calm weathered face, a faint scar through one eyebrow",
+      "origin": "new",
+      "parent_ids": [
+        "maka__vash.mercy_frequency"
+      ],
+      "parents": [
+        {
+          "id": "maka__vash.mercy_frequency",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "hair",
+      "descriptor": "dark, close-cropped hair with a thin braided cord at the nape",
+      "origin": "new",
+      "parent_ids": [
+        "maka__vash.mercy_frequency"
+      ],
+      "parents": [
+        {
+          "id": "maka__vash.mercy_frequency",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "clothing",
+      "descriptor": "a short quilted jerkin over a high-necked linen tunic, and a faded red sash knotted over a wide woven belt",
+      "origin": "transformed",
+      "parent_ids": [
+        "vash.v_clothing"
+      ],
+      "parents": [
+        {
+          "id": "vash.v_clothing",
+          "character": "Vash"
+        }
+      ],
+      "design_delta": {
+        "changed": "form",
+        "from": "a long red coat with a high collar and buckled straps, dark trousers and boots",
+        "to": "a faded red sash knotted over a wide woven belt"
+      }
+    },
+    {
+      "slot": "palette",
+      "descriptor": "slate blue, undyed linen and oxidized brass",
+      "origin": "new",
+      "parent_ids": [
+        "maka__vash.mercy_frequency"
+      ],
+      "parents": [
+        {
+          "id": "maka__vash.mercy_frequency",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "signature_element",
+      "descriptor": "a palm-length bundle of stacked brass rings, like a small chime, hung from a cord at the hip, humming faintly",
+      "origin": "transformed",
+      "parent_ids": [
+        "maka.v_signature"
+      ],
+      "parents": [
+        {
+          "id": "maka.v_signature",
+          "character": "Maka"
+        }
+      ],
+      "design_delta": {
+        "changed": "form",
+        "from": "a tall scythe with a curved blade carried at the side",
+        "to": "a palm-length bundle of stacked brass rings"
+      }
+    },
+    {
+      "slot": "ability_manifestation",
+      "descriptor": "the threads run from the stacked rings to every living person nearby, each pulsing at its own rhythm",
+      "origin": "new",
+      "parent_ids": [
+        "maka__vash.mercy_frequency"
+      ],
+      "parents": [
+        {
+          "id": "maka__vash.mercy_frequency",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "setting",
+      "descriptor": "a salt-white tidal flat at dawn, stilt houses and a crowd on a wooden causeway",
+      "origin": "new",
+      "parent_ids": [
+        "maka__vash.mercy_frequency"
+      ],
+      "parents": [
+        {
+          "id": "maka__vash.mercy_frequency",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "mood",
+      "descriptor": "tense, patient, quietly compassionate",
+      "origin": "new",
+      "parent_ids": [
+        "maka__vash.mercy_frequency"
+      ],
+      "parents": [
+        {
+          "id": "maka__vash.mercy_frequency",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "lighting",
+      "descriptor": "soft pre-dawn light, cool blue-grey with a thin warm horizon line",
+      "origin": "new",
+      "parent_ids": [
+        "maka__vash.mercy_frequency"
+      ],
+      "parents": [
+        {
+          "id": "maka__vash.mercy_frequency",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "style",
+      "descriptor": "painterly cinematic character concept art, three-quarter view",
+      "origin": "new",
+      "parent_ids": [
+        "maka__vash.mercy_frequency"
+      ],
+      "parents": [
+        {
+          "id": "maka__vash.mercy_frequency",
+          "character": "emergent ability"
+        }
+      ]
+    }
+  ],
+  "traits": [
+    {
+      "property_id": "maka.soul_perception",
+      "name": "Soul Perception",
+      "source": "A",
+      "character": "Maka",
+      "outcome": "inherited",
+      "result_text": "Carried intact: it is the targeting sense behind the tuned release.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "maka.soul_resonance",
+      "name": "Soul Resonance",
+      "source": "A",
+      "character": "Maka",
+      "outcome": "transformed",
+      "result_text": "The wavelength-matching principle is carried, but applied to each target instead of to a partner.",
+      "contribution_type": "MECHANISM",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "maka.partner_dependence",
+      "name": "Partner Dependence",
+      "source": "A",
+      "character": "Maka",
+      "outcome": "transformed",
+      "result_text": "Dependence on a compatible partner becomes dependence on a perceivable target: with nothing perceived to tune to, the release cannot fire.",
+      "contribution_type": "MECHANISM",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "maka.weapon_partnership",
+      "name": "Weapon Partnership",
+      "source": "A",
+      "character": "Maka",
+      "outcome": "transformed",
+      "result_text": "The partner's role as a channel that shapes and focuses energy becomes an instrument, a short chime of stacked rings. The partner as a person is not carried.",
+      "contribution_type": "OBJECT_RELATIONSHIP",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "maka.anti_demon_calling",
+      "name": "Anti-Demon Calling",
+      "source": "A",
+      "character": "Maka",
+      "outcome": "transformed",
+      "result_text": "Cutting down corrupted souls becomes breaking corrupting resonance without ending the host.",
+      "contribution_type": "CONCEPTUAL_ROLE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "maka.disciplined_study",
+      "name": "Disciplined Study",
+      "source": "A",
+      "character": "Maka",
+      "outcome": "inherited",
+      "result_text": "Methodical preparation carries over: tuning a release is learned, deliberate work.",
+      "contribution_type": "BEHAVIOR",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "vash.angel_arm",
+      "name": "Angel Arm",
+      "source": "B",
+      "character": "Vash",
+      "outcome": "inherited",
+      "result_text": "Carried as the stored source of the discharge.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "vash.arm_output_limit",
+      "name": "Arm Output Limit",
+      "source": "B",
+      "character": "Vash",
+      "outcome": "inherited",
+      "result_text": "Carried: the raw output stays enormous, which is why it is tuned or not used at all.",
+      "contribution_type": "MECHANISM",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "vash.pacifist_vow",
+      "name": "Pacifist Vow",
+      "source": "B",
+      "character": "Vash",
+      "outcome": "inherited",
+      "result_text": "Carried as a hard bound: the ability has no lethal setting.",
+      "contribution_type": "GOVERNING_RULE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "vash.sharpshooting",
+      "name": "Sharpshooting",
+      "source": "B",
+      "character": "Vash",
+      "outcome": "transformed",
+      "result_text": "Precision in disabling shots becomes precision in choosing which targets the threads reach.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "vash.plant_resilience",
+      "name": "Plant Resilience",
+      "source": "B",
+      "character": "Vash",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "MECHANISM",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "Species physiology is not a mechanic this ability uses; carrying it would stack durability onto a perception-and-restraint design."
+    },
+    {
+      "property_id": "vash.notorious_legend",
+      "name": "Notorious Legend",
+      "source": "B",
+      "character": "Vash",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "CONCEPTUAL_ROLE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "A reputation is a narrative role, not a transferable mechanic."
+    }
+  ],
+  "emergent_ability": {
+    "id": "maka__vash.mercy_frequency",
+    "name": "Mercy Frequency",
+    "description": "A tuned release: the user perceives each soul in range and sends the discharge as threads matched to chosen targets, disabling weapons and breaking corrupting resonance while sparing the living.",
+    "governing_rule": {
+      "id": "maka__vash.tuned_release_rule",
+      "description": "Soul perception maps every living soul in range; the stored discharge is released as narrow threads tuned to a chosen set of targets, sized to disable weapons and break corrupting resonance rather than lives, and the vow caps the output below lethal.",
+      "provenance": "INVENTED_BRIDGE"
+    },
+    "provenance": "INVENTED_BRIDGE",
+    "direct_ancestor_ids": [
+      "maka.soul_perception",
+      "vash.angel_arm",
+      "vash.arm_output_limit",
+      "vash.pacifist_vow"
+    ],
+    "activation": "Sustained perception of every target in range.",
+    "limitations": [
+      "Cannot target what cannot be perceived: out of perception range, or against a soul too shielded or disguised to read, the release does not fire.",
+      "Needs unbroken concentration: any break in perception collapses the tuning and the release is lost, never fired untuned.",
+      "Only a handful of targets can be tuned at once; a crowd of aggressors exceeds what one release can hold.",
+      "Each full release is a heavy strain: perception range shrinks for a while afterwards.",
+      "The vow bounds the output: the ability has no lethal setting, so it cannot end a fight that only a lethal blow would end."
+    ],
+    "inherited_limitations": [
+      {
+        "property_id": "vash.arm_output_limit",
+        "name": "Arm Output Limit",
+        "character": "Vash",
+        "kind": "hard limitation",
+        "description": "The arm's discharge is enormous and indiscriminate; it is a last resort because it cannot be fine-tuned."
+      },
+      {
+        "property_id": "vash.pacifist_vow",
+        "name": "Pacifist Vow",
+        "character": "Vash",
+        "kind": "prohibition",
+        "description": "Refuses to take a life, even an enemy's."
+      }
+    ]
+  },
+  "exclusions": [
+    {
+      "item": "the literal weapon partner as a carried companion",
+      "source": "A",
+      "character": "Maka",
+      "reason": "A separate person; only the partner's channel-shaping role is carried, as an instrument."
+    },
+    {
+      "item": "the academy setting and its hierarchy",
+      "source": "A",
+      "character": "Maka",
+      "reason": "Setting and institution, not a mechanic."
+    },
+    {
+      "item": "the arm's unrestrained destructive output",
+      "source": "B",
+      "character": "Vash",
+      "reason": "Excluded by the vow: there is no setting that releases the discharge untuned."
+    },
+    {
+      "item": "bounty and legend status",
+      "source": "B",
+      "character": "Vash",
+      "reason": "A reputation is a narrative role, not a transferable mechanic."
+    },
+    {
+      "item": "plant physiology and long lifespan",
+      "source": "B",
+      "character": "Vash",
+      "reason": "A biological trait the authored rule does not use."
+    }
+  ],
+  "compatibility": {
+    "status": "COMPATIBLE",
+    "evaluated_conditions": 0,
+    "contradiction": null,
+    "required_bridge": null,
+    "unresolved_reason": null
+  },
+  "ancestry": [
+    {
+      "id": "maka.soul_perception",
+      "kind": "source property",
+      "character": "Maka",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "vash.angel_arm",
+      "kind": "source property",
+      "character": "Vash",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "vash.arm_output_limit",
+      "kind": "source property",
+      "character": "Vash",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "vash.pacifist_vow",
+      "kind": "source property",
+      "character": "Vash",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "maka__vash.tuned_release_rule",
+      "kind": "interaction rule",
+      "provenance": "INVENTED_BRIDGE"
+    }
+  ],
+  "recorded_contribution_ids": [
+    "maka.soul_perception",
+    "maka.soul_resonance",
+    "maka.partner_dependence",
+    "maka.weapon_partnership",
+    "maka.anti_demon_calling",
+    "maka.disciplined_study",
+    "vash.angel_arm",
+    "vash.arm_output_limit",
+    "vash.pacifist_vow",
+    "vash.sharpshooting",
+    "vash.plant_resilience",
+    "vash.notorious_legend"
+  ],
+  "image_prompt": {
+    "text": "a calm traveler casting fine threads of pale gold light, broad-shouldered, medium-height frame, low and planted, heavy-lidded grey-brown eyes, a calm weathered face, a faint scar through one eyebrow, dark, close-cropped hair with a thin braided cord at the nape, a short quilted jerkin over a high-necked linen tunic, and a faded red sash knotted over a wide woven belt, slate blue, undyed linen and oxidized brass, a palm-length bundle of stacked brass rings, like a small chime, hung from a cord at the hip, humming faintly, the threads run from the stacked rings to every living person nearby, each pulsing at its own rhythm, a salt-white tidal flat at dawn, stilt houses and a crowd on a wooden causeway, tense, patient, quietly compassionate, soft pre-dawn light, cool blue-grey with a thin warm horizon line, painterly cinematic character concept art, three-quarter view --ar 3:4 --style raw",
+    "suppressed": false,
+    "order": [
+      "subject",
+      "build",
+      "face",
+      "hair",
+      "clothing",
+      "palette",
+      "signature_element",
+      "ability_manifestation",
+      "setting",
+      "mood",
+      "lighting",
+      "style",
+      "parameters"
+    ],
+    "length": 897,
+    "ceiling": 900
+  },
+  "leak_check": {
+    "detector": "implemented detector",
+    "status": "PASS",
+    "findings": [],
+    "claim": "A pass establishes compliance with the implemented detector only. It is not a guarantee that no recognizable proper noun, character reference or franchise reference is present."
+  }
+}

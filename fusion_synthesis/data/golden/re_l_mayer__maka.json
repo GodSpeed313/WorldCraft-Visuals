@@ -1,0 +1,483 @@
+{
+  "schema": "fusion-synthesis-card/1",
+  "fusion_name": "Cassia Thorne",
+  "sources": {
+    "A": "Re-l Mayer",
+    "B": "Maka"
+  },
+  "concept": "An investigator who reads the faint traces souls leave behind at a scene and assembles them into a case, weighing what is perceived as evidence and never as a verdict.",
+  "dominance": {
+    "value": 50,
+    "applied": false,
+    "note": "fixed in Phase 1; not applied as a weighting"
+  },
+  "appearance": {
+    "subject": "a patient investigator surrounded by hairline traces of pale light",
+    "slots": {
+      "build": "broad, heavy-set frame stooped slightly forward as if listening to the ground",
+      "face": "round, freckled face with pale amber eyes and an absorbed, unhurried expression",
+      "hair": "a thick grey-streaked braid coiled at the crown",
+      "clothing": "layered robes in dusty teal, worn open over plain trousers, with a stiff upright collar of pale oilcloth",
+      "palette": "dusty teal, bone and oxidized copper",
+      "signature_element": "a palm-sized crescent-shaped magnifying glass with a dark tint, hung from a short cord at the chest",
+      "ability_manifestation": "the traces bloom where someone once stood and fade like breath on glass"
+    },
+    "scene": {
+      "setting": "a rain-streaked glass-roofed market hall after closing, a few lit windows",
+      "mood": "hushed, meticulous, quietly unsettled",
+      "lighting": "cool grey rain-light with a single amber lamp",
+      "style": "painterly cinematic character concept art, three-quarter view"
+    },
+    "composed_paragraph": "A patient investigator surrounded by hairline traces of pale light. Build: broad, heavy-set frame stooped slightly forward as if listening to the ground. Face: round, freckled face with pale amber eyes and an absorbed, unhurried expression. Hair: a thick grey-streaked braid coiled at the crown. Clothing: layered robes in dusty teal, worn open over plain trousers, with a stiff upright collar of pale oilcloth. Palette: dusty teal, bone and oxidized copper. Signature element: a palm-sized crescent-shaped magnifying glass with a dark tint, hung from a short cord at the chest. Ability in use: the traces bloom where someone once stood and fade like breath on glass. Setting: a rain-streaked glass-roofed market hall after closing, a few lit windows. Mood: hushed, meticulous, quietly unsettled. Lighting: cool grey rain-light with a single amber lamp. Style: painterly cinematic character concept art, three-quarter view."
+  },
+  "visual_provenance": [
+    {
+      "slot": "subject",
+      "descriptor": "a patient investigator surrounded by hairline traces of pale light",
+      "origin": "new",
+      "parent_ids": [
+        "re_l_mayer__maka.residual_reading"
+      ],
+      "parents": [
+        {
+          "id": "re_l_mayer__maka.residual_reading",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "build",
+      "descriptor": "broad, heavy-set frame stooped slightly forward as if listening to the ground",
+      "origin": "new",
+      "parent_ids": [
+        "re_l_mayer__maka.residual_reading"
+      ],
+      "parents": [
+        {
+          "id": "re_l_mayer__maka.residual_reading",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "face",
+      "descriptor": "round, freckled face with pale amber eyes and an absorbed, unhurried expression",
+      "origin": "new",
+      "parent_ids": [
+        "re_l_mayer__maka.residual_reading"
+      ],
+      "parents": [
+        {
+          "id": "re_l_mayer__maka.residual_reading",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "hair",
+      "descriptor": "a thick grey-streaked braid coiled at the crown",
+      "origin": "new",
+      "parent_ids": [
+        "re_l_mayer__maka.residual_reading"
+      ],
+      "parents": [
+        {
+          "id": "re_l_mayer__maka.residual_reading",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "clothing",
+      "descriptor": "layered robes in dusty teal, worn open over plain trousers, with a stiff upright collar of pale oilcloth",
+      "origin": "transformed",
+      "parent_ids": [
+        "re_l_mayer.v_clothing"
+      ],
+      "parents": [
+        {
+          "id": "re_l_mayer.v_clothing",
+          "character": "Re-l Mayer"
+        }
+      ],
+      "design_delta": {
+        "changed": "material",
+        "from": "a fitted dark-grey uniform coat with a high stiff collar and black gloves",
+        "to": "a stiff upright collar of pale oilcloth"
+      }
+    },
+    {
+      "slot": "palette",
+      "descriptor": "dusty teal, bone and oxidized copper",
+      "origin": "new",
+      "parent_ids": [
+        "re_l_mayer__maka.residual_reading"
+      ],
+      "parents": [
+        {
+          "id": "re_l_mayer__maka.residual_reading",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "signature_element",
+      "descriptor": "a palm-sized crescent-shaped magnifying glass with a dark tint, hung from a short cord at the chest",
+      "origin": "transformed",
+      "parent_ids": [
+        "maka.v_signature"
+      ],
+      "parents": [
+        {
+          "id": "maka.v_signature",
+          "character": "Maka"
+        }
+      ],
+      "design_delta": {
+        "changed": "form",
+        "from": "a tall scythe with a curved blade carried at the side",
+        "to": "a palm-sized crescent-shaped magnifying glass"
+      }
+    },
+    {
+      "slot": "ability_manifestation",
+      "descriptor": "the traces bloom where someone once stood and fade like breath on glass",
+      "origin": "new",
+      "parent_ids": [
+        "re_l_mayer__maka.residual_reading"
+      ],
+      "parents": [
+        {
+          "id": "re_l_mayer__maka.residual_reading",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "setting",
+      "descriptor": "a rain-streaked glass-roofed market hall after closing, a few lit windows",
+      "origin": "new",
+      "parent_ids": [
+        "re_l_mayer__maka.residual_reading"
+      ],
+      "parents": [
+        {
+          "id": "re_l_mayer__maka.residual_reading",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "mood",
+      "descriptor": "hushed, meticulous, quietly unsettled",
+      "origin": "new",
+      "parent_ids": [
+        "re_l_mayer__maka.residual_reading"
+      ],
+      "parents": [
+        {
+          "id": "re_l_mayer__maka.residual_reading",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "lighting",
+      "descriptor": "cool grey rain-light with a single amber lamp",
+      "origin": "new",
+      "parent_ids": [
+        "re_l_mayer__maka.residual_reading"
+      ],
+      "parents": [
+        {
+          "id": "re_l_mayer__maka.residual_reading",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "style",
+      "descriptor": "painterly cinematic character concept art, three-quarter view",
+      "origin": "new",
+      "parent_ids": [
+        "re_l_mayer__maka.residual_reading"
+      ],
+      "parents": [
+        {
+          "id": "re_l_mayer__maka.residual_reading",
+          "character": "emergent ability"
+        }
+      ]
+    }
+  ],
+  "traits": [
+    {
+      "property_id": "re_l_mayer.forensic_method",
+      "name": "Forensic Method",
+      "source": "A",
+      "character": "Re-l Mayer",
+      "outcome": "inherited",
+      "result_text": "Carried intact: it orders what is perceived into a case.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "re_l_mayer.institutional_standing",
+      "name": "Institutional Standing",
+      "source": "A",
+      "character": "Re-l Mayer",
+      "outcome": "inherited",
+      "result_text": "Carried: official rank is what lets a reading be recorded and acted upon.",
+      "contribution_type": "CONCEPTUAL_ROLE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "re_l_mayer.standing_boundary",
+      "name": "Standing Boundary",
+      "source": "A",
+      "character": "Re-l Mayer",
+      "outcome": "inherited",
+      "result_text": "Carried as a hard bound: outside the institutions that grant standing, a reading carries no weight.",
+      "contribution_type": "GOVERNING_RULE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "re_l_mayer.artificial_companions",
+      "name": "Artificial Companions",
+      "source": "A",
+      "character": "Re-l Mayer",
+      "outcome": "transformed",
+      "result_text": "Working among artificial persons becomes a known blind spot: they leave no residue, and the user learns to look for the gaps they leave.",
+      "contribution_type": "OBJECT_RELATIONSHIP",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "re_l_mayer.guarded_composure",
+      "name": "Guarded Composure",
+      "source": "A",
+      "character": "Re-l Mayer",
+      "outcome": "inherited",
+      "result_text": "Carried: a reading is kept to the facts, with no performance.",
+      "contribution_type": "BEHAVIOR",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "re_l_mayer.sidearm_competence",
+      "name": "Sidearm Competence",
+      "source": "A",
+      "character": "Re-l Mayer",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "A combat skill the authored rule does not use."
+    },
+    {
+      "property_id": "maka.soul_perception",
+      "name": "Soul Perception",
+      "source": "B",
+      "character": "Maka",
+      "outcome": "transformed",
+      "result_text": "Perception of the living becomes perception of what the living leave behind.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "maka.soul_resonance",
+      "name": "Soul Resonance",
+      "source": "B",
+      "character": "Maka",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "MECHANISM",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "Resonance needs a partner and an attack to amplify; this ability is investigative and is never an attack."
+    },
+    {
+      "property_id": "maka.partner_dependence",
+      "name": "Partner Dependence",
+      "source": "B",
+      "character": "Maka",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "MECHANISM",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "The limitation belongs to partner resonance, which is not carried."
+    },
+    {
+      "property_id": "maka.weapon_partnership",
+      "name": "Weapon Partnership",
+      "source": "B",
+      "character": "Maka",
+      "outcome": "transformed",
+      "result_text": "The partner's role as a channel that shapes and focuses energy becomes an instrument: a palm-sized crescent magnifier that focuses the reading. The partner as a person is not carried.",
+      "contribution_type": "OBJECT_RELATIONSHIP",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "maka.anti_demon_calling",
+      "name": "Anti-Demon Calling",
+      "source": "B",
+      "character": "Maka",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "CONCEPTUAL_ROLE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "A hunting role; this ability is investigative, not a hunt."
+    },
+    {
+      "property_id": "maka.disciplined_study",
+      "name": "Disciplined Study",
+      "source": "B",
+      "character": "Maka",
+      "outcome": "inherited",
+      "result_text": "Carried: reading traces is learned, methodical work.",
+      "contribution_type": "BEHAVIOR",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    }
+  ],
+  "emergent_ability": {
+    "id": "re_l_mayer__maka.residual_reading",
+    "name": "Residual Reading",
+    "description": "At a scene, the user reads the faint residue souls leave behind and orders it, by forensic method, into a timeline of who was present and in what state, recorded as evidence for a case.",
+    "governing_rule": {
+      "id": "re_l_mayer__maka.trace_case_rule",
+      "description": "Soul perception is turned from the living to what they leave behind: faint residues of recent presence are read at a scene and ordered by forensic method into a sequence of who was there and in what state, recorded as evidence for a case and bounded by the user's official standing.",
+      "provenance": "INVENTED_BRIDGE"
+    },
+    "provenance": "INVENTED_BRIDGE",
+    "direct_ancestor_ids": [
+      "maka.soul_perception",
+      "re_l_mayer.forensic_method",
+      "re_l_mayer.standing_boundary"
+    ],
+    "activation": "Quiet, undisturbed time at the scene, with perception turned to what is left behind.",
+    "limitations": [
+      "Residue fades: traces older than a short window cannot be read, and a disturbed scene is partly lost.",
+      "It records presence and state, not intent or guilt; a reading is evidence to be weighed, never a verdict.",
+      "Artificial persons leave no residue, so anyone or anything without a soul is invisible to it.",
+      "A reading carries weight only where the user has official standing; outside it, it is an unsupported claim.",
+      "Overlapping traces are slow, demanding work and leave the user drained."
+    ],
+    "inherited_limitations": [
+      {
+        "property_id": "re_l_mayer.standing_boundary",
+        "name": "Standing Boundary",
+        "character": "Re-l Mayer",
+        "kind": "hard limitation",
+        "description": "Her authority exists only inside the city's institutions; beyond them it carries no weight."
+      }
+    ]
+  },
+  "exclusions": [
+    {
+      "item": "the closed city and its politics",
+      "source": "A",
+      "character": "Re-l Mayer",
+      "reason": "Setting and politics, not a mechanic."
+    },
+    {
+      "item": "inherited family rank",
+      "source": "A",
+      "character": "Re-l Mayer",
+      "reason": "A lineage role, not a mechanic."
+    },
+    {
+      "item": "the literal weapon partner as a carried companion",
+      "source": "B",
+      "character": "Maka",
+      "reason": "A separate person; only the partner's channel-shaping role is carried, as an instrument."
+    },
+    {
+      "item": "the academy setting and its hierarchy",
+      "source": "B",
+      "character": "Maka",
+      "reason": "Setting and institution, not a mechanic."
+    }
+  ],
+  "compatibility": {
+    "status": "COMPATIBLE",
+    "evaluated_conditions": 0,
+    "contradiction": null,
+    "required_bridge": null,
+    "unresolved_reason": null
+  },
+  "ancestry": [
+    {
+      "id": "maka.soul_perception",
+      "kind": "source property",
+      "character": "Maka",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "re_l_mayer.forensic_method",
+      "kind": "source property",
+      "character": "Re-l Mayer",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "re_l_mayer.standing_boundary",
+      "kind": "source property",
+      "character": "Re-l Mayer",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "re_l_mayer__maka.trace_case_rule",
+      "kind": "interaction rule",
+      "provenance": "INVENTED_BRIDGE"
+    }
+  ],
+  "recorded_contribution_ids": [
+    "re_l_mayer.forensic_method",
+    "re_l_mayer.institutional_standing",
+    "re_l_mayer.standing_boundary",
+    "re_l_mayer.artificial_companions",
+    "re_l_mayer.guarded_composure",
+    "re_l_mayer.sidearm_competence",
+    "maka.soul_perception",
+    "maka.soul_resonance",
+    "maka.partner_dependence",
+    "maka.weapon_partnership",
+    "maka.anti_demon_calling",
+    "maka.disciplined_study"
+  ],
+  "image_prompt": {
+    "text": "a patient investigator surrounded by hairline traces of pale light, broad, heavy-set frame stooped slightly forward as if listening to the ground, round, freckled face with pale amber eyes and an absorbed, unhurried expression, a thick grey-streaked braid coiled at the crown, layered robes in dusty teal, worn open over plain trousers, with a stiff upright collar of pale oilcloth, dusty teal, bone and oxidized copper, a palm-sized crescent-shaped magnifying glass with a dark tint, hung from a short cord at the chest, the traces bloom where someone once stood and fade like breath on glass, a rain-streaked glass-roofed market hall after closing, a few lit windows, hushed, meticulous, quietly unsettled, cool grey rain-light with a single amber lamp, painterly cinematic character concept art, three-quarter view --ar 3:4 --style raw",
+    "suppressed": false,
+    "order": [
+      "subject",
+      "build",
+      "face",
+      "hair",
+      "clothing",
+      "palette",
+      "signature_element",
+      "ability_manifestation",
+      "setting",
+      "mood",
+      "lighting",
+      "style",
+      "parameters"
+    ],
+    "length": 838,
+    "ceiling": 900
+  },
+  "leak_check": {
+    "detector": "implemented detector",
+    "status": "PASS",
+    "findings": [],
+    "claim": "A pass establishes compliance with the implemented detector only. It is not a guarantee that no recognizable proper noun, character reference or franchise reference is present."
+  }
+}

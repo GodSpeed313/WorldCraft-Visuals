@@ -2080,3 +2080,419 @@ AUTH-009's grant record, including its original `Status:` line, the supplemental
 Implementation notes, is unchanged, and the question of the register's jurisdiction over code remains as
 the grant record left it. This record authorizes nothing further, including AUTH-010, the deferred
 `openCase()` escaping, or any other `server.py` change.
+
+---
+
+## AUTH-011
+
+```
+Authorizes:        new, additive files implementing a Phase 1 authored synthesis-card
+                   system: a data schema and loader, a minimal C5 assembler, a minimal C6
+                   renderer (text card, JSON card, one descriptor-only image prompt, leak
+                   check), a style allowlist, a demo command, authored character and pair
+                   data, operator-approved golden snapshots, and new automated tests
+Target scope:      new files only, under one new top-level package `fusion_synthesis/`;
+                   one append-only entry in docs/authorizations.md. Minor filename/module-
+                   boundary adjustments within this functional scope are permitted;
+                   expansion of responsibility beyond it is not
+Route:             operator authorization (direct act; new-file implementation; no
+                   existing-code hold requires release) -> implement on a dedicated branch
+                   -> LOCAL PREPARATION of card content (uncommitted) -> OPERATOR CONTENT
+                   APPROVAL -> commits (two) -> verify -> register entry in the same PR ->
+                   operator review -> merge on explicit approval -> closure record
+Granted by:        Kevin Brown, operator
+Granted at:        2026-10-28, in session
+Basis:             FE Requirements v0.1 §3, §5, §7, §8, §12, §13, §18, INV-14, INV-16,
+                   INV-18; ADR-001 AD-1 and §2 (C5, C6)
+                   (`adr_001_fusion_engine_architecture_reconciliation.md:33`,
+                   `adr_001_fusion_engine_architecture_reconciliation.md:49-51`);
+                   AUTH-004 (`authorizations.md:583-603`), whose exclusions named C4/C5/C6
+                   and real registry ingestion; Ruling 001 Invariant 3 and §7.6
+                   (`ruling_001_canonicalization_policy.md:46-55`,
+                   `ruling_001_canonicalization_policy.md:374-378`), respected
+                   because every emergent mechanic is operator-authored; the operator's
+                   2026-10-28 decisions on the first synthesis slice
+Status:            granted; NOT YET EXERCISED — no file within the scope of this
+                   authorization has landed on main as of this recording
+```
+
+**What actually authorizes this, and what this entry is.** One operator authorization and one
+record, kept separate on purpose:
+
+- **The authorization** is Kevin Brown's own act, stated in his own words below (§§1-10 as amended).
+  It releases no FE §39 hold, because no existing file other than this register is modified.
+- **This AUTH-011 record** is the archive of that act. It creates no authority. Per the operator's
+  issuance, the authorization takes effect on issue and implementation began before this entry
+  landed; this entry lands in the same PR as the implementation.
+
+AUTH-010 is reserved by the operator for the `openCase()` escaping work. It is not authorized and not
+recorded here, and the numbering skips it deliberately.
+
+**Issuance record.** The authoritative text is the corrected AUTH-011 draft, §§1-10, as amended by the
+six binding amendments below. The draft was prepared in session and adopted by the operator; the
+operator's issuance message was not separately preserved outside the repository before this entry was
+written, so byte-level identity with the operator's transmission is not independently verifiable from
+inside the session. The operator directed that this entry record the amendments together with the
+corrected draft text.
+
+### Operator statement
+
+> **AUTH-011 — issued by the operator, 2026-10-28.** I authorize exactly the following. No FE §39 hold is released, because no existing file other than the register is modified.
+
+### 1. Files (all new)
+
+> ```
+> fusion_synthesis/__init__.py
+> fusion_synthesis/schema.py          dataclasses + strict validation of all three data shapes
+> fusion_synthesis/loader.py          globs data/, validates, builds fusion_engine Sources
+> fusion_synthesis/assemble.py        C5-min: runs fusion_engine.pipeline.run_slice, assembles the card
+> fusion_synthesis/render.py          C6-min: composed paragraph, text and JSON card, the image prompt,
+>                                     the prompt-length check and the leak check
+> fusion_synthesis/demo.py            demo command
+> fusion_synthesis/data/style_allowlist.json
+> fusion_synthesis/data/characters/<slug>.json
+> fusion_synthesis/data/pairs/<slug_a>__<slug_b>.json
+> fusion_synthesis/data/golden/<slug_a>__<slug_b>.txt and .json
+> fusion_synthesis/tests/__init__.py   and ten test files (§6)
+> ```
+> - **Imports:** the package may import only `fusion_engine` public modules (types, C1, C2, C3, pipeline) and the standard library. `fusion_engine/` is not edited and does not import this package.
+> - **Register:** `docs/authorizations.md` receives one append-only entry.
+
+### 2. Data shapes (JSON, UTF-8, LF; unknown keys rejected)
+
+> **Character card**
+> ```
+> schema               "fusion-synthesis-character/1"
+> name                 must equal a CHARACTER_REGISTRY key (test, §6)
+> epistemic_status     "FICTIONAL" (the only accepted value; applied to every property)
+> properties[]         id (prefixed "<slug>."), name, description,
+>                      contribution_type, architectural_placement   (FE enum names),
+>                      is_hard_limitation, is_prohibition, activation_condition|null
+>                      {variable, comparator in ==,>,<,>=,<=, value as a number}
+> visual_traits[]      id, slot (one of the 7 slots), descriptor (name-free), derives_from[]
+> proper_nouns[]       every character-specific proper noun (costume, weapon, partner, place,
+>                      franchise): denylist input
+> exclusion_candidates[]   item, reason
+> ```
+>
+> **Pair card**
+> ```
+> schema               "fusion-synthesis-pair/1"
+> a, b                 character names; their order fixes the A / B labels
+> dominance            50 (the only accepted value)
+> fusion_name, concept (one sentence)
+> prompt_max_chars     optional integer 200-2000 (§3)
+> interaction          id, description, dependency_ids[], provenance
+>                      (DEFENSIBLY_DERIVED | INVENTED_BRIDGE only), is_disclosed_modification
+> emergent_ability     id, name, description, direct_ancestor_ids[], contribution_type,
+>                      architectural_placement, limitations[] (at least 1), activation|null
+> trait_outcomes[]     one entry per property of A and B: property_id,
+>                      outcome (inherited | transformed | complementary | not_carried),
+>                      result_text, reason (required for not_carried)
+> exclusions[]         item, source (A | B), reason
+> visual               subject, slots{build, face, hair, clothing, palette, signature_element,
+>                      ability_manifestation}, setting, mood, lighting, style,
+>                      parameters (Midjourney syntax, validated)
+> ```
+>
+> **Visual trait record** (every prompt-contributing descriptor):
+> ```
+> descriptor     name-free text
+> origin         "A" | "B" | "transformed" | "new"
+> parent_ids[]   A/B/transformed: source visual-trait ids. new: [the emergent ability id]
+> design_delta   required if transformed: {changed: form|material|color|scale|structure|
+>                function|placement, from, to}
+> ```
+> - **A or B traits:** the descriptor must equal the parent's descriptor verbatim, so provenance is checkable.
+> - **Transformed traits:** must change the design (§6, visual test).
+> - **Single interaction:** `run_slice` takes exactly one interaction and one emergent property, so a pair has one emergent ability.
+>
+> **Style allowlist** (`data/style_allowlist.json`)
+> ```
+> schema   "fusion-synthesis-style-allowlist/1"
+> terms[]  generic art, photography and medium terms only
+> ```
+> - **Structural validation:**
+>   - The file is required. A missing file is an error and is never treated as empty.
+>   - Unknown keys are rejected.
+>   - Each term must be a string of 1-40 characters (letters, digits, spaces and hyphens only, with no leading or trailing space) and unique case-insensitively.
+> - **Denylist precedence (load-time):** every term is checked against the union denylist of all loaded cards (parent names and their tokens, property, ability and emergent names, `proper_nouns`). A term sharing any token with any denylist entry is a validation failure (exit 2) naming the term, the entry and the source card.
+> - **Content:** machine checks cannot judge "generic". The content restriction (no character, franchise, ability, costume or place names, or other character-specific proper nouns) is enforced by the operator's approval (§5) and by the cross-checks above.
+>
+> **Constraints from the existing engine:**
+> - **One interaction per pair.** `run_slice` takes exactly one interaction and one emergent property.
+> - **Pair-scoped ids.** Interaction and emergent ids share the ledger namespace with property ids, so they must be pair-scoped (for example `<slug_a>__<slug_b>.<name>`). Property ids are character-prefixed so two sources never collide.
+> - **Narrow compatibility check.** C3 evaluates only numeric activation-condition contradictions. A card therefore shows its compatibility status plus how many activation conditions were evaluated, and never implies a broader check.
+
+### 3. Required card output
+
+> The card record contains:
+> - fusion name, sources, concept, and dominance shown as "50/50 (fixed in Phase 1; not applied as a weighting)";
+> - the seven appearance slots and a composed paragraph, built deterministically from descriptors only and therefore name-free;
+> - a visual-provenance table: slot, descriptor, origin, parent (with the parent character's name). Names appear here and nowhere in the prompt;
+> - inherited, transformed, complementary and not-carried traits with source and provenance;
+> - the emergent ability with its governing rule, provenance, ancestors and limitations;
+> - exclusions, the compatibility status with its evaluated-condition count, and the ledger ancestry;
+> - the image prompt, the prompt length against the ceiling, and the leak-check status.
+>
+> **Image prompt:** exactly one, built only from descriptors, in this order: subject, then the seven slot descriptors in fixed order (build, face, hair, clothing, palette, signature element, ability manifestation), then setting, mood, lighting, style, then parameters. Components are comma-separated, with parameters appended after one space. **There is no second prompt format and no name-including variant, with no flag, option or field.**
+>
+> **Prompt length ceiling:**
+> - **Default and override:** the default is `DEFAULT_PROMPT_MAX_CHARS = 900`, defined once in `render.py` and documented there. A pair may override it with `prompt_max_chars` (200-2000), and the effective ceiling is printed on the card.
+> - **Justification:** the default is a project convention sized for 12 descriptors (the subject, seven slots, and four scene fields) at about 65 characters each, plus separators and parameters. It is not a Midjourney specification, and no provider limit has been verified.
+> - **Validation:** length is checked explicitly. If it is exceeded, the run exits 2 and reports the measured length, the ceiling and each component's length. No prompt is printed.
+> - **No truncation:** descriptors are never truncated, dropped or reordered, and all seven slots and every required component must be present and non-empty.
+> - **Determinism:** unchanged.
+>
+> **Leak-check claim:** a passing leak check establishes only that the prompt, the descriptors and the composed paragraph pass the implemented detector (§6, test 5). It is not a guarantee that no recognizable proper noun, character reference or franchise reference is present. Descriptive phrasing that evokes a character without naming it is outside what the detector can see. The operator's review of each rendered card remains the acceptance gate. The demo prints the status as `LEAK CHECK (implemented detector): PASS`.
+
+### 4. Demo command and output
+
+> ```
+> python -m fusion_synthesis.demo                  all authored pairs, in file-name order
+> python -m fusion_synthesis.demo "<A>" "<B>"      one card (names exact, in authored order)
+>     --json                                       the JSON card
+>     --prompt                                     only the image prompt line
+> ```
+>
+> **Text layout, in order:**
+> ```
+> <fusion name>   (<A> x <B>)   dominance: 50/50 (fixed; not applied)
+> CONCEPT
+> APPEARANCE         <slot>: <descriptor> (x7) + composed paragraph
+> VISUAL PROVENANCE  <slot> | <descriptor> | <origin> | <parent id (parent character)>
+> TRAITS             inherited / transformed / complementary / not carried (source, provenance)
+> EMERGENT ABILITY   name, description, governing rule + provenance, ancestors, limitations
+> EXCLUSIONS
+> COMPATIBILITY      <C3 status> (<n> activation conditions evaluated)
+> ANCESTRY
+> IMAGE PROMPT       <one line, copy-paste>   (<length> / <ceiling> characters)
+> LEAK CHECK (implemented detector): PASS
+> ```
+> - **Multi-card run:** ends with `N cards, 0 leaks`.
+> - **Exit codes:** 0 for success.
+>   - 2 for invalid data, an unknown pair, an invalid style allowlist, or a prompt over its ceiling.
+>   - 3 for a detected leak.
+> - **Fail-closed on a leak:**
+>   - The offending tokens are reported and no image prompt is printed for that card.
+>   - In JSON mode the card's `image_prompt` is `null` and `leak_check` lists the tokens.
+>   - In a multi-card run, passing cards print normally and the run exits 3 if any card failed.
+> - **Determinism:** no clock, random or network, with UTF-8 and LF output, so repeated runs are byte-identical.
+
+### 5. Content approval sequence
+
+> Three stages are distinct, and no stage may be skipped.
+>
+> - **Stage A — local preparation (uncommitted, unpushed).**
+>   - After issuance I implement the code and tests on the dedicated branch. I draft the card data and the style allowlist locally, render every card with the demo, and run the tests.
+>   - Revision at this stage is free.
+>   - Nothing under `fusion_synthesis/data/` is staged, committed or pushed during this stage.
+> - **Stage B — operator content approval.**
+>   - I present, per pair, the rendered text card, the JSON card, the image prompt, the length and leak status, and the test results. I also present the full style allowlist contents.
+>   - I record the SHA-256 of each rendered golden snapshot in the approval request.
+>   - You approve, or request revisions, per pair and for the allowlist. Revisions return to Stage A. Approval covers the exact rendered bytes.
+> - **Stage C — commits.**
+>   - Only approved content and golden snapshots are committed. Before each commit I verify that the bytes to be committed hash to the approved SHA-256 values.
+>   - Any later change to approved data or goldens needs re-approval.
+>
+> Both commits follow A → B → C. Commit 2's fifth pair has its own Stage A and B.
+
+### 6. Tests (new, `fusion_synthesis/tests/`, stdlib `unittest`, discovered by the existing CI command)
+
+> 1. **`test_schema_loader`:** valid cards load; each malformed case is rejected clearly (bad enum, bad origin label, unknown parent id, duplicate or colliding id, `dominance` ≠ 50, missing slot, bad `prompt_max_chars`). The loader discovers cards by glob only.
+> 2. **`test_assembly`:** every pair runs C1→C2→C3. The emergent provenance is read from the ledger, limitations propagate, and every property appears exactly once in `trait_outcomes`. INV-19 holds, and the compatibility line reports the evaluated-condition count.
+> 3. **`test_visual`:** all seven slots are present, and every trait has a descriptor, an origin in {A, B, transformed, new} and resolving parents. A and B descriptors equal their parent's. `new` traits parent to the emergent ability.
+>    - **Transformed traits** must pass these structural checks: the descriptor differs from its parent's, a valid `design_delta` is recorded, `from` and `to` differ, and the `to` value appears in the descriptor.
+>    - **No similarity metric:** there is no overlap threshold and no similarity measure of any kind.
+>    - **What it proves:** these checks establish structural consistency, not artistic originality. The operator's review of the rendered card is the acceptance gate for whether the transformation is visually meaningful.
+> 4. **`test_prompt`:** exact component order; built only from descriptors (mutating names and non-descriptor fields leaves the prompt unchanged); parameter syntax.
+>    - **Length:** at-ceiling passes and over-ceiling fails with the §3 message. The override is honored and out-of-range overrides are rejected.
+>    - **No truncation:** all descriptors survive verbatim and no truncation occurs.
+>    - **Single format:** there is exactly one prompt field.
+> 5. **`test_name_leak`:**
+>    - **Detector:** denylist matching on the full name phrase and on tokens of at least 2 characters. Tokens come from both parents' names, every property, ability and emergent name, and each `proper_nouns` list. A fixed stop-word list defined once in `schema.py` is skipped for token matching. A capitalized-word heuristic runs on the prompt and descriptors, with its skip list limited to the style allowlist; the composed paragraph is checked against the denylist only.
+>    - **Subjects checked:** the prompt, every descriptor and the paragraph.
+>    - **Negative controls:** injecting each leak class makes the detector fail, so the test can fail.
+>    - **Fail-closed:** a detected leak gives exit 3, tokens reported and no prompt printed.
+>    - **Claim wording:** the pass wording is asserted to be the §3 wording.
+> 6. **`test_style_allowlist`:**
+>    1. An approved generic style term passes the capitalization heuristic.
+>    2. A non-allowlisted capitalized term is still detected.
+>    3. An allowlisted term matching any denylist entry causes validation failure.
+>    4. Adding a term to the allowlist cannot bypass the denylist. A parent name added to the allowlist is rejected at load, and when forced past the loader in the test harness the detector still flags it (denylist precedence).
+>    5. Invalid allowlist data is rejected with a clear error: wrong schema, unknown key, non-string, empty, duplicate, bad characters, over-length, or a missing file.
+> 7. **`test_registry_binding`:** each card `name` is a `CHARACTER_REGISTRY` key, and the registry modality is not LEGACY (which excludes real people). It also checks that no allowlist term shares a token with a registry key.
+>    - **Registry-binding exception:** this file, and only this file, may read `modality_classifier.py` as text and parse it with Python's `ast` module. This is solely to extract `CHARACTER_REGISTRY`'s keys and modality values by `ast.literal_eval`, for read-only structural validation.
+>    - **Prohibitions:** it must not import, execute, compile, `exec`/`eval`, or load that module through `importlib`, `runpy` or `__import__`, and it must not open it for writing.
+>    - **Failure mode:** if the registry stops being a pure literal, the test fails with a clear error and never skips.
+> 8. **`test_golden_determinism`:** two runs are byte-identical, and each pair's text and JSON equal its operator-approved golden.
+> 9. **`test_demo`:** command variants, output sections, and exit codes 0, 2 and 3.
+> 10. **`test_boundaries`:** an AST scan of every `.py` file in the package and tests.
+>    - **Legacy modules:** no import by any mechanism of `logic_auditor`, `modality_classifier`, `mythos_sync` or `server`, anywhere, including `test_registry_binding.py`.
+>    - **Registry names:** the literal `modality_classifier.py` and the identifier `CHARACTER_REGISTRY` are permitted only in `test_registry_binding.py`. `POWER_REGISTRY` and other registry names are forbidden everywhere.
+>    - **Dynamic loading:** in `test_registry_binding.py` it additionally forbids `exec`, `eval`, `compile`, `importlib`, `runpy`, `__import__` and write-mode `open`.
+>    - **No runtime model:** no `random`, `socket`, `http`, `urllib` or `subprocess` anywhere.
+>    - **Names in code:** no `.py` file contains an authored character or ability name.
+>    - **Negative controls:** the scanner flags synthetic sources for every rule, including `import modality_classifier` placed inside a file that has the registry-binding exception.
+
+### 7. Reusability criterion
+
+> **AUTH-011 succeeds only if both hold.**
+> 1. **The four authored cards are produced correctly.** The pairs are Maka × Vash, Re-l Mayer × Maka, Kino × Vash and James Bond × Kino. "Correctly" means the demo exits 0, every test passes, and each output equals its operator-approved golden snapshot.
+> 2. **The fifth pairing, The Medicine Seller × Re-l Mayer, is added by authoring data only.** The synthesis code and tests do not change, and the new card passes every test, including the name-leak test.
+>
+> **Demonstration:** Commit 2 is a separate commit containing only paths under `fusion_synthesis/data/`.
+> - `git diff --name-status <commit1> <commit2>` must list only added files there (the Medicine Seller character card, the pair card, the goldens), plus a modification of `style_allowlist.json` only if the fifth card's style terms require it, with that modification approved in Stage B.
+> - There are zero changed `.py` files and no test edit.
+> - The demo and the full suite are run at Commit 1 and again at Commit 2, and both pass.
+>
+> If the fifth pair needs any code or test change, the criterion has failed. That is reported as a finding and needs a new authorization. It is not silently patched.
+
+### 8. Scope statement
+
+> Phase 1 produces authored cards only. A person authors each pair's emergent ability, so Phase 1 does not make the engine general. There is no runtime model call and no dashboard integration. Whether a model may draft emergent mechanics at runtime is a separate later decision.
+>
+> Phase 1 is a reusable system for authored pairings. It is not a general-purpose fusion engine, and it makes no claim of automatic emergence derivation or arbitrary-input synthesis. It also does not claim ADR-001 Seam 1 conformance.
+
+### 9. Exclusions (this authorization does NOT authorize)
+
+> - Any edit to an existing file except the append-only register entry. This includes `fusion_engine/` (including its `__init__.py` docstring, whose C5/C6 statement becomes stale and is recorded as a known consequence), the registries, `mythos_sync.py`, `server.py`, `dashboard.html`, `logic_auditor.py`, `modality_classifier.py`, CI config, existing tests, and README.
+> - Any dashboard, server or legacy-engine integration, and any persistence into `containment_matrix.json`. Phase 2 waits for AUTH-010.
+> - **AUTH-010** (`openCase()` escaping), which remains unauthorized.
+> - Any runtime model, network or provider call, image generation, or any name-including prompt variant.
+> - Any dominance other than 50/50.
+> - Real-person or biological inheritance, and ability-only, location or power-system modes.
+> - C4, resource accounting, automatic emergence derivation, and any ruling, gap or successor-contract work.
+> - Any use of the style allowlist to permit character-specific references in prompts, or to bypass or weaken any denylist check.
+> - Any dependency of any other file on `modality_classifier.py`, beyond the single exception in §6, test 7.
+
+### 10. Lifecycle, verification and recording
+
+> - **Branch and commits:** a dedicated branch with two commits.
+>   - **Commit 1:** the code, schema, tests, style allowlist, the four pairs' approved data and goldens, and the register entry.
+>   - **Commit 2:** the data-only fifth pair (§7).
+>   - No commit occurs before the §5 approvals for its content.
+> - **Verification:**
+>   - **Scope:** the diff matches §1. Untouched files keep their baseline git blob hashes.
+>   - **CI:** all suites pass on Python 3.10, 3.11 and 3.12 (stdlib only).
+>   - **Tests:** the §6 tests pass.
+>   - **Approved bytes:** committed data and goldens hash to the approved SHA-256 values.
+>   - **Matrix:** the real matrix hash is unchanged.
+> - **Merge gate:** the diff, the demo output and the test evidence are presented, and nothing is merged without the operator's explicit approval.
+> - **Exercise:** AUTH-011 is exercised and spent on merge to `main`, followed by a closure record.
+> - **Attribution:** no `Co-Authored-By` trailer and no "Generated with Claude Code" line on AUTH-011 commits or PRs.
+> - **Register scope reservation:** the jurisdiction question stays open, as AUTH-007 to AUTH-009 recorded.
+
+### Binding amendments at issuance (operator, verbatim)
+
+> 1. **Commit 2 allowlist.** Commit 2 may modify `fusion_synthesis/data/style_allowlist.json` only if the fifth pairing requires it, and only after I approve the exact modified contents. No Python code or tests may change.
+>
+> 2. **Prompt ceiling.** The default is 900 characters, documented as a project convention. Pairs may override it within the validated range of 200–2,000 characters. Prompts are never silently truncated.
+>
+> 3. **Leak detector.**
+> - The fixed stop-word list and the two-character minimum apply to individual-token matching only.
+> - Full-phrase denylist matching is mandatory and is never weakened by those exclusions. For example, "The Medicine Seller" must always be detected as a complete phrase.
+> - The style allowlist cannot override any full-phrase or token-level denylist match.
+> - A leak detected in the prompt, any descriptor, or the composed paragraph suppresses the prompt in every output mode: the text card, `--json` (with `image_prompt` set to null), and `--prompt` (exit code 3, no prompt printed).
+> - Automated negative controls must verify each behavior.
+>
+> 4. **Sequencing.** Implementation begins only after this issuance. Local content preparation and rendering follow it. My approval of the exact rendered content precedes committing that content.
+>
+> 5. **Anchors.** Source anchors are re-resolved by extraction at registration time.
+>
+> 6. **AUTH-004.** The missing-closure finding remains open and untouched. It is not an AUTH-011 objective.
+>
+> The register entry must record these amendments together with the corrected draft text.
+>
+> **AUTH-011 IS ISSUED BY THE OPERATOR, 2026-10-28.** Its authoritative text is the corrected AUTH-011 draft, §§1–10, as amended above.
+
+### Operator directions during Stage A and Stage B (verbatim, recorded at landing)
+
+> Begin Stage A: create a dedicated implementation branch; implement the authorized code and automated tests within the specified new-file scope; draft Maka × Vash first, including both character cards, the pair card, and the initial style allowlist; render the card locally and execute the applicable tests; stop and present the Stage B approval package for this pairing. Do not stage, commit, or push anything under `fusion_synthesis/data/` before my explicit approval.
+
+> Creative direction (applies to all cards): a fusion must stand on its own as an original character. Small visual hints of the parents are welcome but optional, with no fixed number. Recognition should come mainly through the abilities, governing rule, limitations and concept. Visuals create curiosity; abilities and story reveal ancestry.
+
+> Stage B approved: all four pairs at the exact bytes presented, plus the unchanged allowlist. Review points 1 and 3 accepted. Point 2: leave the source cards as they are. Proceed to Commit 1, then draft the fifth pair (The Medicine Seller × Re-l Mayer) and present it at Stage B
+
+### Stage B approvals (exact approved bytes, SHA-256)
+
+Approved by the operator on 2026-10-28 at Stage B. The committed bytes were verified against these values
+before Commit 1.
+
+| File (under `fusion_synthesis/data/`) | SHA-256 |
+|---|---|
+| `golden/maka__vash.txt` | `916a6fb3cea1f8b84e343f1d5b5f4c57c16b8995ca12c75debe15ea6245eabd8` |
+| `golden/maka__vash.json` | `b75f5c3b5b497189bccd021602680f821292cb983838f55f12b859946a132add` |
+| `golden/re_l_mayer__maka.txt` | `1097b25b6f447cd2a737315fdddfacc3ad9d64eda000d1f37aa58cf0f3667411` |
+| `golden/re_l_mayer__maka.json` | `ec24522fc20cb641ec961f5f408bfa5b5bfa8b386db24ac307dc6901d6085802` |
+| `golden/kino__vash.txt` | `f73aab47c35110d2e1cbd0fa01d04d630f46e881ca95558bac401ccb446f2677` |
+| `golden/kino__vash.json` | `d933428e617e025e8396af36b56e671c78f796003356050787d20dc65025681b` |
+| `golden/james_bond__kino.txt` | `3294edee0c1bbdd3829a05c720240778b619b2f1eac20b417db09e9f6b430789` |
+| `golden/james_bond__kino.json` | `bcbf942fae8ff565e1ce56364f11e2e44bfa19438689f631c8302eb8806ee48a` |
+| `style_allowlist.json` | `c858425c3b4f544803163125fce8526ddc49a69e6fcdcf92f1ae52d2ff4004da` |
+
+### Implementation notes (recorded at landing; not part of the operator's issuance)
+
+These notes record how the authorized text was implemented where it left a mechanism open, and
+consequences found during implementation. They add no scope. The operator reviews them with the diff.
+
+1. **Shared test support.** Synthetic-data builders used by several tests live in
+   `fusion_synthesis/tests/__init__.py`, a file the issuance lists, and no separate support module was
+   added. The builders use invented names only; no authored name appears in any `.py` file.
+2. **Detector details.** Tokens are runs of Unicode letters and digits, lower-cased. Token matching
+   ignores tokens shorter than two characters and a fixed stop-word list (`a`, `an`, `the`, `and`, `or`,
+   `of`, `for`, `with`, `in`, `on`, `at`, `to`, `by`, `de`, `la`, `le`, `el`), defined once in
+   `schema.py`; full-phrase matching never ignores them. The capitalized-word heuristic runs on the prompt
+   body and on each descriptor, so descriptors are written in lower case apart from allowlisted terms.
+3. **`--prompt` with no pair arguments** prints one prompt per passing card; a failing card writes its
+   offending tokens to standard error, prints no prompt, and the run exits 3.
+4. **Known consequence of amendment 3.** Token-level matching of multi-word names makes some ordinary
+   words unusable in a given pair's descriptors (for example "three", through the property name "Three
+   Day Rule", which is why the two Kino pairs use "angled half-length view"). This is the amended
+   detector working as specified.
+5. **Visual content direction.** Descriptors for the subject and the seven appearance slots contain no
+   art-style terms; style appears only in the style slot and the parameters. The ability's visual leads
+   the subject descriptor. Gender is left unspecified in fusion-facing text. The source cards were left as
+   authored, so parent property descriptions still carry the pronouns of the parent character.
+6. **Wording edits to approved outcome text.** Before approval, three trait-outcome sentences were
+   neutralized (removing "her" and "she") and one was reworded to match the revised instrument; every such
+   edit appears in the diffs the operator reviewed at Stage B.
+7. **Margins.** The Maka × Vash prompt is 897 of 900 characters.
+8. **Evidence at Commit 1.** The full suite (280 tests, 104 of them new) passed with exit code 0 locally
+   on Python 3.12.10. A scratch-copy mutation check, whose script is not in the repository, broke 19
+   protections one at a time and the tests caught all 19. Other Python versions and CI are recorded in
+   the pull request.
+9. **Outstanding at Commit 1.** Commit 2 (the data-only fifth pairing) and its own Stage B approval.
+
+### Lifecycle
+
+AUTH-011 is subject to the `Authorization Exercise and Closure` rule in this register
+(`authorizations.md:833` onward). The operator's issuance states that AUTH-011 is exercised and spent on
+merge to `main`, which is that rule's default exercise condition (§2). Appending this entry is not a
+qualifying exercise. A commit on an implementation branch is not, by itself, a qualifying exercise. A
+closure record follows the merge; exercise status is determined under that rule when the time comes and
+is not asserted here.
+
+### On `authorizations.md`'s own stated scope
+
+Recorded explicitly, as AUTH-003, AUTH-006, AUTH-007, AUTH-008 and AUTH-009 recorded it:
+
+1. `authorizations.md`'s introductory text (`authorizations.md:3-5`) describes the register as
+   recording authorizations "to edit corpus text". Read strictly, that sentence does not mention
+   source code or test files.
+2. This entry does **not** determine that the register's subject matter generally encompasses source
+   code or tests, and decides nothing about the register's jurisdiction over code.
+3. This entry does **not** expand or amend the register's introductory definition, and does not
+   depend on it being read broadly.
+4. The authorization is an independent operator act; its authority comes from Kevin Brown's own
+   determination, not from this register's jurisdiction.
+5. Whether future code authorizations generally belong in this register, and under what definitional
+   revision, is **not decided here** and remains open (`authorizations.md:837` records the same
+   reservation).
+6. AUTH-011's validity does not depend on resolving that question.
+
+### Placement
+
+This entry is appended after the final line of the register as it stood at `7d0fc9a` (line 2082),
+so that no existing line moves. Its position after AUTH-009 and its closure record carries no meaning,
+and it amends neither. The missing AUTH-004 closure record is not touched by this entry.

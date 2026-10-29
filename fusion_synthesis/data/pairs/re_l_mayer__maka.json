@@ -1,0 +1,202 @@
+{
+  "schema": "fusion-synthesis-pair/1",
+  "a": "Re-l Mayer",
+  "b": "Maka",
+  "dominance": 50,
+  "fusion_name": "Cassia Thorne",
+  "concept": "An investigator who reads the faint traces souls leave behind at a scene and assembles them into a case, weighing what is perceived as evidence and never as a verdict.",
+  "interaction": {
+    "id": "re_l_mayer__maka.trace_case_rule",
+    "description": "Soul perception is turned from the living to what they leave behind: faint residues of recent presence are read at a scene and ordered by forensic method into a sequence of who was there and in what state, recorded as evidence for a case and bounded by the user's official standing.",
+    "dependency_ids": [
+      "maka.soul_perception",
+      "re_l_mayer.forensic_method",
+      "re_l_mayer.standing_boundary"
+    ],
+    "provenance": "INVENTED_BRIDGE",
+    "is_disclosed_modification": false
+  },
+  "emergent_ability": {
+    "id": "re_l_mayer__maka.residual_reading",
+    "name": "Residual Reading",
+    "description": "At a scene, the user reads the faint residue souls leave behind and orders it, by forensic method, into a timeline of who was present and in what state, recorded as evidence for a case.",
+    "direct_ancestor_ids": [
+      "maka.soul_perception",
+      "re_l_mayer.forensic_method",
+      "re_l_mayer.standing_boundary"
+    ],
+    "contribution_type": "ABILITY",
+    "architectural_placement": "EMERGENT_PROPERTY",
+    "limitations": [
+      "Residue fades: traces older than a short window cannot be read, and a disturbed scene is partly lost.",
+      "It records presence and state, not intent or guilt; a reading is evidence to be weighed, never a verdict.",
+      "Artificial persons leave no residue, so anyone or anything without a soul is invisible to it.",
+      "A reading carries weight only where the user has official standing; outside it, it is an unsupported claim.",
+      "Overlapping traces are slow, demanding work and leave the user drained."
+    ],
+    "activation": "Quiet, undisturbed time at the scene, with perception turned to what is left behind."
+  },
+  "trait_outcomes": [
+    {
+      "property_id": "re_l_mayer.forensic_method",
+      "outcome": "inherited",
+      "result_text": "Carried intact: it orders what is perceived into a case."
+    },
+    {
+      "property_id": "re_l_mayer.institutional_standing",
+      "outcome": "inherited",
+      "result_text": "Carried: official rank is what lets a reading be recorded and acted upon."
+    },
+    {
+      "property_id": "re_l_mayer.standing_boundary",
+      "outcome": "inherited",
+      "result_text": "Carried as a hard bound: outside the institutions that grant standing, a reading carries no weight."
+    },
+    {
+      "property_id": "re_l_mayer.artificial_companions",
+      "outcome": "transformed",
+      "result_text": "Working among artificial persons becomes a known blind spot: they leave no residue, and the user learns to look for the gaps they leave."
+    },
+    {
+      "property_id": "re_l_mayer.guarded_composure",
+      "outcome": "inherited",
+      "result_text": "Carried: a reading is kept to the facts, with no performance."
+    },
+    {
+      "property_id": "re_l_mayer.sidearm_competence",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "reason": "A combat skill the authored rule does not use."
+    },
+    {
+      "property_id": "maka.soul_perception",
+      "outcome": "transformed",
+      "result_text": "Perception of the living becomes perception of what the living leave behind."
+    },
+    {
+      "property_id": "maka.soul_resonance",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "reason": "Resonance needs a partner and an attack to amplify; this ability is investigative and is never an attack."
+    },
+    {
+      "property_id": "maka.partner_dependence",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "reason": "The limitation belongs to partner resonance, which is not carried."
+    },
+    {
+      "property_id": "maka.weapon_partnership",
+      "outcome": "transformed",
+      "result_text": "The partner's role as a channel that shapes and focuses energy becomes an instrument: a palm-sized crescent magnifier that focuses the reading. The partner as a person is not carried."
+    },
+    {
+      "property_id": "maka.anti_demon_calling",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "reason": "A hunting role; this ability is investigative, not a hunt."
+    },
+    {
+      "property_id": "maka.disciplined_study",
+      "outcome": "inherited",
+      "result_text": "Carried: reading traces is learned, methodical work."
+    }
+  ],
+  "exclusions": [
+    {
+      "item": "the closed city and its politics",
+      "source": "A",
+      "reason": "Setting and politics, not a mechanic."
+    },
+    {
+      "item": "inherited family rank",
+      "source": "A",
+      "reason": "A lineage role, not a mechanic."
+    },
+    {
+      "item": "the literal weapon partner as a carried companion",
+      "source": "B",
+      "reason": "A separate person; only the partner's channel-shaping role is carried, as an instrument."
+    },
+    {
+      "item": "the academy setting and its hierarchy",
+      "source": "B",
+      "reason": "Setting and institution, not a mechanic."
+    }
+  ],
+  "visual": {
+    "subject": {
+      "descriptor": "a patient investigator surrounded by hairline traces of pale light",
+      "origin": "new",
+      "parent_ids": ["re_l_mayer__maka.residual_reading"]
+    },
+    "slots": {
+      "build": {
+        "descriptor": "broad, heavy-set frame stooped slightly forward as if listening to the ground",
+        "origin": "new",
+        "parent_ids": ["re_l_mayer__maka.residual_reading"]
+      },
+      "face": {
+        "descriptor": "round, freckled face with pale amber eyes and an absorbed, unhurried expression",
+        "origin": "new",
+        "parent_ids": ["re_l_mayer__maka.residual_reading"]
+      },
+      "hair": {
+        "descriptor": "a thick grey-streaked braid coiled at the crown",
+        "origin": "new",
+        "parent_ids": ["re_l_mayer__maka.residual_reading"]
+      },
+      "clothing": {
+        "descriptor": "layered robes in dusty teal, worn open over plain trousers, with a stiff upright collar of pale oilcloth",
+        "origin": "transformed",
+        "parent_ids": ["re_l_mayer.v_clothing"],
+        "design_delta": {
+          "changed": "material",
+          "from": "a fitted dark-grey uniform coat with a high stiff collar and black gloves",
+          "to": "a stiff upright collar of pale oilcloth"
+        }
+      },
+      "palette": {
+        "descriptor": "dusty teal, bone and oxidized copper",
+        "origin": "new",
+        "parent_ids": ["re_l_mayer__maka.residual_reading"]
+      },
+      "signature_element": {
+        "descriptor": "a palm-sized crescent-shaped magnifying glass with a dark tint, hung from a short cord at the chest",
+        "origin": "transformed",
+        "parent_ids": ["maka.v_signature"],
+        "design_delta": {
+          "changed": "form",
+          "from": "a tall scythe with a curved blade carried at the side",
+          "to": "a palm-sized crescent-shaped magnifying glass"
+        }
+      },
+      "ability_manifestation": {
+        "descriptor": "the traces bloom where someone once stood and fade like breath on glass",
+        "origin": "new",
+        "parent_ids": ["re_l_mayer__maka.residual_reading"]
+      }
+    },
+    "setting": {
+      "descriptor": "a rain-streaked glass-roofed market hall after closing, a few lit windows",
+      "origin": "new",
+      "parent_ids": ["re_l_mayer__maka.residual_reading"]
+    },
+    "mood": {
+      "descriptor": "hushed, meticulous, quietly unsettled",
+      "origin": "new",
+      "parent_ids": ["re_l_mayer__maka.residual_reading"]
+    },
+    "lighting": {
+      "descriptor": "cool grey rain-light with a single amber lamp",
+      "origin": "new",
+      "parent_ids": ["re_l_mayer__maka.residual_reading"]
+    },
+    "style": {
+      "descriptor": "painterly cinematic character concept art, three-quarter view",
+      "origin": "new",
+      "parent_ids": ["re_l_mayer__maka.residual_reading"]
+    },
+    "parameters": "--ar 3:4 --style raw"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "schema": "fusion-synthesis-character/1",
+  "name": "The Medicine Seller",
+  "epistemic_status": "FICTIONAL",
+  "properties": [
+    {
+      "id": "the_medicine_seller.spirit_discernment",
+      "name": "Spirit Discernment",
+      "description": "Perceives the nature of a spirit or curse and works out the Form, the Truth and the Reason behind it.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM"
+    },
+    {
+      "id": "the_medicine_seller.threefold_knowing",
+      "name": "Threefold Knowing",
+      "description": "The sealed sword can be drawn only once the Form, the Truth and the Reason of the spirit are all known.",
+      "contribution_type": "GOVERNING_RULE",
+      "architectural_placement": "LIMITATIONS",
+      "is_hard_limitation": true
+    },
+    {
+      "id": "the_medicine_seller.exorcist_blade",
+      "name": "Exorcist Blade",
+      "description": "A sealed sword that dispels a spirit once it is drawn.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM"
+    },
+    {
+      "id": "the_medicine_seller.warding_talismans",
+      "name": "Warding Talismans",
+      "description": "Paper seals that bind, repel and hold a spirit in place.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM"
+    },
+    {
+      "id": "the_medicine_seller.wandering_peddler",
+      "name": "Wandering Peddler",
+      "description": "Travels as a seller of remedies, an outsider who is neither trusted nor welcome, which gives a reason to ask questions.",
+      "contribution_type": "CONCEPTUAL_ROLE",
+      "architectural_placement": "DOMAIN"
+    },
+    {
+      "id": "the_medicine_seller.inscrutable_manner",
+      "name": "Inscrutable Manner",
+      "description": "Calm, courteous and cryptic; reveals little and leads others to speak their own truth.",
+      "contribution_type": "BEHAVIOR",
+      "architectural_placement": "SECONDARY_EFFECTS"
+    }
+  ],
+  "visual_traits": [
+    {
+      "id": "the_medicine_seller.v_build",
+      "slot": "build",
+      "descriptor": "tall, slender frame with a straight, unhurried carriage",
+      "derives_from": []
+    },
+    {
+      "id": "the_medicine_seller.v_face",
+      "slot": "face",
+      "descriptor": "pale, angular face with red lines drawn around the eyes and a calm, courteous expression",
+      "derives_from": ["the_medicine_seller.inscrutable_manner"]
+    },
+    {
+      "id": "the_medicine_seller.v_hair",
+      "slot": "hair",
+      "descriptor": "long dark hair tied back at the nape",
+      "derives_from": []
+    },
+    {
+      "id": "the_medicine_seller.v_clothing",
+      "slot": "clothing",
+      "descriptor": "a boldly patterned pale kimono worn under a dark outer robe",
+      "derives_from": ["the_medicine_seller.wandering_peddler"]
+    },
+    {
+      "id": "the_medicine_seller.v_palette",
+      "slot": "palette",
+      "descriptor": "ivory, pale blue and red accents",
+      "derives_from": []
+    },
+    {
+      "id": "the_medicine_seller.v_signature",
+      "slot": "signature_element",
+      "descriptor": "a tall wooden cabinet of many small drawers strapped to the back",
+      "derives_from": ["the_medicine_seller.wandering_peddler"]
+    },
+    {
+      "id": "the_medicine_seller.v_manifestation",
+      "slot": "ability_manifestation",
+      "descriptor": "a sealed sword slowly sliding from its sheath as three glowing characters appear in the air",
+      "derives_from": ["the_medicine_seller.threefold_knowing", "the_medicine_seller.exorcist_blade"]
+    }
+  ],
+  "proper_nouns": [
+    "The Medicine Seller",
+    "Medicine Seller",
+    "Kusuriuri",
+    "Mononoke",
+    "Zashikiwarashi",
+    "Umibozu",
+    "Bakeneko",
+    "Nopperabo",
+    "Nue"
+  ],
+  "exclusion_candidates": [
+    {
+      "item": "the sealed sword's imprisoned spirit",
+      "reason": "An object's lore, not a transferable mechanic."
+    },
+    {
+      "item": "the recurring spirit antagonists and their stories",
+      "reason": "Plot, not a mechanic."
+    },
+    {
+      "item": "the remedy cabinet as a carried object",
+      "reason": "A prop; at most its look can be echoed."
+    }
+  ]
+}

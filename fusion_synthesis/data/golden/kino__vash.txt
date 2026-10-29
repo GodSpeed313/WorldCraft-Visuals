@@ -1,0 +1,112 @@
+Hale Ostrander   (Kino x Vash)   dominance: 50/50 (fixed in Phase 1; not applied as a weighting)
+
+CONCEPT
+  A wanderer who watches a quarrel long enough to know every armed hand in it, ends it with one volley that strips the weapons and kills no one, and is gone before the third day ends.
+
+APPEARANCE
+  subject: a patient stranger sending weapons spinning from every armed hand
+  build: compact, sturdy frame with a rolling gait
+  face: a broad, sun-lined face with a level gaze, a single smoke-grey monocle on a brass clasp
+  hair: a shaved head with a faint pale stubble
+  clothing: a chest harness of small leather pouches over a loose sleeveless shirt, wide trousers and sandals
+  palette: sand, indigo and bleached bone
+  signature_element: a slim, double-barrelled pistol with a pale bone grip, worn crosswise at the belt
+  ability_manifestation: a brief ring of kicked-up dust around a calm, unmoving figure, weapons clattering to the ground
+  setting: a terraced hill town at midday, laundry lines and a packed market square
+  mood: alert, unhurried, quietly watchful
+  lighting: hard white noon sun with deep blue shadows
+  style: painterly cinematic character concept art, angled half-length view
+  composed paragraph:
+    A patient stranger sending weapons spinning from every armed hand. Build: compact, sturdy frame with a rolling gait. Face: a broad, sun-lined face with a level gaze, a single smoke-grey monocle on a brass clasp. Hair: a shaved head with a faint pale stubble. Clothing: a chest harness of small leather pouches over a loose sleeveless shirt, wide trousers and sandals. Palette: sand, indigo and bleached bone. Signature element: a slim, double-barrelled pistol with a pale bone grip, worn crosswise at the belt. Ability in use: a brief ring of kicked-up dust around a calm, unmoving figure, weapons clattering to the ground. Setting: a terraced hill town at midday, laundry lines and a packed market square. Mood: alert, unhurried, quietly watchful. Lighting: hard white noon sun with deep blue shadows. Style: painterly cinematic character concept art, angled half-length view.
+
+VISUAL PROVENANCE
+  subject | a patient stranger sending weapons spinning from every armed hand | new | kino__vash.quiet_volley (emergent ability)
+  build | compact, sturdy frame with a rolling gait | new | kino__vash.quiet_volley (emergent ability)
+  face | a broad, sun-lined face with a level gaze, a single smoke-grey monocle on a brass clasp | transformed | vash.v_face (Vash)
+      design change (form): round amber-tinted glasses over an easy, open smile  ->  a single smoke-grey monocle on a brass clasp
+  hair | a shaved head with a faint pale stubble | new | kino__vash.quiet_volley (emergent ability)
+  clothing | a chest harness of small leather pouches over a loose sleeveless shirt, wide trousers and sandals | transformed | kino.v_clothing (Kino)
+      design change (form): a belted brown travel coat with deep pockets, a wide-brimmed cap and pushed-up goggles  ->  a chest harness of small leather pouches
+  palette | sand, indigo and bleached bone | new | kino__vash.quiet_volley (emergent ability)
+  signature_element | a slim, double-barrelled pistol with a pale bone grip, worn crosswise at the belt | new | kino__vash.quiet_volley (emergent ability)
+  ability_manifestation | a brief ring of kicked-up dust around a calm, unmoving figure, weapons clattering to the ground | new | kino__vash.quiet_volley (emergent ability)
+  setting | a terraced hill town at midday, laundry lines and a packed market square | new | kino__vash.quiet_volley (emergent ability)
+  mood | alert, unhurried, quietly watchful | new | kino__vash.quiet_volley (emergent ability)
+  lighting | hard white noon sun with deep blue shadows | new | kino__vash.quiet_volley (emergent ability)
+  style | painterly cinematic character concept art, angled half-length view | new | kino__vash.quiet_volley (emergent ability)
+
+TRAITS
+  inherited:
+    - Three Day Rule [A: Kino] (SOURCE_DERIVED, FICTIONAL)
+      Carried as a hard bound on every stay: the ability's clock runs out when the stay does.
+    - Witness Stance [A: Kino] (SOURCE_DERIVED, FICTIONAL)
+      Carried: watching comes first, and the ability never starts a fight.
+    - Quick Draw [A: Kino] (SOURCE_DERIVED, FICTIONAL)
+      Carried: speed is what lets one volley cover many hands.
+    - Traveler Limits [A: Kino] (SOURCE_DERIVED, FICTIONAL)
+      Carried: no allies and no resources beyond what the user can carry.
+    - Pacifist Vow [B: Vash] (SOURCE_DERIVED, FICTIONAL)
+      Carried as a hard bound: no setting of the volley is lethal.
+  transformed:
+    - Sharpshooting [B: Vash] (SOURCE_DERIVED, FICTIONAL)
+      Precision in disabling shots becomes the aimed, simultaneous disabling of every armed hand.
+  complementary:
+    (none)
+  not carried:
+    - Survival Craft [A: Kino] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: A general road skill the authored rule does not use.
+    - Road Companion [A: Kino] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: A separate being, not a trait; the rule needs no companion.
+    - Angel Arm [B: Vash] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: Its output cannot be tuned to a volley of disabling shots; this design uses only handgun precision.
+    - Arm Output Limit [B: Vash] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: The limit belongs to the arm, which is not carried.
+    - Plant Resilience [B: Vash] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: Species physiology is not a mechanic this ability uses.
+    - Notorious Legend [B: Vash] (SOURCE_DERIVED, FICTIONAL)
+      Not part of this design.
+      not carried because: A reputation is a narrative role, not a transferable mechanic.
+
+EMERGENT ABILITY
+  Quiet Volley  [DEFENSIBLY_DERIVED]
+  After watching a dispute long enough to read who holds what and how each will move, the user ends it with one fast, precise volley that strips every weapon from every armed hand without killing anyone.
+  governing rule (DEFENSIBLY_DERIVED): Time spent watching a dispute teaches the user which hands hold weapons and in what order they will move; one fast volley then disables every weapon in a single breath, the vow keeps every shot non-lethal, and the three-day rule forces the user to leave before the place can adapt.
+  derived from: kino.witness_stance, kino.quick_draw, vash.sharpshooting, vash.pacifist_vow, kino.three_day_rule
+  activation: Sustained observation of a dispute, with the user not yet committed to either side.
+  limitations:
+    - Needs watching first: without time spent observing a dispute, the volley cannot be aimed and does not fire.
+    - It only reaches weapons held in a hand; it cannot stop a threat that is not held, such as gas, fire or a locked room.
+    - Past a handful of armed targets, one volley cannot disable them all and is not attempted.
+    - The vow bounds it: no setting is lethal, so it cannot end a fight that only a lethal shot would end.
+    - The three-day rule applies: the user must leave before the third day ends, so a dispute that outlasts the stay is left unresolved.
+  inherited limitations:
+    - Pacifist Vow [Vash] (prohibition): Refuses to take a life, even an enemy's.
+    - Three Day Rule [Kino] (prohibition): Never stays in any one country longer than three days.
+
+EXCLUSIONS
+  - the talking motorcycle as a carried companion [A: Kino]: A separate being, not a trait.
+  - the episodic structure of visiting one country at a time [A: Kino]: Narrative structure, not a mechanic.
+  - the arm's unrestrained destructive output [B: Vash]: The arm is not carried, so no setting releases it.
+  - bounty and legend status [B: Vash]: A reputation is a narrative role, not a transferable mechanic.
+
+COMPATIBILITY
+  COMPATIBLE (0 activation conditions evaluated)
+
+ANCESTRY
+  - kino.witness_stance (source property [Kino], SOURCE_DERIVED)
+  - kino.quick_draw (source property [Kino], SOURCE_DERIVED)
+  - vash.sharpshooting (source property [Vash], SOURCE_DERIVED)
+  - vash.pacifist_vow (source property [Vash], SOURCE_DERIVED)
+  - kino.three_day_rule (source property [Kino], SOURCE_DERIVED)
+  - kino__vash.watch_then_disarm_rule (interaction rule, DEFENSIBLY_DERIVED)
+
+IMAGE PROMPT
+  a patient stranger sending weapons spinning from every armed hand, compact, sturdy frame with a rolling gait, a broad, sun-lined face with a level gaze, a single smoke-grey monocle on a brass clasp, a shaved head with a faint pale stubble, a chest harness of small leather pouches over a loose sleeveless shirt, wide trousers and sandals, sand, indigo and bleached bone, a slim, double-barrelled pistol with a pale bone grip, worn crosswise at the belt, a brief ring of kicked-up dust around a calm, unmoving figure, weapons clattering to the ground, a terraced hill town at midday, laundry lines and a packed market square, alert, unhurried, quietly watchful, hard white noon sun with deep blue shadows, painterly cinematic character concept art, angled half-length view --ar 3:4 --style raw
+  (792 / 900 characters)
+
+LEAK CHECK (implemented detector): PASS

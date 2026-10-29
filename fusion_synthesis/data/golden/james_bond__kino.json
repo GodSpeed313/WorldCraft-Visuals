@@ -1,0 +1,497 @@
+{
+  "schema": "fusion-synthesis-card/1",
+  "fusion_name": "Marlow Quince",
+  "sources": {
+    "A": "James Bond",
+    "B": "Kino"
+  },
+  "concept": "A short-stay operative who learns a place's customs by watching, builds a believable local role from them in hours, and is gone before the role wears thin.",
+  "dominance": {
+    "value": 50,
+    "applied": false,
+    "note": "fixed in Phase 1; not applied as a weighting"
+  },
+  "appearance": {
+    "subject": "an unremarkable newcomer whose dress and manner shift subtly to match the crowd",
+    "slots": {
+      "build": "average height and build, shoulders slightly rounded, easy to overlook",
+      "face": "an even, forgettable face with mild brown eyes and a ready, ordinary smile",
+      "hair": "short brown hair, neither neat nor unkempt",
+      "clothing": "a grey linen shirt with rolled sleeves and plain trousers, a narrow dark ribbon tied as a loose neckcloth",
+      "palette": "faded grey, tan and soft green",
+      "signature_element": "a pair of folded round spectacles hung on a cord at the neck, unused",
+      "ability_manifestation": "the figure almost lost among the crowd, faces sliding past without noticing"
+    },
+    "scene": {
+      "setting": "a bustling harbour market in a foreign port, awnings and strangers",
+      "mood": "easy, attentive, faintly watchful",
+      "lighting": "warm, flat afternoon light with few shadows",
+      "style": "painterly cinematic character concept art, angled half-length view"
+    },
+    "composed_paragraph": "An unremarkable newcomer whose dress and manner shift subtly to match the crowd. Build: average height and build, shoulders slightly rounded, easy to overlook. Face: an even, forgettable face with mild brown eyes and a ready, ordinary smile. Hair: short brown hair, neither neat nor unkempt. Clothing: a grey linen shirt with rolled sleeves and plain trousers, a narrow dark ribbon tied as a loose neckcloth. Palette: faded grey, tan and soft green. Signature element: a pair of folded round spectacles hung on a cord at the neck, unused. Ability in use: the figure almost lost among the crowd, faces sliding past without noticing. Setting: a bustling harbour market in a foreign port, awnings and strangers. Mood: easy, attentive, faintly watchful. Lighting: warm, flat afternoon light with few shadows. Style: painterly cinematic character concept art, angled half-length view."
+  },
+  "visual_provenance": [
+    {
+      "slot": "subject",
+      "descriptor": "an unremarkable newcomer whose dress and manner shift subtly to match the crowd",
+      "origin": "new",
+      "parent_ids": [
+        "james_bond__kino.passing_cover"
+      ],
+      "parents": [
+        {
+          "id": "james_bond__kino.passing_cover",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "build",
+      "descriptor": "average height and build, shoulders slightly rounded, easy to overlook",
+      "origin": "new",
+      "parent_ids": [
+        "james_bond__kino.passing_cover"
+      ],
+      "parents": [
+        {
+          "id": "james_bond__kino.passing_cover",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "face",
+      "descriptor": "an even, forgettable face with mild brown eyes and a ready, ordinary smile",
+      "origin": "new",
+      "parent_ids": [
+        "james_bond__kino.passing_cover"
+      ],
+      "parents": [
+        {
+          "id": "james_bond__kino.passing_cover",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "hair",
+      "descriptor": "short brown hair, neither neat nor unkempt",
+      "origin": "new",
+      "parent_ids": [
+        "james_bond__kino.passing_cover"
+      ],
+      "parents": [
+        {
+          "id": "james_bond__kino.passing_cover",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "clothing",
+      "descriptor": "a grey linen shirt with rolled sleeves and plain trousers, a narrow dark ribbon tied as a loose neckcloth",
+      "origin": "transformed",
+      "parent_ids": [
+        "james_bond.v_clothing"
+      ],
+      "parents": [
+        {
+          "id": "james_bond.v_clothing",
+          "character": "James Bond"
+        }
+      ],
+      "design_delta": {
+        "changed": "form",
+        "from": "a tailored dark suit, white shirt and narrow dark tie",
+        "to": "a narrow dark ribbon tied as a loose neckcloth"
+      }
+    },
+    {
+      "slot": "palette",
+      "descriptor": "faded grey, tan and soft green",
+      "origin": "new",
+      "parent_ids": [
+        "james_bond__kino.passing_cover"
+      ],
+      "parents": [
+        {
+          "id": "james_bond__kino.passing_cover",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "signature_element",
+      "descriptor": "a pair of folded round spectacles hung on a cord at the neck, unused",
+      "origin": "transformed",
+      "parent_ids": [
+        "kino.v_clothing"
+      ],
+      "parents": [
+        {
+          "id": "kino.v_clothing",
+          "character": "Kino"
+        }
+      ],
+      "design_delta": {
+        "changed": "placement",
+        "from": "a belted brown travel coat with deep pockets, a wide-brimmed cap and pushed-up goggles",
+        "to": "a pair of folded round spectacles hung on a cord at the neck"
+      }
+    },
+    {
+      "slot": "ability_manifestation",
+      "descriptor": "the figure almost lost among the crowd, faces sliding past without noticing",
+      "origin": "new",
+      "parent_ids": [
+        "james_bond__kino.passing_cover"
+      ],
+      "parents": [
+        {
+          "id": "james_bond__kino.passing_cover",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "setting",
+      "descriptor": "a bustling harbour market in a foreign port, awnings and strangers",
+      "origin": "new",
+      "parent_ids": [
+        "james_bond__kino.passing_cover"
+      ],
+      "parents": [
+        {
+          "id": "james_bond__kino.passing_cover",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "mood",
+      "descriptor": "easy, attentive, faintly watchful",
+      "origin": "new",
+      "parent_ids": [
+        "james_bond__kino.passing_cover"
+      ],
+      "parents": [
+        {
+          "id": "james_bond__kino.passing_cover",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "lighting",
+      "descriptor": "warm, flat afternoon light with few shadows",
+      "origin": "new",
+      "parent_ids": [
+        "james_bond__kino.passing_cover"
+      ],
+      "parents": [
+        {
+          "id": "james_bond__kino.passing_cover",
+          "character": "emergent ability"
+        }
+      ]
+    },
+    {
+      "slot": "style",
+      "descriptor": "painterly cinematic character concept art, angled half-length view",
+      "origin": "new",
+      "parent_ids": [
+        "james_bond__kino.passing_cover"
+      ],
+      "parents": [
+        {
+          "id": "james_bond__kino.passing_cover",
+          "character": "emergent ability"
+        }
+      ]
+    }
+  ],
+  "traits": [
+    {
+      "property_id": "james_bond.covert_tradecraft",
+      "name": "Covert Tradecraft",
+      "source": "A",
+      "character": "James Bond",
+      "outcome": "inherited",
+      "result_text": "Carried: it supplies the deception once the customs are known.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "james_bond.close_combat",
+      "name": "Close Combat",
+      "source": "A",
+      "character": "James Bond",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "A combat skill the authored rule does not use."
+    },
+    {
+      "property_id": "james_bond.issued_gadgetry",
+      "name": "Issued Gadgetry",
+      "source": "A",
+      "character": "James Bond",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "OBJECT_RELATIONSHIP",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "Equipment issued by an agency is not available on a short, unsupported stay."
+    },
+    {
+      "property_id": "james_bond.suave_composure",
+      "name": "Suave Composure",
+      "source": "A",
+      "character": "James Bond",
+      "outcome": "transformed",
+      "result_text": "Charm becomes fitting in: composure used to be unremarkable rather than impressive.",
+      "contribution_type": "BEHAVIOR",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "james_bond.licensed_agent",
+      "name": "Licensed Agent",
+      "source": "A",
+      "character": "James Bond",
+      "outcome": "transformed",
+      "result_text": "State backing becomes deniability by design: no agency stands behind the role.",
+      "contribution_type": "CONCEPTUAL_ROLE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "james_bond.human_limits",
+      "name": "Human Limits",
+      "source": "A",
+      "character": "James Bond",
+      "outcome": "inherited",
+      "result_text": "Carried as a hard bound: nothing here exceeds human skill.",
+      "contribution_type": "MECHANISM",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "kino.three_day_rule",
+      "name": "Three Day Rule",
+      "source": "B",
+      "character": "Kino",
+      "outcome": "inherited",
+      "result_text": "Carried: the role's life is the length of the stay.",
+      "contribution_type": "GOVERNING_RULE",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "kino.witness_stance",
+      "name": "Witness Stance",
+      "source": "B",
+      "character": "Kino",
+      "outcome": "inherited",
+      "result_text": "Carried: watching first is what the role is built from.",
+      "contribution_type": "BEHAVIOR",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "kino.quick_draw",
+      "name": "Quick Draw",
+      "source": "B",
+      "character": "Kino",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "A gunfighting skill; this ability is about not being noticed."
+    },
+    {
+      "property_id": "kino.survival_craft",
+      "name": "Survival Craft",
+      "source": "B",
+      "character": "Kino",
+      "outcome": "complementary",
+      "result_text": "Resourcefulness on the road complements the role: the user makes do with whatever the place offers.",
+      "contribution_type": "ABILITY",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "property_id": "kino.road_companion",
+      "name": "Road Companion",
+      "source": "B",
+      "character": "Kino",
+      "outcome": "not_carried",
+      "result_text": "Not part of this design.",
+      "contribution_type": "OBJECT_RELATIONSHIP",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED",
+      "reason": "A separate being, not a trait; a companion would be one more thing to explain."
+    },
+    {
+      "property_id": "kino.traveler_limits",
+      "name": "Traveler Limits",
+      "source": "B",
+      "character": "Kino",
+      "outcome": "inherited",
+      "result_text": "Carried: no allies and no resources beyond what the user can carry.",
+      "contribution_type": "MECHANISM",
+      "epistemic_status": "FICTIONAL",
+      "provenance": "SOURCE_DERIVED"
+    }
+  ],
+  "emergent_ability": {
+    "id": "james_bond__kino.passing_cover",
+    "name": "Passing Cover",
+    "description": "After watching a place's customs, the user assumes a convincing local role built from them, holding it for the length of a short stay and leaving no trace when it ends.",
+    "governing_rule": {
+      "id": "james_bond__kino.watch_then_blend_rule",
+      "description": "Observation of a place's customs is fed straight into covert tradecraft to build a short-lived, convincing local role, and the three-day rule bounds how long that role can hold; the whole of it stays within human limits.",
+      "provenance": "DEFENSIBLY_DERIVED"
+    },
+    "provenance": "DEFENSIBLY_DERIVED",
+    "direct_ancestor_ids": [
+      "kino.witness_stance",
+      "james_bond.covert_tradecraft",
+      "kino.three_day_rule",
+      "james_bond.human_limits"
+    ],
+    "activation": "Time spent watching the place's customs before committing to a role.",
+    "limitations": [
+      "Needs watching first: a role built without observing the place's customs fails at the first test.",
+      "It holds for about three days; after that, repeated contact exposes the seams and the user must be gone.",
+      "It is ordinary skill, not disguise magic: a close acquaintance, an official check or a trained eye can break it.",
+      "Human limits apply: injury, fatigue and fear are all real, and a role does not protect the body.",
+      "One role at a time: two stories in the same place collapse each other."
+    ],
+    "inherited_limitations": [
+      {
+        "property_id": "kino.three_day_rule",
+        "name": "Three Day Rule",
+        "character": "Kino",
+        "kind": "prohibition",
+        "description": "Never stays in any one country longer than three days."
+      },
+      {
+        "property_id": "james_bond.human_limits",
+        "name": "Human Limits",
+        "character": "James Bond",
+        "kind": "hard limitation",
+        "description": "Injury, exhaustion, poison and fear all apply; no powers beyond human skill."
+      }
+    ]
+  },
+  "exclusions": [
+    {
+      "item": "the agency, its codes and its chain of command",
+      "source": "A",
+      "character": "James Bond",
+      "reason": "Institution, not a transferable mechanic."
+    },
+    {
+      "item": "signature catchphrases and drink order",
+      "source": "A",
+      "character": "James Bond",
+      "reason": "Mannerisms, not mechanics."
+    },
+    {
+      "item": "the talking motorcycle as a carried companion",
+      "source": "B",
+      "character": "Kino",
+      "reason": "A separate being, not a trait."
+    },
+    {
+      "item": "the closing refrain about the beauty of the world",
+      "source": "B",
+      "character": "Kino",
+      "reason": "A theme, not a mechanic."
+    }
+  ],
+  "compatibility": {
+    "status": "COMPATIBLE",
+    "evaluated_conditions": 0,
+    "contradiction": null,
+    "required_bridge": null,
+    "unresolved_reason": null
+  },
+  "ancestry": [
+    {
+      "id": "kino.witness_stance",
+      "kind": "source property",
+      "character": "Kino",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "james_bond.covert_tradecraft",
+      "kind": "source property",
+      "character": "James Bond",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "kino.three_day_rule",
+      "kind": "source property",
+      "character": "Kino",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "james_bond.human_limits",
+      "kind": "source property",
+      "character": "James Bond",
+      "provenance": "SOURCE_DERIVED"
+    },
+    {
+      "id": "james_bond__kino.watch_then_blend_rule",
+      "kind": "interaction rule",
+      "provenance": "DEFENSIBLY_DERIVED"
+    }
+  ],
+  "recorded_contribution_ids": [
+    "james_bond.covert_tradecraft",
+    "james_bond.close_combat",
+    "james_bond.issued_gadgetry",
+    "james_bond.suave_composure",
+    "james_bond.licensed_agent",
+    "james_bond.human_limits",
+    "kino.three_day_rule",
+    "kino.witness_stance",
+    "kino.quick_draw",
+    "kino.survival_craft",
+    "kino.road_companion",
+    "kino.traveler_limits"
+  ],
+  "image_prompt": {
+    "text": "an unremarkable newcomer whose dress and manner shift subtly to match the crowd, average height and build, shoulders slightly rounded, easy to overlook, an even, forgettable face with mild brown eyes and a ready, ordinary smile, short brown hair, neither neat nor unkempt, a grey linen shirt with rolled sleeves and plain trousers, a narrow dark ribbon tied as a loose neckcloth, faded grey, tan and soft green, a pair of folded round spectacles hung on a cord at the neck, unused, the figure almost lost among the crowd, faces sliding past without noticing, a bustling harbour market in a foreign port, awnings and strangers, easy, attentive, faintly watchful, warm, flat afternoon light with few shadows, painterly cinematic character concept art, angled half-length view --ar 3:4 --style raw",
+    "suppressed": false,
+    "order": [
+      "subject",
+      "build",
+      "face",
+      "hair",
+      "clothing",
+      "palette",
+      "signature_element",
+      "ability_manifestation",
+      "setting",
+      "mood",
+      "lighting",
+      "style",
+      "parameters"
+    ],
+    "length": 794,
+    "ceiling": 900
+  },
+  "leak_check": {
+    "detector": "implemented detector",
+    "status": "PASS",
+    "findings": [],
+    "claim": "A pass establishes compliance with the implemented detector only. It is not a guarantee that no recognizable proper noun, character reference or franchise reference is present."
+  }
+}
