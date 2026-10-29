@@ -2496,3 +2496,121 @@ Recorded explicitly, as AUTH-003, AUTH-006, AUTH-007, AUTH-008 and AUTH-009 reco
 This entry is appended after the final line of the register as it stood at `7d0fc9a` (line 2082),
 so that no existing line moves. Its position after AUTH-009 and its closure record carries no meaning,
 and it amends neither. The missing AUTH-004 closure record is not touched by this entry.
+
+### AUTH-011 — Closure record
+
+```
+Exercise status:        EXERCISED AND SPENT
+Landed as:              53dc5ac0f1d980788440f4955f208ad2c722271a
+Pull request:           #11
+Exercise recorded at:   2026-10-28 20:13:58 -0400
+```
+
+The first qualifying exercise was the merge of PR #11 into `main`, a merge commit made
+2026-10-28T20:12:03-04:00 (2026-10-29T00:12:03Z; GitHub reports `mergedAt` 2026-10-29T00:12:04Z). Under
+"Authorization Exercise and Closure" §2, that is the first time any part of the authorized act landed on
+the authoritative branch. This record was added later; per §4 it documents an exercise that had already
+occurred and does not imply AUTH-011 remained operative between the merge and this recording. The merge
+was made on the operator's explicit approval, as a merge commit and not a squash or rebase, as AUTH-009
+was.
+
+Recorded because the merge SHA alone does not identify which reviewed commits were merged:
+
+- Parents of the merge, read from the merge commit object itself: exactly two. First parent
+  `7d0fc9acf2d57d03415ad93048f587a00aa7fcc8`, the prior `main`. Second parent
+  `09cdc543173ed63718adfd820cd71ef8dda511cb`, the PR head the operator approved for merging, landed
+  unchanged. The merged tree (`eb6a7861bff140951cc2d24cec9df7d3cd1176cf`) is identical to the approved
+  head's tree, so nothing was added by the merge itself. The PR carried two commits and no others:
+  `68baa28` (Commit 1: schema, loader, minimal assembler and renderer, style allowlist, demo command, ten
+  test files, the four first approved pairings with goldens, and the register entry) and `09cdc54`
+  (Commit 2: the fifth pairing, by authoring data only).
+- Relative to the prior `main`, the merge adds 39 files and modifies one. The 39 added files are all under
+  `fusion_synthesis/`. The one modified file is `docs/authorizations.md`, which was appended; the
+  register's first 2,082 lines are byte-identical to the prior `main`.
+- CI: PR run 40785527656 (`pull_request`, head `09cdc54`, the approved head) and push run 40792475383
+  (the merge commit); `test (3.10)`, `test (3.11)` and `test (3.12)` completed with conclusion `success`
+  in both. In the raw log of each of the three jobs of the merge-commit run, the core step reports
+  `Ran 46 tests` and the full-suite step reports `Ran 280 tests`, both `OK`; all 104 new
+  `fusion_synthesis` tests are logged; and no log line reports a failure or an error. (Three of the 104
+  carry docstrings, so verbose unittest prints their `... ok` on the following line.) The approved-head
+  PR run reported the same counts.
+- No commit in the PR, not the merge commit, and not the PR description carries a `Co-Authored-By` trailer
+  or a "Generated with" line, as the operator's attribution instruction directed.
+
+**Approved content (Stage B, exact bytes, approved 2026-10-28).** Five pairings were approved, each at the
+exact bytes presented. The SHA-256 values below were verified against the committed blobs before each
+commit and again against the blobs on `main` after the merge.
+
+| Pair (fusion name) | Golden snapshot | SHA-256 |
+|---|---|---|
+| Maka × Vash (Wren Calloway) | `maka__vash.txt` | `916a6fb3cea1f8b84e343f1d5b5f4c57c16b8995ca12c75debe15ea6245eabd8` |
+| | `maka__vash.json` | `b75f5c3b5b497189bccd021602680f821292cb983838f55f12b859946a132add` |
+| Re-l Mayer × Maka (Cassia Thorne) | `re_l_mayer__maka.txt` | `1097b25b6f447cd2a737315fdddfacc3ad9d64eda000d1f37aa58cf0f3667411` |
+| | `re_l_mayer__maka.json` | `ec24522fc20cb641ec961f5f408bfa5b5bfa8b386db24ac307dc6901d6085802` |
+| Kino × Vash (Hale Ostrander) | `kino__vash.txt` | `f73aab47c35110d2e1cbd0fa01d04d630f46e881ca95558bac401ccb446f2677` |
+| | `kino__vash.json` | `d933428e617e025e8396af36b56e671c78f796003356050787d20dc65025681b` |
+| James Bond × Kino (Marlow Quince) | `james_bond__kino.txt` | `3294edee0c1bbdd3829a05c720240778b619b2f1eac20b417db09e9f6b430789` |
+| | `james_bond__kino.json` | `bcbf942fae8ff565e1ce56364f11e2e44bfa19438689f631c8302eb8806ee48a` |
+| The Medicine Seller × Re-l Mayer (Odalys Fenn) | `the_medicine_seller__re_l_mayer.txt` | `8bb9d0191a8afc48a91b0ee4846da0c3596665c3da5dbc468c97e30faf694963` |
+| | `the_medicine_seller__re_l_mayer.json` | `b48996140bb59654166690d40451a5bbe14a6e083ca6e22a13e8f9c26501af61` |
+| Style allowlist (12 terms) | `style_allowlist.json` | `c858425c3b4f544803163125fce8526ddc49a69e6fcdcf92f1ae52d2ff4004da` |
+
+The fifth pairing's approval carried one accepted-as-is point (the "charm" / "talisman" wording), recorded
+below as a follow-up. The approved text is exactly what is on `main`.
+
+**Reusability criterion (AUTH-011 §7), evidence.** The fifth pairing was added in Commit 2 by authoring data
+only:
+
+- `git diff --name-status 68baa28 09cdc54` listed exactly four added files, all under
+  `fusion_synthesis/data/`: `characters/the_medicine_seller.json`, `pairs/the_medicine_seller__re_l_mayer.json`
+  and the two goldens.
+- Python files changed between the commits: 0. Test files changed: 0. `style_allowlist.json` changed: no.
+  The register changed: no. The code and test tree objects are identical in the two commits.
+- A clean export (`git archive`) of each commit passed the full suite (280 tests, exit code 0) and the
+  demo (4 cards at Commit 1, 5 cards at Commit 2, 0 leaks).
+- The data-driven tests cover the new card without modification. This was checked by corrupting only the
+  new pair's data in a scratch copy (a parent name in a descriptor, a capitalized proper noun, a prompt over
+  its ceiling); every corruption was caught. "The Medicine Seller" is detected as a full phrase.
+- Separately, a scratch-copy mutation check (script not in the repository) broke 19 protections one at a
+  time at Commit 1 and the tests caught all 19.
+
+**Scope exercised.** The new top-level package `fusion_synthesis/` (schema, loader, minimal C5 assembler,
+minimal C6 renderer with the fail-closed leak check, demo command), its data (six character cards, five
+pair cards, the style allowlist and ten goldens) and its tests (ten test files, 104 tests), plus this
+register's AUTH-011 entry. Phase 1 produces authored cards only. There is no runtime model call, no
+dashboard or server integration, and no claim of arbitrary-input synthesis. A passing leak check means
+compliance with the implemented detector only.
+
+**Excluded surfaces, confirmed untouched by the merge.** The merge changes no path outside `fusion_synthesis/`
+and `docs/authorizations.md`. Compared against the prior `main`, no difference exists in `dashboard.html`,
+`server.py`, `mythos_sync.py`, `modality_classifier.py`, `logic_auditor.py`, `console.py`,
+`fusion_engine/`, `.github/`, `README.md`, `test_engine.py`, `test_hypothesis_properties.py`,
+`test_regression_case_001.py`, `test_dashboard_null_modality.py`, `test_dashboard_escaping.py`,
+`test_server_hardening.py` or `docs/evidence/`. `openCase()` therefore remains unescaped (AUTH-010 is not
+authorized). `containment_matrix.json` is not tracked by git; its SHA-256 on the working machine was
+`3FA4D990C7877B63A5796BF33C43C28A0DC0C66F7C1DF91D0279FFCB50FB86AC` after the merge, unchanged from its
+earlier observations. That is a local observation, not repository evidence.
+
+**Recorded follow-ups (none authorized; none an objective of AUTH-011).**
+
+1. **Wording fix.** The fifth card's concept says "paper charm" where the ability and rule say "paper
+   talisman". Accepted as-is at approval; unifying them changes approved bytes and needs re-approval of
+   the affected files and goldens.
+2. **Style presets.** Selectable style presets at prompt time.
+3. **Visual states.** A choice between resting and activation states for the image (a neutral portrait
+   versus the ability in action).
+4. **Backstory field.** A short backstory field on each card.
+5. **AUTH-004 closure finding.** The register has no closure record for AUTH-004. This remains an open
+   finding, was not investigated or repaired by AUTH-011, and is untouched by this record.
+
+**Recorded residuals.** Token-level denylist matching makes some ordinary words unusable per pair (for
+example "three" in the two Kino cards); the known Hypothesis `filter_too_much` flake in the pre-existing
+property tests is unchanged and unfixed.
+
+Per §6, this closure does not amend, broaden, narrow, reinterpret, ratify, or supersede AUTH-011's scope.
+AUTH-011's grant record, including its original text, amendments and Implementation notes, is unchanged,
+and the question of the register's jurisdiction over code remains as the grant record left it. This record
+authorizes nothing further, including AUTH-010, the deferred `openCase()` escaping, any follow-up listed
+above, or any other change.
+
+---
