@@ -2,17 +2,43 @@
 
 **The Multiverse Logic & Character Synthesis Engine.**
 
-WorldCraft-Visuals is a Python framework for fusing characters — historical figures, cinematic icons, anime leads — into a single "Legacy Profile," complete with powers, lore, and a home biome. Instead of picking outcomes at random, it runs every fusion through a modality system so the results stay internally consistent: a fusion of two grounded, real-world figures shouldn't casually wield reality-bending anime powers, and the engine enforces that.
+WorldCraft-Visuals fuses characters (anime leads, cinematic icons, historical figures) into **original new characters with discoverable ancestry**. A fusion should stand on its own: you meet a new person first, and recognize where they came from through their abilities, rules and limits, not through a costume swap.
 
-### 🧬 Core Systems
+Every fusion card explains itself: what each parent contributed, what was transformed, what was deliberately left out, the one emergent ability that neither parent has alone, its limitations, and a copy-paste image prompt for bringing the character to life in Midjourney or any other image tool.
+
+### ✨ Fusion Synthesis (`fusion_synthesis/`) — the new character cards
+
+Authored synthesis cards, built on the Fusion Engine's C1→C2→C3 slice and authorized by `AUTH-011`. Each card carries:
+
+- **Appearance** in seven slots (build, face, hair, clothing, palette, signature element, ability manifestation), plus a composed description.
+- **Visual provenance**: every visual trait is labelled as from parent A, from parent B, transformed, or new.
+- **Traits**: inherited, transformed, complementary and not-carried, each with its source.
+- **One emergent ability**, with its governing rule, provenance, ancestry and real limitations.
+- **Exclusions**: what was deliberately not imported, and why.
+- **An image prompt** built only from name-free descriptors. A leak check blocks parent names, ability names and other character-specific proper nouns from the prompt, and the demo refuses to print a prompt that fails it.
+
+```bash
+python -m fusion_synthesis.demo                          # every authored card
+python -m fusion_synthesis.demo "Maka" "Vash"            # one card
+python -m fusion_synthesis.demo "Maka" "Vash" --prompt   # just the image prompt
+python -m fusion_synthesis.demo "Maka" "Vash" --json     # the structured card
+```
+
+Five pairings are authored today: Maka × Vash, Re-l Mayer × Maka, Kino × Vash, James Bond × Kino, and The Medicine Seller × Re-l Mayer. The fifth was added with data files only, proving that new pairings need no code changes.
+
+**What this is not (yet):** each pair's emergent ability is authored by a person and approved by the operator. The engine does not invent mechanics for arbitrary pairs, makes no runtime model call, and is not yet shown in the dashboard.
+
+### 🧬 Legacy Engine: Mythos-Sync
 
 - **Modality Classifier** (`modality_classifier.py`) — tags every character as `LEGACY` (real historical/cultural figures), `GROUNDED` (cinematic but physically realistic), or `HIGH_CONCEPT` (physics-bending, supernatural), and blends two characters' modalities into a single fusion profile.
 - **Logic Auditor** (`logic_auditor.py`) — the enforcer. Checks every power against the fusion's modality ceiling and auto-transposes anything illegal down to a legal equivalent (e.g. `Domain Expansion` → `Strategic Genius` for a `LEGACY` fusion), so nothing breaks its own power-scaling rules.
 - **Mythos-Sync Engine** (`mythos_sync.py`) — the full pipeline: classify → select thematic powers by tag → audit → generate lore, biome, rhetorical style, and influence pattern → persist to `containment_matrix.json`.
 - **Fantasy Kingdom Generator** (`fantasy_kingdom_generator.py`) — the original, standalone lore generator. Lighter weight than Mythos-Sync; good for a quick taste of the anime/legend flavor text without the full fusion pipeline.
-- **Live Dashboard** (`dashboard.html` + `server.py`) — a local web UI. Run `server.py` and it serves `dashboard.html`, which posts fusion requests to `/fuse` and renders the resulting Legacy Profile.
+- **Live Dashboard** (`dashboard.html` + `server.py`) — a local web UI. Run `server.py` and it serves `dashboard.html`, which posts fusion requests to `/fuse` and renders the resulting Legacy Profile. Unrecognized names produce a `CAUTIONARY` card instead of a silent guess.
 
-### 🧩 Fusion Engine (`fusion_engine/`) — new, separate, in progress
+The server is hardened for local use (`AUTH-009`): it listens on `127.0.0.1` only, serves just the dashboard and its matrix file, rejects requests from foreign hosts and origins, and returns clean errors for malformed or oversized requests.
+
+### 🧩 Fusion Engine (`fusion_engine/`)
 
 A second, additive reasoning layer, specified independently in `docs/fusion_engine_requirements_v0.1.md`
 (**LOCKED**) and reconciled against this codebase in `docs/adr_001_fusion_engine_architecture_reconciliation.md`.
@@ -31,7 +57,7 @@ Currently implements the minimum C1→C2→C3 vertical slice, authorized by `AUT
   Conditionally Compatible, Incompatible, or Unresolved for a proposed interaction, refusal included as
   a legitimate result rather than an error.
 
-C4 (Dominance), C5 (Structured Reasoning Record), and C6 (Presentation) are not yet built.
+C4 (Dominance) is not yet built. Minimal C5 (card assembly) and C6 (rendering) exist in `fusion_synthesis/` for authored pairings only.
 
 ```bash
 python -m fusion_engine.demo             # structured, non-prose demonstration
@@ -54,6 +80,8 @@ and they are the place to look before changing how concepts are named, classifie
   grounding-terminal halting invariant (I8), which closed GAP-4. **LOCKED** (2026-09-15).
 - **`contract_003_gap5_surfaced_payload_preservation.md`** — supersedes Contract 002 §§3–4 in full;
   carries the surfaced-payload-preservation invariant (I9), which closed GAP-5. **LOCKED** (2026-09-20).
+- **`ruling_003_fusion_level_result_derivation.md`** — how a fusion's overall result is derived when its
+  components resolved at different stages. **LOCKED.**
 - **`fusion_engine_requirements_v0.1.md`** — the Fusion Engine's own spec: capabilities and invariants
   (provenance, compatibility, dominance, refusal) for the `fusion_engine/` package above. **LOCKED.**
 - **`adr_001_fusion_engine_architecture_reconciliation.md`** — how the Fusion Engine's architecture
@@ -67,7 +95,7 @@ and they are the place to look before changing how concepts are named, classifie
 - **`corrections.md`** — defects found in already-signed text. It records them and closes nothing, and
   authorizes no edit, so the text stays exactly as attested.
 - **`authorizations.md`** — bounded, one-time permission to edit specific lines or create specific new
-  files, with specific wording and scope (AUTH-001 through AUTH-005), together with the standing rule for
+  files, with specific wording and scope (AUTH-001 through AUTH-011, with AUTH-010 reserved and not yet issued), together with the standing rule for
   when an authorization counts as exercised and closed.
 - **`amendment_policy.md`** — what may be done to a locked document's text: nothing. A locked document
   is superseded, never amended.
@@ -89,17 +117,14 @@ gaps register is where those differences are tracked.
 
 ### 🚀 Getting Started
 
-The engine has no third-party dependencies — it runs on the Python standard library (3.10+), and
-`python -m unittest test_engine` needs no install step. The one exception is the Hypothesis property
-suite, which is deliberately kept separate so that stays true: `pip install -r requirements-dev.txt`,
-then `python -m unittest test_hypothesis_properties`.
+No third-party dependencies: everything runs on the Python standard library (3.10+). The one exception is the Hypothesis property suite, kept separate on purpose; install it with `pip install -r requirements-dev.txt`.
 
-**Quick lore sample:**
+**Character cards:**
 ```bash
-python fantasy_kingdom_generator.py
+python -m fusion_synthesis.demo
 ```
 
-**Full fusion engine (command line):**
+**Legacy fusion engine (command line):**
 ```bash
 python mythos_sync.py
 ```
@@ -110,6 +135,17 @@ python server.py
 # then open http://localhost:8000/dashboard.html
 ```
 
+**Quick lore sample:**
+```bash
+python fantasy_kingdom_generator.py
+```
+
+**Full test suite** (as CI runs it on Python 3.10, 3.11 and 3.12):
+```bash
+pip install -r requirements-dev.txt
+python -m unittest discover -p "test_*.py"
+```
+
 ## 🛠️ Tech Stack
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![VS Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
@@ -117,22 +153,17 @@ python server.py
 
 ## 🚀 Project Status
 
-The Mythos-Sync engine (classifier, auditor, tag-driven power selection, live dashboard) is functional end to end.
+- **Fusion Synthesis cards:** working for five authored pairings, tested and merged (`AUTH-011`).
+- **Fusion Engine C1–C3:** implemented and tested (`AUTH-004`).
+- **Mythos-Sync engine and dashboard:** functional, with grounding-terminal halting (`AUTH-005`), CAUTIONARY handling and escaping (`AUTH-006` to `AUTH-008`) and a hardened local server (`AUTH-009`).
 
-The Fusion Engine (`fusion_engine/`) is new: its v0.1 requirements are locked and reconciled against
-this codebase, and the minimum C1→C2→C3 slice (contribution classification, provenance, compatibility)
-is implemented, tested (51 tests), and merged. C4 (dominance), C5 (the full structured reasoning
-record), and C6 (creative presentation) are not yet built.
+**Next up:**
+- selectable art styles at prompt time (live-action, painterly, anime, pixel art and more), from one style-neutral character description
+- visual states per character: a resting look and an ability-in-action look
+- a short backstory field on each card
+- escaping in the dashboard's case-file view (`AUTH-010`, reserved), then showing the new cards in the dashboard
 
-Contract 002's grounding-terminal invariant (I8) has been implemented in the Mythos-Sync engine under
-`AUTH-005`: when grounding fails, the engine now halts as `GROUNDING_UNAVAILABLE` and preserves which
-condition occurred, instead of silently falling back to a generic power. Contract 003 (surfaced-payload
-preservation) is locked, but no authorization to implement it has been recorded in
-`docs/authorizations.md`.
-
-Separately, the engine is being taken from a closed-world model — a hand-authored registry that is correct for the vocabulary it contains — toward one that can accept concepts it was never authored with. That transition is being specified in `docs/` before it is implemented, which is why much of the recent history is rulings rather than code.
-
-Earlier plans listed here (growing the character registry, rebalancing power-scaling between modalities) are superseded by that work rather than abandoned.
+The longer-term direction is unchanged: moving from a closed, hand-authored registry toward an engine that can accept concepts it was never authored with, specified in `docs/` before it is implemented.
 
 ## Contributing
 
