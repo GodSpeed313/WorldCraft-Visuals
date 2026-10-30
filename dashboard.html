@@ -508,19 +508,28 @@
   // ── Open Case File modal ──
   function openCase(idx) {
     const f = MATRIX[idx];
+    // AUTH-010: return before any modal state is touched. A missing entry or a
+    // non-string modality (null, undefined, number, object, array) has no case
+    // file to show.
+    if (!f || typeof f.modality !== 'string') return;
     document.getElementById('modal-title').textContent = f.fusion_name;
     const badge = document.getElementById('modal-badge');
-    badge.textContent = f.modality.replace('_',' ');
-    badge.className = `card-badge ${f.modality}`;
+    const modToken = modalityToken(f.modality);
+    // An unknown string opens with a bare badge and its raw text, no class token.
+    badge.textContent = modToken ? f.modality.replace('_',' ') : f.modality;
+    badge.className = modToken ? `card-badge ${modToken}` : 'card-badge';
 
     const transposed = (f.audit_log||[]).filter(l => l.status === 'transposed');
     const unverified = (f.audit_log||[]).filter(l => l.status === 'unverified');
     // Contract 002 I8 terminal (AUTH-005) — kept out of `transposed` and
     // `unverified` so it is never counted or gated as either.
     const groundingUnavailable = (f.audit_log||[]).filter(l => l.status === 'grounding_unavailable');
-    const alphaMod = f.alpha?.modality || f.modality;
-    const betaMod  = f.beta?.modality  || f.modality;
-    const dom = f.dominance ?? 50;
+    // AUTH-010: a parent modality that is not on the allowlist stays null and
+    // renders as a neutral pill; it never inherits the fusion's modality.
+    const alphaMod = modalityToken(f.alpha?.modality);
+    const betaMod  = modalityToken(f.beta?.modality);
+    const domRaw = Number(f.dominance ?? 50);
+    const dom = Number.isFinite(domRaw) ? Math.min(100, Math.max(0, domRaw)) : 50;
 
     document.getElementById('modal-body').innerHTML = `
 
@@ -531,19 +540,19 @@
         <div class="source-row">
           <span class="src-pill" style="background:${modalityBg(alphaMod)};color:${modalityColor(alphaMod)};border:0.5px solid ${modalityBd(alphaMod)};">
             <span class="dot" style="background:${modalityColor(alphaMod)};"></span>
-            ${f.alpha?.name || '?'} · ${alphaMod}
+            ${esc(f.alpha?.name || '?')} · ${alphaMod || '—'}
           </span>
           <span class="src-plus">+</span>
           <span class="src-pill" style="background:${modalityBg(betaMod)};color:${modalityColor(betaMod)};border:0.5px solid ${modalityBd(betaMod)};">
             <span class="dot" style="background:${modalityColor(betaMod)};"></span>
-            ${f.beta?.name || '?'} · ${betaMod}
+            ${esc(f.beta?.name || '?')} · ${betaMod || '—'}
           </span>
         </div>
 
         <p style="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:6px;letter-spacing:0.5px;">Dominance calibration</p>
         <div class="dom-labels">
-          <span>${f.alpha?.name || 'Alpha'}</span>
-          <span>${f.beta?.name  || 'Beta'}</span>
+          <span>${esc(f.alpha?.name || 'Alpha')}</span>
+          <span>${esc(f.beta?.name  || 'Beta')}</span>
         </div>
         <div class="dom-track"><div class="dom-fill" style="width:${dom}%"></div></div>
         <div class="dom-pcts"><span>${dom}%</span><span>${100-dom}%</span></div>
@@ -558,29 +567,29 @@
                 <div class="audit-row">
                   <div class="audit-dot flag"></div>
                   <div class="audit-info">
-                    <p class="audit-power struck">${l.power}</p>
-                    <p class="audit-trans">→ transposed to <span>${l.transposed_to}</span></p>
-                    ${l.reason ? `<p class="audit-reason">${l.reason}</p>` : ''}
+                    <p class="audit-power struck">${esc(l.power)}</p>
+                    <p class="audit-trans">→ transposed to <span>${esc(l.transposed_to)}</span></p>
+                    ${l.reason ? `<p class="audit-reason">${esc(l.reason)}</p>` : ''}
                   </div>
-                  <span class="audit-cost">cost ${l.cost}</span>
+                  <span class="audit-cost">cost ${esc(l.cost)}</span>
                 </div>
               ` : l.status === 'unverified' ? `
                 <div class="audit-row">
                   <div class="audit-dot unver"></div>
                   <div class="audit-info">
-                    <p class="audit-power">${l.power}</p>
+                    <p class="audit-power">${esc(l.power)}</p>
                     <p class="audit-trans">unverified — not in the Power Registry</p>
-                    ${l.reason ? `<p class="audit-reason">${l.reason}</p>` : ''}
+                    ${l.reason ? `<p class="audit-reason">${esc(l.reason)}</p>` : ''}
                   </div>
-                  <span class="audit-cost">cost ${l.cost}</span>
+                  <span class="audit-cost">cost ${esc(l.cost)}</span>
                 </div>
               ` : l.status === 'grounding_unavailable' ? `
                 <div class="audit-row">
                   <div class="audit-dot" style="background:#D85A30;"></div>
                   <div class="audit-info">
-                    <p class="audit-power struck">${l.power}</p>
+                    <p class="audit-power struck">${esc(l.power)}</p>
                     <p class="audit-trans">grounding unavailable — halted, not transposed</p>
-                    ${l.reason ? `<p class="audit-reason">${l.reason}</p>` : ''}
+                    ${l.reason ? `<p class="audit-reason">${esc(l.reason)}</p>` : ''}
                   </div>
                   <span class="audit-cost">—</span>
                 </div>
@@ -588,9 +597,9 @@
                 <div class="audit-row">
                   <div class="audit-dot ok"></div>
                   <div class="audit-info">
-                    <p class="audit-power">${l.power}</p>
+                    <p class="audit-power">${esc(l.power)}</p>
                   </div>
-                  <span class="audit-cost">cost ${l.cost}</span>
+                  <span class="audit-cost">cost ${esc(l.cost)}</span>
                 </div>
               `).join('')}
             </div>
@@ -604,24 +613,24 @@
       <div class="ms">
         <p class="ms-title">02 — Legacy Profile</p>
         <p style="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:8px;">Lore summary</p>
-        <p class="lore-text">${f.lore_summary || '—'}</p>
+        <p class="lore-text">${esc(f.lore_summary || '—')}</p>
         <div class="divider"></div>
         <p style="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:8px;">Approved powers</p>
         <div class="powers-wrap">
           ${(f.approved_powers||[]).map(p =>
-            `<span class="power-pill${p === f.signature_ability ? ' sig' : ''}">${p}${p === f.signature_ability ? ' ★' : ''}</span>`
+            `<span class="power-pill${p === f.signature_ability ? ' sig' : ''}">${esc(p)}${p === f.signature_ability ? ' ★' : ''}</span>`
           ).join('')}
         </div>
         <div class="divider"></div>
         <p style="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:6px;">Influence pattern</p>
-        <p class="influence-text">"${f.influence_pattern || '—'}"</p>
+        <p class="influence-text">"${esc(f.influence_pattern || '—')}"</p>
         <div class="divider"></div>
         <p style="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:6px;">Rhetorical style</p>
-        <p style="font-size:13px;color:var(--text);font-family:var(--mono);">${f.rhetorical_style || '—'}</p>
+        <p style="font-size:13px;color:var(--text);font-family:var(--mono);">${esc(f.rhetorical_style || '—')}</p>
         ${(f.tags||[]).length ? `
           <div class="divider"></div>
           <p style="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:6px;">Tags</p>
-          <div class="tags-wrap">${f.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+          <div class="tags-wrap">${f.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
         ` : ''}
       </div>
 
@@ -629,11 +638,11 @@
       <div class="ms">
         <p class="ms-title">03 — Sync Status</p>
         <div class="meta-grid">
-          <div class="meta-item"><p class="meta-key">Fusion ID</p><p class="meta-val">${f.id}</p></div>
-          <div class="meta-item"><p class="meta-key">Engine</p><p class="meta-val">${f.engine_version}</p></div>
-          <div class="meta-item"><p class="meta-key">Created</p><p class="meta-val">${f.created_at}</p></div>
-          <div class="meta-item"><p class="meta-key">Biome</p><p class="meta-val">${f.biome}</p></div>
-          <div class="meta-item"><p class="meta-key">Dominant</p><p class="meta-val">${f.dominant}</p></div>
+          <div class="meta-item"><p class="meta-key">Fusion ID</p><p class="meta-val">${esc(f.id)}</p></div>
+          <div class="meta-item"><p class="meta-key">Engine</p><p class="meta-val">${esc(f.engine_version)}</p></div>
+          <div class="meta-item"><p class="meta-key">Created</p><p class="meta-val">${esc(f.created_at)}</p></div>
+          <div class="meta-item"><p class="meta-key">Biome</p><p class="meta-val">${esc(f.biome)}</p></div>
+          <div class="meta-item"><p class="meta-key">Dominant</p><p class="meta-val">${esc(f.dominant)}</p></div>
           <div class="meta-item"><p class="meta-key">Transpositions</p><p class="meta-val">${transposed.length}</p></div>
         </div>
       </div>
@@ -643,14 +652,24 @@
   }
 
   // ── Helpers ──
+  // AUTH-010: the only values that may become a modality class token or pick a
+  // modality colour set. Anything else (null, unknown, non-string) is neutral,
+  // never HIGH_CONCEPT. Explicit membership, not an object lookup, so names like
+  // "constructor" cannot pass.
+  function modalityToken(m) {
+    return typeof m === 'string' && ['LEGACY', 'GROUNDED', 'HIGH_CONCEPT'].includes(m) ? m : null;
+  }
   function modalityColor(m) {
-    return m === 'LEGACY' ? 'var(--legacy)' : m === 'GROUNDED' ? 'var(--ground)' : 'var(--high)';
+    const t = modalityToken(m);
+    return t === 'LEGACY' ? 'var(--legacy)' : t === 'GROUNDED' ? 'var(--ground)' : t === 'HIGH_CONCEPT' ? 'var(--high)' : 'var(--muted)';
   }
   function modalityBg(m) {
-    return m === 'LEGACY' ? 'var(--legacy-bg)' : m === 'GROUNDED' ? 'var(--ground-bg)' : 'var(--high-bg)';
+    const t = modalityToken(m);
+    return t === 'LEGACY' ? 'var(--legacy-bg)' : t === 'GROUNDED' ? 'var(--ground-bg)' : t === 'HIGH_CONCEPT' ? 'var(--high-bg)' : 'var(--surface2)';
   }
   function modalityBd(m) {
-    return m === 'LEGACY' ? 'var(--legacy-bd)' : m === 'GROUNDED' ? 'var(--ground-bd)' : 'var(--high-bd)';
+    const t = modalityToken(m);
+    return t === 'LEGACY' ? 'var(--legacy-bd)' : t === 'GROUNDED' ? 'var(--ground-bd)' : t === 'HIGH_CONCEPT' ? 'var(--high-bd)' : 'var(--border2)';
   }
   function esc(v) {
     return String(v)
