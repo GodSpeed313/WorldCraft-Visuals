@@ -2614,3 +2614,248 @@ authorizes nothing further, including AUTH-010, the deferred `openCase()` escapi
 above, or any other change.
 
 ---
+
+## AUTH-010
+
+```
+Authorizes:        one bounded edit set to dashboard.html and one new top-level test
+                   file, so that the case-file modal opened by openCase() escapes
+                   matrix-derived text, returns before any modal-state mutation on a
+                   missing entry or a non-string modality, restricts modality class
+                   tokens to an allowlist, renders unresolved parent modalities
+                   neutrally, and bounds dominance to 0-100
+Target scope:      dashboard.html::openCase()
+                   dashboard.html::modalityColor / modalityBg / modalityBd (their
+                   only callers are inside openCase())
+                   dashboard.html Helpers section, solely to add the allowlist helper
+                   one new top-level test file: test_dashboard_opencase.py
+Route:             operator determination (Act 1, FE Requirements §39 release,
+                   recorded below) -> implement on a dedicated branch -> verify
+                   against the checklist below -> this entry lands in the same PR as
+                   the fix -> operator review of the diff and test evidence -> PR
+                   merge on the operator's explicit approval -> closure record
+Granted by:        Kevin Brown, operator
+Granted at:        2026-10-30T14:02:08-04:00, in session
+Basis:             `authorizations.md:2128-2129` (AUTH-010 reserved by the operator
+                   for the `openCase()` escaping work); `authorizations.md:1316`
+                   (AUTH-007's exclusion of `openCase()`); `authorizations.md:1506`
+                   (AUTH-008 Act 1, under which `openCase()` remained held); FE
+                   Requirements §39 (`fusion_engine_requirements_v0.1.md:1397`)
+Status:            granted; NOT YET EXERCISED — no file within the scope of this
+                   authorization has landed on main as of this recording
+```
+
+**What actually authorizes this, and what this entry is.** Two operator acts and one record, kept
+separate on purpose:
+
+- **Act 1 — the §39 release** is Kevin Brown's own act, stated in his own words below. It removes a
+  prohibition and grants nothing.
+- **Acts 2 and 3 — the implementation authorization and the new-file determination** are Kevin
+  Brown's own act. They are what permit the `dashboard.html` edits and the one new test file.
+- **This AUTH-010 record** is the archive of those acts. It creates no authority. The operator's
+  issuance message states that the authorization is issued and directs implementation on a dedicated
+  branch; this entry lands in the same PR as the implementation.
+
+**Issuance record.** The authoritative text is the operator's issuance message, quoted below as
+received in session, together with the revised AUTH-010 draft that message adopts ("issued as in the
+revised draft"). The draft was prepared in session. The operator's issuance message was not
+separately preserved outside the repository before this entry was written, so byte-level identity
+with the operator's original transmission is not independently verifiable from inside the session.
+
+**Grant time.** The issuance message below carries the literal placeholder `[HH:MM]` in its
+`Granted at:` line, which is quoted as received. The `Granted at:` value in the header block above,
+`2026-10-30T14:02:08-04:00`, is not taken from that line. It is the time Claude Code recorded for the
+operator's human-typed issuance prompt (UTC `2026-10-30T18:02:08.521Z`, shown here at UTC−04:00 and
+without the fraction): line 255 of
+`C:\Users\User\.claude\projects\C--Users-User\8e4f7e35-82b2-49c1-a95d-3b078b47fb50.jsonl`, message
+UUID `ad955e2e-0b01-40f3-9f00-2f8ea0a1f6bb`. The operator verified and adopted that value on
+2026-10-30. It is the recorded submission time of the message, which is not necessarily the moment
+the operator composed it.
+
+### Operator statement (verbatim)
+
+> AUTH-010 — ISSUED.
+>
+> Act 1 (§39 release): I release the FE §39 UNMODIFIED hold on dashboard.html,
+> limited to (a) openCase(), (b) modalityColor(), modalityBg() and modalityBd(),
+> whose only callers are inside openCase(), and (c) the Helpers section, solely
+> to add the allowlist helper named in Act 2. Every other function or section of
+> dashboard.html, and all other §39-held code, remain held exactly as recorded.
+> This release removes a prohibition and grants nothing.
+>
+> Acts 2 and 3: issued as in the revised draft, with one amendment:
+> - AC6 states the expected width for each input; values already normalised by
+>   loadMatrix() are noted as such.
+>
+> Granted by: Kevin Brown, operator.
+> Granted at: 2026-10-30T[HH:MM]-04:00
+> Status: ISSUED.
+>
+> Recorded out-of-scope findings (not authorized), preserved for later
+> prioritization:
+> 1. loadMatrix() fabricates parent modality from the fusion's.
+> 2. loadMatrix() unguarded fusion_name.split.
+> 3. renderGrid() :494 arbitrary class token.
+> 4. renderGrid() :495 throws on a truthy non-string modality, blanking the grid
+>    on load.
+>
+> Create the dedicated branch from 67af9ef, demonstrate the pre-fix test
+> failure, implement the authorized changes, run verification, and prepare the
+> register entry. Local commits on the branch are permitted. Stop with the local
+> diff, commit list and evidence. Do not push or create a PR until I separately
+> authorize those actions.
+>
+> No Co-Authored-By trailer or "Generated with Claude Code" line on any commit
+> or PR.
+
+### Acts 2 and 3 — revised draft as adopted (reproduced from the session; the issuance message above is the authority)
+
+**Act 2 — Implementation.** In `dashboard.html`, and only in `openCase()`, `modalityColor()`,
+`modalityBg()`, `modalityBd()` and the Helpers section:
+
+1. **Escaping.** Wrap every matrix-derived interpolation in `openCase()` in the existing `esc()`
+   helper: `alpha.name`, `beta.name`, `l.power`, `l.transposed_to`, `l.cost`, `l.reason`,
+   `lore_summary`, each `approved_powers` item, `influence_pattern`, `rhetorical_style`, each tag,
+   and `id`, `engine_version`, `created_at`, `biome` and `dominant`. The existing `|| '—'` and
+   `|| '?'` fallbacks stay inside the call.
+2. **Guard.** Before the first mutation, return without throwing when the entry is missing or
+   `typeof f.modality !== 'string'` (null, undefined, number, object, array).
+3. **Badge.** An allowlist helper returns a modality only when it is exactly `LEGACY`, `GROUNDED` or
+   `HIGH_CONCEPT`, by explicit membership rather than object lookup. A valid modality keeps today's
+   class and text exactly. An unknown string opens the modal with a bare `card-badge` and the raw
+   value set through `textContent`.
+4. **Reasons.** Escape `l.reason`. The `l.reason ? … : ''` truthiness test is unchanged.
+5. **Parent pills.** Remove the `|| f.modality` fallback. A parent modality that is not on the
+   allowlist renders a neutral pill (`--muted`, `--surface2`, `--border2`, label `—`) and never
+   inherits the fusion's modality or defaults to HIGH_CONCEPT. `modalityColor/Bg/Bd` return the
+   neutral values for any value the allowlist rejects.
+6. **Dominance.** Coerce with `Number()`, treat a non-finite result as 50, then clamp to 0-100. The
+   one value feeds the bar width and both labels. No rounding.
+7. **Preservation.** Section structure, labels, counts, the all-clear text and benign visible text
+   are unchanged.
+
+**Act 3 — New file `test_dashboard_opencase.py`.** Standard library only, with `node` as a
+subprocess. It fails, and never skips, if `node` is unavailable. Fixtures are literal dicts. It
+never calls `save_to_matrix` or `export_for_web` and never touches `containment_matrix.json`. It
+imports nothing from existing test modules. It must fail against the pre-fix `dashboard.html` and
+pass after the fix. Its self-contained harness runs the dashboard `<script>` in a vm with a fake DOM
+that provides `modal-title` (`textContent`), `modal-badge` (`textContent`, `className`),
+`modal-body` (`innerHTML`) and `case-overlay` (`classList`, add/remove recorded), each pre-filled
+with a sentinel so a partial mutation is visible. Entries load through the unchanged `loadMatrix()`
+and an in-memory `fetch`.
+
+**Acceptance criteria**
+
+- **AC1** Each interpolated field in Act 2.1, set to `<img src=x onerror=alert(1)>&"'`, leaves no
+  `<img` in `modal-body`, shows the entity-escaped form, and round-trips through `html.unescape`.
+  A benign token per field proves the field is rendered at all.
+- **AC2** A missing index, and a modality of `null`, `undefined`, `5`, `{}` and `[]`, throw nothing,
+  leave all four elements identical to their pre-call snapshots, and never add `open` to the overlay.
+- **AC3** `LEGACY`, `GROUNDED` and `HIGH_CONCEPT` give `card-badge <VALUE>` and the value with `_`
+  replaced by a space.
+- **AC4** For string inputs only (`FOO`, `FOO_BAR`, `legacy`, empty string, `GROUNDED extra`, a value
+  containing a double quote and `onmouseover=`, `__proto__`, `constructor`, `toString`, and the
+  hostile string), the badge class token set is exactly `["card-badge"]`, the overlay opens, and
+  `textContent` equals the raw value.
+- **AC5** Reasons of `null`, undefined, `""` and `0` render no row paragraph. A present reason renders
+  exactly one per transposed, unverified and grounding-unavailable row, and a hostile reason is
+  escaped. The approved row never renders a reason.
+- **AC6** Dominance, expected width and labels. Inputs set after `loadMatrix()` has run, so that its
+  own normalisation is bypassed: `-10` → 0; `150` → 100; `"70"` → 70; `42.5` → 42.5 (not rounded);
+  `NaN`, `Infinity`, `-Infinity`, `null`, `"abc"` and `{}` → 50. Inputs that `loadMatrix()` has
+  already normalised before `openCase()` runs (`if (!f.dominance) f.dominance = 50`): `null` and `0`
+  → 50, noted as such. In every case the width and both label values are plain numbers, and the two
+  labels sum to 100.
+- **AC7** A benign full entry keeps its title, badge, three section titles, power pills with the
+  signature star, and a pinned visible text that was captured from the unmodified `openCase()` on
+  the baseline.
+- **AC8** A parent modality that is `null`, absent, unknown, non-string or hostile renders the neutral
+  pill and never the `--high`, `--ground` or `--legacy` variables, and the other parent is
+  unaffected. Valid parents render exactly as before.
+- **AC9** `test_dashboard_null_modality.py` and `test_dashboard_escaping.py` are unmodified and pass.
+- **AC10** The diff contains exactly `dashboard.html` and `test_dashboard_opencase.py`, apart from this
+  separately authorized register maintenance.
+
+### Explicit exclusions
+
+No governed reason generation or propagation, and no change to Contract 001 §5.1 / I5 behaviour. No
+change to `loadMatrix()` or `renderGrid()`. No engine or server change. No change to any existing test
+file. No edit to a locked document. No change to the two untracked scratch files. No CI config change.
+No unrelated dashboard work. No §39 release beyond Act 1.
+
+### Verification evidence (as of local commit `162d4f0`, before this entry was added)
+
+Implementation commits on branch `auth-010-opencase-hardening`, created from
+`67af9ef124ded94795a11960c1b482e76a7359ac`: `ef8dfc5` (new test file, committed ahead of the fix) and
+`162d4f0` (the `dashboard.html` change).
+
+- **Pre-fix failure.** Against the unmodified `dashboard.html` at `67af9ef`, `python -m unittest
+  test_dashboard_opencase -v` ran 9 tests and reported 52 subtest failures across 6 of them
+  (dominance 7, field escaping 23, guard 7, reason presence 1, unknown-string modality 9, neutral
+  parent pill 5). The three preservation tests (valid badges, valid parents, normal rendering) passed
+  both before and after. The failures include `f.modality.replace is not a function` and
+  `Cannot read properties of null (reading 'replace')` from the guard cases, unescaped `<img` in the
+  modal body, extra class tokens, `NaN`, `-10` and `Infinity` in the bar width, and
+  `Malcolm X · GROUNDED` where a neutral pill is required. The full output of that run is preserved,
+  unmodified, at `C:\Users\User\WorldCraft-Evidence\auth010_prefix_run.txt` (184,801 bytes, SHA-256
+  `a8a23b006bbd64f1c6b6df48adf6960e1dcc9c91aea6b1fafb5af951401e8e54`), outside the repository.
+- **Post-fix.** The same command ran 9 tests, OK.
+- **Existing tests.** `python -m unittest test_engine` ran 46 tests, OK. `python -m unittest discover
+  -p "test_*.py"` ran 289 tests, OK. The Hypothesis `filter_too_much` flake did not fire in this run.
+  `test_dashboard_null_modality.py`, `test_dashboard_escaping.py` and `test_engine.py` are identical
+  to `67af9ef` (`git diff --exit-code`).
+- **Diff.** `git diff --name-only 67af9ef...162d4f0` lists exactly `dashboard.html` and
+  `test_dashboard_opencase.py`. Every hunk in `dashboard.html` lies inside `openCase()` or the
+  Helpers section.
+- **`containment_matrix.json`.** Its SHA-256 on the working machine was
+  `3FA4D990C7877B63A5796BF33C43C28A0DC0C66F7C1DF91D0279FFCB50FB86AC` before and after the test runs.
+  The file is not tracked by git, so this is a local observation, not repository evidence.
+- **Not run.** The CI steps `python fantasy_kingdom_generator.py` and `python mythos_sync.py` were not
+  run, because `mythos_sync.py` can persist into `containment_matrix.json`. No real-browser gate was
+  performed; the tests exercise `openCase()` under `node` with a fake DOM only.
+
+### Recorded out-of-scope findings (not authorized)
+
+As recorded in the operator statement above: (1) `loadMatrix()` fabricates a parent modality from the
+fusion's (`dashboard.html:439-440`); (2) `loadMatrix()` calls `fusion_name.split` unguarded; (3)
+`renderGrid()` at `:494` emits an arbitrary class token; (4) `renderGrid()` at `:495` throws on a
+truthy non-string modality, blanking the grid on load. One further observation of the implementer, not
+part of the operator's list and not authorized: `loadMatrix()` replaces any falsy `dominance`,
+including a legitimate `0`, with 50 before `openCase()` runs, so the 0-100 clamp in `openCase()` can
+never see an original `0` from a loaded matrix.
+
+### Relation to AUTH-007 and AUTH-008
+
+AUTH-007 excluded "openCase() in full, including reason display" (`authorizations.md:1316`), and
+AUTH-008 Act 1 left `openCase()` held (`authorizations.md:1506`). Each exclusion limits only its own
+grant. AUTH-010 is a new and independent grant, and its limited `openCase()` work is newly permitted
+despite those exclusions. This entry does not amend, broaden, narrow, reinterpret or supersede
+AUTH-007, AUTH-008 or any other entry, or their historical records.
+
+### Lifecycle
+
+AUTH-010 is subject to the `Authorization Exercise and Closure` rule in this register
+(`authorizations.md:833` onward). The operator's draft provides that it is exercised and spent on
+merge to `main`, which is that rule's default exercise condition. Appending this entry is not a
+qualifying exercise. A commit on an implementation branch is not, by itself, a qualifying exercise. A
+closure record follows the merge. This record authorizes nothing further, including any of the
+out-of-scope findings above.
+
+**Merge gate.** Before any push, PR or merge, the diff and test evidence are presented for operator
+review. As of this recording the operator has not authorized a push or a PR.
+
+### On `authorizations.md`'s own stated scope
+
+This entry does not determine that the register's subject matter generally encompasses source code or
+tests, does not expand or amend the register's introductory definition, and does not depend on it being
+read broadly. The question remains open as `authorizations.md:837` and AUTH-007 record it. AUTH-010's
+validity does not depend on resolving it.
+
+### Placement
+
+This entry is appended after the final line of the register as it stood at `67af9ef`, so that no
+existing line moves. Its position after AUTH-011 and that entry's closure record carries no meaning,
+and it amends neither. The sentence in AUTH-011 recording that "AUTH-010 is reserved … and the numbering
+skips it deliberately" (`authorizations.md:2128-2129`) is a historical statement and is left unedited.
+
+---
