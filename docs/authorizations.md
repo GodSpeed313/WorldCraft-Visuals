@@ -2936,3 +2936,307 @@ implementation authority: it is spent in full under §2. This record authorizes 
 of the out-of-scope findings recorded in the grant record or any other work.
 
 ---
+
+## AUTH-012
+
+```
+Authorizes:        production, return, persistence and display of per-input reasons
+                   on a CAUTIONARY fusion result, as a new `reasons` list on the
+                   returned fusion profile, plus one new top-level test file
+Target scope:      modality_classifier.py::classify_fusion()
+                   mythos_sync.py::build_legacy_profile()
+                   dashboard.html::renderGrid(), the null-modality card branch only
+                   one new top-level test file: test_cautionary_reasons.py
+                   (modality_classifier.py::classify() is NOT released)
+Route:             operator issuance (below) -> implement on a dedicated local branch
+                   -> verify against the acceptance criteria and browser gate ->
+                   this entry lands in the same PR as the fix -> operator review of
+                   the diff and evidence -> push/PR only on separate operator
+                   authorization -> PR merge on the operator's explicit approval ->
+                   closure record
+Granted by:        Kevin Brown, operator
+Granted at:        2026-11-02T00:14-05:00 (as stated in the issuance message)
+Basis:             Contract 001 §5.1 ("the reason must travel with the result");
+                   Contract 003 I5 ("Every terminal state carries its reason to the
+                   output"); Ruling 003 §3.3 and §6.1, which carry that requirement
+                   and extend nothing; AUTH-007 and AUTH-008, which each excluded
+                   this work from their own grants; FE Requirements §39, released
+                   ONLY for the surfaces named above
+Status:            granted; NOT YET EXERCISED — no file within the scope of this
+                   authorization has landed on main as of this recording
+```
+
+**What this entry is.** The operator's issuance message below is the authority. This AUTH-012
+record is its archive and creates no authority. It lands in the same PR as the implementation.
+
+**Issuance record and draft identity.** The issuance adopts the reviewed draft `AUTH-012_DRAFT.md`,
+SHA-256 `60f69e0dc90bd274d1275d41c2d706baefee69d08ad87cb5922430eec5e401e6`. That hash identifies the
+original reviewed draft, not the amended instrument; no hash of the amended instrument is claimed.
+Claude Code verified on 2026-11-02, before the issuance, that its scratchpad copy of the draft hashes
+to that value, and read the draft in full against the amendments. The draft file lives in Claude
+Code's session scratchpad outside the repository and is not committed.
+
+**Grant time.** The `Granted at:` value is quoted from the issuance message as received. It followed
+a Claude Code reading of the machine clock, `2026-11-02T00:14:59-05:00` (Eastern Time), which the
+operator then used in the issuance. An earlier operator message whose `Granted at:` line carried the
+placeholder `2026-11-01THH:MM-05:00` was not acted on: Claude Code stopped and requested the actual
+time, as that message required.
+
+### Operator statement (verbatim)
+
+> # WorldCraft-Visuals — AUTH-012 ISSUANCE
+>
+> **AUTH-012 — ISSUED**
+>
+> **Granted by:** Kevin Brown, operator
+> **Granted at:** 2026-11-02T00:14-05:00
+> **Status:** ISSUED — NOT YET EXERCISED
+>
+> I authorize AUTH-012 using the reviewed draft `AUTH-012_DRAFT.md`, identified by SHA-256:
+>
+> `60f69e0dc90bd274d1275d41c2d706baefee69d08ad87cb5922430eec5e401e6`
+>
+> The hash identifies the original reviewed draft, not the amended issuance.
+>
+> The draft is adopted **subject to the following controlling amendments**. Where the draft conflicts with these amendments, these amendments govern.
+>
+> ## 1. Exact §39 release
+>
+> Release only these three implementation surfaces:
+>
+> - `modality_classifier.py::classify_fusion()`
+> - `mythos_sync.py::build_legacy_profile()`
+> - `dashboard.html::renderGrid()`, limited to its null-modality CAUTIONARY card branch
+>
+> `classify()` is NOT released. It must remain byte-identical.
+>
+> All other previously held code remains held.
+>
+> ## 2. Reason propagation
+>
+> Use this exact reason template:
+>
+> `'<name>' (<role>) is not in the character registry.`
+>
+> Preserve the character name verbatim as received by `classify()`.
+>
+> Roles are `alpha` and `beta`.
+>
+> When both characters are unregistered, preserve two reasons in alpha-then-beta order, even if both names are identical.
+>
+> For CAUTIONARY results, `classify_fusion()` must provide a `reasons` list. `build_legacy_profile()` must carry that list into the CAUTIONARY fusion profile.
+>
+> Resolved results must not contain a `reasons` key.
+>
+> Do not add §5.1 labels or change existing classification semantics.
+>
+> ## 3. Dashboard rendering
+>
+> In the null-modality CAUTIONARY card branch only:
+>
+> - Render each string reason in its own `<p class="audit-reason">` element.
+> - Escape the reason using the existing `esc()` function.
+> - Ignore non-string array elements without throwing.
+> - Render no reason paragraphs for non-array `reasons` values.
+> - Preserve the original order of string reasons.
+> - Keep CAUTIONARY cards nonclickable.
+> - Preserve ordinary card behavior.
+>
+> Do not alter other dashboard branches.
+>
+> ## 4. Tests and acceptance criteria
+>
+> Create the new self-contained `test_cautionary_reasons.py`.
+>
+> Preserve AC1–AC13 from the reviewed draft, except:
+>
+> **Amended AC8:** A mixed `reasons` array must render exactly its string elements, escaped and in original order, without rendering non-string elements or throwing.
+>
+> **New AC14:** Compare the CAUTIONARY return from `classify_fusion()` against literal baseline expectations from commit `0f1ea8e2d9bcd7eb4657963188b0be762f2b55fb`. The modified return must equal the baseline return with exactly one additional key, `reasons`, and no changes to baseline values or other keys.
+>
+> Before editing the classifier, verify whether the draft's `"dominant": None` and `"tags": []` values match that baseline. If they do not, stop and report the discrepancy.
+>
+> Ensure AC14 and the amended AC8 are covered by meaningful pre-fix failing tests. Tests must not merely reproduce implementation logic.
+>
+> Do not edit existing tests.
+>
+> ## 5. Browser acceptance gate
+>
+> Before any push, perform browser acceptance testing against a disposable clone or isolated test environment.
+>
+> Verify:
+>
+> - One unregistered character produces one visible reason.
+> - Two unregistered characters produce two reasons in alpha-then-beta order.
+> - Hostile character names are escaped and do not execute HTML or JavaScript.
+> - Mixed arrays render only string reasons.
+> - CAUTIONARY cards remain nonclickable.
+> - Ordinary cards retain their existing behavior.
+>
+> Preserve screenshot and DOM evidence outside the repository under `WorldCraft-Evidence`.
+>
+> Record evidence paths, file sizes, SHA-256 hashes, and Claude Code as the test performer in the AUTH-012 register entry.
+>
+> If browser acceptance cannot be performed, report the limitation and stop before declaring completion.
+>
+> ## 6. Scope and exclusions
+>
+> Do not modify `save_to_matrix()` or its deduplication behavior.
+>
+> Do not migrate existing entries.
+>
+> Do not resolve Ruling 003 discrepancies, AUTH-003 closure debt, or previously deferred dashboard findings.
+>
+> Do not expand scope into unrelated code, tests, or governance.
+>
+> Exactly these five repository files are authorized to change:
+>
+> 1. `modality_classifier.py`
+> 2. `mythos_sync.py`
+> 3. `dashboard.html`
+> 4. New `test_cautionary_reasons.py`
+> 5. Append-only `docs/authorizations.md`
+>
+> Preserve all held code outside the exact release.
+>
+> ## 7. Execution and stopping point
+>
+> You are authorized to:
+>
+> 1. Verify the baseline and reviewed draft.
+> 2. Create an isolated local implementation branch.
+> 3. Write and run meaningful pre-fix failing tests.
+> 4. Implement the narrowly authorized changes.
+> 5. Run the full existing test suite and new tests.
+> 6. Report local test results using the installed Python version. GitHub CI validation on Python 3.10, 3.11, and 3.12 will occur only after I separately authorize a push.
+> 7. Perform and preserve browser acceptance evidence.
+> 8. Append the AUTH-012 issuance and accurate lifecycle status to `docs/authorizations.md`.
+> 9. Make local commits with no `Co-Authored-By` trailers and no `Generated with Claude Code` attribution.
+> 10. Report the exact changed-file inventory, test results, hashes, evidence paths, and remaining residuals.
+>
+> **Do not push, open a pull request, merge, or clean up branches without my separate authorization.**
+>
+> If any baseline, scope, test, or evidence gate fails, stop and report rather than expanding the authorization.
+>
+> Proceed under AUTH-012 as issued above.
+
+### Amendments to the reviewed draft, as recorded
+
+The issuance states that its amendments govern where the draft conflicts with them. As understood
+and applied by Claude Code:
+
+- **§39 release.** `classify()` is not released and stays byte-identical. The draft's text that
+  would release it "to the extent the operator's scope names it" is superseded.
+- **Dashboard.** Non-string elements of a `reasons` array are ignored. The draft's illustrative
+  expression did not filter them; the implementation adds `.filter(r => typeof r === 'string')`.
+- **AC8** is amended as quoted. **AC14** is added as quoted.
+- **Preserved from the draft:** the reason template, the alpha-then-beta ordering (including the same
+  name in both roles), `reasons` absent (not empty) on resolved results, no change to
+  `save_to_matrix()` or its deduplication, no migration of existing entries, and the draft's
+  exclusions and recorded findings.
+- **Added by the issuance:** the browser acceptance gate (below).
+
+### Implementation and verification record
+
+Performed locally by Claude Code on branch `auth-012-cautionary-reasons`, created from
+`origin/main` at `0f1ea8e2d9bcd7eb4657963188b0be762f2b55fb`. The local `origin/main` reference was
+verified equal to that commit; no fetch was performed. No push, PR or merge has occurred.
+
+Commits (no `Co-Authored-By` trailer, no "Generated with Claude Code" line):
+
+- `338405e` — Add CAUTIONARY reasons regression tests (AUTH-012). Committed before the fix.
+- `e1edf11` — Carry CAUTIONARY reasons through classify_fusion, build_legacy_profile and the
+  dashboard card (AUTH-012).
+
+**Baseline check required by issuance §4.** The draft's `"dominant": None` and `"tags": []` were
+verified against `0f1ea8e` before the classifier was edited. They match the baseline CAUTIONARY
+return exactly.
+
+**Pre-fix failure (AC10, AC14, amended AC8).** `test_cautionary_reasons.py` was run against the
+unmodified baseline: 21 tests, `FAILED (failures=9, errors=15)`, counting sub-tests. The 15 errors
+are `KeyError: 'reasons'`; the failures are the missing `reasons` key or no reason lines. Failing
+before the fix: AC1, AC2, AC3 (CAUTIONARY `reasons` list), AC4, AC5, AC6, AC7 (reason lines and
+escaping), AC8 (mixed array) and AC14. Passing before and after: AC3 (resolved results have no
+`reasons` key and the pinned baseline key sets), AC7 (stub card not clickable, one card per entry),
+AC8 (grid byte-identical to a literal baseline capture, normal card unchanged, non-array `reasons`
+render no lines). Expected values in the file are literals; none is derived from the code under test.
+
+**After the fix.** On Python 3.12.10 (the only installed version):
+
+- `test_cautionary_reasons.py`: 21 tests, OK.
+- `python -m unittest discover -p "test_*.py"`: 310 tests, OK (the 289 existing plus 21 new).
+- `python -m unittest test_engine`: 46 tests, OK.
+- The repository's `containment_matrix.json` had the same SHA-256 before and after the suite runs.
+- GitHub CI on Python 3.10, 3.11 and 3.12 has NOT run. It occurs only after the operator separately
+  authorizes a push. AC13 is therefore not yet satisfied.
+
+**Byte preservation against `0f1ea8e` (AC11, AC12), compared programmatically.**
+
+- Changed files: `modality_classifier.py`, `mythos_sync.py`, `dashboard.html`,
+  `test_cautionary_reasons.py` (new). With this entry, `docs/authorizations.md` makes the five
+  files issuance §6 authorizes.
+- Diff: `modality_classifier.py` +11 (two comment lines and the `reasons` list before the CAUTIONARY
+  return, and the `"reasons"` key at `modality_classifier.py:79`); `mythos_sync.py` +1
+  (`mythos_sync.py:165`); `dashboard.html` 1 line changed (`dashboard.html:488`).
+- Function-source equality with baseline: `classify()`, `load_matrix()`, `save_to_matrix()`,
+  `export_for_web()` (Python, by AST) and `loadMatrix()`, `openCase()`, `esc()` (JavaScript)
+  identical. The `dashboard.html` diff is a single line, so everything else in the file is
+  byte-identical, including the normal-card branch. `generateFusion()` is covered by that
+  single-line argument, not by a separate extraction.
+- Byte-identical to baseline: `server.py`, `logic_auditor.py`, `console.py`, `fusion_engine/`,
+  `fusion_synthesis/`, `.github`, `containment_matrix.json`, and all ten existing test files
+  (AC9). The two untracked scratch files were not touched.
+
+**Line shifts (known consequence, not corrected).** The draft predicted 9 inserted lines in
+`modality_classifier.py` after line 62. The implementation inserts 10 lines there (the draft's code
+plus two comment lines) and 1 more at the return, 11 in total; `mythos_sync.py` gains 1 line;
+`dashboard.html` gains none. Governance citations of lines in those files at or after those points
+have shifted by those amounts and are not corrected by this entry. The draft's list of citing
+documents was not re-evaluated.
+
+### Browser acceptance (performed by Claude Code)
+
+Performed by Claude Code, not by the operator, on 2026-11-02, using the Chrome browser automation
+extension, against a disposable clone of the branch at `e1edf11` (a temporary directory outside the
+repository, deleted after the run). The page was served from the clone by `python -m http.server`
+on 127.0.0.1:8123, not by `server.py`, because `server.py`'s Host allowlist is fixed to port 8000.
+`containment_matrix.json` in the clone held four entries produced by the engine's own
+`build_legacy_profile()` and `save_to_matrix()` and a fifth, the mixed-array entry, added by hand
+because the engine cannot produce one. The card DOM was captured by the page posting its own grid
+`outerHTML` to a short-lived local receiver, which has been stopped.
+
+| Check | Result |
+|---|---|
+| One unregistered character, one visible reason | `Zed x Vash` card shows exactly one `audit-reason` line, alpha |
+| Two unregistered, alpha then beta | `Zed x Yara` card shows two separate lines, alpha first |
+| Hostile name escaped, nothing executes | The card name and reason carry the name as text; 0 `img` elements in the grid; `window.__pwned` stayed undefined |
+| Mixed array renders only strings | `Mixed x Vash` renders `first <b>` and `second & last`, as text, in order; no `b` element |
+| CAUTIONARY cards non-clickable | All four CAUTIONARY cards have no `onclick`; clicking the hostile-name card opened no case file |
+| Ordinary card unchanged | `Bruce Lee x Vash` card keeps `onclick="openCase(3)"`, signature, biome and arrow; clicking opened its case file |
+
+Evidence, stored outside the repository in `C:\Users\User\WorldCraft-Evidence\AUTH-012\`:
+
+| File | Bytes | SHA-256 |
+|---|---|---|
+| `prefix_failure_run_20261102.txt` (pre-fix run, unmodified output) | 22067 | `099ddffa3f722a540d0f5447f829f5cb9983d01ee09f4cece91b77b8cb1280ec` |
+| `browser_acceptance_screenshot_20261102.jpg` | 32056 | `cfd750ee9525d4a4921144945764481d1d3c4e998679a4a3e10147e3393e0e9f` |
+| `browser_card_dom_20261102.html` (grid DOM) | 2021 | `b18ef619f087d90c889d13c375a0923cad04a5ed19ad343b1e56016acdb15856` |
+
+### Residuals, unchanged and not addressed
+
+Recorded findings from the reviewed draft remain open and were not touched: the `save_to_matrix()`
+duplicate residual (an older persisted stub without `reasons` blocks a new stub for the same
+`fusion_name`, so the dashboard would not show the reasons for that fusion); the Ruling 003 §2 /
+Contract 001 §5.1 BLOCKED-versus-CAUTIONARY mismatch; the missing AUTH-003 closure record; and the
+previously recorded deferred `loadMatrix()` and `renderGrid()` findings. Reason names are stored
+unescaped; escaping happens at display, and any other consumer must escape.
+
+### Lifecycle
+
+Status: **ISSUED — NOT YET EXERCISED.** Appending this entry and committing on the implementation
+branch are not a qualifying exercise. AUTH-012 defines no exercise condition of its own and follows
+the register's `Authorization Exercise and Closure` rule: it is exercised and spent on merge to
+`main`, and a closure record follows. No push, PR or merge is authorized; the diff, commit list and
+evidence are presented for operator review first.
+
+---
