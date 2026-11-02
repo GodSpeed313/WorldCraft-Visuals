@@ -60,12 +60,23 @@ def classify_fusion(alpha_name: str, beta_name: str, dominance: int = 50) -> dic
     beta  = classify(beta_name)
 
     if alpha.get("state") == "CAUTIONARY" or beta.get("state") == "CAUTIONARY":
+        # AUTH-012: the reason travels with the result (Contract 001 §5.1,
+        # Contract 003 I5). One entry per unregistered input, alpha first.
+        reasons = [
+            f"'{name}' ({role}) is not in the character registry."
+            for name, role, result in (
+                (alpha_name, "alpha", alpha),
+                (beta_name, "beta", beta),
+            )
+            if result.get("state") == "CAUTIONARY"
+        ]
         return {
             "fusion_name": f"{alpha_name} x {beta_name}",
             "state":       "CAUTIONARY",
             "modality":    None,
             "dominant":    None,
             "tags":        [],
+            "reasons":     reasons,
         }
 
     # Modality priority ranking (higher = more "powerful" classification)

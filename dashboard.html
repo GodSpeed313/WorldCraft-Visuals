@@ -485,7 +485,7 @@
     grid.innerHTML = MATRIX.map((f, i) => f.modality == null ? `
       <div class="fusion-card ${esc(f.state ?? '')}">
         <span class="card-badge ${esc(f.state ?? '')}">${esc(f.state ?? '')}</span>
-        <p class="card-name">${esc(f.fusion_name)}</p>
+        <p class="card-name">${esc(f.fusion_name)}</p>${(Array.isArray(f.reasons) ? f.reasons : []).filter(r => typeof r === 'string').map(r => `<p class="audit-reason">${esc(r)}</p>`).join('')}
         <div class="card-footer">
           <span class="card-id">${esc(f.id)}</span>
         </div>

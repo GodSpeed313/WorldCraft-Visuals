@@ -162,6 +162,7 @@ def build_legacy_profile(
             "fusion_name": fusion["fusion_name"],
             "state":       "CAUTIONARY",
             "modality":    None,
+            "reasons":     fusion["reasons"],
         }
 
     modality = fusion["modality"]
