@@ -2859,3 +2859,80 @@ and it amends neither. The sentence in AUTH-011 recording that "AUTH-010 is rese
 skips it deliberately" (`authorizations.md:2128-2129`) is a historical statement and is left unedited.
 
 ---
+
+### AUTH-010 — Closure record
+
+```
+Exercise status:        EXERCISED AND SPENT
+Landed as:              79c32e304d0ed701c53ed89589bc2fd786db5aab
+Pull request:           #12
+Exercise recorded at:   2026-11-01 22:20:37 -0500
+```
+
+The first qualifying exercise was the merge of PR #12 into `main`, a merge commit made
+2026-10-30T14:43:45-04:00 (2026-10-30T18:43:45Z; GitHub reports `mergedAt` 2026-10-30T18:43:46Z). Under
+"Authorization Exercise and Closure" §2, that is the first time any part of the authorized act landed on
+the authoritative branch. This record was added later; per §4 it documents an exercise that had already
+occurred and does not imply AUTH-010 remained operative between the merge and this recording. GitHub
+attributes the merge to the account `GodSpeed313`. The merge was made as a merge commit, not a squash or
+rebase.
+
+**Operator merge authorization (operator statement).** On 2026-11-01 the operator stated to Claude Code, in
+session, that he explicitly approved the merge of PR #12 before it occurred, conditional on successful
+completion of the browser acceptance checks and merge preconditions, and that Claude Code reported that all
+required conditions passed before executing the merge. This statement is recorded as made. Neither the
+approval nor the report is independently verifiable from the repository or the evidence directory, and this
+record does not verify them.
+
+Recorded because the merge SHA alone does not identify which reviewed commits were merged:
+
+- Parents of the merge, read from the merge commit object itself: exactly two. First parent
+  `67af9ef124ded94795a11960c1b482e76a7359ac`, the prior `main`. Second parent
+  `a0e6621cd1e374037bf0d8f5e2e3864e4c54ea84`, the PR head, landed unchanged. The merged tree
+  (`13a67f092dbf264d67aa5dbaa9a68c7abc087b77`) is identical to the PR head's tree, so nothing was added by
+  the merge itself. The PR carried three commits and no others: `ef8dfc5` (the new test file, committed
+  ahead of the fix), `162d4f0` (the `dashboard.html` change) and `a0e6621` (the register entry).
+- The merge changes exactly three files relative to the prior `main`: `dashboard.html` (modified),
+  `docs/authorizations.md` (appended; no existing line changed, and the register's first 2,616 lines are
+  byte-identical to the prior `main`) and `test_dashboard_opencase.py` (added). On `main`, `dashboard.html`
+  has SHA-256 `e0fbbd1937c80fe38783ac336ad6f33aa1b7af5ecae37ca504153aa62b62ad28` and
+  `test_dashboard_opencase.py` has SHA-256 `b837527365cd2cf6b9c7e7b179ec4a6232d9c0fbbd30d1d5f8fc6753233f9a29`.
+- CI: PR run 41108161456 (`pull_request`, head `a0e6621`, the approved head) and push run 41109379603 (the
+  merge commit); `test (3.10)`, `test (3.11)` and `test (3.12)` completed with conclusion `success` in both.
+- None of the three PR commits, not the merge commit, and not the PR description carries a `Co-Authored-By`
+  trailer or a "Generated with" line, as the operator's attribution instruction directed.
+
+**Automated test results.** In the raw logs of each of the six jobs, the log reports `Ran 46 tests` and
+`Ran 289 tests`, with two bare `OK` lines; all nine `test_dashboard_opencase` methods are reported `ok`; and
+no log line reports a failure, an error, a skip, an expected failure or an unexpected success. (Docstring-bearing
+tests print their `... ok` on a following line under verbose unittest.) Passing subtests print no line of their
+own, so the logs establish that the nine methods passed but not how many subtests each ran. The pre-fix run
+recorded in the grant record is unchanged.
+
+**Browser acceptance (operator statement).** The operator states that Claude Code performed browser
+acceptance checks, using its browser tool, against a disposable clone of commit `a0e6621`, and that the
+results were reported in session. No separate browser-evidence folder was preserved: the evidence directory
+contains no AUTH-010 browser-verification folder, and the results are not recorded in this register. The
+checks were performed by Claude Code, not by the operator. The grant record's verification evidence is as of
+local commit `162d4f0` and records that no real-browser gate had been performed at that time; it is unchanged.
+
+**Scope exercised.** Relative to the prior `main`, `dashboard.html` differs in 25 hunks. Mapped
+programmatically, every hunk lies inside `openCase()`, `modalityColor()`, `modalityBg()`, `modalityBd()` or the
+one function added, `modalityToken()`. The new test file defines nine tests.
+
+**Excluded surfaces, confirmed untouched by the merge.** In `dashboard.html`, `loadMatrix()`, `renderGrid()`,
+`esc()` and `overlayClick()` are byte-identical to their text at `67af9ef`, compared programmatically. The
+merge changes no path other than the three above. Compared against the prior `main`, no difference exists in
+`server.py`, `mythos_sync.py`, `modality_classifier.py`, `logic_auditor.py`, `console.py`, `fusion_engine/`,
+`fusion_synthesis/`, `.github/`, `README.md`, `test_engine.py`, `test_hypothesis_properties.py`,
+`test_regression_case_001.py`, `test_dashboard_null_modality.py`, `test_dashboard_escaping.py`,
+`test_server_hardening.py` or `docs/evidence/`. The out-of-scope findings recorded in the grant record are
+therefore not addressed by the merge.
+
+Per §6, this closure does not amend, broaden, narrow, reinterpret, ratify, or supersede AUTH-010's scope.
+AUTH-010's grant record, including its original `Status:` line, is unchanged, and the question of the
+register's jurisdiction over code remains as the grant record left it. AUTH-010 holds no remaining
+implementation authority: it is spent in full under §2. This record authorizes nothing further, including any
+of the out-of-scope findings recorded in the grant record or any other work.
+
+---
