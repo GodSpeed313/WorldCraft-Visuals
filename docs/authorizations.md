@@ -3240,3 +3240,73 @@ the register's `Authorization Exercise and Closure` rule: it is exercised and sp
 evidence are presented for operator review first.
 
 ---
+
+### AUTH-012 — Closure record
+
+```
+Exercise status:        EXERCISED AND SPENT
+Landed as:              347044658fbb5a3941e0161062665d9b6ce789b9
+Pull request:           #13
+Exercise recorded at:   2026-11-03 21:14:18 -0500
+```
+
+The first qualifying exercise was the merge of PR #13 into `main`, a merge commit made
+2026-11-02T11:11:37-05:00 (GitHub reports `mergedAt` 2026-11-02T16:11:37Z). Under "Authorization Exercise
+and Closure" §2, that is the first time any part of the authorized act landed on the authoritative branch.
+This record was added later; per §4 it documents an exercise that had already occurred and does not imply
+AUTH-012 remained operative between the merge and this recording. GitHub attributes the merge to the account
+`GodSpeed313`. The merge was made as a merge commit, not a squash or rebase. This record states no operator
+approval of the merge: none is established by the repository or the evidence directory beyond that
+attribution.
+
+Recorded because the merge SHA alone does not identify which reviewed commits were merged:
+
+- Parents of the merge, read from the merge commit object itself: exactly two. First parent
+  `0f1ea8e2d9bcd7eb4657963188b0be762f2b55fb`, the prior `main`. Second parent
+  `ee905cef3b7dfd71f0a5edd14acdbe7998871902`, the PR head, landed unchanged. The merged tree
+  (`10e9f950c565dada0593b8cc5f192f1d8ec36a6b`) is identical to the PR head's tree, so nothing was added by
+  the merge itself. The PR carried three commits and no others: `338405e` (the new test file, committed
+  ahead of the fix), `e1edf11` (the code change) and `ee905ce` (the register entry).
+- The merge changes exactly five files relative to the prior `main`: `dashboard.html`, `modality_classifier.py`,
+  `mythos_sync.py` and `docs/authorizations.md` (all modified) and `test_cautionary_reasons.py` (added). The
+  register's first 2,938 lines are byte-identical to the prior `main`, compared by SHA-256. At
+  `347044658fbb5a3941e0161062665d9b6ce789b9` (the merge), the four files have these SHA-256 values: `dashboard.html`
+  `f08db9c3e764444a430d7cfca9b7a0e69e08fd3f16952ef88ed800cd1c2f59bd`; `modality_classifier.py`
+  `949dfbf9f42a90b2b91ac2c654b111c137e75d90d2c9a0ed9dff35fe2e6e3de8`; `mythos_sync.py`
+  `864d3fd1cb0d610ed6bd07e4f408a8ee1b5c9e00117731dfdba815dc7be76c3c`; `test_cautionary_reasons.py`
+  `d0111fb7e3d96995be5b5b6f4dae85d64a073f2350abe8e0bd3afc23d7ac8360`.
+- CI: PR runs 41477348321 and 41477948827 (`pull_request`, head `ee905ce`, the PR head) and push run
+  41479049786 (the merge commit); `test (3.10)`, `test (3.11)` and `test (3.12)` completed with conclusion
+  `success` in all three runs.
+- None of the three PR commits, not the merge commit, and not the PR description carries a `Co-Authored-By`
+  trailer or a "Generated with" line, as the operator's attribution instruction directed.
+
+**Automated test results.** In the raw logs of each of the nine jobs, the log reports `Ran 46 tests` and
+`Ran 310 tests`, each followed by a bare `OK`, and no log line reports a failure, an error, a skip, an
+expected failure or an unexpected success. Each run's logs contain 63 lines that name `test_cautionary_reasons`
+(21 tests in the file, 3 jobs); this record does not tabulate their per-method results beyond the jobs' overall
+`OK`. The pre-fix run recorded in the grant record is unchanged.
+
+**Browser acceptance.** The grant record's implementation and verification record states that Claude Code
+performed the browser acceptance gate. That record is unchanged and this closure does not re-perform it. The
+three evidence files it lists, in `C:\Users\User\WorldCraft-Evidence\AUTH-012\`, were re-hashed on 2026-11-03
+and match the sizes and SHA-256 values the grant record lists.
+
+**Scope exercised.** Relative to the prior `main`, mapped programmatically: both hunks of
+`modality_classifier.py` lie inside `classify_fusion()`; the one hunk of `mythos_sync.py` lies inside
+`build_legacy_profile()`; the one changed line of `dashboard.html` lies inside `renderGrid()`, in the
+`f.modality == null` card branch; `test_cautionary_reasons.py` is the one added file and defines 21 tests.
+
+**Excluded surfaces, confirmed untouched by the merge.** `modality_classifier.py::classify()` is not changed.
+Compared against the prior `main`, no difference exists in `server.py`, `logic_auditor.py`, `console.py`,
+`fusion_engine/`, `fusion_synthesis/`, `.github/`, `README.md`, `test_engine.py`,
+`test_hypothesis_properties.py`, `test_regression_case_001.py`, `test_dashboard_null_modality.py`,
+`test_dashboard_escaping.py`, `test_dashboard_opencase.py`, `test_server_hardening.py` or `docs/evidence/`. The
+merge therefore changes neither `save_to_matrix()` nor `server.py`, and the residuals recorded in the grant
+record remain as that record left them.
+
+Per §6, this closure does not amend, broaden, narrow, reinterpret, ratify, or supersede AUTH-012's scope.
+AUTH-012's grant record, including its original `Status:` line and its "Lifecycle" statement, is unchanged,
+and the question of the register's jurisdiction over code remains as the grant record left it. AUTH-012 holds
+no remaining implementation authority: it is spent in full under §2. This record authorizes nothing further,
+including any residual recorded in the grant record or any future authorization.
