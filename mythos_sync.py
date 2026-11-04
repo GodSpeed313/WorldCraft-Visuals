@@ -125,7 +125,23 @@ def save_to_matrix(profile: dict):
             json.dump(matrix, f, indent=2)
         print(f" ✅ [SERVER] Saved new fusion: {profile['fusion_name']}")
     else:
-        print(f" ⚠️ [SERVER] Duplicate fusion detected. Skipping save.")
+        # AUTH-013: fill-only. Add a missing `reasons` key to an existing record for the same
+        # fusion; never replace existing reasons, never touch any other field or record.
+        incoming = profile.get("reasons")
+        filled = False
+        if isinstance(incoming, list) and incoming:
+            for m in matrix:
+                if (m.get("fusion_name") == profile.get("fusion_name") and
+                        m.get("signature_ability") == profile.get("signature_ability") and
+                        "reasons" not in m):
+                    m["reasons"] = list(incoming)
+                    filled = True
+        if filled:
+            with open(MATRIX_FILE, 'w') as f:
+                json.dump(matrix, f, indent=2)
+            print(f" ✅ [SERVER] Added reasons to existing fusion: {profile['fusion_name']}")
+        else:
+            print(f" ⚠️ [SERVER] Duplicate fusion detected. Skipping save.")
 
 
 # ------------------------------------------------------------------
