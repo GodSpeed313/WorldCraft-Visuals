@@ -3385,3 +3385,263 @@ AUTH-003's grant record, including its original `Status:` line and its acknowled
 questions it left open, including the register's jurisdiction over code, remain as that record left them.
 AUTH-003 holds no remaining implementation authority: it is spent in full under §2. This record authorizes
 nothing further.
+
+---
+
+## AUTH-013
+
+```
+Authorizes:        persistence of a CAUTIONARY result's reasons when an older, reason-less
+                   record for the same fusion already exists: a fill-only addition of the
+                   `reasons` key, plus one new top-level test file
+Target scope:      mythos_sync.py::save_to_matrix(), the duplicate branch only
+                   one new top-level test file: test_matrix_reasons_persistence.py
+Route:             operator issuance (below) -> implement on a dedicated local branch:
+                   this entry first, then the tests committed before the fix, then the
+                   fix -> verify against the acceptance criteria -> pull request ->
+                   operator review of CI on Python 3.10, 3.11 and 3.12 -> PR merge on the
+                   operator's explicit approval -> closure record
+Granted by:        Kevin Brown, operator
+Granted at:        2026-11-03 22:19 -0500 (machine-clock reading, taken at the operator's
+                   direction; see "Grant time")
+Basis:             Contract 001 §5.1 (`contract_001_domain_resolution.md:198-213`), whose
+                   "Critical property" requires that the reason "travel with the result and
+                   may never be discarded on the way out"; Contract 003 I5
+                   (`contract_003_gap5_surfaced_payload_preservation.md:193-194`): "Every
+                   terminal state carries its reason to the output"; Ruling 003 §3.3 and §6.1
+                   (`ruling_003_fusion_level_result_derivation.md:102`, `:170-173`), which
+                   carry that requirement and extend nothing; the operator's reading of
+                   "the output" (Decision D1 below); AUTH-012, which excluded
+                   `save_to_matrix()` and recorded this defect as a residual; FE Requirements
+                   §39 (`fusion_engine_requirements_v0.1.md:1397`), whose hold is released
+                   ONLY for the surface named above
+Status:            granted; NOT YET EXERCISED — no file within the scope of this
+                   authorization has landed on main as of this recording
+```
+
+**What actually authorizes this, and what this entry is.** Two operator acts and one record, kept separate on
+purpose. **Act 1** is the operator's §39 release: it removes a prohibition and grants nothing. **Act 2** is the
+operator's implementation authorization: it grants exactly what it lists. **This entry** is the archive of both.
+It creates no authority and lands in the same PR as the fix.
+
+**Issuance record and draft identity.** The issuance adopts the reviewed draft `AUTH-013_DRAFT_REVISION1a.md`,
+SHA-256 `efe5e5d86fc383ed4527fa9d60a5a849c110bd1273ae9445b469f7288e39d818`, accepts its `save_to_matrix()`
+code block without modification, and lists four changes to incorporate. That hash identifies the reviewed
+draft, not the issued text; no hash of the issued text is claimed. The issued text below is that draft with
+the four listed changes applied and with these further edits only, which the operator did not list and which
+he may reject: the draft banner and its "Revision 1a incorporates" paragraph are omitted; the five headings
+marked "(proposed)" read "(as issued)"; the header's Granted at, Status and Route are filled in or conformed,
+and the Route no longer names the waived browser gate and follows the issuance's order (this entry first, then
+the tests, then the fix); the "Lifecycle and merge gate" sentence is conformed to the issuance, which
+authorizes opening a pull request and withholds merging; and this paragraph, the Grant time paragraph, the
+operator statement and the Placement section are added. The operator's pre-issuance decisions on more than one
+matching record, a seventh test and the browser-gate waiver were stated in session in a message before the
+issuance and are recorded in the issued text as D4, D7 and D8. The original draft (SHA-256
+`6b2840ead41f2953d33e6eb6a31e2038ad68e533601350f274bf95b1a79ceb42`), the superseded first revision
+(`79ce4583c29ec120db1a30b85511ca199529d1838552308293dee92880fb0e16`) and revision 1a are preserved in
+`C:\Users\User\WorldCraft-Evidence\AUTH-013\`. The draft files are not committed.
+
+**Grant time.** The `Granted at:` line of the issuance message, quoted below as received, carried the unfilled
+template `[YYYY-MM-DD HH:MM -0500]`. Claude Code did not act on it, stopped, and offered to read the machine
+clock. The operator replied "Use the clock." (quoted below). The `Granted at:` value in this entry's header is
+the machine-clock reading taken for that purpose, 2026-11-03 22:19:56 -0500 (Eastern Time), shown to the
+minute. An earlier reading of 2026-11-03 22:08:36 -0500, offered to the operator before his reply, was not
+used. The value is the time the grant was recorded at the operator's direction. It was taken after the
+issuance message was received and is not the time that message was composed.
+
+### Operator statement (verbatim)
+
+> AUTH-013 — Issuance
+>
+> I issue AUTH-013 as drafted in AUTH-013_DRAFT_REVISION1a.md (SHA-256 efe5e5d86fc383ed4527fa9d60a5a849c110bd1273ae9445b469f7288e39d818). The save_to_matrix() code block is accepted without modification. Incorporate only these changes into the issued text:
+>
+> 1. Wording: "the body of the else: branch is replaced by the block below."
+> 2. Tests using export_for_web() run in a temporary working directory, restore the previous directory in a finally block, and are not run concurrently. The real matrix hash (3fa4d990…) is verified unchanged.
+> 3. T1 locates the exported record by its identifying fields and asserts its reasons exactly equal the persisted reasons, in order. No equality is required on other exported fields.
+> 4. T1–T7 capture stdout (e.g. contextlib.redirect_stdout to StringIO) so they do not depend on console encoding.
+>
+> Confirmed as intended: a record whose reasons is [] counts as having reasons and is never filled (T3).
+>
+> The superseded REVISION1.md stays preserved.
+>
+> Granted at: [YYYY-MM-DD HH:MM -0500]
+>
+> Implementation:
+> - Branch auth-013-matrix-reasons from main at ae55bf08937c719685e56dc112f4b772feb12e9e.
+> - Record the issued text in the register first; show me the exact entry and its diff before committing it.
+> - Commit the test file next; demonstrate T1 and T7 failing and T2–T6 passing against unmodified code.
+> - Then the fix; all seven tests and the full suite pass.
+> - Open a PR. Stop before merging: I'll review CI on 3.10–3.12 and approve the merge.
+> - No trailers. Parked residuals stay parked.
+
+The operator's reply to Claude Code's request for the grant time, quoted as received:
+
+> Use the clock.
+
+### Defect (verified 2026-11-03 in a disposable copy of `main`; the real matrix was not touched)
+
+`save_to_matrix()` skips a profile whose `(fusion_name, signature_ability)` matches a saved entry. A CAUTIONARY
+profile has no `signature_ability`, so its key is `(fusion_name, None)`. The function only appends or skips. An
+older reason-less stub for a `fusion_name` therefore permanently shadows a newer stub carrying `reasons`: one
+entry remains and `reasons` is not persisted. The `/fuse` response still carries the list; the dashboard, which
+reads the matrix, shows none. The duplicate check never reads `state`.
+
+### Operator decisions recorded for this authorization (as issued)
+
+- **D1 — "the output".** In the operator's words: *"The output" in Contract 003 I5 and Contract 001 §5.1 includes
+  the persisted matrix record when that record supplies the displayed fusion result.* This is the basis on which
+  persistence of reasons is within the governed requirement. It is the operator's reading, not a ruling's text.
+- **D2 — fill-only.** The repair adds a missing `reasons` key and does nothing else.
+- **D3 — no precedence rule.** The repair does not decide which of two records wins. Where both carry `reasons`
+  and they differ, the existing record is left exactly as it is (case R3). General record replacement is out of scope.
+- **D4 — more than one matching record (CONFIRMED by the operator before issuance).** The duplicate check prevents
+  new duplicates, but a matrix could already hold more than one entry with the same key. The repair fills **every**
+  matching record that lacks the key, when the incoming profile supplies a non-empty `reasons` list, and never
+  replaces existing reasons on any record. It does not alter other fields, reorder records, consolidate
+  duplicates, or establish general record-precedence behavior.
+- **D5 — state-agnostic.** The condition tests whether `reasons` is present, never `state`. The repair reads and
+  writes no `state`. BLOCKED-versus-CAUTIONARY reconciliation is not relied on and not decided.
+- **D6 — no migration.** Existing entries are not rewritten except by a later save of the same fusion.
+- **D7 — browser gate waived.** The manual browser acceptance gate is waived. In its place, T1 asserts that the
+  reasons filled into the persisted matrix also appear correctly in `export_for_web()` output. That tests the
+  repaired persistence-to-export path. The dashboard rendering code is unchanged and was browser-verified under
+  AUTH-012.
+- **D8 — T7.** A seventh test covers two pre-existing records that share the duplicate key.
+
+### Act 1 — §39 release (as issued)
+
+The operator releases FE Requirements §39 "Existing WorldCraft-Visuals code — UNMODIFIED" **only** for the
+duplicate branch of `mythos_sync.py::save_to_matrix()`. Every other part of §39 remains held, including all other
+functions in `mythos_sync.py` and `modality_classifier.py`, `server.py`, `dashboard.html` and the successor-contract hold.
+
+### Act 2 — Implementation (as issued)
+
+**Change to `mythos_sync.py::save_to_matrix()`**, in the `else:` branch only. The `is_duplicate` expression and the
+`if not is_duplicate:` branch are not edited. The body of the `else:` branch is replaced by the block below.
+
+```python
+    else:
+        # AUTH-013: fill-only. Add a missing `reasons` key to an existing record for the same
+        # fusion; never replace existing reasons, never touch any other field or record.
+        incoming = profile.get("reasons")
+        filled = False
+        if isinstance(incoming, list) and incoming:
+            for m in matrix:
+                if (m.get("fusion_name") == profile.get("fusion_name") and
+                        m.get("signature_ability") == profile.get("signature_ability") and
+                        "reasons" not in m):
+                    m["reasons"] = list(incoming)
+                    filled = True
+        if filled:
+            with open(MATRIX_FILE, 'w') as f:
+                json.dump(matrix, f, indent=2)
+            print(f" ✅ [SERVER] Added reasons to existing fusion: {profile['fusion_name']}")
+        else:
+            print(f" ⚠️ [SERVER] Duplicate fusion detected. Skipping save.")
+```
+
+Properties, each testable: **idempotent** (after a fill the key exists, so a repeat skips); **no new records**
+(nothing is appended in this branch); **no overwrite** (the key must be absent; no other key is assigned);
+**other records unchanged** (the loaded list is rewritten whole, as the append path already does, and only matching
+records lacking the key gain one key); **unchanged when the incoming list is empty or not a list**.
+Every matching record lacking the key is filled (the loop has no early exit), and records are neither reordered
+nor consolidated (D4). `server.py` is not edited: its single call (`server.py:146`) already passes the profile.
+
+### Act 3 — New file `test_matrix_reasons_persistence.py` (as issued)
+
+Seven tests, committed **before** the fix, each patching `mythos_sync.MATRIX_FILE` to a path inside a temporary
+directory (the pattern of `test_engine.py`'s matrix tests) and asserting that path is inside that directory, so
+the real `containment_matrix.json` is never reached. Each test captures standard output (for example with
+`contextlib.redirect_stdout` into a `StringIO`) so that no test depends on console encoding. `export_for_web()`
+reads through `MATRIX_FILE` but writes the hard-coded relative path `containment_matrix.json`, so any test that
+calls it runs in a temporary working directory, restores the previous directory in a `finally` block, is not run
+concurrently with any other test, and asserts that the file it then reads is inside the temporary directory:
+
+1. **T1 fill.** A seeded old stub (no `reasons`) plus a new stub with non-empty `reasons` leaves exactly one entry;
+   its `reasons` equals the incoming list in order; every other key and value of the seeded record is unchanged.
+   Then `export_for_web()` is called: the exported record is located by its identifying fields (`fusion_name`
+   and `signature_ability`), and its `reasons` exactly equal the persisted reasons, in order. No equality is
+   required on any other exported field. *Expected to fail before the fix.*
+2. **T2 idempotence.** Saving the same new stub again leaves the file byte-identical to its state after T1's save.
+3. **T3 differing reasons.** An existing record that already has `reasons` (including an empty list) is left
+   unchanged when the incoming stub carries different reasons (pins D3; this is a characterization, not a rule).
+4. **T4 unrelated records.** In a multi-entry matrix, every non-matching entry is byte-identical after the save,
+   in the same order, and the count is unchanged.
+5. **T5 resolved duplicates.** A duplicate resolved profile (no `reasons`) is still skipped and no `reasons` key
+   appears; a save with a different `signature_ability` is still appended as before.
+6. **T6 no-op inputs.** An incoming profile whose `reasons` is empty, absent, or not a list leaves the file unchanged.
+7. **T7 two matching records.** The matrix is seeded directly with two records that share one duplicate key, one
+   already holding `reasons` and one lacking the key, plus unrelated records. After a save whose incoming
+   `reasons` is a non-empty list: the record lacking the key receives the incoming list; the record already
+   holding `reasons` equals, as a parsed record, its value before the save; no record is appended; the count and
+   order are unchanged; every unrelated record is unchanged. Records are compared individually, not by comparing
+   whole-file bytes. *Expected to fail before the fix.*
+
+### Acceptance criteria (as issued)
+
+- **AC1–AC7.** T1–T7 pass after the fix. Before the fix, the recorded run shows T1 and T7 failing and T2–T6 passing
+  as characterization, with the failing output preserved unmodified.
+- **AC8.** The existing `test_engine.py` matrix tests (round trip, duplicate not saved twice, different signature kept)
+  and the full suite pass unchanged on Python 3.10, 3.11 and 3.12 in CI, with the new file included.
+- **AC9.** The diff touches only `mythos_sync.py` (the `else:` branch of `save_to_matrix()`), the new test file, and
+  `docs/authorizations.md` (append only). `classify()`, `classify_fusion()`, `build_legacy_profile()`,
+  `load_matrix()`, `export_for_web()`, `server.py` and `dashboard.html` are identical to `main`.
+- **AC10.** The real `containment_matrix.json` has the same SHA-256
+  (`3fa4d990c7877b63a5796bf33c43c28a0dc0c66f7c1df91d0279ffcb50fb86ac`) before and after development and testing.
+- **AC11 — browser gate: WAIVED by the operator (D7).** No manual browser acceptance is required or performed.
+  T1's export assertion stands in for it, and covers the persistence-to-export path only; dashboard rendering is
+  covered by AUTH-012's browser verification and tests, and no rendering code changes.
+
+### Explicit exclusions
+
+- Which of two records wins (R3), general record replacement, and any change to the duplicate key.
+- Replacing existing reasons on any record, reordering records, and consolidating or deduplicating existing records.
+- BLOCKED-versus-CAUTIONARY reconciliation (Ruling 003 §2 against Contract 001 §5.1).
+- Any edit to `export_for_web()` (T1 only calls it), `load_matrix()`, `server.py`, `dashboard.html`,
+  `build_legacy_profile()` or `classify*()`.
+- Migration or backfill of existing entries; any change to matrix format, ids or `engine_version`; `/clear`.
+- Atomic or crash-safe writes, file locking, and corrupt-file handling. (`server.py` builds a plain `HTTPServer`,
+  which serves one request at a time; this draft makes no concurrency claim beyond that.)
+- Any change to Ruling 003 §6.2 or §6.3, which remain open and owned by that ruling.
+
+### Recorded findings — not authorized, not addressed
+
+R3 (differing reasons) stays undecided. The Ruling 003 §2 / Contract 001 §5.1 mismatch stays unsettled and is
+neither relied on nor decided. Reasons are stored as received and unescaped; escaping happens at display, and any
+other consumer must escape. AUTH-001, AUTH-002, AUTH-004 and AUTH-005 still have no closure records. The Hypothesis
+`filter_too_much` flake remains unfixed.
+
+### Known consequences, stated as rules
+
+- **Line numbers.** The change replaces one line in `mythos_sync.py` after the `else:` of `save_to_matrix()` with a
+  longer block. Every governance citation of a line in `mythos_sync.py` after that point shifts by the net lines
+  added, and none may be corrected by this authorization. Whether each cited line currently resolves to its
+  intended text is not evaluated here. No enumeration is offered.
+- **Test count.** The full-discovery count rises by the number of tests in the new file.
+
+### Verification required before the authorized commit lands
+
+- Diff scope per AC9, with function-level mapping of every hunk.
+- The pre-fix run of the new file recorded unmodified; then the full suite run, not only the new file.
+- Real-matrix hash before and after (AC10).
+- No `Co-Authored-By` trailer and no "Generated with Claude Code" line on any commit or the PR.
+
+### Lifecycle and merge gate
+
+Status after issuance: **ISSUED — NOT YET EXERCISED.** Appending this entry and committing on the implementation
+branch are not a qualifying exercise. AUTH-013 defines no exercise condition of its own and follows the register's
+`Authorization Exercise and Closure` rule: it is exercised and spent on merge to `main`, and a closure record
+follows. The issuance authorizes pushing the implementation branch and opening a pull request. It does not
+authorize merging, which waits for the operator's explicit approval after his review of CI on Python 3.10,
+3.11 and 3.12.
+
+### On `authorizations.md`'s own stated scope
+
+As with AUTH-003 through AUTH-012, this entry archives an operator determination about source code. Its placement
+here neither resolves nor presumes the register's jurisdiction over code, which remains open.
+
+### Placement
+
+This entry is appended after the final line of the register as it stood at `ae55bf0` (line 3387), so no
+existing line moves. Its position after the Amendment 1 closure section carries no meaning, and it amends
+neither.
