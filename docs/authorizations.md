@@ -3889,3 +3889,127 @@ placement here neither resolves nor presumes the register's jurisdiction over co
 
 This entry is appended after the final line of the register as it stood at `51a6986` (line 3746), so no
 existing line moves.
+
+### AUTH-014 — Closure record
+
+```
+Exercise status:        EXERCISED AND SPENT
+Landed as:              96c80be2ed2cd9de61240f9b5d9caecfc2eb7a82
+Pull request:           #15
+Exercise recorded at:   2026-11-04 18:00:38 -0500
+```
+
+The first qualifying exercise was the merge of PR #15 into `main`, a merge commit made 2026-11-04T17:53:21-05:00
+(GitHub reports `mergedAt` 2026-11-04T22:53:21Z). Under "Authorization Exercise and Closure" §2, that is the first
+time any part of the authorized act landed on the authoritative branch. This record was added later; per §4 it
+documents an exercise that had already occurred and does not imply AUTH-014 remained operative between the merge
+and this recording. GitHub attributes the merge to the account `GodSpeed313`. The merge was made as a merge
+commit, not a squash or rebase, and the implementation branch was not deleted. It was executed by Claude Code
+through the GitHub CLI as `gh pr merge 15 --merge --match-head-commit dfa37bc571d92dc8fd30942539fae57c734bba20`,
+so that GitHub would refuse it if the PR head differed from that SHA. Immediately before it ran, the remote
+`main` and the PR head were rechecked against the expected values. The command printed no output; the merge was
+confirmed afterwards from GitHub's PR state (`MERGED`, merge commit `96c80be2ed2cd9de61240f9b5d9caecfc2eb7a82`).
+
+**Operator merge authorization (operator statement).** On 2026-11-04 the operator instructed Claude Code, in
+session, in these words: "I, Kevin Brown (operator), approve merging PR #15 using a normal merge commit, strictly
+conditional on the checks below." and "This approval is limited to merging the already-reviewed AUTH-014
+implementation. It does not authorize additional code changes, closure-record publication, or unrelated work."
+The conditions were: remote `main` at `51a6986358783dd61811d91fc55174bb653dcde5`; the expected PR head
+unchanged and the three reviewed commits the only commits in the PR; the PR open, not merged, mergeable and based
+on that `main`; CI run 41927819397 successful on the exact head for Python 3.10, 3.11 and 3.12; the PR containing
+exactly the register issuance, the regression test and the one-line repair, with the containment matrix
+unchanged; a normal merge commit pinned to the head, with no squash, rebase, force push or `--delete-branch`.
+This statement is recorded as made. It is not independently verifiable from the repository or the evidence
+directory, and this record does not verify it. Claude Code ran the checks before merging; their results are the
+repository and GitHub evidence recorded below. This closure record was written under a separate, later
+instruction of the operator.
+
+Recorded because the merge SHA alone does not identify which reviewed commits were merged:
+
+- Parents of the merge, read from the merge commit object itself: exactly two. First parent
+  `51a6986358783dd61811d91fc55174bb653dcde5`, the prior `main`. Second parent
+  `dfa37bc571d92dc8fd30942539fae57c734bba20`, the PR head, landed unchanged. The merged tree
+  (`4744ff622c32d83e82012c1776933760e5bb9957`) is identical to the PR head's tree, so nothing was added by the
+  merge itself. The PR carried three commits and no others, in this order:
+  `c9b2c1b87f1e1785e18c9f2e9c268dfbe51da5a3` (the register entry),
+  `d998c5f3a2d4aeb482ba9b2fd4bc796fc7eb3bb3` (the new test file, committed ahead of the fix) and
+  `dfa37bc571d92dc8fd30942539fae57c734bba20` (the code change).
+- The merge changes exactly three files relative to the prior `main`, 226 insertions and 1 deletion in all:
+  `dashboard.html` (modified, 1 insertion, 1 deletion), `docs/authorizations.md` (appended, 145 insertions; the
+  register's first 3,746 lines are byte-identical to the prior `main`) and `test_dashboard_nonstring_modality.py`
+  (added, 80 insertions). At `96c80be2ed2cd9de61240f9b5d9caecfc2eb7a82` (the merge), the two code files have these
+  SHA-256 values: `dashboard.html`
+  `6110f7a84b683bd72ddd76aeca1f1682979358e8c951bd122ac64d4bd9342d88`; `test_dashboard_nonstring_modality.py`
+  `f8af8298872955a00042b7c4e378f36affb217e49d773853d4c4371996e701c6`.
+- CI, PR run: run 41927819397 (`pull_request`, head `dfa37bc571d92dc8fd30942539fae57c734bba20`, the approved
+  head), workflow "Python application",
+  https://github.com/GodSpeed313/WorldCraft-Visuals/actions/runs/41927819397, status `completed`, conclusion
+  `success`. Jobs: `test (3.10)` (job 126916759846), `test (3.11)` (job 126916760131) and `test (3.12)`
+  (job 126916760161), each `completed` with conclusion `success`.
+- CI, post-merge run: run 41929152176 (`push`, `main`, head `96c80be2ed2cd9de61240f9b5d9caecfc2eb7a82`, the
+  merge commit), workflow "Python application",
+  https://github.com/GodSpeed313/WorldCraft-Visuals/actions/runs/41929152176, status `completed`, conclusion
+  `success`. Jobs: `test (3.12)` (job 126921304531), `test (3.10)` (job 126921304862) and `test (3.11)`
+  (job 126921304882), each `completed` with conclusion `success`. The run was `queued` when first observed, and
+  it was read only after it had completed.
+- None of the three PR commits, not the merge commit, and not the PR description carries a `Co-Authored-By`
+  trailer or a "Generated with" line, as the operator's attribution instruction (AC6) directed.
+
+**Automated test results.** In the raw logs of each of the six jobs, the log reports `Ran 46 tests` and
+`Ran 318 tests`, each followed by a bare `OK`. No log line reports a failure or an error; the only line in each job
+log containing the word "skipped" is the name of `test_t5_resolved_duplicates_are_still_skipped` (an AUTH-013
+test), whose result is `ok`. Each job's log names `test_non_string_modality_does_not_blank_the_grid`; this record
+does not tabulate its per-subTest results from CI beyond the jobs' overall `OK`.
+
+**Failure and verification evidence, stored outside the repository in
+`C:\Users\User\WorldCraft-Evidence\AUTH-014\`:**
+
+| File | Bytes | SHA-256 |
+|---|---|---|
+| `C:\Users\User\WorldCraft-Evidence\AUTH-014\prefix_fail.txt` | 5074 | `1476caaf1075696dcb61617bdaa931fdeeaabf80ef776940cb1971ba15cae73d` |
+| `C:\Users\User\WorldCraft-Evidence\AUTH-014\postfix_pass.txt` | 367 | `d83f905a5d58f0c9497dbfd5f0db856d0844cd84cda732bb4476c3d41ffa72fb` |
+
+Each file was copied byte for byte from its original in the session scratchpad; the copy and the original have
+the same size and SHA-256 and compared identical with `cmp`. Neither is committed to the repository.
+
+- The pre-fix run was made on 2026-11-04 with `dashboard.html` unmodified from the prior `main` and the test file
+  not yet committed: one test method, `Ran 1 test`, `FAILED (failures=4)`. All four subTests (`number`, `boolean`,
+  `object`, `array`) failed on `assertNotIn(RENDER_FAILURE_MESSAGE, grid)`, the grid containing "Matrix could not
+  be rendered." and `<code>f.modality.replace is not a function</code>`. This is the failure the grant record
+  required, and it is the defect itself, not a defect in the test.
+- The post-fix run was made after the one-token edit and before it was committed: `Ran 1 test`, `OK`.
+- A full-discovery run (`python -m unittest discover -p "test_*.py"`) on the working tree with the edit applied
+  reported `Ran 318 tests`, `OK`. The real `containment_matrix.json` had SHA-256
+  `3fa4d990c7877b63a5796bf33c43c28a0dc0c66f7c1df91d0279ffcb50fb86ac` before and after the development and test
+  runs, and again when the merge was verified. The file is not tracked by git, so this is a local observation, not
+  repository evidence. The CI steps `python fantasy_kingdom_generator.py` and `python mythos_sync.py` were not run
+  locally, because `mythos_sync.py` can persist into `containment_matrix.json`.
+
+**Acceptance criteria, as issued.** AC1 (pre-fix failure for the intended defect): met, 4 of 4, as above. AC2
+(post-fix pass for all four values): met. AC3 (full suite on Python 3.10, 3.11 and 3.12 in CI): met, in both the
+PR run and the post-merge run. AC4 (diff scope): met, see the next paragraph. AC5 (real matrix hash unchanged):
+met. AC6 (no `Co-Authored-By` trailer or "Generated with" line): met. Browser gate: waived by the operator on the
+grounds stated in the issuance; no browser acceptance was performed, and this record does not evaluate those
+grounds. The node-harness test covers the behaviour of the page's real script with a fake DOM only.
+
+**Scope exercised.** Relative to the prior `main`, `dashboard.html` differs in exactly one line of 728, line 485,
+inside `renderGrid()`: `f.modality == null ?` became `typeof f.modality !== 'string' ?`. Compared function by
+function, the text of `openCase()`, `loadMatrix()`, `esc()` and `modalityToken()` is identical, and no line number
+in `dashboard.html` shifted (728 lines before and after). The new test file defines one test method with four
+subTest values.
+
+**Excluded surfaces, confirmed untouched by the merge.** The merge changes no path other than the three above.
+In particular `server.py`, `mythos_sync.py`, `modality_classifier.py`, `logic_auditor.py`, `console.py`,
+`fusion_engine/`, `fusion_synthesis/`, `.github/` and every existing test file are identical to the prior `main`.
+The items AUTH-014's entry excludes are not addressed by the merge: the display of a record with no `state`
+(an empty badge and class), the `loadMatrix()` `fusion_name.split` residual, any validation of `modality` in
+`server.py`, `mythos_sync.py` or the matrix writer, and the other out-of-scope findings recorded under AUTH-010.
+No implementation and verification record was appended to the register before the merge; the PR description and
+the evidence listed here carry that material.
+
+Per §6, this closure does not amend, broaden, narrow, reinterpret, ratify, or supersede AUTH-014's scope.
+AUTH-014's grant record, including its original `Status:` line, its "Lifecycle and merge gate" statement and its
+Placement section, is unchanged, and the question of the register's jurisdiction over code remains as the grant
+record left it. AUTH-014 holds no remaining implementation authority: it is spent in full under §2, and the §39
+release it carried is spent with it. This record authorizes nothing further, including any residual recorded in
+the grant record or any future authorization.
