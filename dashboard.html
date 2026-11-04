@@ -482,7 +482,7 @@
       return;
     }
 
-    grid.innerHTML = MATRIX.map((f, i) => f.modality == null ? `
+    grid.innerHTML = MATRIX.map((f, i) => typeof f.modality !== 'string' ? `
       <div class="fusion-card ${esc(f.state ?? '')}">
         <span class="card-badge ${esc(f.state ?? '')}">${esc(f.state ?? '')}</span>
         <p class="card-name">${esc(f.fusion_name)}</p>${(Array.isArray(f.reasons) ? f.reasons : []).filter(r => typeof r === 'string').map(r => `<p class="audit-reason">${esc(r)}</p>`).join('')}

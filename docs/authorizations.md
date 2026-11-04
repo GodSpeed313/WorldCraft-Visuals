@@ -3744,3 +3744,148 @@ Placement section, is unchanged, and the question of the register's jurisdiction
 record left it. AUTH-013 holds no remaining implementation authority: it is spent in full under §2, and the §39
 release it carried is spent with it. This record authorizes nothing further, including any residual recorded in the
 grant record or any future authorization.
+
+## AUTH-014
+
+```
+Authorizes:        one single-token edit to dashboard.html::renderGrid(), so that a
+                   record whose `modality` is not a string takes the same branch as a
+                   null or undefined modality, plus one new top-level test file
+Target scope:      dashboard.html::renderGrid(), the `.map()` ternary condition only
+                   (`dashboard.html:485`)
+                   one new top-level test file: test_dashboard_nonstring_modality.py
+Route:             operator issuance (below) -> implement on a dedicated local branch:
+                   this entry first, then the test committed before the fix, then the
+                   fix -> verify against the acceptance criteria -> pull request ->
+                   operator review of CI on Python 3.10, 3.11 and 3.12 -> PR merge on
+                   the operator's explicit approval -> closure record
+Granted by:        Kevin Brown, operator
+Granted at:        2026-11-04 17:42:26 -0500 (machine-clock reading taken when this entry was
+                   recorded; see "Grant time")
+Basis:             AUTH-007 (the null-modality stub branch in renderGrid(), reused here
+                   without alteration); AUTH-010, whose operator statement lists as
+                   recorded out-of-scope finding 4 "renderGrid() :495 throws on a truthy
+                   non-string modality, blanking the grid on load"
+                   (`authorizations.md:2699-2700`, restated at `:2820-2822`) and whose
+                   closure record confirms `renderGrid()` was left byte-identical
+                   (`authorizations.md:2923-2930`), so the finding was not addressed;
+                   FE Requirements §39 (`fusion_engine_requirements_v0.1.md:1397`, as
+                   cited by AUTH-013), whose hold is released ONLY for the surface named
+                   above
+Status:            ISSUED — NOT YET EXERCISED
+```
+
+**What this entry is.** Two operator acts and one record, kept separate. **Act 1** is the §39 release: it
+removes a prohibition and grants nothing. **Act 2** is the implementation authorization: it grants exactly what
+it lists. **This entry** archives both and creates no authority. It lands in the same PR as the fix.
+
+**Grant time.** The issuance message carried the instruction "Granted at: Actual machine-clock time when
+recorded." The `Granted at:` value in this entry's header is the machine-clock reading (Eastern Time) taken when
+this entry was written. It is the time the grant was recorded at the operator's direction, not the time the
+issuance message was composed.
+
+### Operator statement (verbatim)
+
+> I, Kevin Brown (operator), issue AUTH-014 as drafted, with these determinations: line numbers are 485 and 514; this issuance is the explicit approval to edit dashboard.html required by CLAUDE.md, for the renderGrid() ternary condition only; test shape is one method with four subTest values in a new file; browser gate is WAIVED because the change selects between two existing branches without altering either branch's markup, the null stub branch was browser-verified under AUTH-007, and the node harness executes the page's real script; the no-state empty badge remains excluded; route is the PR route with CI on 3.10, 3.11 and 3.12; AC6 applies (no Co-Authored-By, no Generated-with line).
+
+**Issuance record.** The issuance adopts the draft presented in session on 2026-11-04. That draft was not
+saved to a file and no hash of it is claimed. The issued text below is that draft with these edits only, which
+the operator did not list and which he may reject: the draft banner and bracketed operator placeholders are
+removed or filled from the operator statement; `Granted by`, `Granted at`, `Status` and the AC6 and browser-gate
+lines are conformed to it; the draft's defect paragraph cited the `.replace()` call at `dashboard.html:496`
+and is corrected to `:495`, the line at `51a6986`; the Basis is rewritten from the AUTH-010 text read in full
+before issuance; and this paragraph and the Grant time paragraph are added.
+
+### Defect (verified by read-only inspection at `51a6986`; no real matrix was run)
+
+`renderGrid()` (`dashboard.html:485`) routes a record to the stub-card branch only when `f.modality == null`. A
+non-string, non-null `modality` (number, boolean, object, array) takes the card branch, and `dashboard.html:495`
+calls `f.modality.replace('_',' ')`, which throws `TypeError`. The throw is inside `MATRIX.map(...)`, so one
+such record prevents every card from rendering; `loadMatrix()` catches it and shows "Matrix could not be
+rendered." `openCase()` already guards this (`dashboard.html:514`).
+
+### Act 1 — §39 release (as issued)
+
+The operator releases FE Requirements §39 "Existing WorldCraft-Visuals code — UNMODIFIED" **only** for the
+`.map()` ternary condition in `dashboard.html::renderGrid()` (`dashboard.html:485`). Every other part of §39
+remains held, including all other functions and styling in `dashboard.html`, `openCase()`, `loadMatrix()`,
+`server.py`, `mythos_sync.py`, `modality_classifier.py` and the successor-contract hold. This issuance is also
+the explicit approval to edit `dashboard.html` that the repository `CLAUDE.md` requires, for that condition only.
+
+### Act 2 — Implementation (as issued)
+
+**Change to `dashboard.html:485`**, one token:
+
+```diff
+-    grid.innerHTML = MATRIX.map((f, i) => f.modality == null ? `
++    grid.innerHTML = MATRIX.map((f, i) => typeof f.modality !== 'string' ? `
+```
+
+Properties, each testable: null and undefined still take the stub branch (`typeof` yields "object" and
+"undefined"); a non-string, non-null modality now takes it too; every string modality, including "" and unknown
+strings, takes the card branch exactly as before; neither branch is edited, so `.replace()` is reached only with
+a string; the stub branch has no `onclick`, matching `openCase()`'s refusal to open a non-string-modality
+record. The edit replaces one line with one line, so no line number in the file shifts.
+
+### Act 3 — New file `test_dashboard_nonstring_modality.py` (as issued)
+
+One regression check (a single test method), committed **before** the fix. It reuses `run_dashboard`,
+`count_cards`, `split_cards`, `NORMAL_ENTRY` and `MISSING_FILE_MESSAGE` from `test_dashboard_null_modality.py`
+without modifying that file (the pattern of `test_dashboard_escaping.py`). It runs `dashboard.html`'s own script
+under `node` in a vm with a fake DOM and an in-memory fetch; it reads and writes no `containment_matrix.json`
+and fails, never skips, if `node` is absent. For each of four modality values (`42`, `true`, `{"x": 1}`,
+`["GROUNDED"]`, via `subTest`) it feeds `[NORMAL_ENTRY, bad]`, where `bad` has a string `fusion_name`, a `state`
+and the non-string `modality`, and asserts: (1) the grid contains neither "could not be rendered" nor
+`MISSING_FILE_MESSAGE`; (2) `count_cards(grid) == 2`; (3) the normal card contains `onclick` (non-vacuity);
+(4) the bad card contains neither `onclick` nor `openCase`.
+
+### Acceptance criteria (as issued)
+
+- **AC1.** The test fails for the non-string-modality defect against unmodified `main` (`51a6986`), with the
+  failing output preserved unmodified.
+- **AC2.** The test passes for all four values after the fix.
+- **AC3.** The full suite passes unchanged on Python 3.10, 3.11 and 3.12 in CI, with the new file included.
+- **AC4.** The diff against `51a6986` touches only `dashboard.html` (line 485, one token), the new test file,
+  and `docs/authorizations.md` (append only). `openCase()`, styling, `loadMatrix()` and all other code are
+  identical to `main`.
+- **AC5.** The real `containment_matrix.json` has SHA-256
+  `3fa4d990c7877b63a5796bf33c43c28a0dc0c66f7c1df91d0279ffcb50fb86ac` before and after development and testing.
+- **AC6.** No `Co-Authored-By` trailer and no "Generated with" line on any commit or the PR.
+- **Browser gate: WAIVED by the operator.** His stated grounds: the change selects between two existing branches
+  without altering either branch's markup, the null stub branch was browser-verified under AUTH-007, and the node
+  harness executes the page's real script. No manual browser acceptance is required or performed. This entry
+  does not evaluate those grounds.
+
+### Explicit exclusions
+
+- Any other `dashboard.html` change, any styling change, any edit to `openCase()`.
+- `loadMatrix()`, including its load-time patch loop, which calls `f.fusion_name.split(...)` and would throw on a
+  non-string `fusion_name` (AUTH-010 finding 2). Neither relied on nor addressed.
+- How the stub branch displays a record that has no `state` (it renders an empty badge and class): excluded by
+  the operator.
+- Any validation or normalization of `modality` in `server.py`, `mythos_sync.py` or the matrix writer.
+- Migration of existing matrix entries; any unrelated refactoring; any documentation change beyond this entry.
+
+### Known consequences, stated as rules
+
+- **Line numbers.** None shift (one line replaced by one line).
+- **Test count.** The full-discovery count rises by one test method.
+
+### Lifecycle and merge gate
+
+Status after issuance: **ISSUED — NOT YET EXERCISED.** Appending this entry and committing on the
+implementation branch are not a qualifying exercise. AUTH-014 defines no exercise condition of its own and
+follows the register's `Authorization Exercise and Closure` rule: it is exercised and spent on merge to `main`,
+and a closure record follows. The issuance authorizes pushing the implementation branch and opening a pull
+request. It does not authorize merging, which waits for the operator's explicit approval after his review of CI
+on Python 3.10, 3.11 and 3.12.
+
+### On `authorizations.md`'s own stated scope
+
+As with AUTH-003 through AUTH-013, this entry archives an operator determination about source code. Its
+placement here neither resolves nor presumes the register's jurisdiction over code, which remains open.
+
+### Placement
+
+This entry is appended after the final line of the register as it stood at `51a6986` (line 3746), so no
+existing line moves.
