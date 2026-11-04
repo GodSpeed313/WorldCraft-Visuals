@@ -3645,3 +3645,102 @@ here neither resolves nor presumes the register's jurisdiction over code, which 
 This entry is appended after the final line of the register as it stood at `ae55bf0` (line 3387), so no
 existing line moves. Its position after the Amendment 1 closure section carries no meaning, and it amends
 neither.
+
+### AUTH-013 — Closure record
+
+```
+Exercise status:        EXERCISED AND SPENT
+Landed as:              a77cad6352b712349d7af42a5610ca9989c5b337
+Pull request:           #14
+Exercise recorded at:   2026-11-03 22:48:31 -0500
+```
+
+The first qualifying exercise was the merge of PR #14 into `main`, a merge commit made 2026-11-03T22:35:27-05:00
+(GitHub reports `mergedAt` 2026-11-04T03:35:28Z). Under "Authorization Exercise and Closure" §2, that is the first
+time any part of the authorized act landed on the authoritative branch. This record was added later; per §4 it
+documents an exercise that had already occurred and does not imply AUTH-013 remained operative between the merge
+and this recording. GitHub attributes the merge to the account `GodSpeed313`. The merge was made as a merge
+commit, not a squash or rebase. It was executed by Claude Code through the GitHub CLI, guarded so that GitHub
+would refuse it if the PR head differed from `be2274a0bfa66eeb493d109c15ad2174425ae376`.
+
+**Operator merge authorization (operator statement).** On 2026-11-03 the operator instructed Claude Code, in
+session, to merge PR #14 "using a normal merge commit", conditional on six pre-merge checks (remote `main` still at
+the expected base; PR open and clean with exactly the three authorized commits in order; PR head matching the
+previously reviewed full SHA; all three CI jobs passed on that exact head; only the three authorized files
+changed; the implementation confined to the authorized `save_to_matrix()` duplicate branch), and not to squash,
+rebase, force-push, modify the PR or introduce attribution trailers. This statement is recorded as made. It is not
+independently verifiable from the repository or the evidence directory, and this record does not verify it. Claude
+Code ran the six checks before merging; their results are the repository and GitHub evidence recorded below.
+
+Recorded because the merge SHA alone does not identify which reviewed commits were merged:
+
+- Parents of the merge, read from the merge commit object itself: exactly two. First parent
+  `ae55bf08937c719685e56dc112f4b772feb12e9e`, the prior `main`. Second parent
+  `be2274a0bfa66eeb493d109c15ad2174425ae376`, the PR head, landed unchanged. The merged tree
+  (`6c153962d4289af42fb2494b4120933c9236eeac`) is identical to the PR head's tree, so nothing was added by the
+  merge itself. The PR carried three commits and no others, in this order:
+  `0c53f6722d1337d5e81e952f25de624724b5b202` (the register entry),
+  `fb14da83bf0acfb331387f49664cbdd1bd57936a` (the new test file, committed ahead of the fix) and
+  `be2274a0bfa66eeb493d109c15ad2174425ae376` (the code change).
+- The merge changes exactly three files relative to the prior `main`: `docs/authorizations.md` (appended; the
+  register's first 3,387 lines are byte-identical to the prior `main`), `mythos_sync.py` (modified) and
+  `test_matrix_reasons_persistence.py` (added). At `a77cad6352b712349d7af42a5610ca9989c5b337` (the merge), the
+  two code files have these SHA-256 values: `mythos_sync.py`
+  `6fcd9a5b9eeceae24654db1ebb4f2fe7c7346e1aa19d8ec58e84d0f8d86aa124`; `test_matrix_reasons_persistence.py`
+  `41fa9781f9359252ffc1c66fbf5023a13abe34dc40cae0749ebcccb4ef701ca0`.
+- CI: PR run 41767632660 (`pull_request`, head `be2274a`, the approved head) and push run 41768070083 (`main`, the
+  merge commit); `test (3.10)`, `test (3.11)` and `test (3.12)` completed with conclusion `success` in both.
+- None of the three PR commits, not the merge commit, and not the PR description carries a `Co-Authored-By`
+  trailer or a "Generated with" line, as the operator's attribution instruction directed.
+
+**Automated test results.** In the raw logs of each of the six jobs, the log reports `Ran 46 tests` and
+`Ran 317 tests`, each followed by a bare `OK`. No log line reports a failure, an error, a skip, an expected failure
+or an unexpected success; the only lines containing the word "skipped" are the name of
+`test_t5_resolved_duplicates_are_still_skipped`, whose result is `ok`. Each run's logs contain 21 lines that name
+`test_matrix_reasons_persistence` (7 tests, 3 jobs); this record does not tabulate their per-method results from
+CI beyond the jobs' overall `OK`.
+
+**Failure and verification evidence, stored outside the repository in
+`C:\Users\User\WorldCraft-Evidence\AUTH-013\`:**
+
+| File | Bytes | SHA-256 |
+|---|---|---|
+| `prefix_failure_run_AUTH013.txt` | 2771 | `7380f0dcc62bb4fff69f66915fa1074eab449d81bd376d5ddf1563ab6242ddd3` |
+| `prefix_failure_run_AUTH013_first_attempt_superseded.txt` | 3300 | `d104ac5bb97bff55cc941c27a593eda2c62a23eca694c1da3d4fdb2f6817716b` |
+| `post_fix_run_AUTH013.txt` | 2279 | `baa0b1c550decd6a6439ddcdf09817dee54664b74e45db5c8b3ac9ca5c5dc4c7` |
+
+- The pre-fix run was made on 2026-11-03 with `mythos_sync.py` unmodified from the prior `main` and the test file
+  not yet committed: 7 tests, `FAILED (failures=2)`. T1 and T7 failed, each on `'reasons' not found` in the seeded
+  record; T2 to T6 passed. This is the failure pattern the grant record required.
+- The first attempt is kept because it was a different result: T4 and T7 reported errors, caused by defects in the
+  test code (T4 asserted a fill it should not have, and T7 indexed a key without first asserting it was present).
+  The tests were corrected before they were committed. It is superseded, not hidden.
+- The final run was made against the merge commit `a77cad6352b712349d7af42a5610ca9989c5b337`: the seven new tests
+  `ok`, 46 core tests `OK`, and 317 tests in full discovery `OK`. The real `containment_matrix.json` had SHA-256
+  `3fa4d990c7877b63a5796bf33c43c28a0dc0c66f7c1df91d0279ffcb50fb86ac` before and after that run and before and
+  after the pre-fix run.
+
+**Acceptance criteria, as issued.** AC1 to AC7 (T1 to T7): met, with the pre-fix pattern above. AC8 (existing
+matrix tests and the full suite on Python 3.10, 3.11 and 3.12 in CI): met. AC9 (diff scope): met, see the next
+paragraph. AC10 (real matrix hash unchanged): met. AC11: the manual browser gate was waived by the operator (D7); no
+browser acceptance was performed, and T1's export assertion covers the persistence-to-export path only.
+
+**Scope exercised.** Relative to the prior `main`, mapped programmatically, `mythos_sync.py` has one hunk, inside the
+`else:` branch of `save_to_matrix()`: one line removed and seventeen added. Compared function by function, no
+function in `mythos_sync.py` other than `save_to_matrix()` differs, and the text of `save_to_matrix()` before its
+`else:` branch is unchanged. The new test file defines seven tests.
+
+**Excluded surfaces, confirmed untouched by the merge.** The merge changes no path other than the three above. In
+particular `server.py`, `dashboard.html`, `modality_classifier.py`, `logic_auditor.py`, `console.py`,
+`fusion_engine/`, `fusion_synthesis/`, `.github/`, `test_engine.py` and `test_cautionary_reasons.py` are identical
+to the prior `main`. The residuals recorded in the grant record are not addressed by the merge: the case of
+differing reasons on two records (R3), general record replacement, the BLOCKED-versus-CAUTIONARY question, and the
+other items it lists. No implementation and verification record was appended to the register before the merge; the
+PR description and the evidence listed here carry that material.
+
+Per §6, this closure does not amend, broaden, narrow, reinterpret, ratify, or supersede AUTH-013's scope.
+AUTH-013's grant record, including its original `Status:` line, its "Lifecycle and merge gate" statement and its
+Placement section, is unchanged, and the question of the register's jurisdiction over code remains as the grant
+record left it. AUTH-013 holds no remaining implementation authority: it is spent in full under §2, and the §39
+release it carried is spent with it. This record authorizes nothing further, including any residual recorded in the
+grant record or any future authorization.
