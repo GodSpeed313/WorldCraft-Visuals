@@ -3310,3 +3310,78 @@ AUTH-012's grant record, including its original `Status:` line and its "Lifecycl
 and the question of the register's jurisdiction over code remains as the grant record left it. AUTH-012 holds
 no remaining implementation authority: it is spent in full under §2. This record authorizes nothing further,
 including any residual recorded in the grant record or any future authorization.
+
+---
+
+## Closure Records Placed Under Amendment 1
+
+This section holds closure records recorded under the narrow exception in "Authorization Exercise and
+Closure — Amendment 1 (Closure Placement)". It is a dedicated, append-only section at the tail of the register.
+Each record names the authorization it closes by AUTH number and carries every field §3 requires.
+
+### AUTH-003 — Closure record
+
+```
+Exercise status:        EXERCISED AND SPENT
+Landed as:              c7f0ab790f386ae0a30fcdfe68bf5dfb3d8ed1ba
+Exercise recorded at:   2026-11-03 21:14:52 -0500
+```
+
+(No `Pull request:` field: `c7f0ab7` was committed directly on `main`, and the GitHub API lists no pull request
+associated with it.)
+
+**Why this record is not inside AUTH-003's entry.** §3's default places a closure record inside the
+authorization's own entry. For AUTH-003 that would insert text before every later entry in the register, moving
+all of their lines. Entries after AUTH-003 cite lines of this register by number, and at least one of those
+citations sits inside text quoted verbatim from an operator statement: AUTH-009's "Act 2 — Implementation
+authorization (operator, verbatim)" cites `authorizations.md:1316`, and it is at line 1774 of the register as
+it stands when this record is added. Correcting it would mean altering the operator's quoted words, which no
+compliant edit does. An in-entry insertion would therefore leave that citation identifying different material
+than it identifies now. That is the condition Amendment 1 describes. Convenience and formatting are not the
+basis. No LOCKED document is affected either way: a search of the repository found two citations from LOCKED
+documents into this register, `contract_001_domain_resolution.md:322`'s `authorizations.md:153-314` and
+`ruling_003_fusion_level_result_derivation.md:405`'s `authorizations.md:3-5`, and both lie above AUTH-003.
+This placement amends neither the rule nor Amendment 1.
+
+By operator determination, verbatim operator statements preserved in this register are not subject to corrective editing; no compliant correction of the citation at line 1774 exists, and this AUTH-003 closure is the first application of Amendment 1's tail-section exception.
+
+The first qualifying exercise was the landing of commit `c7f0ab7` on `main`, committed directly (no pull
+request) 2026-09-14T00:22:36-04:00 as "fix: enforce Ruling 001 unresolved character handling". Under
+"Authorization Exercise and Closure" §2, that is the first time any part of the authorized act landed on the
+authoritative branch. This record was added later; per §4 it documents an exercise that had already occurred
+and does not imply AUTH-003 remained operative between that commit and this recording. This is a historical
+closure under §5, supported by the immutable repository evidence below.
+
+Recorded as the evidence that establishes the exercise:
+
+- `c7f0ab7` is on `main`'s first-parent history. Its parent is `1671165b6056cdb50885726a4ca86043247254e9`, the
+  commit that recorded AUTH-003 (committed 2026-09-14T00:14:47-04:00), so no commit lies between the grant
+  record and the exercise.
+- The earliest GitHub-side evidence that the commit was on remote `main` is the push-triggered workflow run
+  34805838223, branch `main`, created 2026-09-14T04:23:02Z. The exact push time is not recoverable from the
+  repository.
+- CI: in that run, `test (3.10)`, `test (3.11)` and `test (3.12)` completed with conclusion `success`; each job's
+  log reports `Ran 46 tests` and `Ran 53 tests`, each followed by a bare `OK`.
+
+**Scope exercised.** The commit changes exactly three files: `modality_classifier.py`, `mythos_sync.py` and
+`test_engine.py`. Mapped programmatically, its nine hunks lie as follows: two inside `classify()` and two
+inside `classify_fusion()` in `modality_classifier.py`; one inside `build_legacy_profile()` in `mythos_sync.py`;
+two inside `test_unknown_character_defaults_to_grounded` and two inside
+`test_unknown_characters_still_produce_a_valid_profile` in `test_engine.py`. Each of those is a function or test
+the grant record names.
+
+**Excluded surfaces, confirmed untouched.** The commit changes no path other than the three above, so
+`logic_auditor.py`, `server.py`, `dashboard.html`, the Fusion Engine modules and every other file the grant
+record excludes are unchanged by it. `logic_auditor.py`, `server.py` and `dashboard.html` were also compared
+byte-for-byte across the commit and are identical.
+
+**What this record does not establish.** It does not establish that the grant record's pre-commit verification
+checklist was followed beyond what the diff and CI logs show, what the author ran locally, or whether the
+operator approved the commit or the push. The grant record also states that the authorization "does not itself
+declare Seam 1 implemented or verified". This closure does not declare it either.
+
+Per §6, this closure does not amend, broaden, narrow, reinterpret, ratify, or supersede AUTH-003's scope.
+AUTH-003's grant record, including its original `Status:` line and its acknowledgment, is unchanged, and the
+questions it left open, including the register's jurisdiction over code, remain as that record left them.
+AUTH-003 holds no remaining implementation authority: it is spent in full under §2. This record authorizes
+nothing further.
