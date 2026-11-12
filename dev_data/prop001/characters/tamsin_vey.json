@@ -1,0 +1,123 @@
+{
+  "schema": "fusion-synthesis-character/1",
+  "name": "Tamsin Vey",
+  "epistemic_status": "FICTIONAL",
+  "properties": [
+    {
+      "id": "tamsin_vey.threshold_bar",
+      "name": "Threshold bar",
+      "description": "Bars any framed opening (door, gate, arch, or gap between two walls) so that nothing passes in either direction until she lifts the bar.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM"
+    },
+    {
+      "id": "tamsin_vey.bell_of_passage",
+      "name": "Bell of passage",
+      "description": "Setting or lifting a bar requires striking her bronze bell so that its tone is heard at the opening, at 40 dB or louder.",
+      "contribution_type": "OBJECT_RELATIONSHIP",
+      "architectural_placement": "ACTIVATION",
+      "activation_condition": {
+        "variable": "bell_sound_db_at_opening",
+        "comparator": ">=",
+        "value": 40
+      }
+    },
+    {
+      "id": "tamsin_vey.consent_sense",
+      "name": "Consent sense",
+      "description": "She knows whether anything approaching an opening she guards intends to cross it, while that opening is within her sight.",
+      "contribution_type": "KNOWLEDGE",
+      "architectural_placement": "DOMAIN",
+      "activation_condition": {
+        "variable": "opening_in_sight",
+        "comparator": "==",
+        "value": 1
+      }
+    },
+    {
+      "id": "tamsin_vey.oath_of_fixed_ways",
+      "name": "Oath of fixed ways",
+      "description": "She must never shorten, lengthen, fold, or reroute the distance or direction of any path or passage, nor knowingly help anyone do so. Barring a passage closed is not rerouting it.",
+      "contribution_type": "GOVERNING_RULE",
+      "architectural_placement": "LIMITATIONS",
+      "is_prohibition": true
+    },
+    {
+      "id": "tamsin_vey.framed_only",
+      "name": "Framed only",
+      "description": "A bar can be set only on an opening with a defined frame. Open ground cannot be barred.",
+      "contribution_type": "GOVERNING_RULE",
+      "architectural_placement": "SCOPE",
+      "is_hard_limitation": true
+    },
+    {
+      "id": "tamsin_vey.watch_bound",
+      "name": "Watch-bound",
+      "description": "While a bar holds, she must keep the opening in sight. If she loses sight of it, the bar fails.",
+      "contribution_type": "GOVERNING_RULE",
+      "architectural_placement": "LIMITATIONS"
+    }
+  ],
+  "visual_traits": [
+    {
+      "id": "tamsin_vey.v_build",
+      "slot": "build",
+      "descriptor": "broad and steady, built for standing watch",
+      "derives_from": []
+    },
+    {
+      "id": "tamsin_vey.v_face",
+      "slot": "face",
+      "descriptor": "calm, square-jawed, unblinking gaze",
+      "derives_from": []
+    },
+    {
+      "id": "tamsin_vey.v_hair",
+      "slot": "hair",
+      "descriptor": "silver-streaked black hair in a single heavy braid",
+      "derives_from": []
+    },
+    {
+      "id": "tamsin_vey.v_clothing",
+      "slot": "clothing",
+      "descriptor": "long oxblood cloak over iron-studded leather",
+      "derives_from": []
+    },
+    {
+      "id": "tamsin_vey.v_palette",
+      "slot": "palette",
+      "descriptor": "oxblood red, bronze, iron grey",
+      "derives_from": []
+    },
+    {
+      "id": "tamsin_vey.v_signature",
+      "slot": "signature_element",
+      "descriptor": "a hand-sized bronze bell on a leather strap",
+      "derives_from": [
+        "tamsin_vey.bell_of_passage"
+      ]
+    },
+    {
+      "id": "tamsin_vey.v_manifestation",
+      "slot": "ability_manifestation",
+      "descriptor": "an archway gone still and impassable, the last note of a bronze bell hanging in the air",
+      "derives_from": [
+        "tamsin_vey.threshold_bar",
+        "tamsin_vey.bell_of_passage"
+      ]
+    }
+  ],
+  "proper_nouns": [
+    "Tamsin Vey"
+  ],
+  "exclusion_candidates": [
+    {
+      "item": "tamsin_vey.consent_sense",
+      "reason": "Informs her watch, but setting or lifting a bar does not depend on it"
+    },
+    {
+      "item": "tamsin_vey.watch_bound",
+      "reason": "Applies only while a bar holds; a fusion that does not use her bar has no basis to inherit it"
+    }
+  ]
+}

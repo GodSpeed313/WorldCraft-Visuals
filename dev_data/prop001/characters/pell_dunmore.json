@@ -1,0 +1,117 @@
+{
+  "schema": "fusion-synthesis-character/1",
+  "name": "Pell Dunmore",
+  "epistemic_status": "FICTIONAL",
+  "properties": [
+    {
+      "id": "pell_dunmore.lamplighting",
+      "name": "Lamplighting",
+      "description": "Lights any lamp or lantern with a touch; the flame burns without fuel until dawn and cannot be put out by wind, water, or any hand but his. Works only after sunset and before dawn, when solar elevation is below 0°.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM",
+      "activation_condition": {
+        "variable": "solar_elevation_deg",
+        "comparator": "<",
+        "value": 0
+      }
+    },
+    {
+      "id": "pell_dunmore.cold_flame",
+      "name": "Cold flame",
+      "description": "His flames give ordinary lantern light but no heat, and cannot ignite anything.",
+      "contribution_type": "GOVERNING_RULE",
+      "architectural_placement": "LIMITATIONS",
+      "is_hard_limitation": true
+    },
+    {
+      "id": "pell_dunmore.steady_hands",
+      "name": "Steady hands",
+      "description": "He never drops, spills, or fumbles anything he is carrying.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "DOMAIN"
+    },
+    {
+      "id": "pell_dunmore.route_memory",
+      "name": "Route memory",
+      "description": "He remembers the position of every lamp on every route he has walked.",
+      "contribution_type": "KNOWLEDGE",
+      "architectural_placement": "DOMAIN"
+    },
+    {
+      "id": "pell_dunmore.night_familiarity",
+      "name": "Night familiarity",
+      "description": "Moves comfortably through darkness from long habit, with no supernatural sight.",
+      "contribution_type": "BEHAVIOR",
+      "architectural_placement": "DOMAIN"
+    },
+    {
+      "id": "pell_dunmore.ordinary_human",
+      "name": "Ordinary human",
+      "description": "Apart from lamplighting, his abilities are those of an ordinary person.",
+      "contribution_type": "CONCEPTUAL_ROLE",
+      "architectural_placement": "SCOPE",
+      "is_hard_limitation": true
+    }
+  ],
+  "visual_traits": [
+    {
+      "id": "pell_dunmore.v_build",
+      "slot": "build",
+      "descriptor": "stooped, lean, an old walker's gait",
+      "derives_from": []
+    },
+    {
+      "id": "pell_dunmore.v_face",
+      "slot": "face",
+      "descriptor": "weathered and kind, deep smile lines",
+      "derives_from": []
+    },
+    {
+      "id": "pell_dunmore.v_hair",
+      "slot": "hair",
+      "descriptor": "thin white hair under a flat wool cap",
+      "derives_from": []
+    },
+    {
+      "id": "pell_dunmore.v_clothing",
+      "slot": "clothing",
+      "descriptor": "patched brown greatcoat with a lamp hook at the belt",
+      "derives_from": []
+    },
+    {
+      "id": "pell_dunmore.v_palette",
+      "slot": "palette",
+      "descriptor": "lamp yellow, soot brown, night blue",
+      "derives_from": []
+    },
+    {
+      "id": "pell_dunmore.v_signature",
+      "slot": "signature_element",
+      "descriptor": "a long brass lighting pole",
+      "derives_from": [
+        "pell_dunmore.lamplighting"
+      ]
+    },
+    {
+      "id": "pell_dunmore.v_manifestation",
+      "slot": "ability_manifestation",
+      "descriptor": "small warm lights in a row along a dark street",
+      "derives_from": [
+        "pell_dunmore.lamplighting"
+      ]
+    }
+  ],
+  "proper_nouns": [
+    "Pell Dunmore"
+  ],
+  "exclusion_candidates": [
+    {
+      "item": "pell_dunmore.night_familiarity",
+      "reason": "An ordinary habit with no effect on what his flame does"
+    },
+    {
+      "item": "pell_dunmore.route_memory",
+      "reason": "Recall of lamp positions; it does not change what his flame does"
+    }
+  ]
+}
