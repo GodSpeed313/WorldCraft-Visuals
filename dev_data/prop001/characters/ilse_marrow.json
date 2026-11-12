@@ -1,0 +1,122 @@
+{
+  "schema": "fusion-synthesis-character/1",
+  "name": "Ilse Marrow",
+  "epistemic_status": "FICTIONAL",
+  "properties": [
+    {
+      "id": "ilse_marrow.tone_casting",
+      "name": "Tone casting",
+      "description": "Shapes a sustained vocal tone into a solid crystalline lattice, clear as glass, that bears weight like stone: walls, beams, or spans up to about 20 m. Works only when ambient sound at her position is 45 dB or lower.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM",
+      "activation_condition": {
+        "variable": "ambient_sound_db_at_caster",
+        "comparator": "<=",
+        "value": 45
+      }
+    },
+    {
+      "id": "ilse_marrow.held_note",
+      "name": "Held note",
+      "description": "A lattice persists only while she sustains its anchoring tone. When the tone stops, the lattice breaks into harmless dust within seconds.",
+      "contribution_type": "GOVERNING_RULE",
+      "architectural_placement": "LIMITATIONS",
+      "is_hard_limitation": true
+    },
+    {
+      "id": "ilse_marrow.load_reading",
+      "name": "Load reading",
+      "description": "By touching a structure, she perceives how stress is distributed through it and where it will fail.",
+      "contribution_type": "KNOWLEDGE",
+      "architectural_placement": "DOMAIN",
+      "activation_condition": {
+        "variable": "contact",
+        "comparator": "==",
+        "value": 1
+      }
+    },
+    {
+      "id": "ilse_marrow.pitch_memory",
+      "name": "Pitch memory",
+      "description": "Recalls and reproduces exactly any frequency she has heard once.",
+      "contribution_type": "KNOWLEDGE",
+      "architectural_placement": "DOMAIN"
+    },
+    {
+      "id": "ilse_marrow.air_bound",
+      "name": "Air-bound",
+      "description": "Her casting needs air to carry sound. It fails in vacuum and underwater.",
+      "contribution_type": "GOVERNING_RULE",
+      "architectural_placement": "LIMITATIONS",
+      "is_hard_limitation": true
+    },
+    {
+      "id": "ilse_marrow.voice_strain",
+      "name": "Voice strain",
+      "description": "Sustaining any tone for longer than about ten minutes costs her voice for a day.",
+      "contribution_type": "GOVERNING_RULE",
+      "architectural_placement": "LIMITATIONS"
+    }
+  ],
+  "visual_traits": [
+    {
+      "id": "ilse_marrow.v_build",
+      "slot": "build",
+      "descriptor": "tall and narrow-shouldered, with a stonemason's forearms",
+      "derives_from": []
+    },
+    {
+      "id": "ilse_marrow.v_face",
+      "slot": "face",
+      "descriptor": "lined, watchful, mouth often slightly open mid-note",
+      "derives_from": [
+        "ilse_marrow.tone_casting"
+      ]
+    },
+    {
+      "id": "ilse_marrow.v_hair",
+      "slot": "hair",
+      "descriptor": "close-cropped grey hair",
+      "derives_from": []
+    },
+    {
+      "id": "ilse_marrow.v_clothing",
+      "slot": "clothing",
+      "descriptor": "dust-pale canvas work apron over a high-collared shirt",
+      "derives_from": []
+    },
+    {
+      "id": "ilse_marrow.v_palette",
+      "slot": "palette",
+      "descriptor": "chalk white, slate grey, pale glass blue",
+      "derives_from": []
+    },
+    {
+      "id": "ilse_marrow.v_signature",
+      "slot": "signature_element",
+      "descriptor": "a brass tuning fork on a cord at her throat",
+      "derives_from": []
+    },
+    {
+      "id": "ilse_marrow.v_manifestation",
+      "slot": "ability_manifestation",
+      "descriptor": "thin glass-like lattices catching light",
+      "derives_from": [
+        "ilse_marrow.tone_casting"
+      ]
+    }
+  ],
+  "proper_nouns": [
+    "Ilse Marrow"
+  ],
+  "exclusion_candidates": [
+    {
+      "item": "ilse_marrow.pitch_memory",
+      "reason": "The profile does not connect it to casting or any other property, so carrying it into a fusion would require a link the profile does not establish"
+    },
+    {
+      "item": "ilse_marrow.voice_strain",
+      "reason": "A cost of sustaining her own tone; a fusion that does not use her sustained tone has no basis to inherit it"
+    }
+  ]
+}

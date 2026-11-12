@@ -1,0 +1,128 @@
+{
+  "schema": "fusion-synthesis-character/1",
+  "name": "Sable Quillon",
+  "epistemic_status": "FICTIONAL",
+  "properties": [
+    {
+      "id": "sable_quillon.living_cartography",
+      "name": "Living cartography",
+      "description": "A map she draws of a place becomes a folded route: anyone holding it can travel between two marked points in a fraction of the walking distance. A route begins and ends at its marked points, which have no frame of their own unless a point is marked inside an existing doorway or arch. Works only during civil twilight, when solar elevation is between −6° and 0°, inclusive.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM",
+      "activation_condition": {
+        "variable": "civil_twilight",
+        "comparator": "==",
+        "value": 1
+      }
+    },
+    {
+      "id": "sable_quillon.ground_bound_routes",
+      "name": "Ground-bound routes",
+      "description": "A folded route follows existing walkable ground. It cannot cross water, open air, or any gap without a surface.",
+      "contribution_type": "GOVERNING_RULE",
+      "architectural_placement": "LIMITATIONS",
+      "is_hard_limitation": true
+    },
+    {
+      "id": "sable_quillon.closing_light",
+      "name": "Closing light",
+      "description": "When twilight ends, every open route closes; travelers mid-route are set down at the nearer end.",
+      "contribution_type": "GOVERNING_RULE",
+      "architectural_placement": "LIMITATIONS",
+      "is_hard_limitation": true
+    },
+    {
+      "id": "sable_quillon.star_bearing",
+      "name": "Star bearing",
+      "description": "Under an open sky, she always knows the direction and distance to any place she has mapped. Works only when cloud cover is 30% or less.",
+      "contribution_type": "KNOWLEDGE",
+      "architectural_placement": "DOMAIN",
+      "activation_condition": {
+        "variable": "cloud_cover_pct",
+        "comparator": "<=",
+        "value": 30
+      }
+    },
+    {
+      "id": "sable_quillon.walked_ground_only",
+      "name": "Walked ground only",
+      "description": "She can map only places she has crossed on foot herself.",
+      "contribution_type": "GOVERNING_RULE",
+      "architectural_placement": "LIMITATIONS",
+      "is_hard_limitation": true
+    },
+    {
+      "id": "sable_quillon.twilight_kinship",
+      "name": "Twilight kinship",
+      "description": "Animals active at dusk treat her as one of their own and neither flee nor attack her. Holds only during civil twilight, when solar elevation is between −6° and 0°, inclusive.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "INTERACTIONS",
+      "activation_condition": {
+        "variable": "civil_twilight",
+        "comparator": "==",
+        "value": 1
+      }
+    }
+  ],
+  "visual_traits": [
+    {
+      "id": "sable_quillon.v_build",
+      "slot": "build",
+      "descriptor": "small and wiry, a long-distance walker's frame",
+      "derives_from": []
+    },
+    {
+      "id": "sable_quillon.v_face",
+      "slot": "face",
+      "descriptor": "sun-browned, narrow eyes always half on the horizon",
+      "derives_from": []
+    },
+    {
+      "id": "sable_quillon.v_hair",
+      "slot": "hair",
+      "descriptor": "dark hair bound back with a strip of map paper",
+      "derives_from": []
+    },
+    {
+      "id": "sable_quillon.v_clothing",
+      "slot": "clothing",
+      "descriptor": "long dusk-blue travel coat with many flat pockets",
+      "derives_from": []
+    },
+    {
+      "id": "sable_quillon.v_palette",
+      "slot": "palette",
+      "descriptor": "dusk violet, ember orange, ink black",
+      "derives_from": []
+    },
+    {
+      "id": "sable_quillon.v_signature",
+      "slot": "signature_element",
+      "descriptor": "a rolled map case worn across the back",
+      "derives_from": [
+        "sable_quillon.living_cartography"
+      ]
+    },
+    {
+      "id": "sable_quillon.v_manifestation",
+      "slot": "ability_manifestation",
+      "descriptor": "lines of ink that glow faintly at dusk",
+      "derives_from": [
+        "sable_quillon.living_cartography"
+      ]
+    }
+  ],
+  "proper_nouns": [
+    "Sable Quillon"
+  ],
+  "exclusion_candidates": [
+    {
+      "item": "sable_quillon.twilight_kinship",
+      "reason": "Acts only on how animals treat her; it does not act on routes or bearings"
+    },
+    {
+      "item": "sable_quillon.star_bearing",
+      "reason": "A navigation sense that the profile does not make any route depend on"
+    }
+  ]
+}
