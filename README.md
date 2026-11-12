@@ -28,6 +28,18 @@ Five pairings are authored today: Maka × Vash, Re-l Mayer × Maka, Kino × Vash
 
 **What this is not (yet):** each pair's emergent ability is authored by a person and approved by the operator. The engine does not invent mechanics for arbitrary pairs, makes no runtime model call, and is not yet shown in the dashboard.
 
+### 🧪 Fusion Proposer (`proposer/`, `dev_data/`) — in development
+
+The first step toward proposing fusions for pairs nobody has authored (`IMP-001`, Milestone 1). It is development scaffolding only: nothing here runs a model, calls an API, renders anything, or creates a pair file.
+
+- **`dev_data/prop001/`** — four development characters (Ilse Marrow, Sable Quillon, Tamsin Vey, Pell Dunmore) in the same card format as the real ones, translated field by field from the frozen profile document DEV-CHAR-001 Revision 3. They are not registered characters and are kept apart from `fusion_synthesis/data/`. `CORRESPONDENCE.md` there records 356 comparisons against the source: 356 match, 0 mismatch. `pairs/` is deliberately empty.
+- **`proposer/inputs/req_001_v1.0_sections_1-5.md`** — the proposer's instructions (REQ-001 v1.0, Sections 1 to 5). The reviewer appendix is not in the repository.
+- **`proposer/packet.py`** — builds the exact bundle a proposer would receive: two named character files, the requirements file and `fusion_synthesis/schema.py`. It never reads a folder, rejects any other input, and serializes to canonical JSON so identical inputs always give an identical SHA-256.
+
+```bash
+python -m unittest discover -s proposer/tests -t . -p "test_*.py"   # 32 tests
+```
+
 ### 🧬 Legacy Engine: Mythos-Sync
 
 - **Modality Classifier** (`modality_classifier.py`) — tags every character as `LEGACY` (real historical/cultural figures), `GROUNDED` (cinematic but physically realistic), or `HIGH_CONCEPT` (physics-bending, supernatural), and blends two characters' modalities into a single fusion profile.
@@ -95,7 +107,7 @@ and they are the place to look before changing how concepts are named, classifie
 - **`corrections.md`** — defects found in already-signed text. It records them and closes nothing, and
   authorizes no edit, so the text stays exactly as attested.
 - **`authorizations.md`** — bounded, one-time permission to edit specific lines or create specific new
-  files, with specific wording and scope (AUTH-001 through AUTH-011, with AUTH-010 reserved and not yet issued), together with the standing rule for
+  files, with specific wording and scope (AUTH-001 through AUTH-014), together with the standing rule for
   when an authorization counts as exercised and closed.
 - **`amendment_policy.md`** — what may be done to a locked document's text: nothing. A locked document
   is superseded, never amended.
@@ -155,13 +167,15 @@ python -m unittest discover -p "test_*.py"
 
 - **Fusion Synthesis cards:** working for five authored pairings, tested and merged (`AUTH-011`).
 - **Fusion Engine C1–C3:** implemented and tested (`AUTH-004`).
-- **Mythos-Sync engine and dashboard:** functional, with grounding-terminal halting (`AUTH-005`), CAUTIONARY handling and escaping (`AUTH-006` to `AUTH-008`) and a hardened local server (`AUTH-009`).
+- **Mythos-Sync engine and dashboard:** functional, with grounding-terminal halting (`AUTH-005`), CAUTIONARY handling and escaping (`AUTH-006` to `AUTH-008`), a hardened local server (`AUTH-009`), a hardened case-file view (`AUTH-010`), governed reasons on CAUTIONARY results and their persistence in the matrix (`AUTH-012`, `AUTH-013`) and a non-string modality guard in the dashboard grid (`AUTH-014`).
+- **Fusion Proposer:** input packet and development data only (`IMP-001` Milestone 1). No proposing happens yet.
 
 **Next up:**
 - selectable art styles at prompt time (live-action, painterly, anime, pixel art and more), from one style-neutral character description
 - visual states per character: a resting look and an ability-in-action look
 - a short backstory field on each card
-- escaping in the dashboard's case-file view (`AUTH-010`, reserved), then showing the new cards in the dashboard
+- showing the new cards in the dashboard
+- the next Fusion Proposer milestones, each authorized separately
 
 The longer-term direction is unchanged: moving from a closed, hand-authored registry toward an engine that can accept concepts it was never authored with, specified in `docs/` before it is implemented.
 
