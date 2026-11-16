@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 import subprocess
 import unittest
+from decimal import Decimal
 from pathlib import Path
 from unittest import mock
 
@@ -29,9 +30,12 @@ class CommittedConfigTests(unittest.TestCase):
             with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
                 m2_harness.main(argv)
 
-    def test_unverified_rates_are_the_committed_default(self):
-        self.assertFalse(COMMITTED_CONFIG.rates.verified)
-        self.assertIsNone(COMMITTED_CONFIG.rates.verified_on)
+    def test_committed_rates_are_the_verified_standard_opus_5_5_rates(self):
+        rates = COMMITTED_CONFIG.rates
+        self.assertEqual((rates.input_per_mtok, rates.output_per_mtok), (Decimal("4.00"), Decimal("20.00")))
+        self.assertIs(rates.verified, True)
+        self.assertEqual(rates.verified_on, "2026-11-15")
+        self.assertEqual(rates.source, "https://platform.claude.com/docs/en/about-claude/pricing")
 
 
 class RootVerificationTests(M2TestCase):

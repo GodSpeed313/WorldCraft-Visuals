@@ -199,7 +199,9 @@ class SpendGuardEndToEndTests(HarnessCase):
         self.assertEqual(out["status"], "COMPLETE")
 
     def test_the_committed_unverified_rates_refuse_generation(self):
-        cfg = dataclasses.replace(self.cfg, rates=COMMITTED_CONFIG.rates)
+        # explicit unverified fixture: the committed rates with verified=False and verified_on=None
+        unverified = dataclasses.replace(COMMITTED_CONFIG.rates, verified=False, verified_on=None)
+        cfg = dataclasses.replace(self.cfg, rates=unverified)
         factory = FakeFactory(count_ok(15000), gen_ok(GOOD))
         with self.assertRaisesRegex(SpendGuardError, "not verified"):
             run(cfg, **self.run_kwargs(factory))
@@ -413,7 +415,9 @@ class DryRunTests(HarnessCase):
         self.assertEqual(report["prepaid_backstop_usd"], "5")
 
     def test_with_the_committed_unverified_rates_the_dry_run_reports_but_does_not_permit(self):
-        report, _ = self.dry(count_ok(15000), cfg=dataclasses.replace(self.cfg, rates=COMMITTED_CONFIG.rates))
+        # explicit unverified fixture: the committed rates with verified=False and verified_on=None
+        unverified = dataclasses.replace(COMMITTED_CONFIG.rates, verified=False, verified_on=None)
+        report, _ = self.dry(count_ok(15000), cfg=dataclasses.replace(self.cfg, rates=unverified))
         self.assertEqual(report["cost_report"]["upper_bound_usd"], "0.70")
         self.assertIs(report["cost_report"]["generation_permitted"], False)
         self.assertIn("not verified", report["cost_report"]["refusal_reason"])

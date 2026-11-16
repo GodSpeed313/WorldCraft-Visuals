@@ -74,17 +74,19 @@ class M2Config:
     recorded_request_headers: tuple = ("anthropic-version", "content-type", "accept")
 
 
-# Rates below come from a SECONDARY source (the claude-api skill's cached model table,
-# dated 2026-11-03). They are NOT verified against the provider's pricing page, so
-# `verified` is False and the spending guard refuses generation until the operator
-# verifies them and changes this value in a reviewed PR (AUTH, A5: pricing
-# uncertainty must prevent generation).
+# Standard Claude Opus 5.5 rates, verified on 2026-11-15 against the provider's pricing
+# page (https://platform.claude.com/docs/en/about-claude/pricing): $4 / MTok base input,
+# $20 / MTok output. They apply to this request, which uses no Batch API, fast mode,
+# prompt caching or non-default data residency. Verified pricing only lets the spending
+# guard compute its bound; it does not by itself permit generation. The reservation,
+# authorization reference, evidence-root and every other guard still apply. Changing a
+# rate or the verified flag needs a reviewed code change and PR.
 COMMITTED_RATES = Rates(
     input_per_mtok=Decimal("4.00"),
     output_per_mtok=Decimal("20.00"),
-    source="claude-api skill model table, cached 2026-11-03 (secondary source; NOT checked against the provider pricing page)",
-    verified_on=None,
-    verified=False,
+    source="https://platform.claude.com/docs/en/about-claude/pricing",
+    verified_on="2026-11-15",
+    verified=True,
 )
 
 COMMITTED_CONFIG = M2Config(

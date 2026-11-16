@@ -103,7 +103,9 @@ class SpendGuardTests(unittest.TestCase):
         self.assertFalse(big_output["generation_permitted"])
 
     def test_unverified_rates_fail_closed_even_when_the_bound_is_small(self):
-        for rates in (dataclasses.replace(VERIFIED_RATES, verified=False), COMMITTED_CONFIG.rates):
+        # explicit unverified fixtures; the committed rates are now verified, so they are not relied on here
+        unverified_committed = dataclasses.replace(COMMITTED_CONFIG.rates, verified=False, verified_on=None)
+        for rates in (dataclasses.replace(VERIFIED_RATES, verified=False), unverified_committed):
             r = self.report(1000, rates=rates)
             self.assertTrue(r["within_cap"])
             self.assertFalse(r["generation_permitted"])
@@ -130,8 +132,15 @@ class SpendGuardTests(unittest.TestCase):
                 enforce_spend_guard(forged)
 
     def test_rates_record_their_source_and_verification_state(self):
-        r = self.report(1000, rates=COMMITTED_CONFIG.rates)
-        self.assertIn("secondary source", r["rates_source"])
+        url = "https://platform.claude.com/docs/en/about-claude/pricing"
+        r = self.report(1000, rates=COMMITTED_CONFIG.rates)          # the committed, verified rates
+        self.assertEqual(r["rates_source"], url)
+        self.assertIs(r["rates_verified"], True)
+        self.assertEqual(r["rates_verified_on"], "2026-11-15")
+        # and an unverified state is recorded as unverified, never as verified
+        unverified = dataclasses.replace(COMMITTED_CONFIG.rates, verified=False, verified_on=None)
+        r = self.report(1000, rates=unverified)
+        self.assertEqual(r["rates_source"], url)
         self.assertIs(r["rates_verified"], False)
         self.assertIsNone(r["rates_verified_on"])
 
