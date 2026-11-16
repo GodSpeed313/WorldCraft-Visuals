@@ -128,7 +128,8 @@ class EvidenceStore:
         self._api_key = api_key
 
     def path_of(self, name: str) -> Path:
-        if os.path.basename(name) != name or not name.startswith(ARTIFACT_PREFIX):
+        # Explicit on every platform: os.path.basename treats a backslash as a separator only on Windows.
+        if "/" in name or "\\" in name or os.path.basename(name) != name or not name.startswith(ARTIFACT_PREFIX):
             raise EvidenceError(f"evidence file name {name!r} must be a bare name starting with {ARTIFACT_PREFIX!r}")
         return self.root / name
 
