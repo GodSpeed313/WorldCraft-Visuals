@@ -91,7 +91,7 @@ class SpendGuardTests(unittest.TestCase):
         at_cap = self.report(180_000)                                           # exactly 0.72 + 1.28 = 2.00
         self.assertEqual(Decimal(at_cap["upper_bound_usd"]), CAP)
         enforce_spend_guard(at_cap)
-        over = self.report(340_001)
+        over = self.report(180_001)
         self.assertFalse(over["generation_permitted"])
         with self.assertRaisesRegex(SpendGuardError, "exceeds"):
             enforce_spend_guard(over)
