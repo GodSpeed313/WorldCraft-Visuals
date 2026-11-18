@@ -31,7 +31,7 @@ class RequestShapeTests(unittest.TestCase):
     def test_approved_configuration_is_what_is_sent(self):
         body = self.bundle.generation_body
         self.assertEqual(body["model"], "claude-opus-5-5")
-        self.assertEqual(body["max_tokens"], 32000)
+        self.assertEqual(body["max_tokens"], 64000)
         self.assertEqual(body["thinking"], {"type": "adaptive"})
         self.assertEqual(COMMITTED_CONFIG.spend_cap_usd, CAP)
         self.assertEqual(COMMITTED_CONFIG.prepaid_backstop_usd, Decimal("5"))
@@ -76,29 +76,29 @@ class RequestShapeTests(unittest.TestCase):
 
 
 class SpendGuardTests(unittest.TestCase):
-    def report(self, tokens, rates=VERIFIED_RATES, max_tokens=32000, cap=CAP):
+    def report(self, tokens, rates=VERIFIED_RATES, max_tokens=64000, cap=CAP):
         return cost_report(tokens, max_tokens, rates, cap)
 
     def test_upper_bound_formula_is_exact(self):
         r = self.report(15000)
-        self.assertEqual(Decimal(r["upper_bound_usd"]), Decimal("0.70"))        # 15000*4/1e6 + 32000*20/1e6
+        self.assertEqual(Decimal(r["upper_bound_usd"]), Decimal("1.34"))        # 15000*4/1e6 + 64000*20/1e6
         self.assertTrue(r["generation_permitted"])
         enforce_spend_guard(r)
 
     # --- negative test 1: a bound above $2.00 prevents generation ---
 
     def test_the_cap_is_inclusive_and_one_token_over_is_refused(self):
-        at_cap = self.report(340_000)                                           # exactly 1.36 + 0.64 = 2.00
+        at_cap = self.report(180_000)                                           # exactly 0.72 + 1.28 = 2.00
         self.assertEqual(Decimal(at_cap["upper_bound_usd"]), CAP)
         enforce_spend_guard(at_cap)
-        over = self.report(340_001)
+        over = self.report(180_001)
         self.assertFalse(over["generation_permitted"])
         with self.assertRaisesRegex(SpendGuardError, "exceeds"):
             enforce_spend_guard(over)
 
     def test_the_bound_covers_the_full_output_allowance_not_just_the_input(self):
         r = self.report(0)
-        self.assertEqual(Decimal(r["upper_bound_usd"]), Decimal("0.64"))
+        self.assertEqual(Decimal(r["upper_bound_usd"]), Decimal("1.28"))
         big_output = self.report(0, max_tokens=128_000)
         self.assertFalse(big_output["generation_permitted"])
 

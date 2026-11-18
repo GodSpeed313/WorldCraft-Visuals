@@ -56,7 +56,7 @@ class HappyPathTests(HarnessCase):
         self.assertEqual(rec["request_parameters"]["temperature"], "OMITTED (not sent)")
         self.assertEqual((rec["stop_reason"], rec["usage_input_tokens"], rec["usage_output_tokens"], rec["provider_request_id"]),
                          ("end_turn", 15000, 1200, "req_fake"))
-        self.assertEqual(rec["estimated_cost"]["pre_send_upper_bound"]["upper_bound_usd"], "0.70")
+        self.assertEqual(rec["estimated_cost"]["pre_send_upper_bound"]["upper_bound_usd"], "1.34")
         self.assertEqual(rec["estimated_cost"]["post_response_estimate_usd"], "0.084")       # 15000*4 + 1200*20, per 1e6
         self.assertEqual(rec["billed_cost_addendum"]["status"], "PENDING")
         self.assertIn("stricter than", rec["retry_policy"])
@@ -410,7 +410,7 @@ class DryRunTests(HarnessCase):
         self.assertEqual(sent["thinking"], {"type": "adaptive"})
         self.assertNotIn("max_tokens", sent)
         self.assertEqual(report["packet_sha256"], EXPECTED_PACKET_SHA256)
-        self.assertEqual(report["cost_report"]["upper_bound_usd"], "0.70")
+        self.assertEqual(report["cost_report"]["upper_bound_usd"], "1.34")
         self.assertIs(report["cost_report"]["generation_permitted"], True)
         self.assertEqual(report["prepaid_backstop_usd"], "5")
 
@@ -418,7 +418,7 @@ class DryRunTests(HarnessCase):
         # explicit unverified fixture: the committed rates with verified=False and verified_on=None
         unverified = dataclasses.replace(COMMITTED_CONFIG.rates, verified=False, verified_on=None)
         report, _ = self.dry(count_ok(15000), cfg=dataclasses.replace(self.cfg, rates=unverified))
-        self.assertEqual(report["cost_report"]["upper_bound_usd"], "0.70")
+        self.assertEqual(report["cost_report"]["upper_bound_usd"], "1.34")
         self.assertIs(report["cost_report"]["generation_permitted"], False)
         self.assertIn("not verified", report["cost_report"]["refusal_reason"])
 
