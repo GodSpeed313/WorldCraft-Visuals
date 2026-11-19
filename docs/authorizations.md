@@ -4091,3 +4091,11 @@ as proof of emergence and states that it displays authored content only.
 
 Per the register's standing rule, this entry authorizes only what it names. It does not amend,
 broaden or reinterpret any other entry or document.
+
+### AUTH-015 closure
+
+**Status: SPENT AND CLOSED.** Merged as `8737ea3` (PR #21, 2026-11-19 00:21:30 UTC, per GitHub).
+**Suite:** the operator ran the full suite on `main`: 513 tests OK (operator-reported; not re-run for this record).
+**Recorded:** 2026-11-18 19:30:07 -0500 (machine clock).
+
+AUTH-015 is exercised in full and holds no remaining authority. This record authorizes nothing further. The entry's earlier "NOT MERGED" status line is superseded by this record, not edited.
