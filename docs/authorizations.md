@@ -4013,3 +4013,81 @@ Placement section, is unchanged, and the question of the register's jurisdiction
 record left it. AUTH-014 holds no remaining implementation authority: it is spent in full under §2, and the §39
 release it carried is spent with it. This record authorizes nothing further, including any residual recorded in
 the grant record or any future authorization.
+
+---
+
+## AUTH-015
+
+```
+Authorizes:        a new, self-contained package `fusion_viewer/` that builds a static
+                   single-file HTML viewer for the existing AUTHORED fusion cards (Path A),
+                   plus this entry. All implementation files are new.
+Target scope:      fusion_viewer/__init__.py
+                   fusion_viewer/viewmodel.py
+                   fusion_viewer/build.py
+                   fusion_viewer/template.html
+                   fusion_viewer/tests/            (new tests, and a node test harness)
+                   docs/authorizations.md          (this one append-only entry)
+Route:             operator issuance -> implement on a feature branch -> verify against the
+                   acceptance criteria -> pull request. NOT merged by the implementer; the
+                   PR merge and any closure record are separate acts on the operator's
+                   approval.
+Granted by:        Kevin Brown, operator
+Granted at:        2026-11-18 19:12:14 -0500 (machine-clock reading taken when this entry was
+                   recorded, not the time the issuance message was composed)
+Basis:             the operator's Phase 0 read-only inventory request and its report
+                   (session 2026-11-18); AUTH-011, whose package and data this viewer reads
+                   without modifying; the operator's baseline run at 19:02 on `main` @
+                   `02a249f` (fusion_synthesis 104 tests OK, fusion_engine 51 tests OK)
+Status:            ISSUED — EXERCISED IN A PULL REQUEST, NOT MERGED
+```
+
+**What this entry is.** A record of an operator authorization. It creates no authority beyond what
+the operator's issuance message granted, and it is not a signature. The issuance message is in
+the session transcript. It is summarized here, not quoted: this entry makes no claim to be a
+verbatim copy of it.
+
+**What the viewer is.** A page that lets a user pick two of the six existing characters and view the
+existing authored card for that pair, or the text "Not yet synthesized — no authored result exists
+for this pair." when none exists. Pairs are unordered. Cards come unmodified from the existing
+`load_library` -> `assemble_card` -> `finalize` path and equal the approved golden JSON. The page
+shows a one-line status summary and a collapsed status-details section that separates authored
+provenance, mechanical checks (including the number of activation conditions evaluated),
+independent-validation status, experimental status, emergent-ability provenance and leak-check
+limits. Where the data has no value, the page says "not recorded". It never presents `COMPATIBLE`
+as proof of emergence and states that it displays authored content only.
+
+### This authorization does NOT authorize
+
+- Path B: any live synthesis, any model or API call, or any reuse of the IMP-001 M2 authorization.
+  No live-synthesis control exists on the page.
+- Any edit to `server.py`, `dashboard.html`, `fusion_synthesis/`, `fusion_engine/`, `proposer/`,
+  authored character or pair data, golden snapshots, `.gitignore`, any other existing tracked file,
+  the sealed IMP-001 M2 evidence, or the two untracked scratch notes.
+- Committing generated HTML. `fusion_viewer/build.py` writes only to an explicit `--out` path and
+  refuses a path inside the repository tree.
+- Any change to the IMP-001 M2 official verdict, any governance ruling, or any release of the FE
+  §39 hold: no existing code file is modified, so none is needed.
+- Authoring new fusion cards, characters or pairs.
+- Merging the pull request.
+
+### Implementation and verification record (written before the merge; the PR carries the evidence)
+
+- `fusion_synthesis` 104 tests OK and `fusion_engine` 51 tests OK, run after the implementation, as
+  at the baseline. The new `fusion_viewer` tests: 45, all OK. CI-style discovery
+  (`unittest discover -p "test_*.py"`, listed without running) finds all 45 among 513 discovered
+  tests with no import failures.
+- Five mutation checks (a card marked independently validated, an asymmetric pair lookup, an
+  `innerHTML` sink in the page, details open by default, a headline that leaks the
+  evaluated-conditions count) were each caught by the new tests.
+- Two builds from identical inputs were byte-identical. The real `containment_matrix.json` had the same
+  SHA-256 before and after the work.
+- The built page was opened in Chrome with an authored pair and an unauthored pair: the
+  expected card and the missing-result text were shown, and the page made no network request of
+  its own. Google Fonts are the only external resource the page may request, and the page is
+  fully usable without them.
+- Not verified: the page at phone width in a real browser. The responsive rules are CSS only and
+  were not exercised at a narrow viewport.
+
+Per the register's standing rule, this entry authorizes only what it names. It does not amend,
+broaden or reinterpret any other entry or document.
