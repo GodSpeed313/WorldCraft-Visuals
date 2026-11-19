@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:"/>
+<title>WorldCraft — Character Fusion</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0e0e10;
+    --surface:   #17171a;
+    --surface2:  #1f1f24;
+    --border:    rgba(255,255,255,0.08);
+    --border2:   rgba(255,255,255,0.16);
+    --text:      #f0eff4;
+    --muted:     #a0a0ac;
+    --faint:     #6c6c78;
+    --spark:     #E8B04B;
+    --spark-bg:  rgba(232,176,75,0.12);
+    --spark-bd:  rgba(232,176,75,0.4);
+    --high:      #7F77DD;
+    --high-bg:   rgba(127,119,221,0.14);
+    --high-bd:   rgba(127,119,221,0.4);
+    --bridge:    #D85A30;
+    --bridge-bg: rgba(216,90,48,0.12);
+    --bridge-bd: rgba(216,90,48,0.4);
+    --mono:      'Space Mono', ui-monospace, 'Cascadia Mono', Consolas, 'Courier New', monospace;
+    --sans:      'Syne', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: radial-gradient(1100px 520px at 12% -8%, rgba(127,119,221,0.16), transparent 60%),
+                radial-gradient(900px 480px at 100% 0%, rgba(232,176,75,0.09), transparent 55%),
+                var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px 48px; }
+
+  header { padding: 34px 0 22px; border-bottom: 0.5px solid var(--border); }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--spark); }
+  h1 { font-size: clamp(26px, 5vw, 40px); font-weight: 800; letter-spacing: -1px; margin-top: 6px; }
+  .lede { color: var(--muted); font-size: 15px; margin-top: 8px; max-width: 62ch; }
+
+  .layout { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 28px; margin-top: 26px; align-items: start; }
+  @media (max-width: 900px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+
+  .label { font-family: var(--mono); font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--faint); margin: 0 0 10px; }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .tile, .pair {
+    font: inherit; color: inherit; text-align: left; cursor: pointer;
+    background: var(--surface); border: 0.5px solid var(--border2); border-radius: 12px; padding: 12px 14px;
+    transition: border-color .15s, background .15s, transform .15s;
+  }
+  .tile:hover, .pair:hover { border-color: var(--high-bd); background: var(--surface2); }
+  .tile:focus-visible, .pair:focus-visible, summary:focus-visible { outline: 2px solid var(--spark); outline-offset: 2px; }
+  .tile[aria-pressed="true"], .pair[aria-pressed="true"] { border-color: var(--high); background: var(--high-bg); }
+  .tile-name { display: block; font-weight: 700; font-size: 16px; }
+  .tile-hint { display: block; font-family: var(--mono); font-size: 10px; color: var(--faint); margin-top: 4px; }
+  .tile-hint.yes { color: var(--spark); }
+  .tile[aria-pressed="true"] .tile-hint { color: var(--muted); }
+
+  .rail { display: flex; flex-direction: column; gap: 6px; margin-top: 24px; }
+  .pair { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; padding: 9px 12px; border-radius: 10px; font-size: 13px; }
+  .pair .mark { font-family: var(--mono); font-size: 10px; color: var(--faint); white-space: nowrap; }
+  .pair.authored .mark { color: var(--spark); }
+
+  .panel { background: var(--surface); border: 0.5px solid var(--border); border-radius: 16px; padding: 22px; }
+  .panel + .panel { margin-top: 18px; }
+
+  .fusion-name { font-size: clamp(28px, 5vw, 44px); font-weight: 800; letter-spacing: -1.2px; line-height: 1.1; }
+  .fusion-from { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .concept { font-size: 17px; margin-top: 14px; max-width: 66ch; }
+
+  .composed { font-size: 14px; color: var(--muted); margin-top: 14px; max-width: 70ch; }
+  .status-line {
+    display: inline-block; margin-top: 16px; padding: 6px 12px; border-radius: 999px;
+    font-family: var(--mono); font-size: 12px; background: var(--spark-bg); border: 0.5px solid var(--spark-bd); color: var(--spark);
+  }
+  .status-line.bridge { background: var(--bridge-bg); border-color: var(--bridge-bd); color: var(--bridge); }
+
+  details { margin-top: 12px; border: 0.5px solid var(--border2); border-radius: 12px; background: var(--surface2); }
+  summary { cursor: pointer; padding: 10px 14px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .status-grid { padding: 4px 16px 16px; display: grid; gap: 14px; }
+  .status-item h4 { font-family: var(--mono); font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--faint); margin-bottom: 3px; }
+  .status-item p { font-size: 14px; color: var(--text); }
+  .status-item p + p { color: var(--muted); margin-top: 3px; }
+  .notice { margin-top: 14px; font-size: 13px; color: var(--muted); border-left: 2px solid var(--spark-bd); padding-left: 12px; }
+
+  h2 { font-size: 13px; font-family: var(--mono); letter-spacing: 1.4px; text-transform: uppercase; color: var(--faint); font-weight: 400; margin: 26px 0 10px; }
+  .result-body h2:first-child { margin-top: 0; }
+  .kv { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 6px 14px; font-size: 14px; }
+  @media (max-width: 560px) { .kv { grid-template-columns: minmax(0, 1fr); } .kv dt { margin-top: 8px; } }
+  .kv dt { font-family: var(--mono); font-size: 11px; color: var(--faint); padding-top: 2px; }
+  .kv dd { color: var(--text); overflow-wrap: anywhere; }
+
+  .list { list-style: none; display: grid; gap: 8px; }
+  .list li { font-size: 14px; background: var(--surface2); border: 0.5px solid var(--border); border-radius: 10px; padding: 10px 12px; overflow-wrap: anywhere; }
+  .list .meta { display: block; font-family: var(--mono); font-size: 10px; color: var(--faint); margin-top: 3px; }
+  .tag { display: inline-block; font-family: var(--mono); font-size: 10px; padding: 1px 8px; border-radius: 4px; margin-left: 6px; background: var(--high-bg); border: 0.5px solid var(--high-bd); color: var(--high); vertical-align: middle; }
+  .tag.warn { background: var(--bridge-bg); border-color: var(--bridge-bd); color: var(--bridge); }
+
+  .group-title { font-weight: 700; font-size: 14px; margin: 14px 0 6px; text-transform: capitalize; }
+  pre.prompt { white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--mono); font-size: 12px; background: var(--surface2); border: 0.5px solid var(--border); border-radius: 10px; padding: 12px; color: var(--muted); }
+
+  .missing { text-align: center; padding: 56px 20px; }
+  .missing p.big { font-size: 20px; font-weight: 700; }
+  .missing p.sub { font-family: var(--mono); font-size: 12px; color: var(--faint); margin-top: 10px; }
+  .choose { text-align: center; padding: 56px 20px; color: var(--muted); }
+
+  .sources { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 18px; }
+  .sources .panel + .panel { margin-top: 0; }
+  .src-name { font-size: 20px; font-weight: 800; }
+
+  footer { margin-top: 34px; padding-top: 16px; border-top: 0.5px solid var(--border); font-family: var(--mono); font-size: 11px; color: var(--faint); }
+  noscript p { padding: 20px; color: var(--bridge); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">WorldCraft &middot; Character fusion</p>
+    <h1>Pick two characters. See what the authors made of them.</h1>
+    <p class="lede">Every fusion shown here was written by hand. Pairs with no authored card are marked, never guessed.</p>
+  </header>
+
+  <noscript><p>This viewer needs JavaScript. It makes no network requests and loads its data from this file.</p></noscript>
+
+  <div class="layout">
+    <aside>
+      <p class="label">Characters</p>
+      <div class="tiles" id="fv-tiles"></div>
+      <p class="label" style="margin-top:24px">All pairings</p>
+      <div class="rail" id="fv-rail"></div>
+    </aside>
+    <main>
+      <div id="fv-result"></div>
+      <div class="sources" id="fv-sources"></div>
+    </main>
+  </div>
+
+  <footer id="fv-footer"></footer>
+</div>
+
+<script id="fv-data" type="application/json">__FV_DATA__</script>
+<script>
+(function () {
+  'use strict';
+
+  var DATA = JSON.parse(document.getElementById('fv-data').textContent);
+  var CHARS = DATA.characters;
+  var BY_SLUG = {};
+  CHARS.forEach(function (c) { BY_SLUG[c.slug] = c; });
+  var selected = DATA.default_selection.slice();
+
+  // ---- DOM helpers. Every string from the data goes in as a text node, never as markup. ----
+  function h(tag, attrs, children) {
+    var el = document.createElement(tag);
+    if (attrs) {
+      Object.keys(attrs).forEach(function (k) {
+        if (k === 'text') { el.appendChild(document.createTextNode(String(attrs[k]))); }
+        else { el.setAttribute(k, String(attrs[k])); }
+      });
+    }
+    (children || []).forEach(function (c) {
+      if (c === null || c === undefined) { return; }
+      el.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+    });
+    return el;
+  }
+  function clear(el) { while (el.firstChild) { el.removeChild(el.firstChild); } }
+  function mount(id, nodes) {
+    var el = document.getElementById(id);
+    clear(el);
+    nodes.forEach(function (n) { el.appendChild(n); });
+  }
+  function pretty(s) { return String(s).replace(/_/g, ' '); }
+  function plural(n, word) { return n + ' ' + word + (n === 1 ? '' : 's'); }
+
+  // ---- selection ----
+  function pairFor(a, b) {
+    var key = DATA.lookup[a] ? DATA.lookup[a][b] : null;
+    return key ? DATA.pairs[key] : null;
+  }
+  function currentPair() { return selected.length === 2 ? pairFor(selected[0], selected[1]) : null; }
+  function toggle(slug) {
+    var i = selected.indexOf(slug);
+    if (i >= 0) { selected.splice(i, 1); }
+    else { if (selected.length === 2) { selected.shift(); } selected.push(slug); }
+    render();
+  }
+  function choosePair(a, b) { selected = [a, b]; render(); }
+
+  // ---- left column ----
+  function renderTiles() {
+    mount('fv-tiles', CHARS.map(function (c) {
+      var isSel = selected.indexOf(c.slug) >= 0;
+      var hint, yes = false;
+      if (isSel) { hint = 'selected'; }
+      else if (selected.length === 1) {
+        yes = !!pairFor(selected[0], c.slug);
+        hint = (yes ? '✦ authored with ' : 'no card with ') + BY_SLUG[selected[0]].name;
+      } else {
+        var n = Object.keys(DATA.lookup[c.slug]).filter(function (o) { return DATA.lookup[c.slug][o]; }).length;
+        hint = plural(n, 'authored pairing');
+      }
+      var btn = h('button', { type: 'button', 'class': 'tile', 'aria-pressed': isSel ? 'true' : 'false', 'data-slug': c.slug }, [
+        h('span', { 'class': 'tile-name', text: c.name }),
+        h('span', { 'class': 'tile-hint' + (yes ? ' yes' : ''), text: hint })
+      ]);
+      btn.addEventListener('click', function () { toggle(c.slug); });
+      return btn;
+    }));
+  }
+
+  function renderRail() {
+    mount('fv-rail', DATA.combinations.map(function (combo) {
+      var on = selected.length === 2 && selected.indexOf(combo.a) >= 0 && selected.indexOf(combo.b) >= 0;
+      var authored = !!combo.pair;
+      var btn = h('button', { type: 'button', 'class': 'pair' + (authored ? ' authored' : ''), 'aria-pressed': on ? 'true' : 'false',
+                              'data-pair': combo.a + '|' + combo.b }, [
+        h('span', { text: BY_SLUG[combo.a].name + ' × ' + BY_SLUG[combo.b].name }),
+        h('span', { 'class': 'mark', text: authored ? '✦ authored' : 'not yet synthesized' })
+      ]);
+      btn.addEventListener('click', function () { choosePair(combo.a, combo.b); });
+      return btn;
+    }));
+  }
+
+  // ---- result ----
+  function section(title, nodes) { return [h('h2', { text: title })].concat(nodes); }
+  function kv(pairs) {
+    var dl = h('dl', { 'class': 'kv' });
+    pairs.forEach(function (p) { dl.appendChild(h('dt', { text: p[0] })); dl.appendChild(h('dd', { text: p[1] })); });
+    return dl;
+  }
+  function ul(items) { return h('ul', { 'class': 'list' }, items); }
+
+  function statusItem(title, lines) {
+    return h('div', { 'class': 'status-item' }, [h('h4', { text: title })].concat(lines.map(function (t) { return h('p', { text: t }); })));
+  }
+
+  function renderStatus(st) {
+    var mc = st.mechanical_checks;
+    var comp = [mc.compatibility_status + ' — ' + mc.evaluated_conditions + ' activation conditions evaluated'];
+    if (mc.contradiction) { comp.push('Contradiction: ' + mc.contradiction); }
+    if (mc.required_bridge) { comp.push('Required bridge: ' + mc.required_bridge); }
+    if (mc.unresolved_reason) { comp.push('Unresolved: ' + mc.unresolved_reason); }
+    comp.push(mc.caveat);
+    var ep = st.emergent_provenance;
+    var epLines = ['Emergent ability: ' + ep.ability + '. Governing rule: ' + ep.governing_rule + '.'];
+    if (ep.bridge_invented) { epLines.push('The authors label the governing rule an invented bridge between the two sources.'); }
+    var lc = st.leak_check;
+    var grid = h('div', { 'class': 'status-grid' }, [
+      statusItem('Authored provenance', [st.authored.text, 'Source: ' + st.authored.source_file]),
+      statusItem('Mechanical checks', [mc.schema].concat(comp)),
+      statusItem('Independent validation', [st.independent_validation.text]),
+      statusItem('Experimental status', [st.experimental.text]),
+      statusItem('Emergent-ability provenance', epLines),
+      statusItem('Leak check', [lc.status + ' (' + lc.detector + '; ' + plural(lc.findings, 'finding') + ')', lc.claim]),
+      statusItem('Dominance', ['Fixed at ' + st.dominance.value + '/' + (100 - st.dominance.value) + '; ' + st.dominance.note + '.'])
+    ]);
+    return h('details', { id: 'fv-status-details' }, [h('summary', { text: 'Status details' }), grid]);
+  }
+
+  function renderCard(pair) {
+    var card = pair.card, st = pair.status;
+    var a = card.sources.A, b = card.sources.B;
+    var out = [];
+    out.push(h('div', { 'class': 'panel result-body' }, [].concat(
+      [h('h2', { text: 'Fusion' })],
+      [h('p', { 'class': 'fusion-name', id: 'fv-fusion-name', text: card.fusion_name }),
+       h('p', { 'class': 'fusion-from', text: 'Authored as ' + a + ' × ' + b + ' (pairs are treated as unordered here)' }),
+       h('p', { 'class': 'concept', text: card.concept }),
+       h('p', { 'class': 'status-line' + (st.emergent_provenance.bridge_invented ? ' bridge' : ''), id: 'fv-status-line', text: st.summary.join(' · ') }),
+       renderStatus(st),
+       h('p', { 'class': 'notice', id: 'fv-notice', text: DATA.notice })]
+    )));
+
+    var ap = card.appearance;
+    var appRows = [['subject', ap.subject]];
+    Object.keys(ap.slots).forEach(function (k) { appRows.push([pretty(k), ap.slots[k]]); });
+    Object.keys(ap.scene).forEach(function (k) { appRows.push([pretty(k), ap.scene[k]]); });
+    var body = [].concat(
+      section('Appearance', [kv(appRows), h('p', { 'class': 'composed', text: ap.composed_paragraph })]),
+      section('Visual provenance', [ul(card.visual_provenance.map(function (r) {
+        var parents = r.parents.map(function (p) { return p.id + ' (' + p.character + ')'; }).join(' + ');
+        var meta = r.origin + ' · from ' + parents;
+        if (r.design_delta) { meta += ' · design change (' + r.design_delta.changed + '): ' + r.design_delta.from + ' → ' + r.design_delta.to; }
+        return h('li', null, [h('strong', { text: pretty(r.slot) + ': ' }), r.descriptor, h('span', { 'class': 'meta', text: meta })]);
+      }))])
+    );
+
+    var traitNodes = [];
+    ['inherited', 'transformed', 'complementary', 'not_carried'].forEach(function (outcome) {
+      var group = card.traits.filter(function (t) { return t.outcome === outcome; });
+      if (!group.length) { return; }
+      traitNodes.push(h('p', { 'class': 'group-title', text: pretty(outcome) }));
+      traitNodes.push(ul(group.map(function (t) {
+        var kids = [h('strong', { text: t.name }), h('span', { 'class': 'tag', text: t.character }), ' ' + t.result_text];
+        if (t.reason) { kids.push(h('span', { 'class': 'meta', text: 'not carried because: ' + t.reason })); }
+        kids.push(h('span', { 'class': 'meta', text: t.provenance + ' · ' + t.epistemic_status }));
+        return h('li', null, kids);
+      })));
+    });
+    body = body.concat(section('Traits', traitNodes));
+
+    var em = card.emergent_ability, gr = em.governing_rule;
+    var emNodes = [
+      kv([['name', em.name], ['provenance', em.provenance], ['description', em.description],
+          ['governing rule', gr.description + ' [' + gr.provenance + ']'], ['derived from', em.direct_ancestor_ids.join(', ')]]
+        .concat(em.activation ? [['activation', em.activation]] : []))
+    ];
+    emNodes.push(h('p', { 'class': 'group-title', text: 'Limitations' }));
+    emNodes.push(ul(em.limitations.map(function (t) { return h('li', { text: t }); })));
+    emNodes.push(h('p', { 'class': 'group-title', text: 'Inherited limitations' }));
+    emNodes.push(em.inherited_limitations.length
+      ? ul(em.inherited_limitations.map(function (l) {
+          return h('li', null, [h('strong', { text: l.name }), h('span', { 'class': 'tag warn', text: l.kind }), ' ' + l.description,
+                                h('span', { 'class': 'meta', text: l.character })]);
+        }))
+      : h('p', { 'class': 'meta', text: '(none)' }));
+    body = body.concat(section('Emergent ability', emNodes));
+
+    body = body.concat(section('Exclusions', [card.exclusions.length
+      ? ul(card.exclusions.map(function (x) { return h('li', null, [h('strong', { text: x.item }), h('span', { 'class': 'tag', text: x.character }), ' ' + x.reason]); }))
+      : h('p', { 'class': 'meta', text: '(none)' })]));
+
+    body = body.concat(section('Ancestry', [ul(card.ancestry.map(function (x) {
+      return h('li', null, [x.id, h('span', { 'class': 'meta', text: x.kind + (x.character ? ' · ' + x.character : '') + ' · ' + x.provenance })]);
+    }))]));
+
+    var ip = card.image_prompt;
+    body = body.concat(section('Image prompt (display only)', [
+      ip.suppressed ? h('p', { 'class': 'meta', text: '[suppressed: the leak check failed]' }) : h('pre', { 'class': 'prompt', text: ip.text }),
+      h('p', { 'class': 'meta', text: ip.length + ' / ' + ip.ceiling + ' characters. Nothing is sent anywhere from this page.' })
+    ]));
+
+    out.push(h('div', { 'class': 'panel result-body' }, body));
+    return out;
+  }
+
+  function renderResult() {
+    if (selected.length < 2) {
+      mount('fv-result', [h('div', { 'class': 'panel choose', text: 'Choose two characters to see their fusion.' })]);
+      return;
+    }
+    var pair = currentPair();
+    if (!pair) {
+      mount('fv-result', [h('div', { 'class': 'panel missing' }, [
+        h('p', { 'class': 'big', id: 'fv-missing', text: DATA.not_synthesized }),
+        h('p', { 'class': 'sub', text: BY_SLUG[selected[0]].name + ' × ' + BY_SLUG[selected[1]].name })
+      ])]);
+      return;
+    }
+    mount('fv-result', renderCard(pair));
+  }
+
+  // ---- sources ----
+  function renderSources() {
+    mount('fv-sources', selected.map(function (slug) {
+      var c = BY_SLUG[slug];
+      var props = c.properties.map(function (p) {
+        var kids = [h('strong', { text: p.name }), h('span', { 'class': 'tag', text: pretty(p.contribution_type) })];
+        if (p.is_hard_limitation) { kids.push(h('span', { 'class': 'tag warn', text: 'hard limitation' })); }
+        if (p.is_prohibition) { kids.push(h('span', { 'class': 'tag warn', text: 'prohibition' })); }
+        kids.push(' ' + p.description);
+        kids.push(h('span', { 'class': 'meta', text: pretty(p.architectural_placement) }));
+        return h('li', null, kids);
+      });
+      var visuals = c.visual_traits.map(function (t) { return h('li', null, [h('strong', { text: pretty(t.slot) + ': ' }), t.descriptor]); });
+      var excl = c.exclusion_candidates.map(function (x) { return h('li', null, [h('strong', { text: x.item }), ' ' + x.reason]); });
+      return h('div', { 'class': 'panel', 'data-source': c.slug }, [
+        h('p', { 'class': 'label', text: 'Source character' }),
+        h('p', { 'class': 'src-name', text: c.name }),
+        h('h2', { text: 'Properties' }), ul(props),
+        h('h2', { text: 'Visual traits' }), ul(visuals),
+        h('h2', { text: 'Possible exclusions' }), excl.length ? ul(excl) : h('p', { 'class': 'meta', text: '(none)' })
+      ]);
+    }));
+  }
+
+  function render() { renderTiles(); renderRail(); renderResult(); renderSources(); }
+
+  mount('fv-footer', [h('span', { text: DATA.notice })]);
+  render();
+})();
+</script>
+</body>
+</html>
