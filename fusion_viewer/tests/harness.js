@@ -89,6 +89,11 @@ function snapshot() {
     interactiveInResult: interactive,
     sourceNames: findAll(n => n.attrs['data-source']).map(n => n.attrs['data-source']),
     footerText: byId('fv-footer').textContent,
+    comparisonPresent: findAll(n => n.attrs.id === 'fv-comparison').length === 1,
+    comparisonText: (findAll(n => n.attrs.id === 'fv-comparison')[0] || { textContent: null }).textContent,
+    comparisonTally: (findAll(n => n.attrs.id === 'fv-cmp-tally')[0] || { textContent: null }).textContent,
+    comparisonTraits: findAll(n => n.attrs['data-cmp-trait']).map(n => ({ id: n.attrs['data-cmp-trait'], outcome: n.attrs['data-outcome'], text: n.textContent })),
+    comparisonSlots: findAll(n => n.attrs['data-cmp-slot']).map(n => ({ slot: n.attrs['data-cmp-slot'], origin: n.attrs['data-origin'], text: n.textContent })),
   };
 }
 

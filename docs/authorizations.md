@@ -4099,3 +4099,84 @@ broaden or reinterpret any other entry or document.
 **Recorded:** 2026-11-18 19:30:07 -0500 (machine clock).
 
 AUTH-015 is exercised in full and holds no remaining authority. This record authorizes nothing further. The entry's earlier "NOT MERGED" status line is superseded by this record, not edited.
+
+---
+
+## AUTH-016
+
+```
+Authorizes:        a Parent-to-Fusion Comparison block in `fusion_viewer/`: on an authored card's
+                   page, a three-column trait comparison (Parent A / fused result / Parent B) and
+                   a slot-by-slot appearance comparison, built only from existing authored data,
+                   plus this entry. No new data, no new files outside the viewer package.
+Target scope:      fusion_viewer/viewmodel.py
+                   fusion_viewer/template.html
+                   fusion_viewer/tests/            (new test_comparison.py; harness.js extended)
+                   docs/authorizations.md          (this one append-only entry)
+Route:             operator issuance -> implement on a feature branch -> verify against the
+                   acceptance criteria -> pull request. NOT merged by the implementer; the
+                   PR merge and any closure record are separate acts on the operator's
+                   approval.
+Granted by:        Kevin Brown, operator
+Granted at:        2026-11-21 (the operator's approval message of this date; the machine-clock
+                   reading when this entry was recorded is 2026-11-21 23:29:20 -0500)
+Basis:             the operator's read-only feature assessment request and its report
+                   (session 2026-11-21); AUTH-015, whose package this work extends without
+                   changing its behavior; baseline `origin/main` @ `dbd520b`
+Status:            ISSUED — EXERCISED IN A PULL REQUEST, NOT MERGED
+```
+
+**What this entry is.** A record of an operator authorization. It creates no authority beyond what
+the operator's approval message granted, and it is not a signature. The message is in the session
+transcript and is summarized here, not quoted.
+
+**What the feature is.** For an authored pair, the page shows, after the fusion summary, a
+comparison panel. Traits: one row per parent property, the parent's trait in its own column and the
+authors' outcome (inherited, transformed, complementary, not carried), result text and reason in the
+fused column. Appearance: one row per slot with Parent A's descriptor, the fused descriptor and
+Parent B's descriptor, the slot's authored origin, its authored parent links and any authored
+design change. The panel also lists the fused ability's direct ancestors and the card's ancestry.
+Every outcome, reason, parent link and design change is copied from the card. The only computed
+value is a tally of outcome labels, which the page marks as computed. A slot authored as "new" is
+labelled as such; the page does not attribute it to either parent's slot. The page states that the
+labels are the authors' own and that it does not measure how much of a trait carried over.
+
+**Operator amendments, as granted.** (1) Parent traits and ancestry display human-readable names
+("Name (Character)"), with raw ids only as secondary lines. A name is taken from the authored
+character files or the card; an id with no known name keeps the raw id and no name is invented.
+(2) The acceptance check includes a phone-width browser check of the new block; layout problems
+found there are reported, not fixed in this pull request.
+
+### This authorization does NOT authorize
+
+- Any edit to `fusion_synthesis/`, `fusion_engine/`, `proposer/`, authored character or pair data,
+  golden snapshots, `server.py`, `dashboard.html`, `.gitignore`, `fusion_viewer/build.py`, any other
+  existing tracked file, the sealed IMP-001 M2 evidence, or the two untracked scratch notes.
+- Any model, network or API call, live synthesis, or reuse of the IMP-001 M2 authorization.
+- Committing generated HTML.
+- Any inference of lineage, inheritance or emergence not already recorded in the card.
+- Any fusion validator work, any schema or field change (including any source, ownership or
+  licensing classification), any change to existing page behavior beyond adding the block.
+- Merging the pull request.
+
+### Implementation and verification record (written before the merge; the PR carries the evidence)
+
+- Viewer tests: 63 passed (45 existing + 18 new), 150 subtests. Full discovery
+  (`unittest discover -p "test_*.py"`): 531 tests OK, no import failures.
+- Nine mutation checks, each caught by the new tests: a mislabelled outcome, a dropped slot, a
+  "new" slot given a parent slot, a raw id as a label, an invented name for an unknown id, the
+  reason hidden on the page, an `innerHTML` sink, an unlabelled tally, and a dropped design change.
+- Two builds from identical inputs were byte-identical (sha256 `0c44738a…99aa98`, 170,033 bytes).
+- Golden snapshots, character and pair data: no diff against `dbd520b`.
+- Browser check (Chrome, local static server on 127.0.0.1, since stopped): at desktop width the
+  panel showed 12 trait rows and 7 slot rows with three columns. At a 390 px viewport (the page
+  loaded in a 390 px frame, because the browser window would not resize) the panel collapsed to one
+  column, column headings were replaced by per-cell labels, empty cells were hidden, and the page
+  had no horizontal overflow.
+- Limitations: the 390 px check used a frame, not device mode on a real phone. At that width the
+  secondary text (descriptions and ids) is small and low-contrast, inherited from the existing
+  `.meta` style; it was not changed here. Only five cards exist, so the comparison covers five pairs.
+  Outcome labels are the authors' and are not independently validated.
+
+Per the register's standing rule, this entry authorizes only what it names. It does not amend,
+broaden or reinterpret any other entry or document.
