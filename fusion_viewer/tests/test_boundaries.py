@@ -25,7 +25,7 @@ FORBIDDEN = {
 }
 DYNAMIC_CALLS = {"exec", "eval", "compile", "__import__"}
 ALLOWED_ROOTS = set(sys.stdlib_module_names) | {"fusion_synthesis", "fusion_viewer"}
-PRODUCTION = ("__init__.py", "viewmodel.py", "build.py")
+PRODUCTION = ("__init__.py", "viewmodel.py", "build.py", "character_check.py")
 
 
 def scan(source: str, filename: str) -> list:

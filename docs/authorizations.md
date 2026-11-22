@@ -4180,3 +4180,113 @@ found there are reported, not fixed in this pull request.
 
 Per the register's standing rule, this entry authorizes only what it names. It does not amend,
 broaden or reinterpret any other entry or document.
+
+---
+
+### AUTH-016 closure
+
+**Status: AUTH-016 SPENT AND CLOSED.** Merged as `5294d44` (PR #23, merge commit, 2026-11-22 04:36:24 UTC, per GitHub).
+**Suite:** the implementer ran the full suite on `main` at `5294d44`: 531 tests OK.
+**Recorded:** 2026-11-21 23:55:49 -0500 (machine clock).
+
+AUTH-016 is exercised in full and holds no remaining authority. This record authorizes nothing further. The entry's earlier "NOT MERGED" status line is superseded by this record, not edited.
+
+---
+
+## AUTH-017
+
+```
+Authorizes:        an Original Character Authoring slice in `fusion_viewer/`: a character
+                   template file; a checker command `python -m fusion_viewer.character_check`;
+                   a `--characters-dir <folder>` option on `python -m fusion_viewer.build` that
+                   loads user-owned character files from outside the repository and shows them
+                   in the viewer; a viewer-side ownership label (original, public_domain,
+                   third_party_ip, licensed; "not recorded" when absent); plus the AUTH-016
+                   closure record above and this entry. A file-based workflow, not a graphical
+                   character creator.
+Target scope:      fusion_viewer/viewmodel.py
+                   fusion_viewer/build.py
+                   fusion_viewer/template.html
+                   fusion_viewer/character_check.py              (new)
+                   fusion_viewer/original_character_template.json (new)
+                   fusion_viewer/tests/                          (new tests, extended harness)
+                   docs/authorizations.md                        (AUTH-016 closure + this entry, append-only)
+Route:             operator issuance -> implement on a feature branch -> verify against the
+                   acceptance criteria -> pull request. NOT merged by the implementer; the
+                   PR merge and any closure record are separate acts on the operator's
+                   approval.
+Granted by:        Kevin Brown, operator
+Granted at:        2026-11-21 (the operator's approval message of this date; the machine-clock
+                   reading when this entry was recorded is 2026-11-21 23:55:49 -0500)
+Basis:             the operator's read-only Mode 2 evaluation request and its report
+                   (session 2026-11-21); AUTH-015 and AUTH-016, whose package this extends;
+                   baseline `origin/main` @ `5294d44`
+Status:            ISSUED — EXERCISED IN A PULL REQUEST, NOT MERGED
+```
+
+**What this entry is.** A record of an operator authorization. It creates no authority beyond what
+the operator's approval message granted, and it is not a signature. The message is in the session
+transcript and is summarized here, not quoted.
+
+**How validation works.** The viewer does not validate characters itself. For each run it makes a
+temporary copy of the complete `fusion_synthesis/data/` directory, adds the user's file(s), removes
+the viewer-side `ownership` field from the copy only, and calls the existing
+`fusion_synthesis.loader.load_library` on the copy. Failures are attributed by staging: the
+repository data alone, then each user file in its own temporary library, then all files that passed
+together in one more library. A failure only the combined run shows is reported as a conflict
+between the files involved. Every temporary directory is removed on exit, including on failure.
+The user's folder is only read. `ownership` is checked against the four values and kept beside its
+file; it is the file author's own statement and is never inferred or verified. The page shows it
+with a note that it is self-declared. Existing characters show "not recorded" and are unchanged.
+Ownership code and data reach the page only in a build that uses `--characters-dir`; any other
+build is byte-identical to the baseline (sha256 `0c44738a…99aa98`, 170,033 bytes).
+
+### This authorization does NOT authorize
+
+- Any edit to `fusion_synthesis/` (including `schema.py` and `loader.py`), `fusion_engine/`,
+  `proposer/`, authored character or pair data, or golden snapshots.
+- Any model, network or API call, or reuse of the IMP-001 M2 authorization.
+- Authoring pairs, fusions or golden files for original characters, or adding an original character
+  to the repository's `data/`.
+- Backfilling `ownership` on existing characters.
+- Committing a user's characters or generated HTML, or writing to the user's character directory.
+- Any verification or enforcement of ownership claims.
+- Touching the two untracked scratch notes, or merging the pull request.
+
+### Implementation and verification record (written before the merge; the PR carries the evidence)
+
+- Tests: viewer 105 passed (63 existing + 42 new), 180 subtests; full discovery
+  (`unittest discover -p "test_*.py"`) 573 tests OK (531 existing + 42 new).
+- Mutation checks: fourteen rules were each broken in turn and each break was caught by a test
+  (ownership value not validated; ownership inferred when absent; ownership not stripped from the
+  temporary copy; combined run skipped; temporary directory not removed; BOM not explained; writes
+  into the user folder; overwrite of an existing character not refused; extension lines kept in the
+  default page; existing characters labelled original; self-declaration note dropped; characters
+  folder inside the repository accepted; declared ownership lost on the way to the page; a failing
+  file not failing the build).
+- Default build: byte-identical to the baseline (sha256 `0c44738a…99aa98`, 170,033 bytes), and
+  two builds with user characters were byte-identical to each other.
+- End-to-end demo: the template was copied to `ember_quill.json` and filled in as a new original
+  character; the checker reported OK; the viewer was built with `--characters-dir`; in Chrome
+  (local static server on 127.0.0.1, since stopped) the character showed a tile and a source panel
+  reading "Ownership: original (self-declared by the character file; not verified)", and was
+  "Not yet synthesized" against each of the six existing characters, which showed
+  "Ownership: not recorded".
+- **Deviation to review: the loader's duplicate-name rule cannot be reached through staging.**
+  `load_library` checks that a file's stem equals its character's slug before it checks for a
+  duplicate name, so a second file for an existing name always fails the file-name rule, and the
+  duplicate-name message is never produced. The loader's file-name rule rejects a copy under another
+  file name. A user file with the same file name as an existing character file, or two user files
+  with the same file name, cannot be placed in one temporary directory at all, and the loader never
+  sees that clash. `character_check.py` therefore refuses those two cases itself, before the loader
+  runs, with a message naming both files. That guard is the only rule it adds; it duplicates no
+  loader rule, and it is the only way the "collision between two user files" case can appear (only
+  in the combined run, with files from two folders). If the operator regards this as the
+  "cannot reproduce an existing check" stop condition, the pull request is not to be merged.
+- Other limits: the checker refuses a `--characters-dir` inside the repository tree (an addition to
+  the approved text, matching the output-path rule). Only one-folder, `*.json`, non-recursive loading
+  is supported. A file whose JSON cannot be read has no readable ownership, so its ownership is not
+  checked until it parses. Pairs with an original character are never authored here.
+
+Per the register's standing rule, this entry authorizes only what it names. It does not amend,
+broaden or reinterpret any other entry or document.

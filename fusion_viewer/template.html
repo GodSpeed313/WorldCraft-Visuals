@@ -444,6 +444,16 @@
   }
 
   // ---- sources ----
+  // FV-EXT-BEGIN ownership (present only in a page built with --characters-dir; removed from every other build)
+  var SELF_DECLARED = ' (self-declared by the character file; not verified)';
+  function ownershipRow(c) {
+    var o = c.ownership;
+    if (!o) { return null; }
+    return h('p', { 'class': 'meta', 'data-ownership': c.slug,
+                    text: 'Ownership: ' + o.label + (o.user_supplied && o.value ? SELF_DECLARED : '') });
+  }
+
+  // FV-EXT-END ownership
   function renderSources() {
     mount('fv-sources', selected.map(function (slug) {
       var c = BY_SLUG[slug];
@@ -460,6 +470,7 @@
       return h('div', { 'class': 'panel', 'data-source': c.slug }, [
         h('p', { 'class': 'label', text: 'Source character' }),
         h('p', { 'class': 'src-name', text: c.name }),
+        ownershipRow(c),  // FV-EXT-LINE
         h('h2', { text: 'Properties' }), ul(props),
         h('h2', { text: 'Visual traits' }), ul(visuals),
         h('h2', { text: 'Possible exclusions' }), excl.length ? ul(excl) : h('p', { 'class': 'meta', text: '(none)' })

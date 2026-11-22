@@ -88,6 +88,7 @@ function snapshot() {
     detailsText: details ? details.textContent : null,
     interactiveInResult: interactive,
     sourceNames: findAll(n => n.attrs['data-source']).map(n => n.attrs['data-source']),
+    ownership: findAll(n => n.attrs['data-ownership']).map(n => ({ slug: n.attrs['data-ownership'], text: n.textContent })),
     footerText: byId('fv-footer').textContent,
     comparisonPresent: findAll(n => n.attrs.id === 'fv-comparison').length === 1,
     comparisonText: (findAll(n => n.attrs.id === 'fv-comparison')[0] || { textContent: null }).textContent,

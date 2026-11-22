@@ -1,0 +1,34 @@
+{
+  "schema": "fusion-synthesis-character/1",
+  "name": "Your Character Name",
+  "ownership": "original",
+  "epistemic_status": "FICTIONAL",
+  "properties": [
+    {
+      "id": "your_character_name.first_ability",
+      "name": "First Ability",
+      "description": "One sentence describing what the character can do.",
+      "contribution_type": "ABILITY",
+      "architectural_placement": "CORE_MECHANISM"
+    },
+    {
+      "id": "your_character_name.first_limit",
+      "name": "First Limit",
+      "description": "One sentence describing a limit the character always has.",
+      "contribution_type": "MECHANISM",
+      "architectural_placement": "LIMITATIONS",
+      "is_hard_limitation": true
+    }
+  ],
+  "visual_traits": [
+    { "id": "your_character_name.v_build", "slot": "build", "descriptor": "describe the build", "derives_from": [] },
+    { "id": "your_character_name.v_face", "slot": "face", "descriptor": "describe the face", "derives_from": [] },
+    { "id": "your_character_name.v_hair", "slot": "hair", "descriptor": "describe the hair", "derives_from": [] },
+    { "id": "your_character_name.v_clothing", "slot": "clothing", "descriptor": "describe the clothing", "derives_from": [] },
+    { "id": "your_character_name.v_palette", "slot": "palette", "descriptor": "describe the colors", "derives_from": [] },
+    { "id": "your_character_name.v_signature", "slot": "signature_element", "descriptor": "describe one signature object or mark", "derives_from": ["your_character_name.first_ability"] },
+    { "id": "your_character_name.v_manifestation", "slot": "ability_manifestation", "descriptor": "describe how the ability looks when used", "derives_from": ["your_character_name.first_ability"] }
+  ],
+  "proper_nouns": [],
+  "exclusion_candidates": []
+}
