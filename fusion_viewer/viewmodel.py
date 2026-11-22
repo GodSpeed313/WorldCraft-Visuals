@@ -36,6 +36,16 @@ NO_INDEPENDENT_VALIDATION = "None recorded. No independent validation record exi
 EXPERIMENTAL_UNRECORDED = "Not recorded (unknown). The card format has no experimental-status field."
 
 
+OWNERSHIP_VALUES = ("original", "public_domain", "third_party_ip", "licensed")
+OWNERSHIP_LABELS = {
+    "original": "original",
+    "public_domain": "public domain",
+    "third_party_ip": "third-party IP",
+    "licensed": "licensed",
+}
+OWNERSHIP_NOT_RECORDED = "not recorded"
+
+
 class ViewDataError(ValueError):
     """The authored data cannot be shown unambiguously (for example, both A x B and B x A are authored)."""
 
@@ -207,7 +217,20 @@ def build_comparison(card: dict, char_a, char_b) -> dict:
     }
 
 
-def build_view(data_dir: Optional[Path] = None) -> dict:
+def _ownership_view(slug: str, ownership: dict) -> dict:
+    """Ownership shown for one character. `ownership` maps the slug of each user-supplied character to the
+    value its file declared (or None). A character that is not in the map is an authored one: not recorded."""
+    value = ownership.get(slug)
+    return {
+        "value": value,
+        "label": OWNERSHIP_LABELS.get(value, OWNERSHIP_NOT_RECORDED),
+        "user_supplied": slug in ownership,
+    }
+
+
+def build_view(data_dir: Optional[Path] = None, ownership: Optional[dict] = None) -> dict:
+    """`ownership` is None for the normal viewer. When a dict is given (user characters are loaded), every
+    character also carries an "ownership" entry; the values are self-declared and are never inferred."""
     library = load_library(data_dir)
     characters = list(library.characters.values())
     slug_of = {c.name: c.slug for c in characters}
@@ -247,7 +270,10 @@ def build_view(data_dir: Optional[Path] = None) -> dict:
         "schema": VIEW_SCHEMA,
         "not_synthesized": NOT_SYNTHESIZED,
         "notice": NOTICE,
-        "characters": [_character_view(c) for c in characters],
+        "characters": [
+            dict(_character_view(c), ownership=_ownership_view(c.slug, ownership)) if ownership is not None else _character_view(c)
+            for c in characters
+        ],
         "pairs": pairs,
         "lookup": lookup,
         "combinations": combos,
