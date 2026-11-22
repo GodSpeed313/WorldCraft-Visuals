@@ -111,6 +111,23 @@
   .group-title { font-weight: 700; font-size: 14px; margin: 14px 0 6px; text-transform: capitalize; }
   pre.prompt { white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--mono); font-size: 12px; background: var(--surface2); border: 0.5px solid var(--border); border-radius: 10px; padding: 12px; color: var(--muted); }
 
+  .cmp-note { font-size: 13px; color: var(--muted); border-left: 2px solid var(--spark-bd); padding-left: 12px; margin-bottom: 12px; max-width: 72ch; }
+  .cmp-head, .cmp-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .cmp-head { font-family: var(--mono); font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--faint); margin-bottom: 6px; }
+  .cmp-row { margin-bottom: 8px; }
+  .cmp-title { font-weight: 700; font-size: 14px; margin: 14px 0 6px; text-transform: capitalize; }
+  .cmp-cell { font-size: 14px; background: var(--surface2); border: 0.5px solid var(--border); border-radius: 10px; padding: 10px 12px; overflow-wrap: anywhere; }
+  .cmp-cell.fused { border-color: var(--spark-bd); }
+  .cmp-cell.empty { background: transparent; border-style: dashed; }
+  .cmp-cell .cell-label { display: none; font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--faint); margin-bottom: 4px; }
+  .cmp-cell .meta { display: block; font-family: var(--mono); font-size: 10px; color: var(--faint); margin-top: 3px; }
+  @media (max-width: 700px) {
+    .cmp-head { display: none; }
+    .cmp-row { grid-template-columns: minmax(0, 1fr); }
+    .cmp-cell.empty { display: none; }
+    .cmp-cell .cell-label { display: block; }
+  }
+
   .missing { text-align: center; padding: 56px 20px; }
   .missing p.big { font-size: 20px; font-weight: 700; }
   .missing p.sub { font-family: var(--mono); font-size: 12px; color: var(--faint); margin-top: 10px; }
@@ -271,6 +288,66 @@
     return h('details', { id: 'fv-status-details' }, [h('summary', { text: 'Status details' }), grid]);
   }
 
+  // ---- parent-to-fusion comparison. Every value is copied from the card; the tally is labelled as computed. ----
+  function cell(kind, label, kids) {
+    return h('div', { 'class': 'cmp-cell ' + kind }, [h('span', { 'class': 'cell-label', text: label })].concat(kids || []));
+  }
+  function emptyCell() { return h('div', { 'class': 'cmp-cell empty', 'aria-hidden': 'true' }, []); }
+  function raw(id) { return h('span', { 'class': 'meta', text: 'id: ' + id }); }
+
+  function renderComparison(cmp) {
+    var A = cmp.parents[0].name, B = cmp.parents[1].name;
+    var kids = [
+      h('h2', { text: 'Compare: parents and fusion' }),
+      h('p', { 'class': 'cmp-note', id: 'fv-cmp-note', text: cmp.note })
+    ];
+    var counts = cmp.tally.counts;
+    kids.push(h('p', { 'class': 'meta', id: 'fv-cmp-tally', text: cmp.tally.text + ': ' +
+      Object.keys(counts).map(function (k) { return counts[k] + ' ' + pretty(k); }).join(', ') + '.' }));
+
+    kids.push(h('p', { 'class': 'cmp-title', text: 'Traits' }));
+    kids.push(h('div', { 'class': 'cmp-head' }, [h('span', { text: 'Parent A · ' + A }), h('span', { text: 'Fused · ' + cmp.fusion_name }), h('span', { text: 'Parent B · ' + B })]));
+    cmp.traits.forEach(function (t) {
+      var parentCell = cell('parent', 'Parent ' + t.side + ' · ' + t.parent, [
+        h('strong', { text: t.label }),
+        t.description ? h('span', { 'class': 'meta', text: t.description }) : null,
+        raw(t.property_id)
+      ]);
+      var fusedKids = [h('span', { 'class': 'tag' + (t.outcome === 'not_carried' ? ' warn' : ''), text: pretty(t.outcome) }), ' ' + t.result_text];
+      if (t.reason) { fusedKids.push(h('span', { 'class': 'meta', text: 'not carried because: ' + t.reason })); }
+      var fusedCell = cell('fused', 'Fused · ' + cmp.fusion_name, fusedKids);
+      var cells = t.side === 'A' ? [parentCell, fusedCell, emptyCell()] : [emptyCell(), fusedCell, parentCell];
+      kids.push(h('div', { 'class': 'cmp-row', 'data-cmp-trait': t.property_id, 'data-outcome': t.outcome }, cells));
+    });
+
+    kids.push(h('p', { 'class': 'cmp-title', text: 'Appearance, slot by slot' }));
+    kids.push(h('div', { 'class': 'cmp-head' }, [h('span', { text: 'Parent A · ' + A }), h('span', { text: 'Fused · ' + cmp.fusion_name }), h('span', { text: 'Parent B · ' + B })]));
+    cmp.slots.forEach(function (s) {
+      var fusedKids = [h('span', { 'class': 'tag', text: s.origin }), ' ' + s.fused];
+      if (s.origin === 'new') {
+        fusedKids.push(h('span', { 'class': 'meta', text: cmp.slot_new_note }));
+      } else {
+        fusedKids.push(h('span', { 'class': 'meta', text: 'derived from: ' + s.derived_from.map(function (d) { return d.label; }).join(' + ') }));
+      }
+      if (s.design_delta) { fusedKids.push(h('span', { 'class': 'meta', text: 'design change (' + s.design_delta.changed + '): ' + s.design_delta.from + ' → ' + s.design_delta.to })); }
+      kids.push(h('p', { 'class': 'cmp-title', text: pretty(s.slot) }));
+      kids.push(h('div', { 'class': 'cmp-row', 'data-cmp-slot': s.slot, 'data-origin': s.origin }, [
+        cell('parent', 'Parent A · ' + A, [s.a === null ? h('span', { 'class': 'meta', text: 'no authored ' + pretty(s.slot) }) : s.a]),
+        cell('fused', 'Fused · ' + cmp.fusion_name, fusedKids),
+        cell('parent', 'Parent B · ' + B, [s.b === null ? h('span', { 'class': 'meta', text: 'no authored ' + pretty(s.slot) }) : s.b])
+      ]));
+    });
+
+    kids.push(h('p', { 'class': 'cmp-title', text: 'Fused ability: ' + cmp.ability.name }));
+    kids.push(h('p', { 'class': 'meta', text: 'The authors list these as its direct ancestors:' }));
+    kids.push(ul(cmp.ability.derived_from.map(function (d) { return h('li', null, [d.label, raw(d.id)]); })));
+    kids.push(h('p', { 'class': 'cmp-title', text: 'Ancestry' }));
+    kids.push(ul(cmp.ancestry.map(function (x) {
+      return h('li', null, [x.label, h('span', { 'class': 'meta', text: x.kind + ' · ' + x.provenance }), raw(x.id)]);
+    })));
+    return h('div', { 'class': 'panel', id: 'fv-comparison' }, kids);
+  }
+
   function renderCard(pair) {
     var card = pair.card, st = pair.status;
     var a = card.sources.A, b = card.sources.B;
@@ -284,6 +361,8 @@
        renderStatus(st),
        h('p', { 'class': 'notice', id: 'fv-notice', text: DATA.notice })]
     )));
+
+    out.push(renderComparison(pair.comparison));
 
     var ap = card.appearance;
     var appRows = [['subject', ap.subject]];
