@@ -9,9 +9,11 @@ this script creates nothing but the output file). The page is generated on deman
 and is never committed.
 
 --characters-dir loads the user's own character files (*.json) from a folder OUTSIDE the
-repository and adds them to the viewer (AUTH-017). They are checked with the existing loader
-by fusion_viewer.character_check; the folder is only read. Without it nothing changes: the
-output is byte-identical to a build that never heard of the option.
+repository and adds them to the viewer (AUTH-017). The same folder may also hold authored fusion
+pair files (AUTH-018); each file's kind is read from its `schema` field, never from its name. They
+are checked with the existing loader by fusion_viewer.character_check; the folder is only read, and
+the page shows only the folder's NAME, never a path. Without the option nothing changes: the output
+is byte-identical to a build that never heard of it.
 
 The only file this script writes is the path given to --out. It refuses a path
 inside the repository tree, because the repository has no ignored output location

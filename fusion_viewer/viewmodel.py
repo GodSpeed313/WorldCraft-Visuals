@@ -86,20 +86,39 @@ def _bridge_summary(card: dict) -> str:
     return "Provenance: " + ", ".join(sorted(provenances))
 
 
-def build_status(card: dict, pair_slug: str) -> dict:
-    """The status block for one authored card, derived only from the card itself."""
+EXTERNAL_FOLDER_FALLBACK = "External folder"
+EXTERNAL_AUTHORED_TEXT = (
+    "Authored: this card is manually authored, in a pair file kept in an external folder outside the repository. "
+    "It was validated by the existing library loader (strict schema and cross-reference validation). "
+    "It has no operator-approved golden snapshot. The file records no author and no date."
+)
+
+
+def build_status(card: dict, pair_slug: str, external_folder: Optional[str] = None) -> dict:
+    """The status block for one authored card, derived only from the card itself.
+
+    `external_folder` is None for a repository pair. For a pair from an external folder it is the folder's NAME
+    (never a path); the status then says the card is manually authored, loader-validated and has no golden."""
     comp = card["compatibility"]
     ability = card["emergent_ability"]
     leak = card["leak_check"]
-    status = {
-        "authored": {
+    if external_folder is None:
+        authored = {
             "value": True,
             "source_file": f"pairs/{pair_slug}.json",
             "text": (
                 "Authored: this result is a hand-written pair file in the repository's authored data. "
                 "The file records no author and no date."
             ),
-        },
+        }
+    else:
+        authored = {
+            "value": True,
+            "source_file": f"{EXTERNAL_FOLDER_FALLBACK} ({external_folder or 'name not recorded'}): {pair_slug}.json",
+            "text": EXTERNAL_AUTHORED_TEXT,
+        }
+    status = {
+        "authored": authored,
         "mechanical_checks": {
             "schema": "Passed: the pair file loaded and passed the strict schema and cross-reference validation.",
             "compatibility_status": comp["status"],
@@ -228,9 +247,13 @@ def _ownership_view(slug: str, ownership: dict) -> dict:
     }
 
 
-def build_view(data_dir: Optional[Path] = None, ownership: Optional[dict] = None) -> dict:
+def build_view(data_dir: Optional[Path] = None, ownership: Optional[dict] = None, external_pairs: Optional[dict] = None) -> dict:
     """`ownership` is None for the normal viewer. When a dict is given (user characters are loaded), every
-    character also carries an "ownership" entry; the values are self-declared and are never inferred."""
+    character also carries an "ownership" entry; the values are self-declared and are never inferred.
+
+    `external_pairs` maps the slug of each pair that came from a user's external folder to that folder's NAME.
+    Those pairs get the external status text; every other pair is exactly as before."""
+    external_pairs = external_pairs or {}
     library = load_library(data_dir)
     characters = list(library.characters.values())
     slug_of = {c.name: c.slug for c in characters}
@@ -248,7 +271,7 @@ def build_view(data_dir: Optional[Path] = None, ownership: Optional[dict] = None
             "slugs": [slug_of[pair.a], slug_of[pair.b]],
             "names": [pair.a, pair.b],
             "card": card,
-            "status": build_status(card, pair.slug),
+            "status": build_status(card, pair.slug, external_pairs[pair.slug] if pair.slug in external_pairs else None),
             "comparison": build_comparison(card, library.characters[pair.a], library.characters[pair.b]),
         }
 
