@@ -4290,3 +4290,117 @@ build is byte-identical to the baseline (sha256 `0c44738a…99aa98`, 170,033 byt
 
 Per the register's standing rule, this entry authorizes only what it names. It does not amend,
 broaden or reinterpret any other entry or document.
+
+---
+
+### AUTH-017 closure
+
+**Status: AUTH-017 SPENT AND CLOSED.** Merged as `880fe18` (PR #24, merge commit, 2026-11-22 05:06:15 UTC, per GitHub).
+**Suite:** the implementer ran the full suite on `main` at `880fe18`: 573 tests OK; the `main` CI runs on `880fe18` and `5294d44` both concluded `success` (per GitHub, read 2026-11-22).
+**Recorded:** 2026-11-22 23:54:08 -0500 (machine clock).
+
+AUTH-017 is exercised in full and holds no remaining authority. This record authorizes nothing further. The entry's earlier "NOT MERGED" status line is superseded by this record, not edited.
+
+---
+
+## AUTH-018
+
+```
+Authorizes:        An External Authored Pair slice in `fusion_viewer/`: the build and the checker
+                   accept authored fusion pair files from the same outside folder as user
+                   characters, classify each file by its `schema` field, stage each pair with the
+                   characters it names, validate with the existing loader, and show the fusion in
+                   the viewer as an authored card with the parent-to-fusion comparison panel; plus
+                   the AUTH-017 closure record above and this entry. Makes Red Mashenclad, Astra
+                   Mashenclad and Coda Mashenclad visible and correctly connected. It does NOT make
+                   Coda usable as a fusion parent.
+Target scope:      fusion_viewer/build.py                  (documentation text only)
+                   fusion_viewer/character_check.py
+                   fusion_viewer/viewmodel.py
+                   fusion_viewer/template.html             (not changed)
+                   fusion_viewer/tests/                    (new tests)
+                   docs/authorizations.md                  (AUTH-017 closure + this entry, append-only)
+Route:             operator issuance -> implement on a feature branch -> verify against the
+                   acceptance criteria -> pull request. NOT merged by the implementer; the PR merge
+                   and any closure record are separate acts on the operator's approval.
+Granted by:        Kevin Brown, operator
+Granted at:        2026-11-22, Eastern Time (the operator's approval message of this date; the
+                   machine-clock reading when this entry was recorded is 2026-11-22 23:54:08 -0500)
+Basis:             the operator's read-only Mode 2 fusion evaluation and its report (session
+                   2026-11-22), option (b) chosen; AUTH-015, AUTH-016 and AUTH-017, whose package
+                   this extends; baseline `origin/main` @ `880fe18`
+Status:            ISSUED — EXERCISED IN A PULL REQUEST, NOT MERGED
+```
+
+**What this entry is.** A record of an operator authorization. It creates no authority beyond what the
+operator's approval message granted, and it is not a signature. The message is in the session transcript
+and is summarized here, not quoted. The approval was "as drafted in the evaluation" with three amendments,
+all recorded below as part of the authorization.
+
+**The three amendments.**
+1. *No absolute local path in the page.* For an external source the status block shows only the folder's
+   NAME (or the generic label "External folder"). The full filesystem path, the home directory and other
+   private directory information never reach the generated HTML. An automated test asserts this.
+2. *Accurate status for an external card.* The page states that the card is manually authored, was
+   validated by the existing library loader, and has no operator-approved golden snapshot. The golden
+   equivalence claim is not displayed for external cards. Repository cards keep their status text byte
+   for byte.
+3. *Kind by schema.* A file is an authored fusion pair only when its `schema` is exactly
+   `fusion-synthesis-pair/1` (and a character only when it is exactly `fusion-synthesis-character/1`).
+   The file name, including a `__` in it, is never used. Any other value is refused with a message that
+   names the file.
+
+### This authorization does NOT authorize
+
+- Any edit to `fusion_synthesis/` (including `schema.py`, `loader.py`, the leak check and `data/`),
+  `fusion_engine/` or `proposer/`; any schema change.
+- Committing the Mashenclad files, any pair file or generated HTML to the repository, or modifying the
+  four source files in the operator's folder.
+- Any golden snapshot; any model, network or API call; live synthesis.
+- Any `ownership` value, inference or backfill. Red, Astra and Coda show "not recorded".
+- Coda as a fusion parent, or a `coda_mashenclad.json`. Coda is an authored fusion card only.
+- Touching the two untracked scratch notes, or merging the pull request.
+
+### Implementation and verification record (written before the merge; the PR carries the evidence)
+
+- **Tests.** Viewer 139 passed (105 existing + 34 new); full discovery (`unittest discover -p "test_*.py"`)
+  607 tests OK (573 existing + 34 new). No existing test was edited.
+- **Mutation checks.** Thirteen rules were each broken in turn and each break was caught by a test: kind
+  taken from the file name; unknown schema accepted; pair staged without its characters; a pair allowed to
+  replace an existing repository pair; a pair authored in both orders not detected; pairs checked despite a
+  character conflict; the combined pair stage skipped; external status identical to the repository text;
+  a full path put in the page; a golden-equivalence claim added; the "no golden snapshot" statement
+  dropped; repository cards given the external text; a pair not reported as a pair. (The combined-pair
+  stage was first missed; a test was added and the break was then caught.)
+- **Default build.** Byte-identical to the baseline (sha256 `0c44738a…99aa98`, 170,033 bytes). The
+  template is unchanged.
+- **Real folder.** With the operator's four files: the checker passed the two characters and the pair;
+  the build wrote a page of 208,304 bytes (sha256 `615752e9…44bbc6`) outside the repository. Counts from
+  the viewer's data: 8 characters, 28 unordered pairs, 6 authored cards, and "Coda Mashenclad" is a card,
+  not a character. The four source files' SHA-256 values were identical before and after.
+- **Browser.** In Chrome (a local static server on 127.0.0.1, since stopped) Red then Astra, and Astra then
+  Red, each resolved to "Coda Mashenclad". The comparison panel showed "Parent A · Red Mashenclad",
+  "Fused · Coda Mashenclad" and "Parent B · Astra Mashenclad". The status details read as amendment 2
+  requires and gave the source as "External folder (mashenclad)". A scan of the real page found no
+  drive-letter path, user-directory path or temporary-directory name. Every other pair read
+  "not yet synthesized". The page-script tool failed in the session, so the selections were made with
+  clicks; the screenshots are in the session, not in the repository.
+
+**Behavior and limits to review.**
+- **A character file with a missing or wrong `schema` now fails in the checker, with the checker's
+  message, before the loader sees it.** Before this change the loader's message was shown. The rule is
+  amendment 3's, and no existing test depended on the old wording. A file whose JSON cannot be read has no
+  readable schema, so it is still passed to the loader as a character and the loader reports the cause.
+- A pair is checked against the characters that passed on their own. If a character file fails, a pair
+  that needs it also fails and names its own file ("no character card named …"); if two character files
+  conflict with each other, pairs are reported as not checked.
+- A pair authored in both orders (A x B and B x A) is reported by the checker, naming both files, instead of
+  only at build time. The viewer's own rule is unchanged.
+- No pair file is placed in the repository, so no golden file exists for the external card; the viewer
+  builds it with the same assemble and finalize path as every other card.
+- The test pair is a renamed copy of an authored repository pair, made at run time; no private file is read
+  by any test.
+- `build.py` changed in its documentation text only.
+
+Per the register's standing rule, this entry authorizes only what it names. It does not amend, broaden or
+reinterpret any other entry or document.
