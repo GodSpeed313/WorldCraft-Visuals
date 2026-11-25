@@ -4663,3 +4663,30 @@ reinterpret any other entry or document.
 
 AUTH-019 is exercised in a pull request and is not merged. Its closure record, and the PR merge, are separate acts
 on the operator's approval.
+
+### Correction to the verification record (added after review; the text above is not rewritten)
+
+Recorded 2026-11-24 22:17:22 -0500 (machine clock). The operator's review of the pull request found two points, corrected here.
+
+- **Which test covers which half of R3's "origin not checked" path.** The condition that blocks the origin stage
+  has two independent halves: a failed combined load of the character files (`characters_conflict`) and a failed
+  combined load of the pair files (`pairs_conflict`). The mutation entry above, "verification run despite a failed
+  combined load", was caught by one test, and that test covers the character half only.
+  - `test_when_a_combined_load_fails_the_origin_stage_is_not_run_and_says_so` forces the character files to clash.
+    It covers `characters_conflict`. It does not cover `pairs_conflict`: reducing the condition to
+    `characters_conflict` alone left every test passing, so the pair half had no coverage when the record above
+    was written.
+  - `test_when_a_combined_pair_load_fails_the_origin_stage_is_not_run_and_says_so`, added in `1218a5b`, forces
+    only the pair files to clash while the character files load together. It covers `pairs_conflict`. It asserts
+    that origin verification is not called, that the pair clash is reported and no character clash is, that the
+    profile is reported as "origin not checked", that it is absent from the passed files, and that the checker exits
+    2 and prints no OK line for it.
+  - Each half was broken in turn in a throwaway copy and each test run against each break. With the condition
+    reduced to `characters_conflict`, the character test passes and the pair test fails. With it reduced to
+    `pairs_conflict`, the character test fails and the pair test passes. Unmutated, both pass. Neither test
+    covers the other's half.
+  - The suite is now 639 tests (607 existing + 32 new). The 22 mutation checks listed above were not re-run in full
+    for this correction; only the two R3 halves were.
+- **History of this entry's status line.** The entry was committed as NOT YET EXERCISED in `1e29fbe` and its status
+  line was set to EXERCISED IN A PULL REQUEST, NOT MERGED in `af6cb58`. This history departs from the AUTH-016 to
+  AUTH-018 precedent, in which each entry was committed already carrying that status; the final text matches.
