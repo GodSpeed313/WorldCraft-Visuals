@@ -4690,3 +4690,4 @@ Recorded 2026-11-24 22:17:22 -0500 (machine clock). The operator's review of the
 - **History of this entry's status line.** The entry was committed as NOT YET EXERCISED in `1e29fbe` and its status
   line was set to EXERCISED IN A PULL REQUEST, NOT MERGED in `af6cb58`. This history departs from the AUTH-016 to
   AUTH-018 precedent, in which each entry was committed already carrying that status; the final text matches.
+- **Name match alone (added at the operator's request).** `test_a_profile_that_matches_a_fusion_in_every_checked_respect_but_declares_no_origin_is_an_ordinary_character`, added in `78cfa7d`, pins that a profile with a fusion's exact name, seven slots and ability name and description but no `fusion_origin` passes as an ordinary character, has origin None, stays selectable, and yields no "recorded from" sentence in either selection order; the suite is now 640 tests (607 existing + 33 new).
