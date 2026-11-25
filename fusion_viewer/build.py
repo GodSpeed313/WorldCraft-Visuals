@@ -15,6 +15,12 @@ are checked with the existing loader by fusion_viewer.character_check; the folde
 the page shows only the folder's NAME, never a path. Without the option nothing changes: the output
 is byte-identical to a build that never heard of it.
 
+A character file in that folder may also carry `fusion_origin` ({"pair": "<pair slug>"}), recording the
+authored fusion pair it was written from (AUTH-019). The checker compares the profile with that pair,
+word for word, on its seven appearance slots and its ability's name and description, and on nothing
+else; a profile that does not match stops the build. The card of any fusion with a promoted parent
+says what was compared. This is a record of origin, not a claim that the profile inherits from it.
+
 The only file this script writes is the path given to --out. It refuses a path
 inside the repository tree, because the repository has no ignored output location
 for generated HTML. Output is deterministic: the same inputs give the same bytes.

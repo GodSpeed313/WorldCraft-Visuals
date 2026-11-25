@@ -92,13 +92,22 @@ EXTERNAL_AUTHORED_TEXT = (
     "It was validated by the existing library loader (strict schema and cross-reference validation). "
     "It has no operator-approved golden snapshot. The file records no author and no date."
 )
+# AUTH-019: said once per promoted parent of a card. It states what was compared and nothing more; the page must not
+# say or imply that a profile inherits from, or is faithful to, the pair it records.
+PROMOTED_PARENT_TEXT = (
+    'Parent "{name}" is recorded from the authored fusion pair {slug}. The profile\'s seven appearance slots and its '
+    "ability's name and description match that card word for word; nothing else in the profile is compared with it."
+)
 
 
-def build_status(card: dict, pair_slug: str, external_folder: Optional[str] = None) -> dict:
+def build_status(card: dict, pair_slug: str, external_folder: Optional[str] = None, promoted_parents: Optional[list] = None) -> dict:
     """The status block for one authored card, derived only from the card itself.
 
     `external_folder` is None for a repository pair. For a pair from an external folder it is the folder's NAME
-    (never a path); the status then says the card is manually authored, loader-validated and has no golden."""
+    (never a path); the status then says the card is manually authored, loader-validated and has no golden.
+
+    `promoted_parents` is None unless a parent of this card is a promoted profile (AUTH-019): a list of
+    (character name, origin pair slug), side A first. Each adds one sentence to the authored text, and nothing else."""
     comp = card["compatibility"]
     ability = card["emergent_ability"]
     leak = card["leak_check"]
@@ -117,6 +126,8 @@ def build_status(card: dict, pair_slug: str, external_folder: Optional[str] = No
             "source_file": f"{EXTERNAL_FOLDER_FALLBACK} ({external_folder or 'name not recorded'}): {pair_slug}.json",
             "text": EXTERNAL_AUTHORED_TEXT,
         }
+    for parent_name, origin_slug in promoted_parents or ():
+        authored["text"] += " " + PROMOTED_PARENT_TEXT.format(name=parent_name, slug=origin_slug)
     status = {
         "authored": authored,
         "mechanical_checks": {
@@ -247,13 +258,22 @@ def _ownership_view(slug: str, ownership: dict) -> dict:
     }
 
 
-def build_view(data_dir: Optional[Path] = None, ownership: Optional[dict] = None, external_pairs: Optional[dict] = None) -> dict:
+def build_view(
+    data_dir: Optional[Path] = None,
+    ownership: Optional[dict] = None,
+    external_pairs: Optional[dict] = None,
+    promotions: Optional[dict] = None,
+) -> dict:
     """`ownership` is None for the normal viewer. When a dict is given (user characters are loaded), every
     character also carries an "ownership" entry; the values are self-declared and are never inferred.
 
     `external_pairs` maps the slug of each pair that came from a user's external folder to that folder's NAME.
-    Those pairs get the external status text; every other pair is exactly as before."""
+    Those pairs get the external status text; every other pair is exactly as before.
+
+    `promotions` maps the slug of each promoted character profile (AUTH-019) to the slug of the pair it records.
+    A card with a promoted parent says so in its authored status text; no other card changes."""
     external_pairs = external_pairs or {}
+    promotions = promotions or {}
     library = load_library(data_dir)
     characters = list(library.characters.values())
     slug_of = {c.name: c.slug for c in characters}
@@ -271,7 +291,12 @@ def build_view(data_dir: Optional[Path] = None, ownership: Optional[dict] = None
             "slugs": [slug_of[pair.a], slug_of[pair.b]],
             "names": [pair.a, pair.b],
             "card": card,
-            "status": build_status(card, pair.slug, external_pairs[pair.slug] if pair.slug in external_pairs else None),
+            "status": build_status(
+                card,
+                pair.slug,
+                external_pairs[pair.slug] if pair.slug in external_pairs else None,
+                [(name, promotions[slug_of[name]]) for name in (pair.a, pair.b) if slug_of[name] in promotions] or None,
+            ),
             "comparison": build_comparison(card, library.characters[pair.a], library.characters[pair.b]),
         }
 
