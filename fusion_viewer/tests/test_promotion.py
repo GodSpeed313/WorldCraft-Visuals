@@ -356,6 +356,30 @@ class OriginStageTests(PromotionBase):
         profile_name = f"{slugify(NEW_FUSION)}.json"
         self.assertTrue(any(profile_name in e and "origin not checked" in e for e in result.errors), result.errors)
 
+    def test_when_a_combined_pair_load_fails_the_origin_stage_is_not_run_and_says_so(self):
+        """The mirror of the test above. There the characters clash together; here the characters all load together
+        and only the pair files clash, so `pairs_conflict` is the only thing that blocks the origin stage."""
+        paths = self.write_all()
+        real = character_check._load
+
+        def fake(files):
+            if sum(item.kind == character_check.PAIR for item in files) >= 2:
+                return "a made-up pair clash"
+            return real(files)
+
+        profile_name = f"{slugify(NEW_FUSION)}.json"
+        with mock.patch.object(character_check, "_load", side_effect=fake), \
+                mock.patch.object(character_check, "_verify_origins") as verify:
+            result = check_files(paths)
+            code, out, _err = run_check(*paths)
+        verify.assert_not_called()
+        self.assertTrue(any("conflict between" in e and "a made-up pair clash" in e for e in result.errors), result.errors)
+        self.assertFalse(any("conflict between" in e and "a made-up pair clash" not in e for e in result.errors), result.errors)
+        self.assertTrue(any(profile_name in e and "origin not checked" in e for e in result.errors), result.errors)
+        self.assertNotIn(profile_name, [i.path.name for i in result.files])
+        self.assertEqual(code, 2)
+        self.assertNotIn(f"OK: {profile_name}", out)
+
     def test_two_pairs_may_share_a_fusion_name_and_the_slug_decides_which_one_is_meant(self):
         trio = self.write_trio()
         profile = self.write_profile()
