@@ -4404,3 +4404,204 @@ all recorded below as part of the authorization.
 
 Per the register's standing rule, this entry authorizes only what it names. It does not amend, broaden or
 reinterpret any other entry or document.
+
+---
+
+### AUTH-018 closure
+
+**Status: AUTH-018 SPENT AND CLOSED.** Merged as `2e0705c` (PR #25, merge commit, 2026-11-23 04:59:37 UTC, per GitHub).
+**Suite:** the implementer ran the full suite on `main` at `2e0705c`: 607 tests OK; the `main` CI run on `2e0705c` concluded `success` (per GitHub, read 2026-11-24).
+**Recorded:** 2026-11-24 21:02:01 -0500 (machine clock).
+
+AUTH-018 is exercised in full and holds no remaining authority. This record authorizes nothing further. The entry's earlier "NOT MERGED" status line is superseded by this record, not edited.
+
+---
+
+## AUTH-019
+
+```
+Authorizes:        An Authored Fusion Promotion slice in `fusion_viewer/`. A character file in the
+                   operator's external folder may carry a viewer-side field `fusion_origin`
+                   ({"pair": "<pair slug>"}) recording the authored fusion pair it was written from.
+                   The field is shape-checked when the file is read and removed from the staged copy
+                   before the existing strict loader sees it, as `ownership` is. After every file has
+                   been loaded together, the checker compares the profile with the named pair (the
+                   seven appearance slots and the ability's name and description, word for word), and
+                   the viewer states, in the status text of any card that has a promoted parent, that
+                   the profile is recorded from that pair and what was compared. Also records the
+                   AUTH-018 closure above and this entry.
+Target scope:      fusion_viewer/character_check.py   (_Prepared, _prepare, check_files, load_view,
+                                                       checker output, module text, one new
+                                                       origin-stage function)
+                   fusion_viewer/viewmodel.py         (build_status, build_view, one new text constant)
+                   fusion_viewer/tests/test_promotion.py (new; synthetic fixtures only)
+                   fusion_viewer/build.py             (documentation text only)
+                   fusion_viewer/template.html        (NOT changed)
+                   docs/authorizations.md             (AUTH-018 closure + this entry, append-only)
+Route:             operator issuance -> feature branch from `2e0705c` -> verify against the
+                   acceptance criteria -> pull request. NOT merged by the implementer; the PR merge
+                   and any closure record are separate acts on the operator's approval.
+Granted by:        Kevin Brown, operator
+Granted at:        2026-11-24 20:58 America/New_York (the operator's issuance message of this date; the
+                   machine-clock reading when this entry was recorded is 2026-11-24 21:02:01 -0500)
+Basis:             AUTH-016, AUTH-017 and AUTH-018, whose package this extends; the read-only AUTH-019
+                   review of 2026-11-24 and the operator's five decisions on it (summarized below);
+                   baseline `origin/main` @ `2e0705c`; FE Requirements §39
+                   (`docs/fusion_engine_requirements_v0.1.md:1397`), released ONLY as stated in Act 1
+Status:            ISSUED — NOT YET EXERCISED
+```
+
+**What this entry is.** Two operator acts and one record, kept separate. **Act 1** is the §39 release: it
+removes a prohibition and grants nothing. **Act 2** is the implementation authorization below: it grants exactly
+what it lists. **This entry** archives both and creates no authority. It lands in the same PR as the change.
+
+### Operator statement (verbatim)
+
+> §39 RELEASE (Act 1) — ISSUED.
+> I release FE Requirements §39 as written in your drafted release text, with one amendment: add `fusion_viewer/build.py` (documentation text only) to the released surfaces, matching AUTH-019's target scope. Everything else in the release text stands as drafted. This release removes a prohibition and grants nothing.
+> Released by: Kevin Brown (operator)
+> Released at: 2026-11-24 20:58 America/New_York
+>
+> AUTH-019 (Act 2) — ISSUED as drafted, with the decisions summary accepted as written.
+> Granted by: Kevin Brown (operator)
+> Granted at: 2026-11-24 20:58 America/New_York
+> Proceed: branch from 2e0705c, implement against R1–R8 and acceptance criteria 1–16, open the PR, do not merge. Stop on any stop condition.
+
+**Issuance record.** The issuance adopts the draft presented in session on 2026-11-24. That draft was not saved
+to a file and no hash of it is claimed. The issued text below is that draft with the operator's one listed
+amendment (`fusion_viewer/build.py`, documentation text only, added to the released surfaces in Act 1) and
+these edits only, which the operator did not list and which he may reject: the draft's `<operator fills>`
+fields are filled from the operator statement; the bracketed line standing for Act 1 is replaced by the Act 1
+text as issued; the fixed text of the AUTH-018 closure and this header carry the machine-clock reading taken
+when they were written; and this paragraph and the operator statement above are added.
+
+### Act 1 — §39 release (as issued)
+
+The operator releases FE Requirements §39 "Existing WorldCraft-Visuals code — UNMODIFIED"
+(`docs/fusion_engine_requirements_v0.1.md:1397`) **only** for these surfaces, and only for the changes AUTH-019
+names for them: `fusion_viewer/character_check.py` (`_Prepared`, `_prepare`, `check_files`, `load_view`, the
+checker's output, its module text, and one new origin-stage function); `fusion_viewer/viewmodel.py`
+(`build_status`, `build_view`, and one new text constant); `fusion_viewer/build.py` (documentation text only);
+and the new file `fusion_viewer/tests/test_promotion.py`.
+
+Whether §39 reached `fusion_viewer/` at all is not decided here. AUTH-015 recorded "no existing code file is
+modified, so none is needed" (`authorizations.md:4070`), and AUTH-016, AUTH-017 and AUTH-018 changed files in
+this folder with no §39 text. This release is made to remove any doubt for AUTH-019, and it creates no
+precedent for those entries.
+
+Every other part of §39 remains held, including `fusion_synthesis/`, `fusion_engine/`, `proposer/`,
+`server.py`, `dashboard.html`, `mythos_sync.py`, `modality_classifier.py`, `fusion_viewer/template.html`, the
+successor-contract hold, and every other item on the §39 list. This release removes a prohibition and grants
+nothing; authority to implement comes only from Act 2.
+
+### Act 2 — Implementation (as issued)
+
+**Operator decisions recorded (summarized, not quoted).** (1) Option 1: build the verified-origin mechanism.
+(2) Verification is verbatim: the seven slots plus the ability's name and description. (3) Slice 1 shows the
+origin in status text only; no template change. (4) Acceptance uses synthetic fixtures only; the operator's
+first creative use will not be a parent crossed with its own descendant, which waits until shared ancestry is
+handled. (5) Coda's property set (ability plus limitations) is the operator's own authoring, done after the
+mechanism merges, and stays out of code and tests.
+
+**Rules.**
+
+- **R1 Field.** `fusion_origin` is optional and is read only in a character file. It is an object with exactly
+  one key, `pair`, a non-empty string. `pair` is a pair slug (the pair file's stem, as the loader derives it),
+  never a fusion name: the loader accepts two pairs with the same `fusion_name`, so a name is ambiguous.
+  Any other shape is refused with a message that names the file.
+- **R2 Strip.** `fusion_origin` is removed from the staged copy together with `ownership`. The source file is
+  never modified. `fusion_synthesis/`, `schema.py` and the loader are unchanged; an unknown key anywhere else is
+  still rejected.
+- **R3 Timing.** Reading a file checks the field's shape only. Origin verification runs exactly once, as the
+  last stage of `check_files`, against the library loaded with every file that passed, after the combined
+  character load and the combined pair load. It never runs in the per-file character stage, the combined
+  character stage or the per-pair stages. A profile that passes alone and whose origin pair is absent from, or
+  mismatched in, the staged library fails at this stage. If a combined load failed, the stage is not run and
+  each promoted profile is reported as not checked, with the reason.
+- **R4 Verification.** Against the staged library, for each promoted profile: (O1) the named pair exists in
+  the library; (O2) the profile's `name` equals that pair's `fusion_name` exactly; (O3) neither parent of that
+  pair is itself a promoted profile, and the profile is not a parent of that pair; (O4) each of the seven
+  slot descriptors equals the pair's descriptor for that slot, word for word; (O5) the profile has a property
+  whose name and description equal the pair's emergent ability name and description, word for word. Each failure
+  names the profile file and begins "origin:". The comparison reads authored data only; nothing is assembled.
+- **R5 Viewer text.** For each promoted parent of a card, the following sentence is appended to
+  `status.authored.text` (parent A first, then B), and nowhere else:
+  `Parent "<name>" is recorded from the authored fusion pair <slug>. The profile's seven appearance slots and its ability's name and description match that card word for word; nothing else in the profile is compared with it.`
+  The sentence must not say or imply that a profile inherits from, or is faithful to, its origin. Cards with no
+  promoted parent, and every repository card, are byte-identical to before.
+- **R6 Checker output.** A passing promoted profile prints one line of the same limited wording.
+- **R7 Selectability.** A fusion becomes a selectable character only through a profile that passes R1 to R4.
+  An unpromoted fusion stays a card only. The first-generation limit in O3 is a check, not part of the file
+  format.
+- **R8 Baselines.** The default build, and any `--characters-dir` build with no `fusion_origin` field, are
+  byte-identical to the base.
+
+**Limits and disclosures (part of this authorization).**
+
+- **Verification is limited.** Matching the seven slots and the ability shows only that the profile records its
+  origin card's slots and ability. It does not show complete inheritance fidelity. Not compared: limitations,
+  activation, the interaction rule, concept, trait outcomes, exclusions, scene fields, slot lineage, or any
+  other property. No code, test, message or page text may claim otherwise.
+- **Grandparent denylist terms are not inherited.** A promoted profile's denylist is its own name, property
+  names and `proper_nouns` as authored. Its origin parents' proper nouns are not added (the gap recorded in
+  `CODA_PROVENANCE.md`). This slice does not fix, check or warn about it. A characterization test pins the
+  current behaviour.
+- **Shared ancestry is not handled.** The loader accepts a parent crossed with its own descendant. This slice
+  neither blocks nor flags it.
+- **Drift is partly caught.** Verification re-runs on every check and build, so an edit to the origin pair's
+  slots or ability is caught. Edits elsewhere are not.
+
+**Acceptance criteria.** All tests use synthetic fixtures built at run time in temporary folders, derived from a
+repository pair as AUTH-018's tests are. No test reads a private file.
+
+1. All existing tests pass unmodified (607 at base); no assertion is weakened or removed.
+2. The default build is byte-identical: SHA-256 `0c44738a224c01cf50f21508579ec5fe2b15a9da83d03411f48f7e1e1c99aa98`.
+3. With the operator's existing folder, read only, the `--characters-dir` build is byte-identical at the base and
+   on the branch (the AUTH-018 record gives `615752e9c90592aac8d59a4a456929ce8d635f99c6dbecbd66058fc1ea44bbc6`).
+4. A valid profile passes the checker; the build lists it as a character; the generation-2 pair resolves from
+   either selection order.
+5. An unpromoted fusion is absent from the character list and from the combinations.
+6. The staged copy contains no `fusion_origin`; the source file's bytes are unchanged.
+7. Each bad shape (not an object, extra key, non-string, empty) fails naming the file.
+8. **Timing (c).** A profile that passes alone fails the origin stage when its origin pair is absent from the
+   staged library, and fails separately for each of: name not equal to `fusion_name`; one slot descriptor
+   differing; ability name differing; ability description differing. A spy test shows verification is called
+   once, after the last combined load, with the complete staged library, and not during per-file validation.
+9. A profile whose origin pair has a promoted parent, or which is a parent of its own origin pair, fails.
+10. Two pairs sharing a `fusion_name`: the profile resolves only to the pair its slug names.
+11. Two profiles that would be the same character fail through the existing collision mechanism.
+12. The generation-2 card's status carries the R5 sentence; a test pins required phrases and the absence of
+    "inherit", "faithful", "fidelity", "complete", "accurate" and "derived".
+13. No generated HTML contains an absolute local path; no external card makes a golden-equivalence claim;
+    repository cards keep their status byte for byte.
+14. A profile that omits its origin parents' proper nouns still passes (characterization test for the disclosed
+    gap).
+15. Each of R1, R3, O1 to O5 and R5 is broken in turn and each break is caught by a test (mutation record in
+    the PR).
+16. No model, network or API call; IMP-001 is not reopened.
+
+**Stop conditions.** Stop and ask if: any edit to `fusion_synthesis/`, `fusion_engine/`, `proposer/` or
+`template.html` becomes necessary; the default-build hash changes; an existing test must be weakened; a test
+would need a private file; a creative decision about Coda's content appears in code or a test; or the origin
+comparison needs anything beyond the seven slots and the ability name and description.
+
+### This authorization does NOT authorize
+
+- Any edit to `fusion_synthesis/` (including `schema.py`, `loader.py`, the leak check and `data/`),
+  `fusion_engine/`, `proposer/`, `server.py`, `dashboard.html`, `template.html`, golden snapshots, authored
+  data or `.gitignore`; any schema change.
+- Creating `coda_mashenclad.json`, a second-generation pair, or any private file; committing any private file
+  or generated HTML; modifying the operator's source files.
+- Automatic conversion of a fusion into a character; any invention or reinterpretation of abilities,
+  limitations or visual traits.
+- Fixing grandparent denylist inheritance; handling shared ancestry; later generations or fusion-to-fusion
+  mechanisms.
+- Any claim about synthesis quality or inheritance fidelity; any `ownership` inference.
+- Any model, network or API call; any change to the IMP-001 M2 verdict or any governance ruling.
+- Touching the two untracked scratch notes, or merging the pull request.
+
+**Obligation.** "AUTH-019 SPENT AND CLOSED" is appended, append-only, in the next authorized PR that touches
+`docs/authorizations.md`.
+
+Per the register's standing rule, this entry authorizes only what it names. It does not amend, broaden or
+reinterpret any other entry or document.
