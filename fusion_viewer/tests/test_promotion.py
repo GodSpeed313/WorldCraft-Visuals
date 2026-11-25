@@ -245,6 +245,34 @@ class PromotionTests(PromotionBase):
         path = self.write_profile(promoted_profile(data, repo.slug))
         self.assertEqual(check_files([path]).errors, ())
 
+    def test_a_profile_that_matches_a_fusion_in_every_checked_respect_but_declares_no_origin_is_an_ordinary_character(self):
+        """Matching is never enough: only a declared `fusion_origin` makes a profile a promoted one. This profile has
+        the fusion's exact name, its seven slots and its ability's name and description, and nothing else."""
+        data = self.profile()
+        del data["fusion_origin"]
+        profile_name = f"{slugify(data['name'])}.json"
+        paths = self.write_trio() + [self.write_profile(data), self.put(pair_file_name(self.gen2_data(data)), self.gen2_data(data))]
+
+        result = check_files(paths)
+        self.assertEqual(result.errors, ())  # passes as an ordinary character
+        item = next(i for i in result.files if i.path.name == profile_name)
+        self.assertIsNone(item.origin)
+        self.assertEqual(item.staged, item.path.read_bytes())  # nothing was stripped: there was nothing to strip
+        code, out, _err = run_check(*paths)
+        self.assertEqual(code, 0)
+        self.assertIn(f"OK: {profile_name} (ownership: not recorded; a self-declaration, not verified)", out.splitlines())
+
+        view = load_view(paths)
+        self.assertIn(NEW_FUSION, [c["name"] for c in view["characters"]])  # still selectable
+        other = self.other["name"]
+        for first, second in ((NEW_FUSION, other), (other, NEW_FUSION)):
+            with self.subTest(f"{first} then {second}"):
+                record = resolve(view, first, second)
+                self.assertIsNotNone(record)
+                self.assertEqual(record["status"]["authored"]["text"], EXTERNAL_AUTHORED_TEXT)
+                self.assertNotIn("recorded from", json.dumps(record))
+        self.assertNotIn("recorded from", json.dumps(view))
+
 
 class OriginStageTests(PromotionBase):
     """R3, R4: origin verification against the complete staged library, never during per-file validation."""
