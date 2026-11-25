@@ -4448,7 +4448,7 @@ Basis:             AUTH-016, AUTH-017 and AUTH-018, whose package this extends; 
                    review of 2026-11-24 and the operator's five decisions on it (summarized below);
                    baseline `origin/main` @ `2e0705c`; FE Requirements §39
                    (`docs/fusion_engine_requirements_v0.1.md:1397`), released ONLY as stated in Act 1
-Status:            ISSUED — NOT YET EXERCISED
+Status:            ISSUED — EXERCISED IN A PULL REQUEST, NOT MERGED
 ```
 
 **What this entry is.** Two operator acts and one record, kept separate. **Act 1** is the §39 release: it
@@ -4605,3 +4605,61 @@ comparison needs anything beyond the seven slots and the ability name and descri
 
 Per the register's standing rule, this entry authorizes only what it names. It does not amend, broaden or
 reinterpret any other entry or document.
+
+### Implementation and verification record (written before the merge; the PR carries the evidence)
+
+- **Branch and commits.** `auth-019-fusion-promotion` from `2e0705c`: `1e29fbe` (the AUTH-018 closure and this
+  entry, append-only, +201 -0), then `36c747c` (code and tests). Files changed: `docs/authorizations.md`,
+  `fusion_viewer/character_check.py`, `fusion_viewer/viewmodel.py`, `fusion_viewer/build.py` (documentation text
+  only) and the new `fusion_viewer/tests/test_promotion.py`. Not touched: `fusion_viewer/template.html`,
+  `fusion_synthesis/`, `fusion_engine/`, `proposer/`, any existing test file, the two untracked scratch notes.
+- **Tests.** Full discovery (`unittest discover -p "test_*.py"`) 638 tests OK (607 existing + 31 new); core
+  `test_engine` 46 OK. Run on Python 3.12.10, the only runtime on the implementer's machine; the 3.10 and 3.11
+  results are CI's and are in the PR. No existing test was edited. The real matrix is unchanged (SHA-256
+  `3fa4d990...`).
+- **Red before green.** The tests were written first. Against the unmodified code the first 30 of them reported 20
+  failures and 7 errors (subtest failures counted singly); the single page-level test was added after they passed.
+- **Mutation checks.** Twenty-two rules were each broken in turn, in a throwaway copy of the packages and never in
+  the repository, each by an exact-match replacement that must apply exactly once, and each break was caught by a
+  test: shape check removed; extra keys allowed; blank pair allowed; `fusion_origin` left in the staged copy;
+  verification run twice; verification run despite a failed combined load; verification run on a library without
+  the pairs; failed profiles kept in the passed list; a missing origin pair accepted; name need not equal the
+  fusion name; a profile allowed to be a parent of its own origin pair; a promoted parent allowed; slots not
+  compared; only the first slot compared; ability name not compared; ability description not compared; no
+  sentence added; wording changed to "inherits"; sides reversed; the sentence put on the first-generation card;
+  the checker's origin line never printed; the view gaining a key when nothing is promoted. A run aborted once
+  because a later edit had changed the indentation one pattern matched; the runner refuses an edit that does not
+  apply, so nothing was skipped silently. The pattern was corrected and all 22 were rerun on the final code.
+- **Default build.** Byte-identical: SHA-256 `0c44738a224c01cf50f21508579ec5fe2b15a9da83d03411f48f7e1e1c99aa98`,
+  170,033 bytes, built directly and asserted by a test.
+- **Characters-dir build with no `fusion_origin`.** A build of the synthetic first-generation trio was taken at
+  `2e0705c` before any change (202,723 bytes, SHA-256
+  `446c3ff2d139cc353e3b8b263bbb59f1b87eea7184931b5efd2c06926f246200`, identical on two runs). A test pins it and
+  it is identical on the branch.
+- **Real folder, read only.** With the operator's `mashenclad` folder, the checker passed its two characters and
+  its pair, and the build wrote 208,304 bytes, SHA-256
+  `615752e9c90592aac8d59a4a456929ce8d635f99c6dbecbd66058fc1ea44bbc6`: identical to the AUTH-018 record. The four
+  source files' SHA-256 prefixes (`b6be7816...` CODA_PROVENANCE.md, `1598f35b...` astra_mashenclad.json,
+  `8f2d2f10...` red_mashenclad.json, `a0124df8...` red_mashenclad__astra_mashenclad.json) were identical before
+  and after.
+- **The page.** Run through the repository's node harness (the page's own script, a fake DOM): the sentence shows
+  under "Status details", "Authored provenance", on exactly the two selection orders of the second-generation
+  pair and on none of the other 70 pages rendered. It was not looked at in Chrome.
+- **Behavior and limits to review.**
+  - A profile that fails origin verification is dropped from the checker's passed list: no OK line is printed for
+    it, and a build stops with exit 2 and writes nothing.
+  - One profile can report several origin failures, one message per failed rule.
+  - The origin stage does nothing when no file carries `fusion_origin`.
+  - `fusion_origin` in a pair file is refused by the existing strict pair loader, not by new code (tested).
+  - The named pair may be a repository pair (tested).
+  - The stage-6 library load has no error handling: the files that passed have already loaded together in stages
+    3 to 5. A defensive branch written first was removed as unreachable.
+  - The disclosed limits stand, each pinned by a test or stated in the entry: grandparent denylist terms are not
+    inherited; shared ancestry is not handled; only seven slots and the ability are compared.
+- **What was not done.** No real Coda profile or second-generation pair was created; no private file is read by any
+  test; nothing was written outside the repository except throwaway temporary folders and the session scratchpad.
+  No model, network or API call. No Python 3.10 or 3.11 run locally; a scan of the changed files found no
+  pre-3.12 f-string hazard, and CI is the confirmation.
+
+AUTH-019 is exercised in a pull request and is not merged. Its closure record, and the PR merge, are separate acts
+on the operator's approval.
